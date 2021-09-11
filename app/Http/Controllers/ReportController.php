@@ -1078,7 +1078,7 @@ Log::info(JasperPHP::process(
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
-        $property = DB::select("call proc_repo_summary_racepropstatus(".$termid.")");
+        $property = DB::select("call proc_repo_summary_race(".$termid.")");
      /* $property = DB::select('select `cm_appln_valdetl`.`vd_accno`,`cm_masterlist`.`ma_fileno`,
    `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone,
    `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, owntype.tdi_value owntype, 
@@ -1218,7 +1218,7 @@ Log::info($subzone_id);
                       'password' => env('DB_PASSWORD',''),
                       'jdbc_driver' => 'com.mysql.jdbc.Driver',
                       'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
-                ))->output();
+                ))->execute();
 
         $headers = array(
             'Content-Type: application/pdf',
