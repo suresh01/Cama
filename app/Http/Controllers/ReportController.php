@@ -1033,6 +1033,7 @@ Log::info(JasperPHP::process(
     public function racesummaryTables(Request $request){
         Log::info('Test');
         ini_set('memory_limit', '2056M');
+        ini_set('max_execution_time', '200');
        // $baskedid = $request->input('id');
         $maxRow = 30;
 
@@ -1100,7 +1101,8 @@ Log::info(JasperPHP::process(
 
     public function generateSummaryZone(Request $request)
     {
-        //$jasper = new JasperPHP;        
+        //$jasper = new JasperPHP;    
+        ini_set('max_execution_time', '200');    
 
         $termid = $request->input('termid');
         $title = $request->input('title');
