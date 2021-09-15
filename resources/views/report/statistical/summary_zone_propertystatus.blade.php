@@ -3,66 +3,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Summary By Property Status and Building Categori vs Race</title>
+<title>Statistics Report</title>
 
 @include('includes.header', ['page' => 'report'])
-					
+	
 	<div id="content">
 		<div class="grid_container">
 			<div class="grid_12">	
 					<br>
 				<div class="breadCrumbHolder module">	
-				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_6">
+				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Report</a></li>
-						<li><a href="#">Statistcal</a></li>
-						<li>Summary By Property Status and Building Categori vs Race</li>
+						<li>Laporan Cukai Taksiran Mengikut Kategori</li>						
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a  href="#" onclick="deleteProperty()" >Generate Report</a>				
-					@include('report.statistical.racesearch')
+					<a href="#" onclick="deleteProperty()">Generate Report</a>				
+					
+					@include('report.search.search',['tableid'=>'proptble', 'action' => 'valuationdatatable', 'searchid' => '17'])	
 				</div>
 				<br>
-				
-        
-        
+
 				<div class="widget_wrap">					
 					<div class="widget_content">						
 						<table id="proptble" class="display select">
 							<thead style="text-align: left;">
 								<tr>
-									<th><input name="select_all" value="1" type="checkbox"></th>
+									<th></th>
 									<th class="table_sno">
 										S No
 									</th>
 									<th>
-										BUILDING STATUS
+										Term Name
 									</th>
 									<th>
-										BUILDING CATEGORY
+										Term Date
 									</th>
 									<th>
-										CINA
+										Enforce Date
 									</th>
 									<th>
-										INDIA
+										Property Count
 									</th>
-									<th>
-										LAINLAIN
-									</th>	
-									<th>
-										MELAYU
-									</th>	
-									<th>
-										SYAIKAT
-									</th>	
-									<th>
-										TOTAL
-									</th>		
+									<th>			
 								</tr>
 							</thead>
 							<tbody>			
@@ -72,16 +59,14 @@
 					</div>
 				</div>
 			</div>
-			<input type="hidden" name="termid" id="termid">
-			
-		<!-- <form style="display: hidden;" id="generateform" method="GET" action="generateinspectionreport">
+				
+		<form style="display: hidden;" id="generateform" method="GET" action="generatesummarypropertystatuszone">
             @csrf
-            <input type="hidden" name="accounts" id="accounts">
-		</form>-->
-		
+            <input type="hidden" name="termid" id="accounts">
+            <input type="hidden" name="title" id="title">
+		</form>
 		
 	</div>
-	
 	<span class="clear"></span>
 	
 	<script>
@@ -93,21 +78,70 @@
 				$('#maxrow').attr('style', "display:none;");
 			}
 		}
-
-
+		
 		function deleteProperty(){
 			var table = $('#proptble').DataTable();
-//console.log(table.rows('.selected').data()); 
-			var tilte = prompt("Report Title", "STATISTIK HARTA MENGIKUT BANGSA SEHINGGA PENGGAL");
-
-			if (tilte == null || tilte == "") {
-				return;
-			} else {
-				var id = $('#termid').val();
-			//	alert(id);
-				window.location = "generatesummaryrace?title="+tilte+"&termid="+id;
-			}
+			var termdate = '';
+			var title_txt = '';
+//console.log(table.rows('.selected').data());termdate
 			
+				var account = $.map(table.rows('.selected').data(), function (item) {
+					//console.log(item);
+		        	termdate= item['termDate'];
+		        	return item['vt_id']
+		   		});
+		   		title_txt="STATISTIK HARTA MENGIKUT KATEGORI BANGUNAN SEHINGGA PENGGAL";
+			
+			
+
+	   		
+			var type = "delete";
+			if(account.length > 0) {
+			console.log(account.toString());
+			var noty_id = noty({
+				layout : 'center',
+				text: 'Are want to Generate Report?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Generate', click: function($noty) {
+						$noty.close();
+						$('#accounts').val(account.toString());
+						var tilte = prompt("Report Title", title_txt+" "+termdate);
+						$('#title').val(tilte);
+						$('#generateform').submit();
+					/*	$.ajax({
+					        type:'GET',
+					        url:'generateinspectionreport',
+					        data:{accounts:account.toString(),type:type,id:'id'},
+					        success:function(data){
+					        	
+								//location.reload();				        		
+					        	//$("#finish").attr("disabled", true);
+					        	//clearTableError(4);
+				        	},
+					        error:function(data){
+								//$('#loader').css('display','none');	
+					        	   	
+					        		var noty_id = noty({
+									layout : 'top',
+									text: 'Report Not generated!',
+									modal : true,
+									type : 'error', 
+								});
+				        	}
+						});*/
+					  }
+					},
+					{type: 'button blue', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 type : 'success', 
+			 });
+			} else {
+				alert('Please atleast one property to generate report');
+			}
 		}
 	
 
@@ -144,30 +178,20 @@
 		}
 
 $(document).ready(function (){
-	var table = $('#proptble').DataTable({
+
+var table = $('#proptble').DataTable({
 		        "processing": false,
-		        "serverSide": false,
-		        "retrieve": true,
-		        /*"dom": '<"toolbar">frtip',*/
-				 
-		        // ajax: '{{ url("inspectionproperty") }}',
-		        /*"ajax": '/bookings/datatables',*/
+		        "serverSide": false,		        
 		        "columns": [
-			        {"data": null, "orderable": false, "searchable": false, "name":"_id" },
+			        {"data": "id", "orderable": false, "searchable": false, "name":"id" },
 			        {"data": null, "name": "sno"},
-			        {"data": "bldgstatus", "name": "account number"},
-			        {"data": "bldgcategory", "name": "fileno"},
-			        {"data": "CINA", "name": "zone","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
-			        {"data": "INDIA", "name": "subzone","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
-			        {"data": "LAINLAIN", "name": "owner","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }, 
-			        {"data": "MELAYU", "name": "ishasbldg","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
-			        {"data": "SYAIKAT", "name": "owntype","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }, 
-			        {"data": "TOTAL", "name": "bldgcount","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }
+			        {"data": "name", "name": "account number"},
+			        {"data": "termDate", "name": "zone"},
+			        {"data": "enforceDate", "name": "subzone"},
+			        {"data": "propertycount", "name": "subzone"}
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
-		   			var oSettings = this.fnSettings();
-  	
-			        $("td:nth-child(2)", nRow).html(oSettings._iDisplayStart+iDisplayIndex +1);
+			        $("td:nth-child(2)", nRow).html(iDisplayIndex + 1);
 			        return nRow;
 			    },
 			    "sPaginationType": "full_numbers",
@@ -177,7 +201,7 @@ $(document).ready(function (){
 		    },
 		    'columnDefs': [{
          'targets': 0,
-         'searchable': true,
+         'searchable': false,
          'orderable': false,
          'width': '1%',
          'className': 'dt-body-center',
@@ -239,17 +263,16 @@ $(document).ready(function (){
       e.stopPropagation();
    });
 
-   // Handle click on table cells with checkboxes
-   $('#proptble').on('click', 'tbody td, thead th:first-child', function(e){
-      $(this).parent().find('input[type="checkbox"]').trigger('click');
-   });
-
    // Handle click on "Select all" control
    $('thead input[name="select_all"]', $('#proptble').DataTable().table().container()).on('click', function(e){
       if(this.checked){
-         $('#proptble tbody input[type="checkbox"]:not(:checked)').trigger('click');
+        $('#proptble tbody input[type="checkbox"]').prop('checked', true);
+         $('#proptble tbody tr').addClass('selected');
+         $('#info').html(selectedrow() + " Row Selected");
       } else {
-         $('#proptble tbody input[type="checkbox"]:checked').trigger('click');
+         $('#proptble tbody input[type="checkbox"]').prop('checked', false);
+         $('#proptble tbody tr').removeClass('selected');
+         $('#info').html(selectedrow() + " Row Selected");
       }
 
       // Prevent click event from propagating to parent
@@ -261,6 +284,7 @@ $(document).ready(function (){
       // Update state of "Select all" control
       updateDataTableSelectAllCtrl($('#proptble').DataTable());
    });
+
    // Handle form submission event
 
 });
@@ -268,8 +292,6 @@ $(document).ready(function (){
 
 	</script>
 </div>
-<div id="loader">
-		
-	</div>
+
 </body>
 </html>

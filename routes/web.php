@@ -509,6 +509,13 @@ Route::get('generatesummarybldg', 'ReportController@generateSummaryBLDG');
 
 Route::get('generatesummaryrace', 'ReportController@generateSummaryRace');
 
+
+Route::get('summarypropertystatuszone', 'ReportController@summaryPropertystatusZone');
+
+
+Route::get('generatesummarypropertystatuszone', 'ReportController@generateSummaryPropertystatusZone');
+
+
 Route::get('subzonecollection', 'ReportController@subzoneCollection');
 
 Route::get('subzonecollectiontable', 'ReportController@subzoneCollectionTables');

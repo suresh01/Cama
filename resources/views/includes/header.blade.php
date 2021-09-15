@@ -568,10 +568,7 @@ $('.mainNav li:has(ul)').addClass('has-child');
 								<a style="" onclick="check_access('714','racesummary');" href="#">Pivot report</a>
 							</li>
 							<li>
-								<a style="" onclick="check_access('714','racesummary');" href="#">Laporan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</a>
-							</li>
-							<li>
-								<a style="" onclick="check_access('714','racesummary');" href="#">Ringkasan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</a>
+								<a style="" onclick="check_access('714','summarypropertystatuszone');" href="#">Laporan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</a>
 							</li>
 			            </ul>
 		          	</li>

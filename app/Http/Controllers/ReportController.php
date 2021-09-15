@@ -1030,6 +1030,18 @@ Log::info(JasperPHP::process(
       return view('report.statistical.racesummary')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
+
+    public function summaryPropertystatusZone(Redirect $request){
+      $search=DB::select(' select sd_key, sd_label, 
+        case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
+        from tbsearchdetail mtb where sd_se_id = 17');
+
+        App::setlocale(session()->get('locale'));
+
+      return view('report.statistical.summary_zone_propertystatus')->with('search',$search);
+    }
+
     public function racesummaryTables(Request $request){
         Log::info('Test');
         ini_set('memory_limit', '2056M');
@@ -1147,6 +1159,7 @@ Log::info($subzone_id);
 
     public function generateSummaryBLDG(Request $request)
     {        
+        ini_set('max_execution_time', '200');
         //$jasper = new JasperPHP;        
        // $account = $request->input('accounts');
         //Log::info($account);
@@ -1192,8 +1205,49 @@ Log::info($subzone_id);
 
     }
 
+
+     public function generateSummaryPropertystatusZone(Request $request)
+    {        
+        ini_set('max_execution_time', '200');
+        //$jasper = new JasperPHP;        
+       // $account = $request->input('accounts');
+        //Log::info($account);
+        //$input = $request->input();
+       //     $account1 = $input['accounts'];
+     //   Log::info($account1);
+        //$user = $request->input('user');
+            // Compile a JRXML to Jasper
+         //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
+        
+      //  $filter = 'vd_id in ('. $account.')';
+
+      $termid = $request->input('termid');
+      $title = $request->input('title');
+
+    JasperPHP::process(
+            base_path('/reports/bldgstatus_zonesubzone.jasper'),
+                false,
+                array("pdf"),
+                 array("termid" => $termid,"title" => $title ),
+                array(
+                      'driver' => 'generic',
+                      'username' => env('DB_USERNAME',''),
+                      'password' => env('DB_PASSWORD',''),
+                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+                ))->execute();
+
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+
+        return response()->download(base_path('/reports/bldgstatus_zonesubzone.pdf'), 'bldgstatus_zonesubzone.pdf', $headers);
+
+    }
+
     public function generateSummaryRace(Request $request)
     {        
+        ini_set('max_execution_time', '200');
         //$jasper = new JasperPHP;        
        // $account = $request->input('accounts');
         //Log::info($account);
@@ -1210,7 +1264,7 @@ Log::info($subzone_id);
       $title = $request->input('title');
 
      JasperPHP::process(
-            base_path('/reports/summaryrace1.jasper'),
+            base_path('/reports/summaryrace_propstatus.jasper'),
                 false,
                 array("pdf"),
                  array("termid" => $termid,"title" => $title ),
@@ -1226,7 +1280,7 @@ Log::info($subzone_id);
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/reports/summaryrace1.pdf'), 'summaryrace.pdf', $headers);
+        return response()->download(base_path('/reports/summaryrace_propstatus.pdf'), 'summaryrace.pdf', $headers);
 
     }
 
