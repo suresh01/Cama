@@ -176,6 +176,10 @@
 										@if($rec->objectDe_count == 0 && $rec->basket_count > 0 && $rec->vt_approvalstatus_id == '01')
 											<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->vt_id}}')" disabled="true" title="Approve Transfer" href="#"></a></span>
 										@endif
+
+										@if($rec->objectDe_count == 0 && $rec->basket_count > 0 && $rec->vt_approvalstatus_id == '02')
+											<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->vt_id}}')" disabled="true" title="Approve Transfer" href="#"></a></span>
+										@endif
 									</td>
 								</tr>
 								<div style="display: none;">

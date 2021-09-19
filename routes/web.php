@@ -660,3 +660,7 @@ Route::get('generatedeactive','ReportController@generateDeactive');
 //Route::get('exportcsv','HomeController@ExportDataEnqueryCSV');
 
 Route::get('exportcsv','ReportController@ExportDataEnqueryCSV');
+
+Route::get('statisticsreport', 'ReportController@statisticsReport');
+
+Route::post('generatestatisticsreport', 'ReportController@generateStatisticsReport');

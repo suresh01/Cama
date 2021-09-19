@@ -3032,4 +3032,68 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
 //dd($filterquery);
             return response()->stream($callback, 200, $headers);
     }
+
+
+    public function statisticsReport(Redirect $request){
+      $search=DB::select(' select sd_key, sd_label, 
+          case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
+        from tbsearchdetail mtb where sd_se_id = "14" ');
+      
+     
+      $term = DB::select("select vt_id termid, vt_name term, applntype.tdi_value applntype, 
+                termstage.tdi_desc termstage from cm_appln_valterm 
+                left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
+                on applntype.tdi_key = vt_applicationtype_id
+                left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
+                on termstage.tdi_key = vt_approvalstatus_id 
+                where  vt_approvalstatus_id = '05'
+                order by vt_termDate desc");
+        
+       $propcategory = DB::select(" select * FROM tbdefitems where tdi_td_name ='BULDINGCATEGORY' order by tdi_sort");
+
+        App::setlocale(session()->get('locale'));
+        
+      return view('report.statistical.statistics')->with('search',$search)->with('term',$term)->with('propcategory',$propcategory);
+    }
+
+
+    public function generateStatisticsReport(Request $request)
+    {        
+
+      $termid = $request->input('termid');
+      $title = $request->input('title');
+      $reporttype = $request->input('reporttype');
+      $propcategory = $request->input('propcategory');
+
+      $reportname = "";
+      $reportpdf = "";
+
+      if($reporttype == 1) {
+        $reportname = "bldgstatus_zonesubzone";
+      } else if($reporttype == 2)  {
+        $reportname = "bldgstatus_summary";
+      } else  {
+        $reportname = "bldgstatus_zone_summary";
+      }
+
+      JasperPHP::process(
+          base_path('/reports/'.$reportname.'.jasper'),
+              false,
+              array("pdf"),
+               array("termid" => $termid,"title" => $title,"propcategory" => $propcategory ),
+              array(
+                    'driver' => 'generic',
+                    'username' => env('DB_USERNAME',''),
+                    'password' => env('DB_PASSWORD',''),
+                    'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                    'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+          ))->execute();
+
+      $headers = array(
+          'Content-Type: application/pdf',
+      );  
+      return response()->download(base_path('/reports/'.$reportname.'.pdf'), 'Summary Report.pdf', $headers);
+
+    }
 } 

@@ -855,7 +855,7 @@
 		formatMoney('taxdrivevalue','{{$rec -> vt_derivedvalue}}');
 		formatMoney('taxdriverate','{{$rec -> vt_derivedrate}}');
 
-		
+		$('#taxnotes').val('{{$rec -> vt_note}}')
 
 	@endforeach
 

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Summary By Zon and Property Status vs Bulding Category</title>
+<title>Statistical Report</title>
 
 @include('includes.header', ['page' => 'report'])
 					
@@ -16,66 +16,91 @@
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Report</a></li>
-						<li><a href="#">Statistcal</a></li>
-						<li>Summary By Zon and Property Status vs Bulding Category</li>
+						<li>Statistical</li>
 					</ul>
 				</div>
 				</div>
 				
-				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a  href="#" onclick="deleteProperty()" >Generate Report</a>				
-					@include('report.statistical.search')
-				</div>
 				<br>
-				
+			
         
         
 				<div class="widget_wrap">					
-					<div class="widget_content">						
-						<table id="proptble" class="display select">
-							<thead style="text-align: left;">
-								<tr>
-									<th><input name="select_all" value="1" type="checkbox"></th>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										SUBZONE
-									</th>
-									<th>
-										BUILDING STATUS
-									</th>
-									<th>
-										HARTAKHAS
-									</th>
-									<th>
-										KEDIAMAN
-									</th>
-									<th>
-										LOTKOSONG
-									</th>	
-									<th>
-										PERINDUSTRIAN
-									</th>	
-									<th>
-										PERNIAGAAN
-									</th>	
-									<th>
-										PERTANIAN
-									</th>	
-									<th>
-										TOTAL
-									</th>		
-								</tr>
-							</thead>
-							<tbody>			
+					<div class="widget_content">
+						<h3 id="title">Generate Report</h3>
+						<form id="addgroupfrom"  autocomplete="off" class="" method="post" action="generatestatisticsreport" >
+							@csrf
+							<input type="hidden" name="id" id="id" value="0">
+							<input type="hidden" name="operation" id="operation" value="0">
+							<div  class="grid_12 form_container left_label">
+								<ul>
+									<li>
+										<div class="form_grid_12">									
+											<label class="field_title" id="termname" for="termid">Term Name<span class="req">*</span></label>
+											<div class="form_input">
+												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="termid" name="termid" tabindex="20">
+													<option></option>
+													@foreach ($term as $rec)
+														<option value='{{ $rec->termid }}'>( {{ $rec->applntype }} ) {{ $rec->term }}</option>
+													@endforeach	
+												</select>
+											</div>
+											<span class=" label_intro"></span>
+										</div>	
+
+										<div class="form_grid_12">									
+											<label class="field_title" id="termname" for="termid">Report Type<span class="req">*</span></label>
+											<div class="form_input">
+												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="reporttype" name="reporttype" tabindex="20">
+													<option></option>
+													<option value="1">Laporan Cukai Taksiran Mengikut Kategori</option>
+													<option value="2">Ringkasan Cukai Taksiran Mengikut Kategori</option>
+													<option value="3">Laporan Senarai Industri</option>
+												</select>
+											</div>
+											<span class=" label_intro"></span>
+										</div>		
+
+
+
+										<div class="form_grid_12">									
+											<label class="field_title" id="termname" for="termid">Property Category<span class="req">*</span></label>
+											<div class="form_input">
+												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="propcategory" name="propcategory" tabindex="20">
+													<option></option>
+													@foreach ($propcategory as $rec)
+														<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+													@endforeach	
+												</select>
+											</div>
+											<span class=" label_intro"></span>
+										</div>	
+
+										<div class="form_grid_12">									
+											<label class="field_title" id="termname" for="termid">Report Tittle<span class="req">*</span></label>
+											<div class="form_input">
+												<input type="text"  id="title" name="title"  value="STATISTIK HARTA MENGIKUT KATEGORI BANGUNAN SEHINGGA PENGGAL">
+											</div>
+											<span class=" label_intro"></span>
+										</div>								
+									</li>
+								</ul>
+							</div>
+							
+							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 								
-							</tbody>
-						</table>
+								<div class="form_input">
+									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>Genrate Report</span></button>			
+														
+									
+								</div>
+								
+								<span class="clear"></span>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
-			<input type="hidden" name="termid" id="termid">
 			
 		<!-- <form style="display: hidden;" id="generateform" method="GET" action="generateinspectionreport">
             @csrf
@@ -84,15 +109,24 @@
 		
 		
 	</div>
-
 	<span class="clear"></span>
 	
 	<script>
-		
+		function ratepayer(val){
+			//	console.log(val);
+			if (val =='07'){
+				$('#ratepayername').show();
+			} else {
+				$("#e_tenantid").val("");
+				$('#ratepayername').hide();
+			}
+			
+		}
 		function changeField(val){
 			if(val == 'table'){
 				$('#maxrow').removeAttr('style');
 			} else {
+
 				$('#maxrow').attr('style', "display:none;");
 			}
 		}
@@ -100,23 +134,17 @@
 
 		function deleteProperty(){
 			var table = $('#proptble').DataTable();
-//console.log(table.rows('.selected').data()); 
-			var tilte = prompt("Report Title", "STATISTIK HARTA MENGIKUT KATEGORI BANGUNAN SEHINGGA PENGGAL");
-
-			var table = $('#proptble').DataTable();
-//console.log(table.rows('.selected').data());
-			var subzone = $.map(table.rows().data(), function (item) {
-				//console.log(item);
-	        	return item['subzoneid']
-	   		});
+//console.log(table.rows('.selected').data()); href="generatecollectionbldg" 
+		
+			var tilte = prompt("Report Title", "STATISTIK KUTIPAN MENGIKUT KAWASAN SEHINGGA PENGGAL");
 
 			if (tilte == null || tilte == "") {
 				return;
 			} else {
-				var id = $('#termid').val();
-				//alert(id);
-				window.location = "generatesummarybldg?title="+tilte+"&termid="+id+"&subzone_id="+subzone;
+				var id = $('#value_Term').val();
+				window.location = "generatecollectionzone?title="+tilte+"&termid="+id;
 			}
+			
 		}
 	
 
@@ -158,21 +186,17 @@ $(document).ready(function (){
 		        "serverSide": false,
 		        "retrieve": true,
 		        /*"dom": '<"toolbar">frtip',*/
-				"lengthMenu":  [100, 200, 500, 1000], 
+				 
 		        // ajax: '{{ url("inspectionproperty") }}',
 		        /*"ajax": '/bookings/datatables',*/
 		        "columns": [
-			        {"data": "subzoneid", "orderable": false, "searchable": false, "name":"_id" },
+			        {"data": null, "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": null, "name": "sno"},
-			        {"data": "suzbone", "name": "account number"},
-			        {"data": "bldgcategory", "name": "fileno"},
-			        {"data": "HARTAKHAS", "name": "zone","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
-			        {"data": "KEDIAMAN", "name": "subzone","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
-			        {"data": "LOTKOSONG", "name": "owner","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }, 
-			        {"data": "PERINDUSTRIAN", "name": "ishasbldg","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
-			        {"data": "PERNIAGAAN", "name": "owntype","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }, 
-			        {"data": "PERTANIAN", "name": "TO_OWNNAME","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }, 
-			        {"data": "TOTAL", "name": "bldgcount","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }
+			        {"data": "ma_subzone_id", "name": "account number"},
+			        {"data": "subzone", "name": "fileno"},
+			        {"data": "propcount", "name": "zone", "className": "number_algin" },
+			        {"data": "vt_approvednt", "name": "subzone","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
+			        {"data": "vt_approvedtax", "name": "owner","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();
@@ -272,14 +296,55 @@ $(document).ready(function (){
       updateDataTableSelectAllCtrl($('#proptble').DataTable());
    });
    // Handle form submission event
-
+   $("#termid").change(function() {
+	    	//console.log(this.value);
+	    	var param_value = this.value;
+	    	var param = 'borangc';
+	        $.ajax({
+			  url: "subCategory",
+			  cache: false,
+			  data:{param_value:param_value,param:param},
+			  success: function(data){
+	    		createDropDownOptions(data.res_arr, 'ratepayertypeid');
+			  }
+			});
+		});
+		$("#ratepayertypeid").change(function() {
+	    	//console.log(this.value);
+			var param_value2 = this.value;
+	    	var param_value = $("#termid").val();
+	    	var param = 'borangc2';
+	        $.ajax({
+			  url: "subCategory",
+			  cache: false,
+			  data:{param_value2:param_value2,param_value:param_value,param:param},
+			  success: function(data){
+	    		createDropDownOptions(data.res_arr, 'ratepayername');
+			  }
+			});
+	    });
 });
+var createDropDownOptions = function(data, field) {
+    var options = "<option></option>";
+    // Create the list of HTML Options
 
+    for (i = 0; i < data.length; i++)
+    {
+        options += "<option value='" + data[i].tdi_key + "'>" + data[i].tdi_value + "</option>\r\n";
+    }
+
+    // Assign the options to the HTML Select container
+    $('select#' + field)[0].innerHTML = options;
+ 
+    // Set the option to be Selected
+    //$('#' + field).val(data[0].tdi_key);
+
+    // Refresh the HTML Select so it displays the Selected option
+    //$('#' + field).selectmenu('refresh');
+};
 
 	</script>
 </div>
-<div id="loader">
-		
-	</div>
+
 </body>
 </html>

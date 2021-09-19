@@ -156,7 +156,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
              , cm_appln_val_bldg where vbal_vb_id = vb_id and vb_vd_id = ifnull("'.$prop_id.'",0)');           
             
              $tax = DB::select('select `vt_id`, `vt_vd_id`, vt_derivedrate, vt_derivedvalue, `vt_grossvalue`, `vt_valuedescretion`, `vt_proposednt`, `vt_proposedrate`, `vt_calculatedrate`,  
-`vt_proposedtax`, `vt_approvednt`,  `vt_approvedrate`, `vt_adjustment`,  `vt_approvedtax`,  `vt_note`,
+`vt_proposedtax`, `vt_approvednt`,  `vt_approvedrate`, `vt_adjustment`,  `vt_approvedtax`,  TRIM(REPLACE(REPLACE(REPLACE(`vt_note`, "\\n", " "), "\\r", " "), "\\t", " ")) vt_note,
 `vt_createby`,  `vt_createdate`,  `vt_updateby`,  `vt_updatedate`
 FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
 
@@ -310,7 +310,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
              , cm_appln_val_bldg where vbal_vb_id = vb_id and vb_vd_id = ifnull("'.$prop_id.'",0)');           
             
              $tax = DB::select('select `vt_id`, `vt_vd_id`, vt_derivedrate, vt_derivedvalue, `vt_grossvalue`, `vt_valuedescretion`, `vt_proposednt`, `vt_proposedrate`, `vt_calculatedrate`,  
-`vt_proposedtax`, `vt_approvednt`,  `vt_approvedrate`, `vt_adjustment`,  `vt_approvedtax`,  `vt_note`,
+`vt_proposedtax`, `vt_approvednt`,  `vt_approvedrate`, `vt_adjustment`,  `vt_approvedtax`,  TRIM(REPLACE(REPLACE(REPLACE(`vt_note`, "\\n", " "), "\\r", " "), "\\t", " ")) vt_note,
 `vt_createby`,  `vt_createdate`,  `vt_updateby`,  `vt_updatedate`
 FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
 
