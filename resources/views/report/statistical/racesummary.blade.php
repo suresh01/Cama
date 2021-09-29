@@ -46,19 +46,19 @@
 										BUILDING CATEGORY
 									</th>
 									<th>
+										MELAYU
+									</th>
+									<th>
 										CINA
 									</th>
 									<th>
 										INDIA
-									</th>
-									<th>
-										LAINLAIN
-									</th>	
-									<th>
-										MELAYU
 									</th>	
 									<th>
 										SYAIKAT
+									</th>	
+									<th>
+										LAINLAIN
 									</th>	
 									<th>
 										TOTAL
@@ -104,7 +104,7 @@
 				return;
 			} else {
 				var id = $('#termid').val();
-			//	alert(id);
+				alert(id);
 				window.location = "generatesummaryrace?title="+tilte+"&termid="+id;
 			}
 			
@@ -157,12 +157,12 @@ $(document).ready(function (){
 			        {"data": null, "name": "sno"},
 			        {"data": "bldgstatus", "name": "account number"},
 			        {"data": "bldgcategory", "name": "fileno"},
-			        {"data": "CINA", "name": "zone","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
-			        {"data": "INDIA", "name": "subzone","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
-			        {"data": "LAINLAIN", "name": "owner","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }, 
-			        {"data": "MELAYU", "name": "ishasbldg","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
-			        {"data": "SYAIKAT", "name": "owntype","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }, 
-			        {"data": "TOTAL", "name": "bldgcount","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }
+			        {"data": "MELAYU", "name": "zone","render": $.fn.dataTable.render.number( ',', '.', 0 ), "className": "number_algin" },
+			        {"data": "CINA", "name": "subzone","render": $.fn.dataTable.render.number( ',', '.', 0 ), "className": "number_algin" },
+			        {"data": "INDIA", "name": "owner","render": $.fn.dataTable.render.number( ',', '.', 0 ), "className": "number_algin" }, 
+			        {"data": "SYAIKAT", "name": "ishasbldg","render": $.fn.dataTable.render.number( ',', '.', 0 ), "className": "number_algin" },
+			        {"data": "LAINLAIN", "name": "owntype","render": $.fn.dataTable.render.number( ',', '.', 0 ), "className": "number_algin" }, 
+			        {"data": "TOTAL", "name": "bldgcount","render": $.fn.dataTable.render.number( ',', '.', 0 ), "className": "number_algin" }
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();

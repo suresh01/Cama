@@ -141,7 +141,7 @@
 				return;
 			} else {
 				var id = $('#termid').val();
-				//alert(id);
+				alert(id);
 				window.location = "generatesummaryzone?title="+tilte+"&termid="+id+"&subzone_id="+subzone;
 			}
 			//var type = "delete";

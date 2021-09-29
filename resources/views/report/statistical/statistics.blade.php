@@ -53,9 +53,9 @@
 											<div class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="reporttype" name="reporttype" tabindex="20">
 													<option></option>
-													<option value="1">Laporan Cukai Taksiran Mengikut Kategori</option>
-													<option value="2">Ringkasan Cukai Taksiran Mengikut Kategori</option>
-													<option value="3">Laporan Senarai Industri</option>
+													<option value="1">Laporan Senarai Industri (Select by Property Categori)</option>
+													<option value="2">Laporan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</option>
+													<option value="3">Ringkasan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</option>
 												</select>
 											</div>
 											<span class=" label_intro"></span>
@@ -68,6 +68,7 @@
 											<div class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="propcategory" name="propcategory" tabindex="20">
 													<option></option>
+													<option value='%'>SEMUA KATEGORI</option>	
 													@foreach ($propcategory as $rec)
 														<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
 													@endforeach	

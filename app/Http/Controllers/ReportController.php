@@ -330,19 +330,36 @@ class ReportController extends Controller
         //$statuscond = 'vt_approvalstatus_id = "05"' ;
         
      
-        $group = DB::select("select maxTermId id, maxAppTermType, maxTermName name, DATE_FORMAT(termDate, '%d/%m/%Y') termDate, maxEnforceDate enforceDate, count(vd_accno) propertycount
+                $group = DB::select("select vt_id id, vt_applicationtype_id maxAppTermType, vt_name name, DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, DATE_FORMAT(vt_approvalstatusdate, '%d/%m/%Y') enforceDate,
+(select count(vd_id) bil
 from cm_appln_valdetl
 inner join cm_appln_val on va_id = vd_va_id
 inner join cm_appln_valterm on vt_id = va_vt_id
 inner join cm_masterlist on vd_ma_id = ma_id
-left join (select vt_id maxTermId,vt_applicationtype_id maxAppTermType, vt_name maxTermName,  DATE_FORMAT(vt_termDate, '%d/%m/%Y') maxTermDate,  DATE_FORMAT(vt_approvalstatusdate, '%d/%m/%Y') maxEnforceDate FROM cm_appln_valterm) maxTerm on maxTerm.maxTermId = ".$filterqueryvtid."
+inner join cm_appln_parameter on ap_vd_id = vd_id
 inner join (select max(vt_termDate) termdate,  vd_ma_id, vd_accno as accountno from cm_appln_valdetl
 inner join cm_appln_val on va_id = vd_va_id
 inner join cm_appln_valterm on vt_id = va_vt_id
 where  vt_termDate <=(select vt_termDate from cm_appln_valterm where vt_id = ".$filterqueryvtid.") and vt_applicationtype_id = (select vt_applicationtype_id from cm_appln_valterm where vt_id = ".$filterqueryvtid.")
 and vd_accno NOT IN (select cm_appln_deactivedetl.dad_accno from cm_appln_deactivedetl inner join  cm_appln_deactive on cm_appln_deactivedetl.dad_da_id = cm_appln_deactive.da_id 
 inner join cm_appln_valterm on cm_appln_deactive.da_vt_id = cm_appln_valterm.vt_id where vt_termDate <=(select vt_termDate from cm_appln_valterm where vt_id = ".$filterqueryvtid.") and vt_applicationtype_id = (select vt_applicationtype_id from cm_appln_valterm where vt_id = ".$filterqueryvtid."))
-group by vd_ma_id) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno");
+group by vd_ma_id) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno
+) propertycount
+from cm_appln_valterm termutama where vt_id = ".$filterqueryvtid."");
+
+//         $group = DB::select("select maxTermId id, maxAppTermType, maxTermName name, DATE_FORMAT(termDate, '%d/%m/%Y') termDate, maxEnforceDate enforceDate, count(vd_accno) propertycount
+// from cm_appln_valdetl
+// inner join cm_appln_val on va_id = vd_va_id
+// inner join cm_appln_valterm on vt_id = va_vt_id
+// inner join cm_masterlist on vd_ma_id = ma_id
+// left join (select vt_id maxTermId,vt_applicationtype_id maxAppTermType, vt_name maxTermName,  DATE_FORMAT(vt_termDate, '%d/%m/%Y') maxTermDate,  DATE_FORMAT(vt_approvalstatusdate, '%d/%m/%Y') maxEnforceDate FROM cm_appln_valterm) maxTerm on maxTerm.maxTermId = ".$filterqueryvtid."
+// inner join (select max(vt_termDate) termdate,  vd_ma_id, vd_accno as accountno from cm_appln_valdetl
+// inner join cm_appln_val on va_id = vd_va_id
+// inner join cm_appln_valterm on vt_id = va_vt_id
+// where  vt_termDate <=(select vt_termDate from cm_appln_valterm where vt_id = ".$filterqueryvtid.") and vt_applicationtype_id = (select vt_applicationtype_id from cm_appln_valterm where vt_id = ".$filterqueryvtid.")
+// and vd_accno NOT IN (select cm_appln_deactivedetl.dad_accno from cm_appln_deactivedetl inner join  cm_appln_deactive on cm_appln_deactivedetl.dad_da_id = cm_appln_deactive.da_id 
+// inner join cm_appln_valterm on cm_appln_deactive.da_vt_id = cm_appln_valterm.vt_id where vt_termDate <=(select vt_termDate from cm_appln_valterm where vt_id = ".$filterqueryvtid.") and vt_applicationtype_id = (select vt_applicationtype_id from cm_appln_valterm where vt_id = ".$filterqueryvtid."))
+// group by vd_ma_id) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno");
 
 
       } else if($page == 2){
@@ -370,7 +387,22 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
         //$statuscond = 'vt_approvalstatus_id = "05"' ;
         
      
-        $group = DB::select("select get_activeterm_count(vt_termDate,'0','') propertycount, 
+        $group = DB::select("select 
+        
+        (select count(vd_id) bil
+from cm_appln_valdetl
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+inner join cm_masterlist on vd_ma_id = ma_id
+inner join (select max(vt_termDate) termdate,  vd_ma_id, vd_accno as accountno from cm_appln_valdetl
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+where  vt_termDate <=(select vt_termDate from cm_appln_valterm where vt_id = ".$filterqueryvtid.") and vt_applicationtype_id = (select vt_applicationtype_id from cm_appln_valterm where vt_id = ".$filterqueryvtid.")
+and vd_accno NOT IN (select cm_appln_deactivedetl.dad_accno from cm_appln_deactivedetl inner join  cm_appln_deactive on cm_appln_deactivedetl.dad_da_id = cm_appln_deactive.da_id 
+inner join cm_appln_valterm on cm_appln_deactive.da_vt_id = cm_appln_valterm.vt_id where vt_termDate <=(select vt_termDate from cm_appln_valterm where vt_id = ".$filterqueryvtid.") and vt_applicationtype_id = (select vt_applicationtype_id from cm_appln_valterm where vt_id = ".$filterqueryvtid."))
+group by vd_ma_id) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno) 
+        
+        propertycount, 
 vt_id as id, vt_termDate, vt_termtype_id,vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, 
 DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, 
 DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
@@ -387,7 +419,20 @@ from  cm_appln_valterm
         //$statuscond = 'vt_approvalstatus_id = "05"' ;
         
      
-        $group = DB::select("select get_activeterm_count(vt_termDate,'1','') propertycount, 
+        $group = DB::select("select 
+        (select count(vd_id) bil
+from cm_appln_valdetl
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+inner join cm_masterlist on vd_ma_id = ma_id
+inner join (select max(vt_termDate) termdate,  vd_ma_id, vd_accno as accountno from cm_appln_valdetl
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+where  vt_termDate <=(select vt_termDate from cm_appln_valterm where vt_id = ".$filterqueryvtid.") and vt_applicationtype_id = (select vt_applicationtype_id from cm_appln_valterm where vt_id = ".$filterqueryvtid.")
+and vd_accno NOT IN (select cm_appln_deactivedetl.dad_accno from cm_appln_deactivedetl inner join  cm_appln_deactive on cm_appln_deactivedetl.dad_da_id = cm_appln_deactive.da_id 
+inner join cm_appln_valterm on cm_appln_deactive.da_vt_id = cm_appln_valterm.vt_id where vt_termDate <=(select vt_termDate from cm_appln_valterm where vt_id = ".$filterqueryvtid.") and vt_applicationtype_id = (select vt_applicationtype_id from cm_appln_valterm where vt_id = ".$filterqueryvtid."))
+group by vd_ma_id) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno) 
+        propertycount, 
 vt_id as id, vt_termDate, vt_termtype_id,vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, 
 DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, 
 DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
@@ -1137,10 +1182,11 @@ Log::info($subzone_id);
         
       //  $filter = 'vd_id in ('. $account.')';
      JasperPHP::process(
-            base_path('/reports/summaryzone.jasper'),
+            base_path('/reports/newsummaryzone.jasper'),
                 false,
                 array("pdf"),
-                 array("termid" => $termid,"title" => $title,"subzone" => $filter ),
+                 //array("termid" => $termid,"title" => $title,"subzone" => $filter ),
+                 array("termid" => $termid,"title" => $title),
                 array(
                       'driver' => 'generic',
                       'username' => env('DB_USERNAME',''),
@@ -1153,7 +1199,7 @@ Log::info($subzone_id);
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/reports/summaryzone.pdf'), 'summaryzone.pdf', $headers);
+        return response()->download(base_path('/reports/newsummaryzone.pdf'), 'summaryzone.pdf', $headers);
 
     }
 
@@ -1264,7 +1310,7 @@ Log::info($subzone_id);
       $title = $request->input('title');
 
      JasperPHP::process(
-            base_path('/reports/summaryrace_propstatus.jasper'),
+            base_path('/reports/summaryrace1.jasper'),
                 false,
                 array("pdf"),
                  array("termid" => $termid,"title" => $title ),
@@ -1280,7 +1326,7 @@ Log::info($subzone_id);
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/reports/summaryrace_propstatus.pdf'), 'summaryrace.pdf', $headers);
+        return response()->download(base_path('/reports/summaryrace1.pdf'), 'summaryrace.pdf', $headers);
 
     }
 
@@ -3070,11 +3116,12 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
       $reportpdf = "";
 
       if($reporttype == 1) {
-        $reportname = "bldgstatus_zonesubzone";
+        $reportname = "summaryofsubzonvspropcate";
       } else if($reporttype == 2)  {
+        // $reportname = "summaryofsubzonvspropcate";
         $reportname = "bldgstatus_summary";
       } else  {
-        $reportname = "bldgstatus_zone_summary";
+        $reportname = "summaryofpropcate";
       }
 
       JasperPHP::process(

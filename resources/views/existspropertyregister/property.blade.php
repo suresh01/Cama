@@ -537,10 +537,10 @@ var table = $('#proptble').DataTable();
 										    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 										},
 								        //data:{param_value:id,module:'DELP'},
-								         data:{param_value:0,module:'DELP',param:id},
+								         data:{param_value:0,module:'DELEXISTP',param:id},
 								        success:function(data){		
 											
-											window.location.assign('propertyregister?pb={{$pb}}');		        		
+											window.location.assign('existspropertyregister?pb={{$pb}}');		        		
 								        	//$("#finish").attr("disabled", true);
 								        	//clearTableError(4); 
 							        	},
