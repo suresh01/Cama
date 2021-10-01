@@ -32,24 +32,52 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
+							<h3 id="title">Jana Report</h3>
 							<form style="" id="generateforma" method="GET" action="generateowntypa">
 					            @csrf
+								<input type="hidden" name="type" id="type">
 					            <input type="hidden" name="accounts" id="accountsa">
 								<div  class="grid_12 form_container left_label">
 									<ul>
 										<li>											
 											<fieldset>
 												<legend>Additional Information</legend>
+													<div class="form_grid_12">
+														<label class="field_title" id="lposition" for="position">Nama Pegawai<span class="req">*</span></label>
+														<div  class="form_input">
+															<select onchange="getposition()" data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="usernameA" tabindex="7" name="name" tabindex="20">
+																	<option></option>
+																@foreach ($userlist as $rec)
+																		<option value='{{ $rec->usr_id }}'>{{ $rec->usr_name }}</option>
+																@endforeach	
+															</select>
+														</div>
+														<span class=" label_intro"></span>
+														<input type="hidden" id="username" name="username">
+													</div>
 												
+													<div class="form_grid_12">
+														<label class="field_title" id="llevel" for="level">Jawatan<span class="req">*</span></label>
+														<div  class="form_input">
+															<input id="jawatan" name="title"  type="text"  maxlength="50" class="required"/>
+														</div>
+														<span class=" label_intro"></span>
+													</div>
+											
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">PRINT DATE<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">Tarikh Cetak<span class="req">*</span></label>
 													<div id="prntdateahtm" class="form_input">
 														<input id="prntdatea" name="prntdate" autocomplete="off" type="text"  maxlength="50" class="required "/>
 													</div>
 													<span class=" label_intro"></span>
 												</div>
-
+												<div class="form_grid_12">
+													<label class="field_title" id="llevel" for="level">Tarikh Hijri<span class="req">*</span></label>
+													<div id="prntdateahtm" class="form_input">
+														<input id="tarikhhijri" name="tarikhhijri" autocomplete="off" type="text"  maxlength="50" class="required "/>
+													</div>
+													<span class=" label_intro"></span>
+												</div>
 											
 											</fieldset>
 
@@ -60,9 +88,9 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Hantar</span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>
@@ -72,7 +100,7 @@
 					</div>
 				</div>
 
-				<div id="addDetail" style="display:none" class="grid_12">
+				{{-- <div id="addDetail" style="display:none" class="grid_12">
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
@@ -114,7 +142,7 @@
 							</form>
 						</div>
 					</div>
-				</div>
+				</div> --}}
         
 				<div class="widget_wrap">					
 					<div class="widget_content">						
@@ -385,6 +413,19 @@ $(document).ready(function (){
 
 });	
 
+function getposition(){
+	var userid = $('#usernameA').val();
+	//alert (userid);
+	$('#username').val($("#usernameA option:selected").text());
+	$.ajax({
+		type:'GET',
+		url:'/getuserdetail',
+		data:{id:userid},
+		success:function(data){	        	
+			$('#jawatan').val(data.userposition);
+		}
+	});
+}
 function reportA(){
 	var table = $('#proptble').DataTable();
 		$('#prntdateahtm').html('<input id="prntdatea" name="prntdate" autocomplete="off" type="text"  maxlength="50" class="required datepicker"/>');
@@ -395,7 +436,9 @@ function reportA(){
         	return item['vd_id']
    		});
 		var type = "delete";
+		
 		if(account.length > 0) {
+			$('#type').val('type1');
 			$('#accountsa').val(account.toString());
 			$('#addDetailA').modal();
 			console.log(account.toString());
@@ -406,8 +449,8 @@ function reportA(){
 
 function reportB(){
 	var table = $('#proptble').DataTable();
-		$('#prntdatehtm').html('<input id="prntdate" name="prntdate" autocomplete="off" type="text"  maxlength="50" class="required datepicker"/>');
-					 	$( "#prntdate" ).datepicker({dateFormat: 'dd/mm/yy'});
+		$('#prntdateahtm').html('<input id="prntdatea" name="prntdate" autocomplete="off" type="text"  maxlength="50" class="required datepicker"/>');
+					 	$( "#prntdatea" ).datepicker({dateFormat: 'dd/mm/yy'});
 					 	
 		var account = $.map(table.rows('.selected').data(), function (item) {
 			//console.log(item);
@@ -415,8 +458,9 @@ function reportB(){
    		});
 		var type = "delete";
 		if(account.length > 0) {
-			$('#accounts').val(account.toString());
-			$('#addDetail').modal();
+			$('#type').val('type2');
+			$('#accountsa').val(account.toString());
+			$('#addDetailA').modal();
 			console.log(account.toString());
 		} else {
 			alert('Please atleast one property to generate report');

@@ -1298,7 +1298,7 @@ public function generateRemisireport(Request $request) {
       $name = $request->input('username');
       if($type == 'type1'){
         $jasper_path = base_path('/reports/remisi.jasper');
-        $dowload_path = base_path('/reports/remisi.pdf');
+        $dowload_path = base_path('/reports/remisi.pdf'); 
         $filename = 'remisi.pdf';
       } else {
         $jasper_path = base_path('/reports/remisiInspection.jasper');

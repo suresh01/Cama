@@ -131,13 +131,19 @@ class ReportController extends Controller
 
     public function getUserdetail(Request $request){
         $userid = $request->input('id');
-
+        $biluser = 0;
        // $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
         $userlist=DB::select('select usr_position FROM tbuser where usr_id = '.$userid);
-        foreach ($userlist as $obj) {    
+        foreach ($userlist as $obj) {  
+            $biluser++;  
            $userposition = $obj->usr_position;
         }
-        return response()->json(array('userposition'=> $userposition), 200);
+        if ($biluser > 0){
+            return response()->json(array('userposition'=> $userposition), 200);
+        }else{
+            return response()->json(array('userposition'=> ''), 200);
+        }
+        
     }
 
 
@@ -2445,37 +2451,49 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12") '.$filterquery);
     public function generateOwnerTypeA(Request $request)
     {        
              //$jasper = new JasperPHP;
+        $type = $request->input('type');
+        $username = $request->input('username');
+        $title = $request->input('title');
         $account = $request->input('accounts');
         $prntdate = $request->input('prntdate');
+        $tarikhhijri = $request->input('tarikhhijri');
         
         $filter = " vd_id in (". $account.")";
         
-       Log::info($filter);
+       Log::info($type . ' ' . $prntdate . ' ' . $tarikhhijri . ' ' . $filter);
+       if($type == 'type1') {
+        $reportname = "ownernoticea";
+      } else if($type == 'type2')  {
+        // $reportname = "summaryofsubzonvspropcate";
+        $reportname = "ownernoticeb";
+      } else  {
+        $reportname = "summaryofpropcate";
+      }
       /* $input = $request->input();
             $account1 = $input['accounts'];
         Log::info($account1);*/
             // Compile a JRXML to Jasper
         //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
-         Log::info(JasperPHP::process(
-            base_path('/reports/ownernoticea.jasper'),
-                false,
-                array("pdf"),
-                array("propid" => $filter,"p_date" =>  $prntdate),               
-                //array("param_condition" => $filter,"background" =>  base_path('/public/images/onwertypea.jpg')),
+        //  Log::info(JasperPHP::process(
+        //     base_path('/reports/ownernoticea.jasper'),
+        //         false,
+        //         array("pdf"),
+        //         array("propid" => $filter,"p_date" =>  $prntdate),               
+        //         //array("param_condition" => $filter,"background" =>  base_path('/public/images/onwertypea.jpg')),
 
-            array(
-              'driver' => 'generic',
-              'username' => env('DB_USERNAME',''),
-              'password' => env('DB_PASSWORD',''),
-              'jdbc_driver' => 'com.mysql.jdbc.Driver',
-              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-            ))->output());
+        //     array(
+        //       'driver' => 'generic',
+        //       'username' => env('DB_USERNAME',''),
+        //       'password' => env('DB_PASSWORD',''),
+        //       'jdbc_driver' => 'com.mysql.jdbc.Driver',
+        //       'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+        //     ))->output());
 
       JasperPHP::process(
-            base_path('/reports/ownernoticea.jasper'),
+            base_path('/reports/'.$reportname.'.jasper'),
                 false,
                 array("pdf"),    
-                array("propid" => $filter,"p_date" =>  $prntdate),             
+                array("propid" => $filter,"p_date" =>  $prntdate,"username" => $username,"usernametitle" => $title,"hijri_date" => $tarikhhijri),             
                 //array("param_condition" => $filter,"background" =>  base_path('/reports/images/onwertypea.jpg')),
             array(
               'driver' => 'generic',
@@ -2489,7 +2507,7 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12") '.$filterquery);
               'Content-Type: application/pdf',
             );
 
-        return response()->download(base_path('/reports/onwertypea.pdf'), 'Onwer Type A.pdf', $headers);
+        return response()->download(base_path('/reports/'.$reportname.'.pdf'), 'Onwer Type A.pdf', $headers);
 
     }
 
@@ -2500,12 +2518,14 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12") '.$filterquery);
         from tbsearchdetail mtb where sd_se_id = "14" ');
         
         $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
-        $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
+        //$userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
+        $userlist=DB::select('select usr_id, concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, concat(usr_firstname, " " ,usr_lastname) usr_name , usr_position FROM tbuser');
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
 
         App::setlocale(session()->get('locale'));
+        
         
       return view('report.ownernotice')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
@@ -2575,53 +2595,53 @@ left join tbdefitems as lotcode on lotcode.tdi_key = al_lotcode_id and lotcode.t
         return $propertyDetails;
     }
 
-    public function generateOwnerTypeB(Request $request)
-    {        
-             //$jasper = new JasperPHP;
-        $account = $request->input('accounts');
-        $prntdate = $request->input('prntdate');
+    // public function generateOwnerTypeB(Request $request)
+    // {        
+    //          //$jasper = new JasperPHP;
+    //     $account = $request->input('accounts');
+    //     $prntdate = $request->input('prntdate');
         
-        $filter = " vd_id in (". $account.")";
+    //     $filter = " vd_id in (". $account.")";
         
        
-      /* $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);*/
-            // Compile a JRXML to Jasper
-        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
-         Log::info(JasperPHP::process(
-            base_path('/reports/ownernoticeb.jasper'),
-                false,
-                array("pdf"),               
-                array("propid" => $filter,"p_date" =>  $prntdate),
-            array(
-              'driver' => 'generic',
-              'username' => env('DB_USERNAME',''),
-              'password' => env('DB_PASSWORD',''),
-              'jdbc_driver' => 'com.mysql.jdbc.Driver',
-              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-            ))->output());
+    //   /* $input = $request->input();
+    //         $account1 = $input['accounts'];
+    //     Log::info($account1);*/
+    //         // Compile a JRXML to Jasper
+    //     //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
+    //      Log::info(JasperPHP::process(
+    //         base_path('/reports/ownernoticeb.jasper'),
+    //             false,
+    //             array("pdf"),               
+    //             array("propid" => $filter,"p_date" =>  $prntdate),
+    //         array(
+    //           'driver' => 'generic',
+    //           'username' => env('DB_USERNAME',''),
+    //           'password' => env('DB_PASSWORD',''),
+    //           'jdbc_driver' => 'com.mysql.jdbc.Driver',
+    //           'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+    //         ))->output());
 
-      JasperPHP::process(
-            base_path('/reports/ownernoticeb.jasper'),
-                false,
-                array("pdf"),               
-                array("propid" => $filter,"p_date" =>  $prntdate),
-            array(
-              'driver' => 'generic',
-              'username' => env('DB_USERNAME',''),
-              'password' => env('DB_PASSWORD',''),
-              'jdbc_driver' => 'com.mysql.jdbc.Driver',
-              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-            ))->execute();
+    //   JasperPHP::process(
+    //         base_path('/reports/ownernoticeb.jasper'),
+    //             false,
+    //             array("pdf"),               
+    //             array("propid" => $filter,"p_date" =>  $prntdate),
+    //         array(
+    //           'driver' => 'generic',
+    //           'username' => env('DB_USERNAME',''),
+    //           'password' => env('DB_PASSWORD',''),
+    //           'jdbc_driver' => 'com.mysql.jdbc.Driver',
+    //           'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+    //         ))->execute();
 
-            $headers = array(
-              'Content-Type: application/pdf',
-            );
+    //         $headers = array(
+    //           'Content-Type: application/pdf',
+    //         );
 
-        return response()->download(base_path('/reports/ownernoticeb.pdf'), 'Onwer Notice Type B.pdf', $headers);
+    //     return response()->download(base_path('/reports/ownernoticeb.pdf'), 'Onwer Notice Type B.pdf', $headers);
 
-    }
+    // }
 
     public function ownerTransferList(Redirect $request){
       $search=DB::select(' select sd_key, sd_label, 

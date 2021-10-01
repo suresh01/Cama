@@ -641,7 +641,7 @@ Route::get('ownernoticedata', 'ReportController@ownerNoticeDataTables');
 
 Route::get('generateowntypa', 'ReportController@generateOwnerTypeA');
 
-Route::get('generateowntypb', 'ReportController@generateOwnerTypeB');
+// Route::get('generateowntypb', 'ReportController@generateOwnerTypeB');
 
 Route::get('ownertransferlist', 'ReportController@ownerTransferList');
 
