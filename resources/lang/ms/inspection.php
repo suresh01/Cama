@@ -23,6 +23,9 @@ return [
 	'Zone'=>'Mukim',
 	'Subzone'=>'Taman/Kawasan',
 	'Status_Harta'=>'Status Harta',
+	'Property_Category'=>'Kategori Harta',
+	'Property_Type'=>'Jenis Harta',
+	'Property_Storey'=>'Tingkat Harta',
 	'Nt'=>'Nt',
 	'Rate'=>'Kadar',
 	'Tax_Rate'=>'Cukai',
@@ -46,8 +49,6 @@ return [
 	// newproperty.blade.php
 	'Add_Property'=>'Tambah Harta',
 	'owner'=>'Pemilik',
-	'Property_Address1'=>'No Bangunan',
-	'Is_Empty_Lot'=>'Jika Tanah Kosong',
 	//grab-basket.blade.php
 	'Bakset_Name'=>'Nama Basket',
 	'Approve_By_At'=>'Disahkan Oleh / Disahkan Pada',

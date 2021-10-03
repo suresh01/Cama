@@ -15,7 +15,7 @@
       <div style="float:right;margin-right: 0px;"  class="btn_24_blue">
         
         <a href="#" id="" onclick="getSelectedProp()" class=""><span>{{__('inspection.Add_Property')}} </span></a>
-        <a href="#" id="" onclick="back()" class=""><span>{{__('common.Back')}}  </span></a>
+        {{-- <a href="#" id="" onclick="back()" class=""><span>{{__('common.Back')}}  </span></a> --}}
         <a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}}  </span></a>
       </div>
       <div style="float:right;margin-right: 15px;"  class="btn_24_blue">
@@ -43,10 +43,13 @@
                 {{__('inspection.Subzone')}}
               </th>
               <th>
-                {{__('inspection.Property_Address1')}}
+                {{__('inspection.Address1')}}
               </th>
               <th>
-                {{__('inspection.Is_Empty_Lot')}}
+                {{__('inspection.Status_Harta')}}
+              </th>
+               <th>
+                {{__('inspection.Property_Type')}}
               </th>
             </tr>
           </thead>
@@ -124,7 +127,8 @@ $(document).ready(function (){
               {"data": "zone", "name": "subzone"},
               {"data": "subzone", "name": "owner"}, 
               {"data": "ma_addr_ln1", "name": "ishasbldg"}, 
-              {"data": "isbldg", "name": "ishasbldg"}              
+              {"data": "isbldg", "name": "ishasbldg"},
+              {"data": "bldgtype", "name": "bldgtype"}                
           ],
 		    'columnDefs': [{
          'targets': 0,

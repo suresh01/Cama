@@ -240,6 +240,7 @@ where vt_approvalstatus_id >= '01')");
         }
         foreach ($data as $obj1) {
         $count = $obj1['@p_newprop'];
+        
            #or first convert it and then change its properties using 
            #an array syntax, it's up to you
         }
@@ -250,64 +251,16 @@ where vt_approvalstatus_id >= '01')");
     *
     */
     public function exsitsProperty(Request $request){
-        $isfilter = $request->input('filter');
-        $basketid = $request->input('id');
-        $basket_id = $request->input('basket_id');
-        $type = $request->input('type');
-        $filterquery = '';
-        if($isfilter == 'true'){
-            $input = $request->input();
-            $condition = $input['condition'];
-            $value = $input['value'];
-            $logic = $input['logic'];
-            $fieldcolumn = $input['field'];
-
-             foreach ($input['field'] as $fieldindex => $field) {
-                
-                if($value[$fieldindex] != ""){
-                    if($fieldindex == count($input['field']) - 1) {
-                        if($fieldcolumn[$fieldindex] != ""){
-                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
-                         }
-                    } else {
-                        if($fieldcolumn[$fieldindex] != ""){
-                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
-                        }   
-                    }
-                }               
-            }
-            if($filterquery != ''){
-                $filterquery  = ' AND '. $filterquery ;
-            }
-            Log::info($filterquery);
-
-        }
-        $condition = '';
-        if ($type ==2 ){
-            // $condition = ' AND PB_APPROVED = 12';
-        }
-        Log::info($filterquery.''.$condition);
-       /* $property = DB::select('select `vd_approvalstatus_id`, `vd_id`, `vd_va_id`, `ma_id`, `ma_pb_id`, `ma_fileno`, `ma_accno`, `vd_accno`,
-        `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`, `ma_addr_ln1`, 
-        `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
-        `vt_approvednt`, `vt_approvedtax`,  `vt_proposedrate`, `vt_note`, propertstatus.tdi_desc propertstatus
-        FROM `cm_appln_valdetl`
-        INNER JOIN `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
-        LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
-        LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
-        LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
-        LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
-        left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
-        on propertstatus.tdi_key = vd_approvalstatus_id 
-        left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
-        on bldgsotery.tdi_key = vd_bldgstorey_id where vd_id in (select MAX(vd_id) from cm_appln_valdetl group by vd_ma_id)  '. $filterquery.''.$condition);*/
         
+        $basketid = $request->input('id');
+        
+        Log::info('testt');
         $search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = 18 ');
+        from tbsearchdetail mtb where sd_se_id = 18 order by sd_sort ' );
         App::setlocale(session()->get('locale'));
-        return view('inspection.grab.exsitsproperty')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id);
+        return view('inspection.grab.exsitsproperty')->with('search',$search)->with('id',$basketid);//->with('basket_id',$basket_id);
     }
 
     /**
@@ -483,9 +436,9 @@ where vt_approvalstatus_id >= '01')");
                 }               
             }
             if($filterquery != ''){
-                $filterquery  = ' AND '. $filterquery ;
+                $filterquery  = ' WHERE '. $filterquery ;
             }
-            Log::info($filterquery);
+            
 
         }
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
@@ -495,34 +448,26 @@ where vt_approvalstatus_id >= '01')");
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
-        Log::info('select `vd_approvalstatus_id`, `vd_id`, `vd_va_id`, `ma_id`, `ma_pb_id`, `ma_fileno`, `ma_accno`, `vd_accno`,
-        `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`, `ma_addr_ln1`, 
-        `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
-        `vt_approvednt`, `vt_approvedtax`,  `vt_proposedrate`, `vt_note`, propertstatus.tdi_desc propertstatus
-        FROM `cm_appln_valdetl`
-        INNER JOIN `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
-        LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
-        LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
-        LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
-        LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
-        left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
-        on propertstatus.tdi_key = vd_approvalstatus_id 
-        left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
-        on bldgsotery.tdi_key = vd_bldgstorey_id where vd_id in (select MAX(vd_id) from cm_appln_valdetl group by vd_ma_id)  '. $filterquery);
-       $property = DB::select('select `vd_approvalstatus_id`, `vd_id`, `vd_va_id`, `ma_id`, `ma_pb_id`, `ma_fileno`, `ma_accno`, `vd_accno`,
-        `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`, `ma_addr_ln1`,  `ma_addr_ln2`, 
-        `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
-        `vt_approvednt`, `vt_approvedtax`,  `vt_proposedrate`, `vt_note`, propertstatus.tdi_desc propertstatus
-        FROM `cm_appln_valdetl`
-        INNER JOIN `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
-        LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
-        LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
-        LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
-        LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
-        left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
-        on propertstatus.tdi_key = vd_approvalstatus_id 
-        left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
-        on bldgsotery.tdi_key = vd_bldgstorey_id where vd_id in (select MAX(vd_id) from cm_appln_valdetl group by vd_ma_id)  '. $filterquery);
+        Log::info('');
+       $property = DB::select('select 
+vd_id, vd_va_id, ma_id, ma_pb_id, ma_fileno, ma_accno, vd_accno,
+tbdefitems_subzone.tdi_parent_name zone, tbdefitems_subzone.tdi_value subzone, ma_addr_ln1,  ma_addr_ln2, 
+tbdefitems_ishasbuilding.tdi_value isbldg, concat(tbdefitems_bldgtype.tdi_parent_name, " || ", tbdefitems_bldgtype.tdi_value, " || ", tbdefitems_bldgsotery.tdi_value ) bldgtype
+from cm_appln_valdetl
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+inner join cm_masterlist on vd_ma_id = ma_id
+left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") tbdefitems_subzone on tbdefitems_subzone.tdi_key = ma_subzone_id
+left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "ISHASBUILDING") tbdefitems_ishasbuilding on tbdefitems_ishasbuilding.tdi_key = vd_ishasbuilding
+left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") tbdefitems_bldgtype on tbdefitems_bldgtype.tdi_key = vd_bldgtype_id
+left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BUILDINGSTOREY") tbdefitems_bldgsotery on tbdefitems_bldgsotery.tdi_key = vd_bldgstorey_id
+inner join (select max(vt_termDate) termdate,  vd_ma_id, vd_accno as accountno from cm_appln_valdetl
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+where  vt_id  IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = "05") 
+and vd_accno NOT IN (select cm_appln_deactivedetl.dad_accno from cm_appln_deactivedetl inner join  cm_appln_deactive on cm_appln_deactivedetl.dad_da_id = cm_appln_deactive.da_id 
+inner join cm_appln_valterm on cm_appln_deactive.da_vt_id = cm_appln_valterm.vt_id where vt_id IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = "05") )
+group by vd_ma_id, vd_accno) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno'. $filterquery);
         
         $propertyDetails = Datatables::collection($property)->make(true);
    

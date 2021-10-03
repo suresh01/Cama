@@ -137,8 +137,10 @@
 									<th>
 										{{__('inspection.File_Number')}}
 									</th>
-									<th> {{__('group.Term_Name')}} </th>
-									<th>{{__('group.Basket_Name')}} </th>
+									<th> {{__('inspection.Term')}} </th>
+									<th>{{__('inspection.Basket')}} </th>
+									<th> {{__('inspection.Zone')}} </th>
+									<th>{{__('inspection.Subzone')}} </th>
 									<th>{{__('inspection.Nt')}}</th>		
 									<th>{{__('inspection.Rate')}}</th>	
 									<th>{{__('inspection.Tax_Rate')}}</th>			
@@ -204,16 +206,19 @@
 
 		function getposition(){
 			var userid = $('#tittle').val();
-			$('#username').val($("#tittle option:selected").text());
-			$.ajax({
-		        type:'GET',
-		        url:'/getuserdetail',
-		        data:{id:userid},
-		        success:function(data){	        	
-		        	console.log(data);
-		        	$('#name').val(data.userposition);
-		        }
-		    });
+			//alert(userid.length);
+			if (userid.length > 0){
+				$('#username').val($("#tittle option:selected").text());
+				$.ajax({
+					type:'GET',
+					url:'/getuserdetail',
+					data:{id:userid},
+					success:function(data){	        	
+						console.log(data);
+						$('#name').val(data.userposition);
+					}
+				});
+			}
 		}
 
 
@@ -275,6 +280,8 @@ $(document).ready(function (){
 			        {"data": "ma_fileno", "name": "file number"},
 			        {"data": "vt_name", "name": "TERM"},
 			        {"data": "va_name", "name": "BASKET"},
+					{"data": "zone", "name": "zone"},
+			        {"data": "subzone", "name": "subzone"},
 			        {"data": "vt_approvednt", "name": "nt", "sClass": "numericCol"}, 
 			        {"data": "vt_approvedrate", "name": "rate", "sClass": "numericCol" }, 
 			        {"data": "vt_approvedtax", "name": "tax", "sClass": "numericCol"}

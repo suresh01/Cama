@@ -22,7 +22,7 @@ return [
 	'File_Number'=>'File Number',
 	'Zone'=>'Zone',
 	'Subzone'=>'Subzone',
-	'Status_Harta'=>'Status Harta',
+	'Status_Harta'=>'Property Status',
 	'Property_Category'=>'Property Category',
 	'Property_Type'=>'Property Type',
 	'Property_Storey'=>'Property Storey',
@@ -30,7 +30,7 @@ return [
 	'Rate'=>'Rate',
 	'Tax_Rate'=>'Tax Rate',
 	'Status'=>'Status',
-	'Address1'=>'Address 1',
+	'Address1'=>'No',
 	'Address2'=>'Address 2',
 	'Address3'=>'Address 3',
 	'Address4'=>'Address 4',
@@ -49,8 +49,6 @@ return [
 	// newproperty.blade.php
 	'Add_Property'=>'Add Property',
 	'owner'=>'Owner',
-	'Property_Address1'=>'Property Address 1',
-	'Is_Empty_Lot'=>'Is Empty Lot',
 	//grab-basket.blade.php
 	'Bakset_Name'=>'Bakset Name',
 	'Approve_By_At'=>'Approve By / Approved At',

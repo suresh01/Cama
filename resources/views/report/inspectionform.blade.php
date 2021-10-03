@@ -15,8 +15,8 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
-						<li>Inspection Form</li>
+						<li><a href="#">Laporan</a></li>
+						<li>Borang Lawat Periksa</li>
 					</ul>
 				</div>
 				</div>
@@ -115,12 +115,10 @@
 									<th class="table_sno">
 										{{__('inspection.SNo')}}
 									</th>
-									<th>
-										{{__('inspection.Account_Number')}}
-									</th>
-									<th>
-										{{__('inspection.File_Number')}}
-									</th>
+									<th>{{__('inspection.Account_Number')}} </th>
+									<th>{{__('inspection.File_Number')}} </th>
+									<th>{{__('inspection.Term_Name')}} </th>
+									<th>{{__('inspection.Basket')}} </th>
 									<th>{{__('inspection.Zone')}} </th>
 									<th>{{__('inspection.Subzone')}} </th>
 									<th>{{__('inspection.Address1')}}</th>
@@ -128,7 +126,7 @@
 									<th>{{__('inspection.Type_Of_Owner')}}</th>
 									<th>{{__('inspection.Owner_Name')}}</th>	
 									<th>
-										BULIDING COUNT
+										Bilangan Bangunan
 									</th>		
 								</tr>
 							</thead>
@@ -230,6 +228,8 @@ $(document).ready(function (){
 			        {"data": null, "name": "sno"},
 			        {"data": "vd_accno", "name": "account number"},
 			        {"data": "ma_fileno", "name": "fileno"},
+					{"data": "vt_termDate", "name": "vt_termDate"},
+					{"data": "va_name", "name": "va_name"},
 			        {"data": "zone", "name": "zone"},
 			        {"data": "subzone", "name": "subzone"},
 			        {"data": "ma_addr_ln1", "name": "owner"}, 
