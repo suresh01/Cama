@@ -6,7 +6,7 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>{{__('existspropertyregisyter.Property_Maintenance')}} </title>
+<title>{{__('propertyregister.Property_Registration')}}</title>
 <style>
 .disabled-btn{
     pointer-events:none;
@@ -21,10 +21,10 @@
 		<div id="usertable" class="grid_12">	
 			<div id="breadCrumb3" class="breadCrumb grid_12">
 					<ul>
-						<li><a href="#">{{__('existspropertyregisyter.Home')}} </a></li>
-						<li><a href="#">{{__('existspropertyregisyter.Data_Maintenance')}} </a></li>
-						<li><a href="existspropertybasket">{{__('existspropertyregisyter.Property_Registration')}} </a></li>
-						<li><a href="existspropertyregister?pb={{$pb}}">{{$basket_name}}</a></li>
+						<li><a href="#">{{__('propertyregister.Home')}} </a></li>
+						<li><a href="#">{{__('propertyregister.Data_Maintenance')}} </a></li>
+						<li><a href="propertybasket">{{__('propertyregister.Property_Registration')}} </a></li>
+						<li><a href="propertyregister?pb={{$pb}}">{{$basket_name}}</a></li>
 						<li>{{$accountnumbber}}</li>
 					</ul>
 				</div>
@@ -34,30 +34,34 @@
 				<div class="widget_wrap">
 					<div class="widget_top">
 						<!--<span class="h_icon list"></span>-->
-						<h6>Property Registration</h6>
+						<h6>{{__('propertyregister.Property_Registration')}}</h6>
 						<div id="top_tabby">
 						</div>
 					</div>
 					<input type="hidden" value="" id="propertystatus" >
 					<div class="widget_content">
 						<!--<h3>Property Registration</h3>-->
-						<form action="" id="existspropertyregsitration_from" class="form_container left_label">
+						<form action="" id="propertyregsitration_from" class="form_container left_label">
 							<fieldset title="Step 1">		
-								<legend>{{__('existspropertyregisyter.Master_Information')}} </legend>					
-								
-				            	@include('existspropertyregister.tab.master')
-				            								
+								<legend>{{__('propertyregister.Master_Information')}} </legend>						
+								@if ($count == 0 && $basket_type =='K')
+				            		@include('existspropertyregister.tab.masternew')
+				            	@elseif ($count == 0 && $basket_type =='C')
+				            		@include('existspropertyregister.tab.mastercmk')
+				            	@else
+				            		@include('existspropertyregister.tab.master')
+				            	@endif								
 							</fieldset>
 							<fieldset title="Step 2">
-								<legend>{{__('existspropertyregisyter.Lot_Inforamtion')}} </legend>
-								@include('existspropertyregister.tab.lot')
-							</fieldset>
-							<fieldset title="Step 3">
-								<legend>{{__('existspropertyregisyter.Owner_Information')}} </legend>
+								<legend>{{__('propertyregister.Owner_Information')}} </legend>
 								@include('existspropertyregister.tab.owner')
 							</fieldset>
+							<fieldset title="Step 3">
+								<legend>{{__('propertyregister.Lot_Inforamtion')}} </legend>
+								@include('existspropertyregister.tab.lot')
+							</fieldset>
 							<fieldset title="Step 4">
-								<legend>{{__('existspropertyregisyter.Building_Inforamtion')}}  </legend>
+								<legend>{{__('propertyregister.Building_Inforamtion')}} </legend>
 								@include('existspropertyregister.tab.building')
 							</fieldset>
 							@if($iseditable == 1)
@@ -82,25 +86,39 @@
 
 
       $("#accnumber").keypress(function (e) {
-         var length = jQuery(this).val().length;
-       if(length > 10) {
-            return false;
-       } else if(e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-            return false;
-       } else if((length == 0) && (e.which == 48)) {
-            return false;
-       }
+      	var length = jQuery(this).val().length;
+      	//var length = jQuery(this).val().length;
+      	if($('#pagetype').val() == 'cmk'){
+
+         	if(length > 11) {
+	            return false;
+	       } else if(e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+	            return false;
+	       } else if((length == 0) && (e.which == 48)) {
+	            return false;
+	       }
+      	} else {
+      		if(length > 10) {
+	            return false;
+	       } else if(e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+	            return false;
+	       } else if((length == 0) && (e.which == 48)) {
+	            return false;
+	       }
+      	}
+      
       });
    
 		
-		let lotmap = new Map([["0","sno"],["1", "lotstate"], ["2", "lotdistrict"], ["3", "lotcity"],["4", "presint"], ["5", "lotype"],["6", "lotnum"], ["7", "altlotnum"],["8", "lttt"], ["9", "ltnum"],["10", "altnum"], ["11", "landar"],["12", "landaruni"],["13", "landcon"], ["14", "lanpos"],["15", "roadtype"], ["16", "roadcate"],["17", "landuse"], ["18", "expcon"],["19", "interest"], ["20", "tentype"],["21", "tenduration"], ["22", "tenstart"],["23", "tenend"], ["24", "status"],["25", "action"],["26", "actioncode"],["27", "lot_id"],["28", "lotaccnum1"],["29", "lotaccnum2"],["30", "lotaccnum3"],["31", "lotaccnum4"],["32", "lotaccnum5"],["33", "lotaccnum6"],["34", "lotaccnum7"],["35", "lotaccnum"]]);
+		let lotmap = new Map([["0","sno"],["1", "lotstate"], ["2", "lotdistrict"], ["3", "lotcity"],["4", "presint"], ["5", "lotype"],["6", "lotnum"], ["7", "altlotnum"],["8", "lttt"], ["9", "ltnum"],["10", "altnum"], ["11", "landar"],["12", "landaruni"],["13", "landcon"], ["14", "lanpos"],["15", "roadtype"], ["16", "roadcate"],["17", "landuse"], ["18", "expcon"],["19", "interest"], ["20", "tentype"],["21", "tenduration"], ["22", "tenstart"],["23", "tenend"], ["24", "status"],["25", "action"],["26", "actioncode"],["27", "lot_id"],["28", "lotaccnum1"],["29", "lotaccnum2"],["30", "lotaccnum3"],["31", "lotaccnum4"],["32", "lotaccnum5"],["33", "lotaccnum6"],["34", "lotaccnum7"],["35", "lotaccnum"],["36", "lostratano"]]);
 
-		let ownermap = new Map([["0","sno"],["1", "ownaplntype"], ["2", "typeofown"], ["3", "ownnum"],["4", "ownname"], ["5", "ownaddr1"],["6", "ownaddr2"], ["7", "ownaddr3"],["8", "ownaddr4"], ["9", "ownpostcode"],["10", "ownstate"], ["11", "telno"],["12", "faxno"],["13", "citizen"], ["14", "race"],["15", "numerator"], ["16", "demominator"],["17", "action"], ["18", "actioncode"],["19", "ownerid"],["20","owneraccnum"]]);
+		let ownermap = new Map([["0","sno"],["1", "ownaplntype"], ["2", "typeofown"], ["3", "ownnum"],["4", "ownname"], ["5", "ownaddr1"],["6", "ownaddr2"], ["7", "ownaddr3"],["8", "ownaddr4"], ["9", "ownpostcode"],["10", "ownstate"], ["11", "telno"],["12", "faxno"],["13", "citizen"], ["14", "race"],["15", "numerator"], ["16", "demominator"],["17", "action"], ["18", "actioncode"],["19", "ownerid"],["20","owneraccnum"],["21","owncity"],["22","emailno"]]);
 
-		let bldgmap = new Map([["0","sno"],["1", "url"],["2", "bldgnum"],["3", "bldgnum1"],["4", "bldgnum2"],["5", "bldgnum3"],["6", "bldgnum4"],  ["7", "bldgttype"],["8", "bldgstorey"], ["9", "bldgcond"],["10", "bldgpos"], ["11", "bldgstructure"],["12", "rooftype"], ["13", "walltype"],["14", "floortype"], ["15", "cccdt"],["16", "occupieddt"],["17", "mainbldg"],["18", "action"],["19", "actioncode"],["20", "bldgid"],["21","bldgaccnum"]]);
+		let bldgmap = new Map([["0","sno"],["1", "url"],["2", "bldgnum"],["3", "bldgnum1"],["4", "bldgnum2"],["5", "bldgnum3"],["6", "bldgnum4"],  ["7", "bldgttype"],["8", "bldgstorey"], ["9", "bldgcond"],["10", "bldgpos"], ["11", "bldgstructure"],["12", "rooftype"], ["13", "walltype"],["14", "floortype"], ["15", "cccdt"],["16", "occupieddt"],["17", "mainbldg"],["18", "action"],["19", "actioncode"],["20", "bldgid"],["21","bldgaccnum"],["22","mbldg"]]);
 
 		
-		 let bldgarmap = new Map([["0","sno"],["1", "bldgaccnum"],  ["2", "bldgnum"], ["3", "bldgnum2"], ["4", "bldgnum4"], ["5", "bldgnum5"], ["6", "bldgnum7"], ["7", "bldgnu8m"], ["8", "bldgnu2m"], ["9", "bldgnum7"], ["10", "bldgnu8m"], ["11", "bldgnu2m"],["12", "reffinfo"], ["13", "artype"],["14", "arcate"], ["15", "arlevel"],["16", "arzone"], ["17", "aruse"],["18", "ardesc"], ["19", "dimention"],["20", "arcnt"],["21", "size"],["22", "uom"],["23", "totsize"],["24", "fltype"],["25","dwalltype"],["26", "celingtype"],["27", "action"],["28","actioncode"],["29","bldgarid"],["30","bldgnumtxt"]]);
+		let bldgarmap = new Map([["0","sno"],["1", "bldgaccnum"],  ["2", "bldgnum"], ["3", "disparlevel"], ["4", "bldgnum2"], ["5", "bldgnum4"], ["6", "bldgnum5"], ["7", "bldgnum7"], ["8", "bldgnu8m"], ["9", "bldgnu2m"], ["10", "bldgnum7"], ["11", "bldgnu8m"], ["12", "bldgnu2m"],["13", "reffinfo"], ["14", "artype"],["15", "arcate"], ["16", "arlevel"],["17", "arzone"], ["18", "aruse"],["19", "ardesc"], ["20", "dimention"],["21", "arcnt"],["22", "size"],["23", "uom"],["24", "totsize"],["25", "fltype"],["26","dwalltype"],["27", "celingtype"],["28", "action"],["29","actioncode"],["30","bldgarid"],["31","bldgnumtxt"]]);
+		//let bldgarmap = new Map([["0","sno"],["1", "bldgaccnum"],  ["2", "bldgnum"], ["3", "bldgnum2"], ["4", "bldgnum4"], ["5", "bldgnum5"], ["6", "bldgnum7"], ["7", "bldgnu8m"], ["8", "bldgnu2m"], ["9", "bldgnum7"], ["10", "bldgnu8m"], ["11", "bldgnu2m"],["12", "reffinfo"], ["13", "artype"],["14", "arcate"], ["15", "arlevel"],["16", "arzone"], ["17", "aruse"],["18", "ardesc"], ["19", "dimention"],["20", "arcnt"],["21", "size"],["22", "uom"],["23", "totsize"],["24", "fltype"],["25","dwalltype"],["26", "celingtype"],["27", "action"],["28","actioncode"],["29","bldgarid"],["30","bldgnumtxt"]]);
 		
            $("#propertyregsitration_from").submit(function(e){
                 //alert('submit intercepted');
@@ -145,7 +163,7 @@
 						var ldata1 = $('#ownertble').DataTable().row(j).data();
 						var tempdata2 = {};
 						$.each(ldata1, function( key, value ) {
-							if (key !== 17 && key !== 25) {
+							if (key !== 17 && key !== 27) {
 								tempdata2[ownermap.get(""+key+"")] = value; 
 							} 
 						//console.log(key);            
@@ -182,7 +200,9 @@
 						var ldata2 = $('#bldgartable1').DataTable().row(k).data();
 						var tempdata3 = {};
 						$.each(ldata2, function( key, value ) {
-							if (key !== 27) {
+							//masukk
+							//alert(key + ' == ' + value);
+							if (key !== 28) {
 							tempdata3[bldgarmap.get(""+key+"")] = value;	
 							}				           
 		            	});

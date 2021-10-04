@@ -1,43 +1,46 @@
-
+ 
 						<div id="tab3">
-							<h4>{{__('existspropertyregisyter.Owner')}} </h4>
+							<h4>{{__('propertyregister.Application_Type')}} </h4>
 								<p>
-									{{__('existspropertyregisyter.Account_Number')}}  = <span id="ownerlabel"></span>
+									{{__('propertyregister.Account_Number')}}  = <span id="ownerlabel"></span>
 								</p>
 
-							@if($iseditable == 1)<button onclick="openowner()" id="addowner" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('existspropertyregisyter.Add_Owner')}} </span></button>@endif
+							@if($iseditable == 1)<button onclick="openowner()" id="addowner" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('propertyregister.addowner')}}</span></button>@endif
 
 								<div id="ownertable" class="widget_wrap">					
 									<div class="widget_content">						
 										<table style="width: 100%" id="ownertble" class="display ">
 										<thead style="text-align: left;">
 								  		<tr>
-											<th class="table_sno">{{__('existspropertyregisyter.SNo')}}</th>
-											<th>{{__('existspropertyregisyter.Owner_Application_Type')}}</th>
-											<th>{{__('existspropertyregisyter.Type_Of_Owner')}}</th>
-											<th>{{__('existspropertyregisyter.Owner_No')}}</th>
-											<th>{{__('existspropertyregisyter.Owner_Name')}}</th>
-											<th>{{__('existspropertyregisyter.Owner_Addres1')}}</th>
-											<th>{{__('existspropertyregisyter.Owner_Addres2')}}</th>
-											<th>{{__('existspropertyregisyter.Owner_Addres3')}}</th>
-											<th>{{__('existspropertyregisyter.Owner_Addres4')}}</th>
-											<th>{{__('existspropertyregisyter.Postcode')}}</th>
-											<th>{{__('existspropertyregisyter.State')}}</th>
-											<th>{{__('existspropertyregisyter.Tel_Number')}}</th>
-											<th>{{__('existspropertyregisyter.Fax_Number')}}</th>
-											<th>{{__('existspropertyregisyter.Citizenship')}}</th>
-											<th>{{__('existspropertyregisyter.Race')}}</th>
-											<th>{{__('existspropertyregisyter.Numerator')}}</th>
-											<th>{{__('existspropertyregisyter.Denominator')}}</th>
-											<th>{{__('existspropertyregisyter.Action')}}</th>
-											<th>{{__('existspropertyregisyter.Actioncode')}}</th>
-											<th>{{__('existspropertyregisyter.To_Id')}}</th>
-											<th>{{__('existspropertyregisyter.Accoumnum')}}</th>
-											<th>{{__('existspropertyregisyter.App_Type_Id')}}</th>
-											<th>{{__('existspropertyregisyter.Id_Number')}}</th>
-											<th>{{__('existspropertyregisyter.Address')}}</th>
-											<th>{{__('existspropertyregisyter.Tel_Number_Fax')}}</th>
-											<th>{{__('existspropertyregisyter.Action')}}</th>
+											<th class="table_sno">{{__('propertyregister.SNO')}} </th>
+
+											<th>{{__('propertyregister.Owner_Application_Type')}}</th>
+											<th>{{__('propertyregister.Type_Of_Owner')}}</th>
+											<th>{{__('propertyregister.Owner_No')}}</th>
+											<th>{{__('propertyregister.Owner_Name')}}</th>
+											<th>{{__('propertyregister.Owner_Addres1')}}</th>
+											<th>{{__('propertyregister.Owner_Addres2')}}</th>
+											<th>{{__('propertyregister.Owner_Addres3')}}</th>
+											<th>{{__('propertyregister.Owner_Addres4')}}</th>
+											<th>{{__('propertyregister.postcode')}}</th>
+											<th>{{__('propertyregister.State')}}</th>
+											<th>{{__('propertyregister.Tel_Number')}}</th>
+											<th>{{__('propertyregister.Fax_Number')}}</th>
+											<th>{{__('propertyregister.Citizenship')}}</th>
+											<th>{{__('propertyregister.Race')}}</th>
+											<th>{{__('propertyregister.Numerator')}}</th>
+											<th>{{__('propertyregister.Denominator')}}</th>
+											<th>{{__('propertyregister.Action')}}</th>
+											<th>{{__('propertyregister.Actioncode')}}</th>
+											<th>{{__('propertyregister.To_Id')}}</th>
+											<th>{{__('propertyregister.Accoumnum')}}</th>
+											<th>{{__('propertyregister.Email')}}</th>
+											<th>{{__('propertyregister.City')}}</th>
+											<th>{{__('propertyregister.App_Type')}} / {{__('propertyregister.Id_Type')}}</th>
+											<th>{{__('propertyregister.Id_Number')}}</th>
+											<th>{{__('propertyregister.Address')}}</th>
+											<th>{{__('propertyregister.Tel_Number')}} / {{__('propertyregister.Fax_Number')}}</th>
+											<th>{{__('propertyregister.Action')}}</th>
 										</tr>
 										</thead>
 										</table>
@@ -46,9 +49,9 @@
 								<div style="display:none;" id="ownerdetail" >
 								<div id="owner_form"  autocomplete="off" onsubmit="return false;" class=" left_label" method="post" action="#" >
 										<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-									<button id="submitaddtblowner" onclick="addownerRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{__('common.Add_New')}}</span></button>	
-									<button id="submitedittblowner" onclick="editownerRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{__('common.Update')}}</span></button>	
-								<button id="close" onclick="closeowner()" name="close" type="button" class="btn_small btn_blue"><span>{__('common.Close')}}</span></button>
+									<button id="submitaddtblowner" onclick="addownerRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}}  </span></button>	
+									<button id="submitedittblowner" onclick="editownerRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}} </span></button>	
+								<button id="close" onclick="closeowner()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}} </span></button>
 								</div>
 								<div class="grid_6 ">
 								<ul>
@@ -59,69 +62,74 @@
 									<input type="hidden" value="0" name="ownerid" id="ownerid">
 									<input type="hidden" value="0" name="tableindex" id="tableindex">
 								
-								<fieldset>
-										<legend>{{__('existspropertyregisyter.Owner_Information')}}</legend>
-
-										<div class="form_grid_12">
-									<label class="field_title" id="lusername" for="username">{{__('existspropertyregisyter.Owner_Application_Type')}} <span class="req">*</span></label>
-									<div  class="form_input">
-										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownaplntype" name="ownaplntype" tabindex="1">
-											<option></option>
-											<option value='C'>CMK</option>
-											<option value='K'>KAD</option>
-										</select>
-									</div>
-									<span class=" label_intro"></span>
-								</div>
-								
-								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Type_Of_Owner')}}<span class="req">*</span></label>
-									<div  class="form_input">
-										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="typeofown" name="typeofown" tabindex="1">
-											<option></option>
-											@foreach ($owntype as $rec)
-												<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-											@endforeach	
-										</select>
-									</div>
-									<span class=" label_intro"></span>
-								</div>
-
-								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Owner_No')}} <span class="req">*</span></label>
-									<div  class="form_input">
-										<input id="ownnum" name="ownnum"  type="text" tabindex="1"  maxlength="15" />
-									</div>
-									<span class=" label_intro"></span>
-								</div>
-								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Owner_Name')}} <span class="req">*</span></label>
-									<div  class="form_input">
-										<input id="ownname" name="ownname" tabindex="1" type="text"  maxlength="80" />
-									</div>
-									<span class=" label_intro"></span>
-								</div>
-								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Tel_Number')}} <span class="req">*</span></label>
-										<div  class="form_input">
-											<input id="telno" name="telno" tabindex="1" type="text" value="" maxlength="15" class="large"/>
-										</div>
-										<span class=" label_intro"></span>
-									</div>
-									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Fax_Number')}} <span class="req">*</span></label>
-										<div  class="form_input">
-											<input id="faxno" name="faxno" tabindex="1" type="text" value="" maxlength="15" class="large"/>
-										</div>
-										<span class=" label_intro"></span>
-									</div>
-								</fieldset>
-
-
 									<fieldset>
-										<legend>{{__('existspropertyregisyter.Other_Information')}} </legend>
+										<legend>{{__('propertyregister.Owner_Information')}}</legend>
+										<div class="form_grid_12">
+											<label class="field_title" id="lusername" for="username">{{__('propertyregister.Owner_Application_Type')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownaplntype" name="ownaplntype" tabindex="1">
+													<option></option>
+													<option value='C'>CMK</option>
+													<option value='K'>KAD</option>
+												</select>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										
+										<div class="form_grid_12">
+											<label class="field_title" id="lposition" for="position">{{__('propertyregister.Type_Of_Owner')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="typeofown" name="typeofown" tabindex="1">
+													<option></option>
+													@foreach ($owntype as $rec)
+													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+													@endforeach
+												</select>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('propertyregister.Owner_No')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="ownnum" name="ownnum"  type="text" tabindex="1"  maxlength="15" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('propertyregister.Owner_Name')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="ownname" name="ownname" tabindex="1" type="text"  maxlength="80" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('propertyregister.Tel_Number')}}<span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="telno" name="telno" tabindex="1" type="text" value="" maxlength="80" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('propertyregister.Fax_Number')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="faxno" name="faxno" tabindex="1" type="text" value="" maxlength="80" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('propertyregister.Email')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="emailno" name="emailno" tabindex="1" type="text" value="" maxlength="50" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+									</fieldset>
+
+
+								<fieldset>
+									<legend>Other Information</legend>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Citizenship')}} <span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('propertyregister.Citizenship')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="citizen" name="citizen" tabindex="1">
 											<option></option>
@@ -133,7 +141,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Race')}}<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.Race')}} <span class="req">*</span></label>
 									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="race" name="race" tabindex="1">
 											<option></option>
 											@foreach ($race as $rec)
@@ -144,14 +152,14 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Numerator')}} </label>
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.Numerator')}} </label>
 									<div  class="form_input">
 										<input id="numerator" tabindex="1" name="numerator" value="0" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Denominator')}} </label>
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.Denominator')}} </label>
 									<div  class="form_input">
 										<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name="demominator" value="0"  type="number" tabindex="1"  maxlength="5" class=""/>
 									</div>
@@ -165,16 +173,16 @@
 								<ul>
 								<li >
 									<fieldset>
-										<legend>{{__('existspropertyregisyter.Address_Information')}} </legend>
+										<legend>{{__('propertyregister.Address_Information')}} </legend>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Owner_Addres1')}}<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('propertyregister.Owner_Addres1')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownaddr1" name="ownaddr1" tabindex="1"  type="text"  maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Owner_Addres2')}}</label>
+									<label class="field_title" id="llevel" for="level">{{__('propertyregister.Owner_Addres2')}} </label>
 									<div  class="form_input">
 										<input id="ownaddr2" name="ownaddr2" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -182,14 +190,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Owner_Addres3')}}</label>
+									<label class="field_title" id="llevel" for="level">{{__('propertyregister.Owner_Addres3')}} </label>
 									<div  class="form_input">
 										<input id="ownaddr3" name="ownaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Owner_Addres4')}}</label>
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.Owner_Addres4')}} </label>
 									<div  class="form_input">
 										<input id="ownaddr4" name="ownaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -197,14 +205,22 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Postcode')}} <span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.City')}} <span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="ownpostcode"  name="ownpostcode" tabindex="1" type="number"  maxlength="50" class="large"/>
+										<input id="owncity"  name="owncity" tabindex="1" type="text"  maxlength="50" class=""/>
+									</div>
+									<span class=" label_intro"></span>
+								</div>
+
+								<div class="form_grid_12">
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.postcode')}} <span class="req">*</span></label>
+									<div  class="form_input">
+										<input id="ownpostcode"  name="ownpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.State')}} <span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('propertyregister.State')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownstate" name="ownstate" tabindex="1">
 											<option></option>
@@ -238,19 +254,19 @@
 					<script type="text/javascript">
 						 $(document).ready(function() {
 			
-			let ownermap = new Map([["0","sno"],["1", "ownaplntype"], ["2", "typeofown"], ["3", "ownnum"],["4", "ownname"], ["5", "ownaddr1"],["6", "ownaddr2"], ["7", "ownaddr3"],["8", "ownaddr4"], ["9", "ownpostcode"],["10", "ownstate"], ["11", "telno"],["12", "faxno"],["13", "citizen"], ["14", "race"],["15", "numerator"], ["16", "demominator"],["17", "action"], ["18", "actioncode"],["19", "ownerid"],["20","owneraccnum"]]);
+			let ownermap = new Map([["0","sno"],["1", "ownaplntype"], ["2", "typeofown"], ["3", "ownnum"],["4", "ownname"], ["5", "ownaddr1"],["6", "ownaddr2"], ["7", "ownaddr3"],["8", "ownaddr4"], ["9", "ownpostcode"],["10", "ownstate"], ["11", "telno"],["12", "faxno"],["13", "citizen"], ["14", "race"],["15", "numerator"], ["16", "demominator"],["17", "action"], ["18", "actioncode"],["19", "ownerid"],["20","owneraccnum"],["21","owncity"],["22","emailno"]]);
  		var ownerdata = [];
 		 		@foreach ($ownerlist as $rec)
 
 		 			if ('{{$rec->TO_FAXNO}}' != ''){
 
 		 			}
-		 			ownerdata.push( [ '{{$loop->iteration}}', '{{$rec->TO_OWNERAPPLNTYPE_ID}}', '{{$rec->TO_OWNTYPE_ID}}', '{{$rec->TO_OWNNO}}', '{{$rec->TO_OWNNAME}}', '{{$rec->TO_ADDR_LN1}}', '{{$rec->TO_ADDR_LN2}}', '{{$rec->TO_ADDR_LN3}}', '{{$rec->TO_ADDR_LN4}}', '{{$rec->TO_POSTCODE}}', '{{$rec->TO_STATE_ID}}', '{{$rec->TO_TELNO}}', '{{$rec->TO_FAXNO}}', '{{$rec->TO_CITIZEN_ID}}', '{{$rec->TO_RACE_ID}}', '{{$rec->TO_NUMETR}}', '{{$rec->TO_DENOMTR}}','<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->TO_ID}}' ,'newacc',			'{{$rec->TO_OWNERAPPLNTYPE_ID}} / {{$rec->owntype}}'	,'{{$rec->TO_OWNNO}}'	,'{{$rec->TO_ADDR_LN1}}  {{$rec->TO_ADDR_LN2}}   {{$rec->TO_ADDR_LN3}} <br> {{$rec->state}} - {{$rec->TO_POSTCODE}} '	,'{{$rec->TO_TELNO}} / {{$rec->TO_FAXNO}}'	,'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span>' ] );
+		 			ownerdata.push( [ '{{$loop->iteration}}', '{{$rec->TO_OWNERAPPLNTYPE_ID}}', '{{$rec->TO_OWNTYPE_ID}}', '{{$rec->TO_OWNNO}}', '{{$rec->TO_OWNNAME}}', '{{$rec->TO_ADDR_LN1}}', '{{$rec->TO_ADDR_LN2}}', '{{$rec->TO_ADDR_LN3}}', '{{$rec->TO_ADDR_LN4}}', '{{$rec->TO_POSTCODE}}', '{{$rec->TO_STATE_ID}}', '{{$rec->TO_TELNO}}', '{{$rec->TO_FAXNO}}', '{{$rec->TO_CITIZEN_ID}}', '{{$rec->TO_RACE_ID}}', '{{$rec->TO_NUMETR}}', '{{$rec->TO_DENOMTR}}','<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->TO_ID}}' ,'newacc',	'{{$rec->TO_CITY}}'	, '{{$rec->TO_EMAIL}}'	,	'{{$rec->TO_OWNERAPPLNTYPE_ID}} / {{$rec->owntype}}'	,'{{$rec->TO_OWNNO}}'	,'{{$rec->TO_ADDR_LN1}}  {{$rec->TO_ADDR_LN2}}   {{$rec->TO_ADDR_LN3}} <br> {{$rec->state}} - {{$rec->TO_POSTCODE}} '	,'{{$rec->TO_TELNO}} / {{$rec->TO_FAXNO}}'	,'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>' ] );
 		 		@endforeach
 
         $('#ownertble').DataTable({
             data:           ownerdata,
-            "columns":[ null, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false },null,null,null,null,null],
+            "columns":[ null, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false },null,null,null,null,null],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
         	"bAutoWidth": false,
@@ -309,16 +325,16 @@
             	$('#'+key).val(val);
 			});
 
-            $('#propertyregsitration_from-back-2').hide();
-			$('#propertyregsitration_from-next-2').hide();	
+            $('#propertyregsitration_from-back-1').hide();
+			$('#propertyregsitration_from-next-1').hide();	
 			addDisableTab();
 
         	$("#ownerdetail").show();
 			$("#addowner").hide();
 			$("#ownertable").hide();
 
-			//$('#submitedittblowner').show();
-			//$('#submitaddtblowner').hide();
+			$('#submitedittblowner').show();
+			$('#submitaddtblowner').hide();
 
 
 		});
@@ -328,10 +344,10 @@
 
 function editownerRow(){
 	if(validateOwner()) {
-		$('#propertyregsitration_from-back-2').show();
-		$('#propertyregsitration_from-next-2').show();	
-		//$('#submitedittblowner').show();
-		//$('#submitaddtblowner').hide();
+		$('#propertyregsitration_from-back-1').show();
+		$('#propertyregsitration_from-next-1').show();	
+		$('#submitedittblowner').show();
+		$('#submitaddtblowner').hide();
 		var table = $('#ownertble').DataTable();
 		var account = $('#accnumber').val();
 
@@ -346,7 +362,7 @@ function editownerRow(){
 				operation_code = "new";
 			}
 
-		data=[operation,$('#ownaplntype').val(),$('#typeofown').val(), $('#ownnum').val(), $('#ownname').val(),  $('#ownaddr1').val(), $('#ownaddr2').val(), $('#ownaddr3').val(),$('#ownaddr4').val(), $('#ownpostcode').val(), $('#ownstate').val(),$('#telno').val(), $('#faxno').val(), $('#citizen').val(), $('#race').val(), $('#numerator').val(), $('#demominator').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>',operation_code, $('#ownerid').val(),account, $('#ownaplntype').val()+' / '+$('#typeofown option:selected').text(),$('#ownnum').val(),$('#ownaddr1').val()+'<br>'+$('#ownaddr2').val()+'<br>'+$('#ownpostcode').val()+'<br>'+$('#ownstate option:selected').text(),$('#telno').val()+' / '+$('#faxno').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>'];
+		data=[operation,$('#ownaplntype').val(),$('#typeofown').val(), $('#ownnum').val(), $('#ownname').val(),  $('#ownaddr1').val(), $('#ownaddr2').val(), $('#ownaddr3').val(),$('#ownaddr4').val(), $('#ownpostcode').val(), $('#ownstate').val(),$('#telno').val(), $('#faxno').val(), $('#citizen').val(), $('#race').val(), $('#numerator').val(), $('#demominator').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>',operation_code, $('#ownerid').val(),account, $('#owncity').val(),$('#emailno').val(),$('#ownaplntype').val()+' / '+$('#typeofown option:selected').text(),$('#ownnum').val(),$('#ownaddr1').val()+'<br>'+$('#ownaddr2').val()+'<br>'+$('#ownpostcode').val()+'<br>'+$('#ownstate option:selected').text(),$('#telno').val()+' / '+$('#faxno').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>'];
 
 		row.data(data);
 
@@ -361,18 +377,18 @@ function addownerRow(){
 
 	if(validateOwner()){
 
-		//$('#submitedittblowner').hide();
-		//	$('#submitaddtblowner').show();
+		$('#submitedittblowner').hide();
+			$('#submitaddtblowner').show();
 
-			//$('#propertyregsitration_from-back-2').show();
-		//$('#propertyregsitration_from-next-2').show();	
+			//$('#propertyregsitration_from-back-1').show();
+		//$('#propertyregsitration_from-next-1').show();	
 		//var operation = $("#lot_operation").val();
 		//console.log(operation);
 		var t = $('#ownertble').DataTable();
 
 		var account = $('#accnumber').val();
 									
-		t.row.add([ 'New',$('#ownaplntype').val(),$('#typeofown').val(), $('#ownnum').val(), $('#ownname').val(),  $('#ownaddr1').val(), $('#ownaddr2').val(), $('#ownaddr3').val(),$('#ownaddr4').val(), $('#ownpostcode').val(), $('#ownstate').val(),$('#telno').val(), $('#faxno').val(), $('#citizen').val(), $('#race').val(), $('#numerator').val(), $('#demominator').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>','new', $('#ownerid').val(),account  , $('#ownaplntype').val()+' / '+$('#typeofown option:selected').text(),$('#ownnum').val(),$('#ownaddr1').val()+'<br>'+$('#ownaddr2').val()+'<br>'+$('#ownpostcode').val()+'<br>'+$('#ownstate option:selected').text(),$('#telno').val()+' / '+$('#faxno').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>']).draw( false );
+		t.row.add([ 'New',$('#ownaplntype').val(),$('#typeofown').val(), $('#ownnum').val(), $('#ownname').val(),  $('#ownaddr1').val(), $('#ownaddr2').val(), $('#ownaddr3').val(),$('#ownaddr4').val(), $('#ownpostcode').val(), $('#ownstate').val(),$('#telno').val(), $('#faxno').val(), $('#citizen').val(), $('#race').val(), $('#numerator').val(), $('#demominator').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>','new', $('#ownerid').val(),account  ,  $('#owncity').val(),$('#emailno').val(), $('#ownaplntype').val()+' / '+$('#typeofown option:selected').text(),$('#ownnum').val(),$('#ownaddr1').val()+'<br>'+$('#ownaddr2').val()+'<br>'+$('#ownpostcode').val()+'<br>'+$('#ownstate option:selected').text(),$('#telno').val()+' / '+$('#faxno').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>']).draw( false );
 		$('#propertystatus').val('');
 		alert('Record is successfully added');
 		/*$("#ownerdetail").hide();
@@ -384,11 +400,11 @@ function addownerRow(){
 
 
 						function openowner(){
-							$('#propertyregsitration_from-back-2').hide();
-							$('#propertyregsitration_from-next-2').hide();	
+							$('#propertyregsitration_from-back-1').hide();
+							$('#propertyregsitration_from-next-1').hide();	
 							addDisableTab();
-							//$('#submitedittblowner').hide();
-			 				//$('#submitaddtblowner').show();
+							$('#submitedittblowner').hide();
+			 				$('#submitaddtblowner').show();
 							$("#owner_operation2").val(1);
 							$("#owneraccnum").val($('#accnumber').val());
 							$("#ownerdetail").show();
@@ -427,8 +443,8 @@ function addownerRow(){
 							$("#ownersubmit").html("Update");
 						}
 						function closeowner(){			
-							$('#propertyregsitration_from-back-2').show();
-							$('#propertyregsitration_from-next-2').show();		
+							$('#propertyregsitration_from-back-1').show();
+							$('#propertyregsitration_from-next-1').show();		
 							removeDisableTab();			
 							$('#masterid').val('');
 							$('#ownaplntype').val('');

@@ -7,6 +7,7 @@
 				<legend>{{__('propertyregister.Account_Information')}}</legend>
 				<input type="hidden" name="operation" value="1" id="master_operation">
 				<input type="hidden" value="0" name="role_id" id="roleid">
+				<input type="hidden" value="cmk" name="pagetype" id="pagetype">
 				<div class="form_grid_12">
 					<label class="field_title" id="lusername" for="username">{{__('propertyregister.Account_Number')}} <span class="req">*</span></label>
 					<div  class="form_input">
@@ -128,7 +129,7 @@
 					<div  class="form_input">
 						<select data-placeholder="Choose a Status..." tabindex="12" style="width:100%" class="cus-select"  id="state" name="state" tabindex="20">
 							<option></option>
-							@foreach ($statedefault as $rec)
+							@foreach ($state as $rec)
 							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
 							@endforeach
 						</select>
@@ -175,12 +176,11 @@
 			});
 	    });
 
-	    $("#accnumber").keyup(function(){
-	    	
+	    $("#accnumber").keyup(function(){	    	
 		    var account = this.value;
 		    var length = account.length;
-		    if (length > 11){
-		    	alert('Please enter 11 digit account number');
+		    if (length > 12){
+		    	alert('Please enter 11 digit  account number');
 		    	//$("#accnumber").val(account.slice(0,-1));
 		    }
 		    
@@ -208,30 +208,7 @@
 		    //$("#accnumber").val(this.value+""+Math.floor((Math.random() * 9) + 1));
 		    var account = this.value;
 		    var length = account.length;
-		    if (length === 11){		    
-			    $.ajax({
-				  url: "checkdigit",
-				  cache: false,
-				  data:{param_value:this.value},
-				  success: function(data){
-				  	
-				  		$("#accnumber").val(account+""+data.checkdigit);
-				    	
-				    	var valid = validateAccount(account+""+data.checkdigit).done(function(data){
-					       var count = data.res_arr;
-							if (count > 0 ) {
-								$('#accnumber').focus();
-								alert('Account Number already exists');
-							} else {
-			    				$('#propertystatus').val('');
-							}
-						});	
-				   
-				  }
-				});
-		    } else {
-		    	alert("Please enter 11 digit account number");
-		    }
+		    
 	    });
 
 	    $("#propertyregsitration_from-next-0").click(function(){
