@@ -2649,7 +2649,7 @@ left join tbdefitems as lotcode on lotcode.tdi_key = al_lotcode_id and lotcode.t
       $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  , sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = "40" ');
+        from tbsearchdetail mtb where sd_se_id = "40"  order by sd_sort');
         
         $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
         $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
@@ -2663,7 +2663,7 @@ left join tbdefitems as lotcode on lotcode.tdi_key = al_lotcode_id and lotcode.t
     }
 
     public function ownerTransferListData(Request $request){
-        Log::info('Test');
+        
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
