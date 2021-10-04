@@ -35,22 +35,18 @@
 								<tr>
 									<th><input name="select_all" value="1" type="checkbox"></th>
 									<th class="table_sno">
-										S No
+										{{__('inspection.SNo')}}
 									</th>
+									<th>{{__('inspection.Account_Number')}} </th>
+									<th>{{__('inspection.File_Number')}} </th>
+									<th>{{__('inspection.Term_Name')}} </th>
+									<th>{{__('inspection.Basket')}} </th>
+									<th>{{__('inspection.Zone')}} </th>
+									<th>{{__('inspection.Subzone')}} </th>
+									<th>{{__('inspection.Address1')}}</th>
+									<th>{{__('inspection.Address2')}}</th>
 									<th>
-										ACCOUNT NUMBER
-									</th>
-									<th>
-										FILE NUMBER
-									</th>
-									<th>
-										LOT CODE / ALTERNATIVE LOT NO
-									</th>
-									<th>
-										ZONE / SUBZONE
-									</th>
-									<th>
-										PROPERTY ADDRESS
+										Bilangan Bangunan
 									</th>			
 								</tr>
 							</thead>
@@ -182,17 +178,30 @@ $(document).ready(function (){
 				 
 		        // ajax: '{{ url("inspectionproperty") }}',
 		        /*"ajax": '/bookings/datatables',*/
-		        "columns": [
+		        // "columns": [
+			    //     {"data": "vd_id", "orderable": false, "searchable": false, "name":"_id" },
+			    //     {"data": null, "name": "sno"},
+			    //     {"data": "vd_accno", "name": "account number"},
+			    //     {"data": "ma_fileno", "name": "fileno"},
+			    //     {"data": "lot_detail", "name": "zone"},
+			    //     {"data": "subzone", "name": "subzone"},
+			    //     {"data": function(data){
+			    //         return data.ma_addr_ln1+", "+data.ma_addr_ln2+", "+data.ma_addr_ln3+", "+data.ma_addr_ln4+", "+data.ma_city+", "+data.ma_postcode;
+			    //     }, "name": "owner"}
+		   		// ],
+				"columns": [
 			        {"data": "vd_id", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": null, "name": "sno"},
 			        {"data": "vd_accno", "name": "account number"},
 			        {"data": "ma_fileno", "name": "fileno"},
-			        {"data": "lot_detail", "name": "zone"},
+					{"data": "vt_termDate", "name": "vt_termDate"},
+					{"data": "va_name", "name": "va_name"},
+			        {"data": "zone", "name": "zone"},
 			        {"data": "subzone", "name": "subzone"},
-			        {"data": function(data){
-			            return data.ma_addr_ln1+", "+data.ma_addr_ln2+", "+data.ma_addr_ln3+", "+data.ma_addr_ln4+", "+data.ma_city+", "+data.ma_postcode;
-			        }, "name": "owner"}
-		   		],
+			        {"data": "ma_addr_ln1", "name": "ma_addr_ln1"}, 
+			        {"data": "ma_addr_ln2", "name": "ma_addr_ln2"},
+			        {"data": "bldgcount", "name": "bldgcount"}
+		   		],   
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();
   	

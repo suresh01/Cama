@@ -2257,7 +2257,7 @@ bldgcategory,bldgtype ');
       $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  , sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = "14" ');
+        from tbsearchdetail mtb where sd_se_id = "14"  order by sd_sort ');
         
         $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
         $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
@@ -2317,18 +2317,22 @@ bldgcategory,bldgtype ');
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
-      $property = DB::select('select vd_id, `cm_appln_valdetl`.`vd_accno`,`cm_masterlist`.`ma_fileno`,
-concat(`tbdefitems_subzone`.`tdi_parent_name`, "/" , `tbdefitems_subzone`.`tdi_value`) subzone,
-`cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, ma_addr_ln3, ma_addr_ln4, ma_city, ma_postcode, concat(`lotcode`.`tdi_value` , "-",al_no, "/", al_altno) lot_detail,
-`cm_appln_valdetl`.`vd_approvalstatus_id`, `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`,
-`cm_masterlist`.`ma_pb_id` 
-FROM `cm_appln_valdetl`
-JOIN `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
-join cm_appln_val on va_id = vd_va_id
-join cm_appln_lot on al_vd_id = vd_id
-LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
-left join tbdefitems as lotcode on lotcode.tdi_key = al_lotcode_id and lotcode.tdi_td_name = "LOTCODE"
-where vd_approvalstatus_id in ("07","08","09","10","11","12") '.$filterquery);
+      $property = DB::select('select 
+cm_appln_valdetl.vd_accno,cm_masterlist.ma_fileno,
+tbdefitems_subzone.tdi_parent_name zone, tbdefitems_subzone.tdi_value subzone,
+cm_masterlist.ma_addr_ln1,cm_masterlist.ma_addr_ln2, owntype.tdi_value owntype, 
+cm_owner.TO_OWNNAME, (select count(*) from cm_appln_bldg where ab_vd_id = vd_id) bldgcount,
+cm_appln_valdetl.vd_approvalstatus_id, cm_appln_valdetl.vd_id, cm_appln_valdetl.vd_va_id, cm_masterlist.ma_id, cm_masterlist.ma_pb_id, 
+va_name, concat("(", DATE_FORMAT(vt_termDate, "%d/%m/%Y"), ") ", vt_name) vt_termDate      
+FROM cm_appln_valdetl
+inner JOIN cm_masterlist ON cm_masterlist.ma_id = cm_appln_valdetl.vd_ma_id
+inner JOIN cm_owner ON ma_id = TO_MA_ID
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+-- LEFT JOIN tbdefitems_subzone ON cm_masterlist.ma_subzone_id = tbdefitems_subzone.tdi_key
+LEFT JOIN tbdefitems tbdefitems_subzone ON tbdefitems_subzone.tdi_key = ma_subzone_id  and tbdefitems_subzone.tdi_td_name = "SUBZONE"
+LEFT JOIN tbdefitems owntype on TO_OWNTYPE_ID = owntype.tdi_key and owntype.tdi_td_name = "OWNTYPE"
+where vd_approvalstatus_id in ("07","08","09","10","11","12")  '.$filterquery);
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);
    
@@ -2348,7 +2352,7 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12") '.$filterquery);
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "18" ');
+        from tbsearchdetail mtb where sd_se_id = "18" order by sd_sort');
        $termcondition = "";
         
         $termfilter = DB::select("select vt_id termid, vt_name term, applntype.tdi_value applntype, 
@@ -2412,18 +2416,18 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12") '.$filterquery);
         Log::info($account1);*/
             // Compile a JRXML to Jasper
         //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
-         Log::info(JasperPHP::process(
-            base_path('/reports/r4cover.jasper'),
-                false,
-                array("pdf"),               
-                array("param_condition" => $filter,"logo" =>  base_path('/public/images/logo.jpeg')),
-            array(
-              'driver' => 'generic',
-              'username' => env('DB_USERNAME',''),
-              'password' => env('DB_PASSWORD',''),
-              'jdbc_driver' => 'com.mysql.jdbc.Driver',
-              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-            ))->output());
+        //  Log::info(JasperPHP::process(
+        //     base_path('/reports/r4cover.jasper'),
+        //         false,
+        //         array("pdf"),               
+        //         array("param_condition" => $filter,"logo" =>  base_path('/public/images/logo.jpeg')),
+        //     array(
+        //       'driver' => 'generic',
+        //       'username' => env('DB_USERNAME',''),
+        //       'password' => env('DB_PASSWORD',''),
+        //       'jdbc_driver' => 'com.mysql.jdbc.Driver',
+        //       'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+        //     ))->output());
 
       JasperPHP::process(
             base_path('/reports/r4cover.jasper'),
@@ -2897,21 +2901,21 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
         Log::info($account1);*/
             // Compile a JRXML to Jasper
         //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
-         Log::info(JasperPHP::process(
-            base_path('/reports/deactiveproperty.jasper'),
-                false,
-                array("pdf"),               
-                array("basketid" => $filter,"title" => $title),
-            array(
-              'driver' => 'generic',
-              'username' => env('DB_USERNAME',''),
-              'password' => env('DB_PASSWORD',''),
-              'jdbc_driver' => 'com.mysql.jdbc.Driver',
-              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-            ))->output());
+        //  Log::info(JasperPHP::process(
+        //     base_path('/reports/deactiveproperty.jasper'),
+        //         false,
+        //         array("pdf"),               
+        //         array("basketid" => $filter,"title" => $title),
+        //     array(
+        //       'driver' => 'generic',
+        //       'username' => env('DB_USERNAME',''),
+        //       'password' => env('DB_PASSWORD',''),
+        //       'jdbc_driver' => 'com.mysql.jdbc.Driver',
+        //       'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+        //     ))->output());
 
       JasperPHP::process(
-            base_path('/reports/deactiveproperty.jasper'),
+            base_path('/reports/newdeactiveproperty.jasper'),
                 false,
                 array("pdf"),               
                 array("basketid" => $filter,"title" => $title),
@@ -2927,7 +2931,7 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
               'Content-Type: application/pdf',
             );
 
-        return response()->download(base_path('/reports/deactiveproperty.pdf'), 'Deactive List.pdf', $headers);
+        return response()->download(base_path('/reports/newdeactiveproperty.pdf'), 'Deactive List.pdf', $headers);
 
     }
 
