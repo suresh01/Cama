@@ -261,7 +261,23 @@ class PropertyRegisterationController extends Controller
         
         //$master = DB::table('cm_masterlist')->where('ma_id', $prop_id)->first();
         //$building = DB::select('select * from cm_bldg where bl_ma_id = ifnull("'.$prop_id.'",0)');
-        $building = DB::select('select cm_bldg.*, bldgtype.tdi_value bldgtype, tdi_parent_name
+
+          $building = DB::select('select cm_bldg.*, bldgtype.tdi_value bldgtype, tdi_parent_name
+             bldgcategory, tdi_parent_key bldgcategory_id, bldgstorey.tdi_value bldgstorey, 
+            bldgstr.tdi_value bldgstr
+            , rootype.tdi_value rootype , astatus.tdi_value astatus
+             from cm_bldg left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype 
+             on bldgtype.tdi_key = BL_BLDGTYPE_ID
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgstorey
+            on bldgstorey.tdi_key = BL_BLDGSTOREY_ID
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGSTRUCTURE") bldgstr
+            on bldgstr.tdi_key = BL_BLDGSTRUCTURE_ID
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROOFTYPE") rootype  
+            on rootype.tdi_key = BL_ROOFTYPE_ID
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISMAINBLDG") astatus  
+            on astatus.tdi_key = bl_ismainbldg_id
+            where bl_ma_id = ifnull("'.$prop_id.'",0)');
+      /*  $building = DB::select('select cm_bldg.*, bldgtype.tdi_value bldgtype, tdi_parent_name
          bldgcategory, tdi_parent_key bldgcategory_id, bldgstorey.tdi_value bldgstorey, 
         bldgstr.tdi_value bldgstr
         , rootype.tdi_value rootype
@@ -272,7 +288,7 @@ class PropertyRegisterationController extends Controller
         left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGSTRUCTURE") bldgstr
         on bldgstr.tdi_key = BL_BLDGSTRUCTURE_ID
         left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROOFTYPE") rootype  
-        on rootype.tdi_key = BL_ROOFTYPE_ID where bl_ma_id = ifnull("'.$prop_id.'",0)');
+        on rootype.tdi_key = BL_ROOFTYPE_ID where bl_ma_id = ifnull("'.$prop_id.'",0)');*/
         //$lotlist = DB::select('select * from cm_lot where lo_ma_id = ifnull("'.$prop_id.'",0)');
         $lotlist = DB::select('select cm_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
         , unitsize.tdi_value unitsize, concat(lotcode.tdi_value,cm_lot.LO_NO) lotnumber, concat(titletype.tdi_value,cm_lot.LO_TITLENO) titlenumber, landuse.tdi_value landuse, tentype.tdi_value tentype
