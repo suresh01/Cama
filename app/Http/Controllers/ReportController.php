@@ -3011,7 +3011,7 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
 
        
        
-
+        Log::info($filterquery);
 
         $property = DB::select("
         select 

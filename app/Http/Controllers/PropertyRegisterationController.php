@@ -876,6 +876,24 @@ $master ='{"aa":"ss '.$type.'"}';
         return response()->json(array('checkdigit'=> 'succsess','propertycnt'=>$propertycnt), 200);
     }
 
+    public function generateTextFile(Request $request){
+        $param_value = $request->input('param_value');
+        $module = $request->input('module');
+        $param = $request->input('param');
+        $param_str = $request->input('param_str');
+        $param_status = $request->input('param_status');
+        $name=Auth::user()->name;
+        //$param = $request->input('param');
+        Log::info($module);
 
+        $propertycnt = 0;
+
+            Log::info("call proc_approvepropreg('".$param_value."',    '".$name."','".$module."', '".$param."', '".$param_str."', '".$param_status."')"); 
+            $register=DB::select("call proc_approvepropreg(".$param_value.",   '".$name."', '".$module."', '".$param."', '".$param_str."', '".$param_status."')");
+
+
+        
+        return response()->json(array('checkdigit'=> 'succsess','propertycnt'=>$propertycnt), 200);
+    }
     
 }

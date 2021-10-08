@@ -263,7 +263,7 @@
 
 		$(".field").change(function(){
 			//value_drop
-			//alert();
+			alert();
 			console.log($(this).val());
 		    var id= $(this).val();
 		   // var selectedvalue = $(this).find('option:selected').text();
