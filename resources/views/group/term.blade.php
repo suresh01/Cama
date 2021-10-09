@@ -168,8 +168,10 @@
 											<span><a class="action-icons c-edit" onclick="editTerm('{{$rec->vt_id}}')" title="Edit Term" href="#">Edit</a></span>
 											@endif
 										@endif
-
 										@if($rec->vt_approvalstatus_id == '03' )
+											<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="generateTextFile('{{$rec->vt_id}}')" disabled="true" title="Jana Text File" href="#"></a></span>
+										@endif
+										@if($rec->vt_approvalstatus_id == '04' )
 											<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="enforceTerm('{{$rec->vt_id}}')" disabled="true" title="Enforce Term" href="#"></a></span>
 										@endif
 
@@ -501,6 +503,57 @@
 		
 
 		}	
+		function generateTextFile(id){
+			var noty_id = noty({
+				layout : 'center',
+				text: 'Jana Text File?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Jana', click: function($noty) {
+						$noty.close();
+						$.ajax({
+			  				type: 'GET', 
+						    url:'generatetextfile',
+						    headers: {
+							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							},
+					        data:{param_value:id,module:'GENERATETEXTFILE'},
+					        success:function(data){
+					        	
+						        	var noty_id = noty({
+										layout : 'top',
+										text: 'Term Generated!',
+										modal : true,
+										type : 'success', 
+									});	
+									window.location.assign("term");	
+									        		
+					        	//$("#finish").attr("disabled", true);
+					        	//clearTableError(4);
+				        	},
+					        error:function(data){
+								//$('#loader').css('display','none');	
+					        	$('#finishloader').html('');     	
+					        		var noty_id = noty({
+									layout : 'top',
+									text: 'Problem while Generate File!',
+									modal : true,
+									type : 'error', 
+								});
+				        	}
+				    	});
+					  }
+					},
+					{type: 'button blue', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 type : 'success', 
+			 });
+		
+
+		}
 	</script>
 
 </div>

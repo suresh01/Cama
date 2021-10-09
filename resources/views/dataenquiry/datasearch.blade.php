@@ -200,9 +200,9 @@
 
 		
 		function ExportSCV(){
-			//alert(1);
-			location.href ="exportcsv?" + $("#filterForm").serialize();
-			//console.log($("#filterForm").serialize());
+			//alert($("#filterForm").serialize());
+			//location.href ="exportcsv?" + $("#filterForm").serialize();
+			console.log($("#filterForm").serialize());
 		
 		}
 
@@ -214,7 +214,7 @@
 
 			   // If none of the checkboxes are checked
 		   if($chkbox_checked.length === 0){
-		      chkbox_select_all.checked = false;
+		      //chkbox_select_all.checked = false;
 		      if('indeterminate' in chkbox_select_all){
 		         chkbox_select_all.indeterminate = false;
 		      }

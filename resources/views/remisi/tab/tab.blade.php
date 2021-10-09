@@ -92,6 +92,8 @@
 
 			for (var i = 0;i<$('#invesitgatetable').DataTable().rows().count();i++){
 				var ldata = $('#invesitgatetable').DataTable().row(i).data();
+				
+	        	console.log(ldata);
 				var tempdata1 = {};
 				$.each(ldata, function( key, value ) {
 					if (key !== 4) {
@@ -99,7 +101,7 @@
 					} 
 				//console.log(key);            
 	        	});
-	        	//console.log(templotdata);
+	        	console.log(tempdata1);
 	        	instabledata.push(tempdata1);            	
 			}
 //alert($('#invesitgatetable').DataTable().rows().count());
@@ -113,7 +115,7 @@
             if(instabledata === ''){
 				instabledata = "{}";
 			}
-		//console.log(formdata);
+		console.log(instabledata);
 			var noty_id1 = noty({
 				layout : 'center',
 				text: 'Are want to Update?',
