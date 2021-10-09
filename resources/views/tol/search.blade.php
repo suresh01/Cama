@@ -58,7 +58,7 @@
 					</form>
 			</div>
 			<div style="display: none;" id="view"></div>
-			<button id="" style="float:right;" name="btnadduser" type="button" class="basic-custom-modal1 btn_small btn_blue"><span>{{__('search.addfilter')}}</span></button>
+			<button id="" style="float:right;" name="btnadduser" type="button" class="basic-modal btn_small btn_blue"><span>{{__('search.addfilter')}}</span></button>
 			<!--<a href="#" class="basic-custom-modal1">Add Filter</a>-->
 <script>
 	var i = 0;
@@ -84,7 +84,7 @@
 			
 			//$('#basic-modal-content').css('display', 'none');
 		});
-		$('.basic-custom-modal1').click(function(){
+		$('.basic-modal').click(function(){
 			$.ajax({
 		        type:'GET',
 		        url:'/getaccess',
@@ -114,6 +114,8 @@
 			//$('#simplemodal-container').css('display', 'block');
 			//$('#basic-modal-content').css('display', 'none');
 		});
+
+		
 
 
 		$('.remove').click(function() {

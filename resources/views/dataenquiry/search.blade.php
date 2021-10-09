@@ -73,40 +73,30 @@
 		waitingIndicator('searchLoader'); //waiting indicator
 
 		$('#simplemodal-overlay').css('display', 'block');
-		$('.simplemodal-close').click(function(){
+		$('.simplemodal-custom-close').click(function(){
 			//alert('');
-			
+			$('#simplemodal-overlay').css('display', 'none');
+			$('#simplemodal-container').css('display', 'none');
+			$('#basic-modal-content').attr('name','hide');
 
-			$('#manaual-filter-placeholder').html($('#filterrow').html());
-			$('#basic-modal-content').css('display', 'none');
+			
+			//$('#basic-modal-content').css('display', 'none');
 		});
 		$('.basic-modal').click(function(){
-			$.ajax({
-		        type:'GET',
-		        url:'/getaccess',
-		        data:{module:211},
-		        success:function(data){	        	
-		        	if(data.msg === "false"){
-		        		alert("211 - "
-		        			+"We are sorry "
-							+" The function you are trying to access does not have permission :(");
-
-		        		//return "false";
-		        	} else {
-	        		
-						var content = $('#manaual-filter-placeholder').html();
-						if (content.trim() != "" ){
-							$('#filterrow').html(content);
-							$('#manaual-filter-placeholder').html('');
-
-							
-					
-						}
-						filterAction();
-						
-		        	}
-		        }
-		    });
+			
+        		var status = $('#basic-modal-content').attr('name');
+				//alert($('#basic-modal-content').attr('name'));
+				if(status == 'hide'){
+					console.log("23");
+					$('#simplemodal-overlay').css('display', 'block');
+					$('#simplemodal-container').css('display', 'block');
+				} else {
+					console.log("24");
+					$('#simplemodal-overlay').css('display', 'block');
+					$('#simplemodal-container').css('display', 'block');
+					$('#basic-modal-content').modal();
+				}
+		        filterAction();
 			
 			//$('#simplemodal-overlay').css('display', 'block');
 			//$('#simplemodal-container').css('display', 'block');

@@ -73,6 +73,37 @@
 		waitingIndicator('searchLoader'); //waiting indicator
 
 		$('#simplemodal-overlay').css('display', 'block');
+		$('.simplemodal-custom-close').click(function(){
+			//alert('');
+			$('#simplemodal-overlay').css('display', 'none');
+			$('#simplemodal-container').css('display', 'none');
+			$('#basic-modal-content').attr('name','hide');
+
+			
+			//$('#basic-modal-content').css('display', 'none');
+		});
+		$('.basic-modal').click(function(){
+			
+        		var status = $('#basic-modal-content').attr('name');
+				//alert($('#basic-modal-content').attr('name'));
+				if(status == 'hide'){
+					console.log("23");
+					$('#simplemodal-overlay').css('display', 'block');
+					$('#simplemodal-container').css('display', 'block');
+				} else {
+					console.log("24");
+					$('#simplemodal-overlay').css('display', 'block');
+					$('#simplemodal-container').css('display', 'block');
+					$('#basic-modal-content').modal();
+				}
+		        filterAction();
+			
+			//$('#simplemodal-overlay').css('display', 'block');
+			//$('#simplemodal-container').css('display', 'block');
+			//$('#basic-modal-content').css('display', 'none');
+		});
+
+		/*$('#simplemodal-overlay').css('display', 'block');
 		$('.simplemodal-close').click(function(){
 			//alert('');
 			
@@ -111,7 +142,7 @@
 			//$('#simplemodal-overlay').css('display', 'block');
 			//$('#simplemodal-container').css('display', 'block');
 			//$('#basic-modal-content').css('display', 'none');
-		});
+		});*/
 
 		
 
