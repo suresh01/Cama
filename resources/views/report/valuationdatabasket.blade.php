@@ -15,14 +15,14 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
-						<li>Valuation Data BY Basket</li>
+						<li><a href="#">Laporan</a></li>
+						<li>Laporan Senarai Nilaian Pada Bakul</li>
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty()">Generate Report</a>				
+					<a href="#" onclick="deleteProperty()">Jana Laporan</a>				
 					
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'valuationdatatablebasket', 'searchid' => $msearchid])	
 				</div>
@@ -37,16 +37,16 @@
 										S No
 									</th>
 									<th>
-										Term Name
+										Nama Penggal
 									</th>
 									<th>
-										Term Date
+										Penggal
 									</th>
 									<th>
-										Basket Name
+										Nama Bakul
 									</th>
 									<th>
-										Property Count
+										Bilangan Harta
 									</th>
 									<th>			
 								</tr>
@@ -89,10 +89,10 @@
 	   		});
 			var type = "delete";
 			if(account.length > 0) {
-			console.log(account.toString());
+			//console.log(account.toString());
 			var noty_id = noty({
 				layout : 'center',
-				text: 'Are want to Generate Report?',
+				text: 'Jana Laporan?',
 				modal : true,
 				buttons: [
 					{type: 'button pink', text: 'Generate', click: function($noty) {
@@ -101,27 +101,6 @@
 						var tilte = prompt("Report Title", "SENARAI NILAIAN PINDAAN DAN HARTA BARU HARTA MAJLIS PERBANDARAN HANG TUAH JAYA BAGI PENGGAL "+termdate);
 						$('#title').val(tilte);
 						$('#generateform').submit();
-					/*	$.ajax({
-					        type:'GET',
-					        url:'generateinspectionreport',
-					        data:{accounts:account.toString(),type:type,id:'id'},
-					        success:function(data){
-					        	
-								//location.reload();				        		
-					        	//$("#finish").attr("disabled", true);
-					        	//clearTableError(4);
-				        	},
-					        error:function(data){
-								//$('#loader').css('display','none');	
-					        	   	
-					        		var noty_id = noty({
-									layout : 'top',
-									text: 'Report Not generated!',
-									modal : true,
-									type : 'error', 
-								});
-				        	}
-						});*/
 					  }
 					},
 					{type: 'button blue', text: 'Cancel', click: function($noty) {

@@ -15,15 +15,15 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
-						<li>Owner Notice</li>
+						<li><a href="#">Laporan</a></li>
+						<li>Notis Pemilik</li>
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="reportA()" >Notice Type A</a>	
-					<a href="#" onclick="reportB()" >Notice Type B</a>	
+					<a href="#" onclick="reportA()" >Notis Jenis A</a>	
+					<a href="#" onclick="reportB()" >Notis Jenis B</a>	
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'ownernoticedata', 'searchid' => '14'])			
 					
 				</div>
@@ -154,22 +154,22 @@
 										S No
 									</th>
 									<th>
-										ACCOUNT NUMBER
+										No Harta
 									</th>
 									<th>
-										FILE NUMBER
+										No Fail
 									</th>
 									<th>
-										ZONE / SUBZONE
+										Mukim / Taman/ Kawasan
 									</th>
 									<th>
-										Owner Name
+										Nama Pemilik
 									</th>	
 									<th>
-										Owner No
+										Id Pemilik
 									</th>	
 									<th>
-										LOT CODE / ALTERNATIVE LOT NO
+										No Lot / No Lot Alternatif
 									</th>		
 								</tr>
 							</thead>

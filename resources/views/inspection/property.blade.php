@@ -85,9 +85,9 @@
 
 					@include('inspection.propertysearch')
 
-					@include('inspection.bldgarea')
+					{{-- @include('inspection.bldgarea') --}}
 					@if($approvestatus == '04' )	
-					<a href="#" onclick="addProperty()">{{__('inspection.New_Property')}} </a>
+					<a href="#" onclick="addProperty()">{{__('inspection.Masterlist_Property')}} </a>
 					<a href="#" onclick="addExisitingProperty()">{{__('inspection.Add_Exsisting_Property')}} </a>
 					<!--<a href="#" onclick="deleteProperty()">Delete Property</a>-->
 

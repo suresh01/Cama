@@ -74,22 +74,26 @@
 
   	function getSelectedProp(id){
 		//var table = $('#proptble').DataTable();
-	
-		$('#loader').html('<div class="simplemodal-overlay" style="background: none repeat scroll 0 0 black;opacity: 0.5; height: 100%; width: 100%; position: fixed; left: 0px; top: 0px; z-index: 1001;"><span><img style="    display: block; '+
-				' margin-left: auto; '+
-				' margin-right: auto; '+
-				' text-align: center; '+
-				' vertical-align: middle;'+
-				' margin-top: 300px;" src="images/ajax-loader/ajax-loader(6).gif" alt="Loader"></span></div>');
+	//alert();
+		// $('#loader').html('<div class="simplemodal-overlay" style="background: none repeat scroll 0 0 black;opacity: 0.5; height: 100%; width: 100%; position: fixed; left: 0px; top: 0px; z-index: 1001;"><span><img style="    display: block; '+
+		// 		' margin-left: auto; '+
+		// 		' margin-right: auto; '+
+		// 		' text-align: center; '+
+		// 		' vertical-align: middle;'+
+		// 		' margin-top: 300px;" src="images/ajax-loader/ajax-loader(6).gif" alt="Loader"></span></div>');
 
     	var type = "addpropbasket";
+		
    		$.ajax({
 	        type:'GET',
 	        url:'grappdata',
 	        data:{accounts:'{{$id}}',id:id,type:type},
-	        success:function(data){	        	
+	        success:function(data){	   
+				
 	        	alert(data.newcount+" Property Added");
-	        	$('#loader').html('');		
+				// $('#loader').html('');	
+
+	        		
 	        
 	        }
 		});

@@ -15,19 +15,19 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
+						<li><a href="#">Laporan</a></li>
 						@if($page==0)
-							<li>Pivot Report (Property Status = Empty Lot)</li>
+							<li>Laporan Pivot (Tanah Kosong)</li>
 						@endif
 						@if($page==1)
-							<li>Pivot Report (Property Status = Building)</li>
+							<li>Laporan Pivot (Berbangunan)</li>
 						@endif
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty()">Generate Report</a>				
+					<a href="#" onclick="deleteProperty()">Jana Report</a>				
 					
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'valuationdatatable?page='.$page, 'searchid' => '17'])	
 				</div>
@@ -43,16 +43,16 @@
 										S No
 									</th>
 									<th>
-										Term Name
+										Nama Penggal
 									</th>
 									<th>
-										Term Date
+										Penggal
 									</th>
 									<th>
-										Enforce Date
+										Kuatkuasa Penggal
 									</th>
 									<th>
-										Property Count
+										Bilangan Harta
 									</th>
 									<th>			
 								</tr>

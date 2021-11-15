@@ -503,57 +503,64 @@
 		
 
 		}	
+
 		function generateTextFile(id){
-			var noty_id = noty({
-				layout : 'center',
-				text: 'Jana Text File?',
-				modal : true,
-				buttons: [
-					{type: 'button pink', text: 'Jana', click: function($noty) {
-						$noty.close();
-						$.ajax({
-			  				type: 'GET', 
-						    url:'generatetextfile',
-						    headers: {
-							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-							},
-					        data:{param_value:id,module:'GENERATETEXTFILE'},
-					        success:function(data){
+			//alert($("#filterForm").serialize());
+			location.href ="generatetextfile?" + "param_value="+id;
+			//console.log($("#filterForm").serialize());
+		
+		}
+		// function generateTextFile(id){
+		// 	var noty_id = noty({
+		// 		layout : 'center',
+		// 		text: 'Jana Text File?',
+		// 		modal : true,
+		// 		buttons: [
+		// 			{type: 'button pink', text: 'Jana', click: function($noty) {
+		// 				$noty.close();
+		// 				$.ajax({
+		// 	  				type: 'GET', 
+		// 				    url:'generatetextfile',
+		// 				    headers: {
+		// 					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		// 					},
+		// 			        data:{param_value:id,module:'GENERATETEXTFILE'},
+		// 			        success:function(data){
 					        	
-						        	var noty_id = noty({
-										layout : 'top',
-										text: 'Term Generated!',
-										modal : true,
-										type : 'success', 
-									});	
-									window.location.assign("term");	
+		// 				        	var noty_id = noty({
+		// 								layout : 'top',
+		// 								text: 'Term Generated!',
+		// 								modal : true,
+		// 								type : 'success', 
+		// 							});	
+		// 							window.location.assign("term");	
 									        		
-					        	//$("#finish").attr("disabled", true);
-					        	//clearTableError(4);
-				        	},
-					        error:function(data){
-								//$('#loader').css('display','none');	
-					        	$('#finishloader').html('');     	
-					        		var noty_id = noty({
-									layout : 'top',
-									text: 'Problem while Generate File!',
-									modal : true,
-									type : 'error', 
-								});
-				        	}
-				    	});
-					  }
-					},
-					{type: 'button blue', text: 'Cancel', click: function($noty) {
-						$noty.close();
-					  }
-					}
-					],
-				 type : 'success', 
-			 });
+		// 			        	//$("#finish").attr("disabled", true);
+		// 			        	//clearTableError(4);
+		// 		        	},
+		// 			        error:function(data){
+		// 						//$('#loader').css('display','none');	
+		// 			        	$('#finishloader').html('');     	
+		// 			        		var noty_id = noty({
+		// 							layout : 'top',
+		// 							text: 'Problem while Generate File!',
+		// 							modal : true,
+		// 							type : 'error', 
+		// 						});
+		// 		        	}
+		// 		    	});
+		// 			  }
+		// 			},
+		// 			{type: 'button blue', text: 'Cancel', click: function($noty) {
+		// 				$noty.close();
+		// 			  }
+		// 			}
+		// 			],
+		// 		 type : 'success', 
+		// 	 });
 		
 
-		}
+		// }
 	</script>
 
 </div>

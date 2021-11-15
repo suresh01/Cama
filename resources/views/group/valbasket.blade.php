@@ -423,8 +423,8 @@ function check_usaccess(module,id){
 
 		function delProperty(id){
 			//console.log();
-		if(isAccessAllowed(513)){
-			var noty_id = noty({
+			if(isAccessAllowed(513)){
+				var noty_id = noty({
 						layout : 'center',
 						text: 'Are want to delete Basket?',
 						modal : true,
@@ -448,7 +448,7 @@ function check_usaccess(module,id){
 							],
 						 type : 'success', 
 					 });
-}
+			}
 
 			
 		}
@@ -536,7 +536,7 @@ function check_usaccess(module,id){
 
 		
 		function resetValuation(id){
-if(isAccessAllowed(5110)){
+			if(isAccessAllowed(5110)){
 
 			
 						var noty_id = noty({
@@ -591,7 +591,7 @@ if(isAccessAllowed(5110)){
 		}	
 
 		function approveValuation(id){
-if(isAccessAllowed(518)){
+			if(isAccessAllowed(518)){
 			
 			var noty_id = noty({
 				layout : 'center',

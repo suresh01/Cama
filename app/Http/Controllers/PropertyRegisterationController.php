@@ -638,10 +638,10 @@ $master ='{"aa":"ss '.$type.'"}';
         } else */
         $stage = '0';
         if ( $param == '03'  ){
-             $condition = ' where PB_APPROVALSTATUS_ID  in ("03") ';
+             $condition = ' PB_APPROVALSTATUS_ID  in ("03","04") ';
             $stage = '03';
         } else {
-             $condition = ' where PB_APPROVALSTATUS_ID  in ("01","02") ';
+             $condition = ' PB_APPROVALSTATUS_ID  in ("01","02") ';
             $stage = '01';
         }
             $basket=DB::select("select pb_id basket_id, pb_name basketname,  ifnull(propcnt.propcount,0) propcount, applntype.tdi_value applntype, pb_applicationtype_id,
@@ -657,14 +657,15 @@ $master ='{"aa":"ss '.$type.'"}';
             where ma_approvalstatus_id = '02' group by ma_pb_id) pendingprop on pendingprop.ma_pb_id = pb_id
             left join (select ma_pb_id, count(*) approved_count from cm_masterlist 
             where ma_approvalstatus_id = '03' group by ma_pb_id) approvedprop on approvedprop.ma_pb_id = pb_id
-            left join (select * from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = PB_APPLICATIONTYPE_ID  ".$condition." and  PB_PROPBASKETTYE_ID = 1
+            left join (select * from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = PB_APPLICATIONTYPE_ID  
+            WHERE ".$condition." and  PB_PROPBASKETTYE_ID = 1
             order by pb_createdate desc ");
 
             $propertycount =DB::select('select count(*) propcount from cm_masterlist inner join cm_propbasket on PB_ID = ma_pb_id
-                 where   PB_PROPBASKETTYE_ID = 1');
+                 where   PB_PROPBASKETTYE_ID = 1 AND '.$condition);
 
             $valproperty =DB::select('select count(*) propcount from cm_masterlist inner join cm_propbasket on PB_ID = ma_pb_id
-            inner join cm_appln_valdetl on vd_ma_id = ma_id where   PB_PROPBASKETTYE_ID = 1');
+            inner join cm_appln_valdetl on vd_ma_id = ma_id where   PB_PROPBASKETTYE_ID = 1 AND '.$condition);
 
             $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
 
@@ -686,10 +687,10 @@ $master ='{"aa":"ss '.$type.'"}';
         } else */
         $stage = '0';
         if ( $param == '03'  ){
-             $condition = ' where PB_APPROVALSTATUS_ID  in ("03") ';
+             $condition = ' PB_APPROVALSTATUS_ID  in ("03", "04") ';
             $stage = '03';
         } else {
-             $condition = ' where PB_APPROVALSTATUS_ID  in ("01","02") ';
+             $condition = ' PB_APPROVALSTATUS_ID  in ("01", "02") ';
             $stage = '01';
         }
             $basket=DB::select("select pb_id basket_id, pb_name basketname,  ifnull(propcnt.propcount,0) propcount, applntype.tdi_value applntype, pb_applicationtype_id,
@@ -705,14 +706,15 @@ $master ='{"aa":"ss '.$type.'"}';
             where ma_approvalstatus_id = '02' group by ma_pb_id) pendingprop on pendingprop.ma_pb_id = pb_id
             left join (select ma_pb_id, count(*) approved_count from cm_masterlist 
             where ma_approvalstatus_id = '03' group by ma_pb_id) approvedprop on approvedprop.ma_pb_id = pb_id
-            left join (select * from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = PB_APPLICATIONTYPE_ID  ".$condition." and  PB_PROPBASKETTYE_ID = 2
+            left join (select * from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = PB_APPLICATIONTYPE_ID  
+            WHERE ".$condition." and  PB_PROPBASKETTYE_ID = 2
             order by pb_createdate desc ");
 
             $propertycount =DB::select('select count(*) propcount from cm_masterlist inner join cm_propbasket on PB_ID = ma_pb_id
-                 where   PB_PROPBASKETTYE_ID = 2');
+                 where   PB_PROPBASKETTYE_ID = 2 AND '.$condition);
 
             $valproperty =DB::select('select count(*) propcount from cm_masterlist inner join cm_propbasket on PB_ID = ma_pb_id
-            inner join cm_appln_valdetl on vd_ma_id = ma_id where   PB_PROPBASKETTYE_ID = 2');
+            inner join cm_appln_valdetl on vd_ma_id = ma_id where   PB_PROPBASKETTYE_ID = 2 AND '.$condition);
 
             $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
             
@@ -877,22 +879,123 @@ $master ='{"aa":"ss '.$type.'"}';
     }
 
     public function generateTextFile(Request $request){
+        ini_set('memory_limit', '2056M');
+        ini_set('max_execution_time', '200');
+        $fileName = 'TermCSV.csv';
         $param_value = $request->input('param_value');
-        $module = $request->input('module');
-        $param = $request->input('param');
-        $param_str = $request->input('param_str');
-        $param_status = $request->input('param_status');
+       
         $name=Auth::user()->name;
         //$param = $request->input('param');
-        Log::info($module);
+        Log::info($param_value);
 
+        $property = DB::select("
+        SELECT 
+        CASE
+        WHEN bil > 0 then 2
+        ELSE 0
+        END STATUS, 
+        CASE 
+        WHEN bldgstatus.tdi_key = '1' THEN '41'
+        WHEN bldgstatus.tdi_key = '0' THEN '42'
+        ELSE '42'
+        END KATEGORI,  vd_accno ID, '' AKAUN, vt_approvednt NT, vt_approvedrate KADAR, DATE_FORMAT(vt_termDate, '%d/%m/%Y') TTK, vd_id KM_BAKUL_ID, 
+        concat('0',ma_district_id) DAERAH, subzone.tdi_parent_key MUKIM, concat('1', subzone.tdi_key) KAWASAN_KOD, 
+        '1' BIL_PEMILIK, TO_OWNNAME NAMA, ma_addr_ln1 NO_RUM, ma_addr_ln2 JALAN, ma_addr_ln3 TEMPAT, ma_addr_ln4 KAWASAN, concat(ma_postcode, ' ', ma_city) BANDAR, state.tdi_value NEGERI, 
+        to_addr_ln1 NO_RUM_POS, to_addr_ln2 JALAN_POS, to_addr_ln3 TEMPAT_POS, to_addr_ln4 KAWASAN_POS, concat(to_postcode, ' ' ,to_city) BANDAR_POS, ownstate.tdi_value NEGERI_POS, 
+        TO_OWNNO KP, TO_TELNO NO_TEL, TO_MOBNO NO_HP, lotcode.tdi_value LOT_KOD , al_no LOT_NO, 
+        bldgtype.tdi_parent_key RESCOM, bldgtype.tdi_parent_name KAT_BGN
+        from cm_appln_valdetl
+        inner join cm_appln_val on va_id = vd_va_id
+        inner join cm_appln_valterm on vt_id = va_vt_id
+        inner join cm_masterlist on vd_ma_id = ma_id
+        inner join cm_appln_lot on al_vd_id = vd_id
+        inner join cm_owner on to_ma_id = ma_id
+        inner join cm_appln_val_tax on vt_vd_id = vd_id
+        inner join cm_appln_parameter on ap_vd_id = vd_id 
+        left join (SELECT count(ma_accno) bil, ma_accno subaccno
+        from cm_masterlist subma
+        inner join cm_appln_valdetl on  vd_ma_id = ma_id
+        inner join cm_appln_val on va_id = vd_va_id
+        inner join cm_appln_valterm subvalterm  on vt_id = va_vt_id 
+        where subvalterm.vt_approvalstatus_id = '05' and subvalterm.vt_termDate < (select vt_termDate from cm_appln_valterm subsubvalterm where subsubvalterm.vt_id = ".$param_value.")
+        group by subaccno) biltable on biltable.subaccno = ma_accno
+        left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'SUBZONE') subzone on subzone.tdi_key = ma_subzone_id
+        left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'LOTCODE') lotcode on lotcode.tdi_key = al_lotcode_id
+        left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'STATE') state on state.tdi_key = ma_state_id 
+        left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'STATE') ownstate on ownstate.tdi_key = to_state_id 
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = 'ISHASBUILDING') bldgstatus on bldgstatus.tdi_key = ap_bldgstatus_id
+        left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'BULDINGTYPE') bldgtype on bldgtype.tdi_key = ap_propertytype_id
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = 'BUILDINGSTOREY') bldgstorey on bldgstorey.tdi_key = ap_propertylevel_id
+        where cm_appln_valterm.vt_id = ".$param_value."
+        ");
+
+        $headers = array(
+                    "Content-type"        => "text/csv",
+                    "Content-Disposition" => "attachment; filename=$fileName",
+                    "Pragma"              => "no-cache",
+                    "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                    "Expires"             => "0"
+                );
+
+    $columns = array('STATUS', 'KATEGORI', 'ID', 'AKAUN', 'NT', 'KADAR', 'TTK', 'KM_BAKUL_ID', 'DAERAH', 'MUKIM', 'KAWASAN_KOD', 
+                     'BIL_PEMILIK', 'NAMA', 'NO_RUM', 'JALAN', 'TEMPAT', 'KAWASAN', 'BANDAR', 'NEGERI', 'NO_RUM_POS', 'JALAN_POS', 
+                     'TEMPAT_POS', 'KAWASAN_POS', 'BANDAR_POS', 'NEGERI_POS', 'KP', 'NO_TEL', 'NO_HP', 'LOT_KOD', 'LOT_NO', 'RESCOM', 'KAT_BGN');
+
+                $callback = function() use($property, $columns) {
+                $file = fopen('php://output', 'w');
+                fputcsv($file, $columns);
+
+                foreach ($property as $rec) {
+                    $row['STATUS']  = $rec->STATUS;
+                    $row['KATEGORI']  = $rec->KATEGORI;
+                    $row['ID']  = $rec->ID;
+                    $row['AKAUN']  = $rec->AKAUN;
+                    $row['NT']  = $rec->NT;
+                    $row['KADAR']  = $rec->KADAR;
+                    $row['TTK']  = $rec->TTK;
+                    $row['KM_BAKUL_ID']  = $rec->KM_BAKUL_ID;
+                    $row['DAERAH']  = $rec->DAERAH;
+                    $row['MUKIM']  = $rec->MUKIM;
+                    $row['KAWASAN_KOD']  = $rec->KAWASAN_KOD;
+                    $row['BIL_PEMILIK']  = $rec->BIL_PEMILIK;
+                    $row['NAMA']  = $rec->NAMA;
+                    $row['NO_RUM']  = $rec->NO_RUM;
+                    $row['JALAN']  = $rec->JALAN;
+                    $row['TEMPAT']  = $rec->TEMPAT;
+                    $row['KAWASAN']  = $rec->KAWASAN;
+                    $row['BANDAR']  = $rec->BANDAR;
+                    $row['NEGERI']  = $rec->NEGERI;
+                    $row['NO_RUM_POS']  = $rec->NO_RUM_POS;
+                    $row['JALAN_POS']  = $rec->JALAN_POS;
+                    $row['TEMPAT_POS']  = $rec->TEMPAT_POS;
+                    $row['KAWASAN_POS']  = $rec->KAWASAN_POS;
+                    $row['BANDAR_POS']  = $rec->BANDAR_POS;
+                    $row['NEGERI_POS']  = $rec->NEGERI_POS;
+                    $row['KP']  = $rec->KP;
+                    $row['NO_TEL']  = $rec->NO_TEL;
+                    $row['NO_HP']  = $rec->NO_HP;
+                    $row['LOT_KOD']  = $rec->LOT_KOD;
+                    $row['LOT_NO']  = $rec->LOT_NO;
+                    $row['RESCOM']  = $rec->RESCOM;
+                    $row['KAT_BGN']  = $rec->KAT_BGN;
+ 
+                    fputcsv($file, array(
+                        $row['STATUS'], $row['KATEGORI'], $row['ID'], $row['AKAUN'], $row['NT'], $row['KADAR'], $row['TTK'], $row['KM_BAKUL_ID'], $row['DAERAH'], 
+                        $row['MUKIM'], $row['KAWASAN_KOD'], $row['BIL_PEMILIK'], $row['NAMA'], $row['NO_RUM'], $row['JALAN'], $row['TEMPAT'], $row['KAWASAN'], 
+                        $row['BANDAR'], $row['NEGERI'], $row['NO_RUM_POS'], $row['JALAN_POS'], $row['TEMPAT_POS'], $row['KAWASAN_POS'], $row['BANDAR_POS'], $row['NEGERI_POS'], 
+                        $row['KP'], $row['NO_TEL'], $row['NO_HP'], $row['LOT_KOD'], $row['LOT_NO'], $row['RESCOM'], $row['KAT_BGN']
+                    ));
+                }
+
+                fclose($file);
+            };
+        
+            return response()->stream($callback, 200, $headers);
         $propertycnt = 0;
 
             Log::info("call proc_approvepropreg('".$param_value."',    '".$name."','".$module."', '".$param."', '".$param_str."', '".$param_status."')"); 
             $register=DB::select("call proc_approvepropreg(".$param_value.",   '".$name."', '".$module."', '".$param."', '".$param_str."', '".$param_status."')");
 
-
-        
         return response()->json(array('checkdigit'=> 'succsess','propertycnt'=>$propertycnt), 200);
     }
     

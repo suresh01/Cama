@@ -27,7 +27,8 @@
 									<fieldset>
 										<legend>{{__('valuation.Valuation_Basket_Information')}}</legend>	
 										@foreach ($valuationbasket as $rec)		
-										<input type="hidden" name="valuationbasket_id" id="valuationbasket_id" value="{{$rec->va_id}}">				
+										<input type="hidden" name="valuationbasket_id" id="valuationbasket_id" value="{{$rec->va_id}}">		
+										<input type="hidden" name="term_id" id="term_id" value="{{$rec->termid}}">			
 										<div style="line-height: 2;" class=" invoice_to">	
 											<strong><span>{{__('valuation.Name')}} : </span></strong>
 											<span>{{$rec->va_name}}</span>	
@@ -129,7 +130,10 @@
 </div>
 <script>
 	function back(){
-		 window.location.assign("group");
+		var term_id = $("#term_id").val();
+		//alert(term_id);
+		window.location.assign("valbasket?id="+term_id+"&ts=1");
+		 	
 	}
 	function startValuation(id){
 

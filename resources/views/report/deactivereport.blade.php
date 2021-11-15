@@ -39,11 +39,11 @@
 					<div id="breadCrumb3"  class="breadCrumb grid_3">
 						<ul >
 							<li><a href="#">{{__('group.Home')}} </a></li>
-							<li><a href="#">Report </a></li>
+							<li><a href="#">Laporan </a></li>
 							<li>{{__('group.Deactivate_Property')}}</li>
 						</ul>
 					</div>
-					<button id="adduser" style="float:right;margin-right: 10px;" onclick="generateReport()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Generate Report</span></button>
+					<button id="adduser" style="float:right;margin-right: 10px;" onclick="generateReport()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Jana Laporan</span></button>
 					<div  style="float:right;margin-right: 20px;">		
 							<select onchange="getdata()" data-placeholder="Choose a Status..."  style="float: left;" class="cus-select"  id="paramterm" name="paramterm" tabindex="6">
 								<option value="0">{{__('group.Please_Select_a_Filter')}}...</option>

@@ -15,8 +15,8 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_6">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
-						<li>Statistical</li>
+						<li><a href="#">Laporan</a></li>
+						<li>Statistik</li>
 					</ul>
 				</div>
 				</div>
@@ -27,7 +27,7 @@
         
 				<div class="widget_wrap">					
 					<div class="widget_content">
-						<h3 id="title">Generate Report</h3>
+						<h3 id="title">Jana Laporan</h3>
 						<form id="addgroupfrom"  autocomplete="off" class="" method="post" action="generatestatisticsreport" >
 							@csrf
 							<input type="hidden" name="id" id="id" value="0">
@@ -36,7 +36,7 @@
 								<ul>
 									<li>
 										<div class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">Term Name<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">Penggal<span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="termid" name="termid" tabindex="20">
 													<option></option>
@@ -49,13 +49,13 @@
 										</div>	
 
 										<div class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">Report Type<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">Jenis Laporan<span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="reporttype" name="reporttype" tabindex="20">
 													<option></option>
-													<option value="1">Laporan Senarai Industri (Select by Property Categori)</option>
-													<option value="2">Laporan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</option>
-													<option value="3">Ringkasan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</option>
+													<option value="1">Laporan Senarai (Pilihan Kategori Harta)</option>
+													{{-- <option value="2">Laporan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</option> --}}
+													<option value="3">Ringkasan Cukai Taksiran Mengikut (Pilihan Kategori Harta)</option>
 												</select>
 											</div>
 											<span class=" label_intro"></span>
@@ -64,7 +64,7 @@
 
 
 										<div class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">Property Category<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">Kategori Harta<span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="propcategory" name="propcategory" tabindex="20">
 													<option></option>
@@ -78,7 +78,7 @@
 										</div>	
 
 										<div class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">Report Tittle<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">Tajuk Laporan<span class="req">*</span></label>
 											<div class="form_input">
 												<input type="text"  id="title" name="title"  value="STATISTIK HARTA MENGIKUT KATEGORI BANGUNAN SEHINGGA PENGGAL">
 											</div>
@@ -91,7 +91,7 @@
 							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 								
 								<div class="form_input">
-									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>Genrate Report</span></button>			
+									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>Jana Laporan</span></button>			
 														
 									
 								</div>

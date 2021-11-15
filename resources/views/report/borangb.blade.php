@@ -15,7 +15,7 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_6">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
+						<li><a href="#">Laporan</a></li>
 						<li>Borang B</li>
 					</ul>
 				</div>
@@ -27,7 +27,7 @@
         
 				<div class="widget_wrap">					
 					<div class="widget_content">
-						<h3 id="title">Generate Report</h3>
+						<h3 id="title">Jana Laporan</h3>
 						<form id="addgroupfrom"  autocomplete="off" class="" method="post" action="generateborangb" >
 							@csrf
 							<input type="hidden" name="id" id="id" value="0">
@@ -36,7 +36,7 @@
 								<ul>
 									<li>
 										<div class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">Term Name<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">Nama Penggal<span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="termid" name="termid" tabindex="20">
 													<option></option>
@@ -49,7 +49,7 @@
 										</div>	
 
 										<div class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">Ratepayer Type<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">Jenis Ratepayer<span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="ratepayertypeid" name="ratepayertypeid" tabindex="20">
 													<option></option>
@@ -63,7 +63,7 @@
 
 
 										<div  class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">Tenant Name<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">Nama Tenant<span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="ratepayername" name="ratepayername" tabindex="20">
 													<option></option>
@@ -81,7 +81,7 @@
 							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 								
 								<div class="form_input">
-									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>Genrate Report</span></button>			
+									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>Jana Laporan</span></button>			
 														
 									
 								</div>

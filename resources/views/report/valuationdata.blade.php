@@ -15,22 +15,22 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
+						<li><a href="#">Laporan</a></li>
 						@if($page==3)
-							<li>Valuation Data Until Term</li>
+							<li>Laporan Senarai Nilaian Sehingga Penggal</li>
 						@endif	
 						@if($page==2)
-							<li>Valuation Data Selected Term</li>
+							<li>Laporan Senarai Nilaian Pada Penggal</li>
 						@endif
 						@if($page==1)
-							<li>Valuation Data BY Basket</li>
+							<li>Laporan Senarai Nilaian Pada Bakul</li>
 						@endif
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty()">Generate Report</a>				
+					<a href="#" onclick="deleteProperty()">Jana Laporan</a>				
 					
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'valuationdatatable?page='.$page, 'searchid' => $msearchid])	
 				</div>
@@ -46,16 +46,16 @@
 										S No
 									</th>
 									<th>
-										Term Name
+										Nama Penggal
 									</th>
 									<th>
-										Term Date
+										Penggal
 									</th>
 									<th>
-										Enforce Date
+										Tarikh Kuatkuasa
 									</th>
 									<th>
-										Property Count
+										Bilangan Harta
 									</th>
 									<th>			
 								</tr>
@@ -113,7 +113,7 @@
 		        	termdate= item['termDate'];
 		        	return item['id']
 		   		});
-		   		title_txt="STATISTIK KUTIPAN MENGIKUT KAT. BANGUNAN SEHINGGA PENGGAL";
+		   		title_txt="SENARAI NILAIAN PINDAAN DAN HARTA BARU HARTA MAJLIS PERBANDARAN HANG TUAH JAYA SEHINGGA PENGGAL";
 			}
 			
 
@@ -123,7 +123,7 @@
 			console.log(account.toString());
 			var noty_id = noty({
 				layout : 'center',
-				text: 'Are want to Generate Report?',
+				text: 'Jana Laporan?',
 				modal : true,
 				buttons: [
 					{type: 'button pink', text: 'Generate', click: function($noty) {
@@ -163,7 +163,7 @@
 				 type : 'success', 
 			 });
 			} else {
-				alert('Please atleast one property to generate report');
+				alert('Sila Pilih Untuk Jana Laporan');
 			}
 		}
 	

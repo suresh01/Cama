@@ -18,14 +18,14 @@
 				<div id="breadCrumb3"  class="breadCrumb grid_3">
 						<ul >
 							<li><a href="#">Home</a></li>
-							<li>Valuation Process</li>
+							<li>Proses Penilaian</li>
 						</ul>
 					</div>
-					<button id="adduser" style="float:right;margin-right: 10px;" onclick="back()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Back</span></button>
+					<button id="adduser" style="float:right;margin-right: 10px;" onclick="back()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Kembali</span></button>
 					<br>
 				<div class="widget_wrap">
 					<div class="widget_top">
-						<h6>Tone of list missing property value	</h6>
+						<h6>Senarai Aras Nilai yang tidak lengkap</h6>
 					</div>
 					<div class="widget_content">
 						<div class=" page_content">
@@ -37,7 +37,7 @@
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Bulidind Detail</h6>
+											<h6>Aras Nilai Bangunan</h6>
 										</div>
 										<div class="widget_content">
 											<div class="invoice_tbl">
@@ -48,34 +48,34 @@
 														S No
 													</th>
 													<th>
-														ZONE 
+														Mukim 
 													</th>
 													<th>
-														SUBZONE 
+														Taman/Kawasan 
 													</th>
 													<th>
-														BUILDING CATEGORY
+														Kat Bangunan
 													</th>
 													<th>
-														BUILDING TYPE
+														Jenis Bangunan
 													</th>
 													<th>
-														BUILDING STOREY
+														Tingkat Bangunan
 													</th>
 													<th>
-														AREA TYPE
+														Jenis Ruang
 													</th>
 													<th>
-														AREA LEVEL
+														Aras Ruang
 													</th>
 													<th>
-														AREA CATEGORY
+														Kat Ruang
 													</th>
 													<th>
-														AREA USE
+														Kegunaan Ruang
 													</th>
 													<th>
-														STATUS
+														Status
 													</th>
 												</tr>
 												</thead>
@@ -146,7 +146,7 @@
 									<div class="widget_wrap">
 										
 										<div class="widget_content">
-											<h3 id="title">Add Building Tone</h3>
+											<h3 id="title">Tambah Aras Tanah</h3>
 											<form id="bldgform" autocomplete="off" method="post" action="#" >
 												<div  class="grid_12 form_container left_label">
 													<ul>
@@ -155,10 +155,10 @@
 															<input type="hidden" name="basketid" value="{{$tonebasket_id}}" id="basketid">
 															<input type="hidden" name="bldg_id" id="bldg_id">
 															<fieldset>
-																<legend>Information</legend>
+																<legend>Maklumat</legend>
 																
 																<div class="form_grid_12">
-																	<label class="field_title" id="accnumberlbl" for="username">Transaction Type<span class="req">*</span></label>
+																	<label class="field_title" id="accnumberlbl" for="username">Jenis Transaksi<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select data-placeholder="Choose a type..." style="width:100%" disabled="disabled"  class="cus-select" id="transtype" name="trnstype" tabindex="20">
 																			<option></option>
@@ -172,7 +172,7 @@
 																
 																
 																<div class="form_grid_12">
-																	<label class="field_title" id="lposition" for="position">ZONE<span class="req">*</span></label>
+																	<label class="field_title" id="lposition" for="position">Mukim<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<input type="text" disabled="" id="bldgzone" name="zone">
 																	</div>
@@ -180,7 +180,7 @@
 																</div>
 																
 																<div class="form_grid_12">
-																	<label class="field_title" id="accnumberlbl" for="username">SUBZONE<span class="req">*</span></label>
+																	<label class="field_title" id="accnumberlbl" for="username">Taman/Kawasan<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select data-placeholder="Choose a type..." style="width:100%" disabled="disabled"  class="cus-select" id="subzone" name="subzone" tabindex="20">
 																			<option></option>
@@ -193,7 +193,7 @@
 																</div>
 																
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">PROPERTY CATEGORY<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Kat Bangunan<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<input type="text" disabled="" id="bldgcate" name="bldgcate">
 																		
@@ -202,7 +202,7 @@
 																</div>
 
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">PROPERTY TYPE<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Jenis Bangunan<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="proptype" name="proptype" disabled="disabled"  tabindex="20">
 																			<option></option>
@@ -215,7 +215,7 @@
 																</div>
 
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">PROPERTY STOREY<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Tingkat Bangunan<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select data-placeholder="Choose a type..." style="width:100%" disabled="disabled" class="cus-select" id="propstoery" name="propstoery" tabindex="20">
 																			<option></option>
@@ -227,7 +227,7 @@
 																	<span class=" label_intro"></span>
 																</div>
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">AREA TYPE<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Jenis Ruang<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select disabled="disabled" data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="artype" name="artype" tabindex="20">
 																			<option></option>
@@ -239,7 +239,7 @@
 																	<span class=" label_intro"></span>
 																</div>
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">AREA LEVEL<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Aras Ruang<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select disabled="disabled" data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="arlvl" name="arlvl" tabindex="20">
 																			<option></option>
@@ -251,7 +251,7 @@
 																	<span class=" label_intro"></span>
 																</div>
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">AREA CATEGORY<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Kat Ruang<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select disabled="disabled" data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="arcate" name="arcate" tabindex="20">
 																			<option></option>
@@ -264,7 +264,7 @@
 																</div>
 
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">AREA USE<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Kegunaan Ruang<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" disabled="disabled" id="aruse" name="aruse" tabindex="20">
 																			<option></option>
@@ -277,7 +277,7 @@
 																</div>
 
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">VALUE<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Nilai Aras (s.m.p)<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<input id="value" name="value"  type="text"  maxlength="50" class="required"/>
 																	</div>
@@ -293,9 +293,9 @@
 												
 												<div  class="grid_12">							
 													<div class="form_input">
-														<button id="addsubmit" name="adduser" onclick="updateBldg()" class="btn_small btn_blue"><span>Submit</span></button>									
+														<button id="addsubmit" name="adduser" onclick="updateBldg()" class="btn_small btn_blue"><span>Simpan</span></button>									
 														
-														<button id="close" onclick="closeBldg()" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+														<button id="close" onclick="closeBldg()" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 														<span class=" label_intro"></span>
 													</div>								
 													<span class="clear"></span>
@@ -308,7 +308,7 @@
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Depreciation Detail</h6>
+											<h6>Susut Nilai</h6>
 										</div>
 					        	
 										<div class="widget_content">
@@ -320,10 +320,10 @@
 														S No
 													</th>
 													<th>
-														BUILDING CONDITION
+														Keadaan Bangunan
 													</th>
 													<th>
-														STATUS
+														Status
 													</th>
 												</tr>
 												</thead>
@@ -361,7 +361,7 @@
 									<div class="widget_wrap">
 										
 										<div class="widget_content">
-											<h3 id="title">Add </h3>
+											<h3 id="title">Tambah Susut Nilai </h3>
 											<form id="debform" autocomplete="off" method="post" action="#" >
 												<div  class="grid_12 form_container left_label">
 													<ul>
@@ -370,10 +370,10 @@
 															<input type="hidden" name="basketid" value="{{$tonebasket_id}}" id="basketid">
 															<input type="hidden" name="dep_id" id="dep_id">
 															<fieldset>
-																<legend>Basket Information</legend>
+																<legend>Maklumat Susut Nilai</legend>
 																
 																<div class="form_grid_12">
-																	<label class="field_title" id="lposition" for="position">BUILDING CONDITION<span class="req">*</span></label>
+																	<label class="field_title" id="lposition" for="position">Keadaan Bangunan<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select data-placeholder="Choose a type..." style="width:100%" disabled="disabled" class="cus-select" id="bldgcond" name="bldgcond" tabindex="20">
 																			<option></option>
@@ -386,7 +386,7 @@
 																</div>
 																
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">VALUE<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Nilai (%)<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<input id="value" name="value"  type="text"  maxlength="50" class="required"/>
 																	</div>
@@ -402,9 +402,9 @@
 												
 												<div class="grid_12">							
 													<div class="form_input">
-														<button id="addsubmit" name="adduser" onclick="addDep()" class="btn_small btn_blue"><span>Submit</span></button>									
+														<button id="addsubmit" name="adduser" onclick="addDep()" class="btn_small btn_blue"><span>Simpan</span></button>									
 														
-														<button id="close" onclick="closeDep()" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+														<button id="close" onclick="closeDep()" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 														<span class=" label_intro"></span>
 													</div>								
 													<span class="clear"></span>
@@ -419,7 +419,7 @@
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Land Detail</h6>
+											<h6>Aras Tanah</h6>
 										</div>
 										<div class="widget_content">
 											<div class="invoice_tbl">
@@ -430,25 +430,25 @@
 															S No
 														</th>
 														<th>
-															Zone
+															Mukim
 														</th>
 														<th>
-															Subzone
+															Taman/Kawasan
 														</th>
 														<th>
-															Building Status
+															Status Harta
 														</th>
 														<th>
-															Property Category
+															Kat Harta
 														</th>
 														<th>
-															Property type
+															Jenis Harta
 														</th>
 														<th>
-															Property Storey
+															Tingkat Harta
 														</th>
 														<th>
-															STATUS
+															Status
 														</th>
 														
 													</tr>
@@ -487,6 +487,8 @@
 													</tr>
 													<div style="display:none">
 														<input type="hidden" id="lsuzone_{{$loop->iteration}}" value="{{ $rec->ma_subzone_id }}">
+														<input type="hidden" id="lzone_{{$loop->iteration}}" value="{{ $rec->zone }}">	
+														<input type="hidden" id="lpropcate_{{$loop->iteration}}" value="{{ $rec->bldgcate }}">	
 														<input type="hidden" id="lproptype_{{$loop->iteration}}" value="{{ $rec->ap_propertytype_id }}">	
 														<input type="hidden" id="lpropstoery_{{$loop->iteration}}" value="{{ $rec->ap_propertylevel_id }}">			
 														<input type="hidden" id="lhasbldg_{{$loop->iteration}}" value="{{ $rec->ap_bldgstatus_id }}">	
@@ -505,7 +507,7 @@
 									<div class="widget_wrap">
 										
 										<div class="widget_content">
-											<h3 id="title">Add </h3>
+											<h3 id="title">Tambah Aras Tanah</h3>
 											<form id="lotform" autocomplete="off" method="post" action="#" >
 												<div  class="grid_12 form_container left_label">
 													<ul>
@@ -514,12 +516,19 @@
 															<input type="hidden" name="basketid" value="{{$tonebasket_id}}" id="basketid">
 															<input type="hidden" name="land_id" id="land_id">
 															<fieldset>
-																<legend>Basket Information</legend>
+																<legend>Aras Tanah</legend>
 															
 																
-																
 																<div class="form_grid_12">
-																	<label class="field_title" id="accnumberlbl" for="username">SUBZONE<span class="req">*</span></label>
+																	<label class="field_title" id="lposition" for="position">Mukim<span class="req">*</span></label>
+																	<div  class="form_input">
+																		<input type="text" disabled="" id="lzone" name="zone">
+																	</div>
+																	<span class=" label_intro"></span>
+																</div>
+
+																<div class="form_grid_12">
+																	<label class="field_title" id="accnumberlbl" for="username">Taman/Kawasan<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" disabled="disabled" id="lsubzone" name="subzone" tabindex="20">
 																			<option></option>
@@ -531,10 +540,17 @@
 																	<span class=" label_intro"></span>
 																</div>
 
-																
+																<div class="form_grid_12">
+																	<label class="field_title" id="llevel" for="level">Kat Harta<span class="req">*</span></label>
+																	<div  class="form_input">
+																		<input type="text" disabled="" id="lpropcate" name="lpropcate">
+																		
+																	</div>
+																	<span class=" label_intro"></span>
+																</div>
 																
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">PROPERTY TYPE<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Jenis Harta<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" disabled="disabled" id="lproptype" name="proptype" tabindex="20">
 																			<option></option>
@@ -547,7 +563,7 @@
 																</div>
 
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">PROPERTY STOREY<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Tingkat Harta<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" disabled="disabled" id="lpropstoery" name="propstoery" tabindex="20">
 																			<option></option>
@@ -559,7 +575,7 @@
 																	<span class=" label_intro"></span>
 																</div>
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">HAS BUILDING<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Status Harta<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" disabled="disabled" id="lhasbldg" name="hasbldg" tabindex="20">
 																			<option></option>
@@ -572,7 +588,7 @@
 																</div>
 
 																<div class="form_grid_12">
-																	<label class="field_title" id="llevel" for="level">VALUE<span class="req">*</span></label>
+																	<label class="field_title" id="llevel" for="level">Nilai (s.m.p)<span class="req">*</span></label>
 																	<div  class="form_input">
 																		<input id="lvalue" name="value"  type="text"  maxlength="50" class="required"/>
 																	</div>
@@ -588,9 +604,9 @@
 												
 												<div class="grid_12">							
 													<div class="form_input">
-														<button id="addsubmit" name="adduser" onclick="updateLand()" class="btn_small btn_blue"><span>Submit</span></button>									
+														<button id="addsubmit" name="adduser" onclick="updateLand()" class="btn_small btn_blue"><span>Simpan</span></button>									
 														
-														<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+														<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 														<span class=" label_intro"></span>
 													</div>								
 													<span class="clear"></span>
@@ -603,7 +619,7 @@
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Land Standard</h6>
+											<h6>Luas Tanah Piawai</h6>
 										</div>
 										<div class="widget_content">
 											<div class="invoice_tbl">
@@ -614,22 +630,22 @@
 														S No
 													</th>
 													<th>
-														ZONE 
+														Mukim 
 													</th>
 													<th>
-														SUBZONE 
+														Taman/Kawasan 
 													</th>
 													<th>
-														BUILDING CATEGORY
+														Kategori Harta
 													</th>
 													<th>
-														BUILDING TYPE
+														Jenis Harta
 													</th>
 													<th>
-														BUILDING STOREY
+														Tingkat Harta
 													</th>
 													<th>
-														STATUS
+														Status
 													</th>
 												</tr>
 												</thead>
@@ -663,6 +679,8 @@
 												</tr>
 												<div style="display:none">
 													<input type="hidden" id="lssubzone_{{$loop->iteration}}" value="{{ $rec->ma_subzone_id }}">
+													<input type="hidden" id="lszone_{{$loop->iteration}}" value="{{ $rec->zone }}">	
+													<input type="hidden" id="lspropcate_{{$loop->iteration}}" value="{{ $rec->bldgcategory }}">	
 													<input type="hidden" id="lsproptype_{{$loop->iteration}}" value="{{ $rec->ap_propertytype_id }}">
 													<input type="hidden" id="lspropstoery_{{$loop->iteration}}" value="{{ $rec->ap_propertylevel_id }}">			
 												</div>
@@ -682,7 +700,7 @@
 			<div class="widget_wrap">
 				
 				<div class="widget_content">
-					<h3 id="title">Add </h3>
+					<h3 id="title">Tambah Luas Tanah Piawai </h3>
 					<form id="landstatardform" autocomplete="off" method="post" action="#" >
 						<div  class="grid_12 form_container left_label">
 							<ul>
@@ -691,11 +709,18 @@
 															<input type="hidden" name="basketid" value="{{$tonebasket_id}}" id="basketid">
 															<input type="hidden" name="landstd_id" id="landstd_id">
 									<fieldset>
-										<legend>Basket Information</legend>
+										<legend>Luas Tanah Piawai</legend>
 																			
-										
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">SUBZONE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">Mukim<span class="req">*</span></label>
+											<div  class="form_input">
+												<input type="text" disabled="" id="lszone" name="zone">
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+
+										<div class="form_grid_12">
+											<label class="field_title" id="accnumberlbl" for="username">Taman/Kawasan<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="lssubzone" disabled="disabled" name="subzone" tabindex="20">
 													<option></option>
@@ -706,9 +731,16 @@
 											</div>
 											<span class=" label_intro"></span>
 										</div>										
-
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">PROPERTY TYPE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Kat Harta<span class="req">*</span></label>
+											<div  class="form_input">
+												<input type="text" disabled="" id="lspropcate" name="lspropcate">
+												
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="accnumberlbl" for="username">Jenis Harta<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="lsproptype" disabled="disabled" name="proptype" tabindex="20">
 													<option></option>
@@ -720,7 +752,7 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">PROPERTY STOREY<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">Tingkat Harta<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="lspropstoery" disabled="disabled" name="propstoery" tabindex="20">
 													<option></option>
@@ -734,7 +766,7 @@
 										
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">STANDARD AREA NUMBER<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Luas Tanah Piawai<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="standardarea" name="standardarea"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -742,7 +774,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">NEXT AREA NUMBER<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Luas Tanah Tambahan<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="nextarea" name="nextarea"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -750,7 +782,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">MAX AREA NUMBER<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Peringkat Maksimum<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="maxarea" name="maxarea"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -766,9 +798,9 @@
 						
 						<div class="grid_12">							
 							<div class="form_input">
-								<button id="addsubmit" name="adduser" onclick="updateLandSd()" class="btn_small btn_blue"><span>Submit</span></button>									
+								<button id="addsubmit" name="adduser" onclick="updateLandSd()" class="btn_small btn_blue"><span>Simpan</span></button>									
 								
-								<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+								<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 								<span class=" label_intro"></span>
 							</div>								
 							<span class="clear"></span>
@@ -792,19 +824,19 @@
 														S No
 													</th>
 													<th>
-														ZONE 
+														Mukim 
 													</th>
 													<th>
-														BUILDING CATEGORY
+														Kategori Harta
 													</th>
 													<th>
-														BUILDING TYPE
+														Jenis Harta
 													</th>
 													<th>
-														BUILDING STATUS
+														Status Harta
 													</th>
 													<th>
-														STATUS
+														Status
 													</th>
 												</tr>
 												</thead>
@@ -854,7 +886,7 @@
 			<div class="widget_wrap">
 				
 				<div class="widget_content">
-					<h3 id="title">Add </h3>
+					<h3 id="title">Tambah Kadar Cukai </h3>
 					<form id="taxform" autocomplete="off" method="post" action="#" >
 						<div  class="grid_12 form_container left_label">
 							<ul>
@@ -863,11 +895,11 @@
 															<input type="hidden" name="basketid" value="{{$tonetaxbasket_id}}" id="basketid">
 															<input type="hidden" name="tax_id" id="tax_id">
 									<fieldset>
-										<legend>Basket Information</legend>
+										<legend>Kadar Cukai</legend>
 										
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">ZONE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">Mukim<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="tzone" disabled="disabled" name="zone" tabindex="20">
 													<option></option>
@@ -881,7 +913,7 @@
 										
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">PROPERTY TYPE<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">Jenis Harta<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="tproptype" disabled="disabled" name="proptype" tabindex="20">
 													<option></option>
@@ -895,7 +927,7 @@
 
 
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">HAS BUILDING<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">Status Harta<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="thasbldg" disabled="disabled" name="hasbldg" tabindex="20">
 													<option></option>
@@ -910,7 +942,7 @@
 										
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">VALUE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Kadar Cukai (%)<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="value" name="value"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -926,9 +958,9 @@
 						
 						<div class="grid_12">							
 							<div class="form_input">
-								<button id="addsubmit" name="adduser" onclick="addTax()" class="btn_small btn_blue"><span>Submit</span></button>									
+								<button id="addsubmit" name="adduser" onclick="addTax()" class="btn_small btn_blue"><span>Simpan</span></button>									
 								
-								<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+								<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 								<span class=" label_intro"></span>
 							</div>								
 							<span class="clear"></span>
@@ -958,7 +990,7 @@ function addbldg(id) {
 		$('#arcate').val($('#arcate_'+id).val());
 		$('#aruse').val($('#aruse_'+id).val());
 		$('#value').val($('#value_'+id).val());
-		$('#bldgcate').val($('#propcate_'+id).val());
+		//$('#bldgcate').val($('#propcate_'+id).val());
 		$('#bldgcate').val($('#category_'+id).val());
 		$('#bldgzone').val($('#zone_'+id).val());
 		$('#transtype').val($('#valtype_'+id).val());
@@ -969,7 +1001,7 @@ function addbldg(id) {
 function updatetablestatus(tableid, indexid){
 	$( "select" ).attr( "disabled","" );
 	var api = $('#'+tableid).DataTable();    
-		$('#'+tableid+'_filter').remove();
+	$('#'+tableid+'_filter').remove();
     $('#'+tableid+'_info').remove();
     $('#'+tableid+'_paginate').remove();
     $('#'+tableid+'_length').remove();     
@@ -1149,6 +1181,8 @@ function addDep(){
 	}
 function addLand(id){
 		$('#lsubzone').val($('#lsuzone_'+id).val());
+		$('#lzone').val($('#lzone_'+id).val());
+		$('#lpropcate').val($('#lpropcate_'+id).val());
 		$('#lpropstoery').val($('#lpropstoery_'+id).val());
 		$('#lproptype').val($('#lproptype_'+id).val());
 		$('#lhasbldg').val($('#lhasbldg_'+id).val());
@@ -1210,7 +1244,7 @@ function updateLand(){
 									     		$noty.close();	
 					        	//$("#finish").attr("disabled", true);
 					        	//clearTableError(4);
-													updatetablestatus("landtable", "land_id");
+								updatetablestatus("landtable", "land_id");
 				        	},
 					        error:function(data){
 								//$('#loader').css('display','none');	
@@ -1243,6 +1277,8 @@ function updateLand(){
 
 	function addLandSd(id){
 		$('#lssubzone').val($('#lssubzone_'+id).val());
+		$('#lszone').val($('#lszone_'+id).val());
+		$('#lspropcate').val($('#lspropcate_'+id).val());
 		$('#lsproptype').val($('#lsproptype_'+id).val());
 		$('#lspropstoery').val($('#lspropstoery_'+id).val());
 		$('#landstd_id').val(id);

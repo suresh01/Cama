@@ -137,14 +137,7 @@ class InspectionController extends Controller
 from cm_propbasket 
 where 
 PB_APPROVALSTATUS_ID = '03' and 
-PB_APPLICATIONTYPE_ID = '".$aptype."' and 
-pb_id not in (select distinct pb_id 
-from cm_propbasket
-inner join cm_masterlist on ma_pb_id = pb_id
-inner join cm_appln_valdetl on vd_ma_id = ma_id
-inner join cm_appln_val on va_id = vd_va_id
-inner join cm_appln_valterm on vt_id = va_vt_id 
-where vt_approvalstatus_id >= '01')");
+PB_APPLICATIONTYPE_ID = '".$aptype."'");
         App::setlocale(session()->get('locale'));
         return view('inspection.grab.basket')->with(array('id'=>$insbasket_id,'basket'=>$basket));
     }

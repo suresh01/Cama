@@ -51,7 +51,7 @@
 						<a href="#" disabled="true" onclick="submitForm()" class=""><span>Submit </span></a>	
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" onclick="terminate()" class="simplemodal-close"><span>Close </span></a>
+						<a href="#" onclick="terminate()" class="simplemodal-custom-close"><span>Close </span></a>
 					</div>
 					</form>
 			</div>
@@ -253,7 +253,7 @@
 
 		$(".field").change(function(){
 			//value_drop
-			alert();
+			// alert();
 			console.log($(this).val());
 		    var id= $(this).val();
 		   // var selectedvalue = $(this).find('option:selected').text();

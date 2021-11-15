@@ -15,14 +15,14 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
-						<li>Ownership Transfer List</li>
+						<li><a href="#">Laporan</a></li>
+						<li>Senarai Pindah Milik</li>
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty()" >Generate Report</a>	
+					<a href="#" onclick="deleteProperty()" >Jana Laporan</a>	
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'ownertransferlistdata', 'searchid' => '40'])			
 					
 				</div>
@@ -38,25 +38,25 @@
 										S No
 									</th>
 									<th>
-										Accountnumber
+										No Harta
 									</th>
 									<th>
-										Group
+										Kumpulan
 									</th>
 									<th>
-										Register Date
+										Didaftar Pada
 									</th>
 									<th>
-										Register BY
+										Didaftar Oleh
 									</th>
 									<th>
-										Process Date
+										Diproses Pada
 									</th>
 									<th>
-										Process BY
+										Diproses Oleh
 									</th>
 									<th>
-										Day
+										Hari
 									</th>			
 								</tr>
 							</thead>

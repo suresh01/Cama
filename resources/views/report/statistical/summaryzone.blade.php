@@ -15,15 +15,15 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_6">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
-						<li><a href="#">Statistcal</a></li>
-						<li>Summary By Zon/Sub Zon</li>
+						<li><a href="#">Laporan</a></li>
+						<li><a href="#">Statistik</a></li>
+						<li>Ringkasan  Mukim/Kawasan</li>
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a  href="#" onclick="deleteProperty()" >Generate Report</a>				
+					<a  href="#" onclick="deleteProperty()" >Jana Laporan</a>				
 					@include('report.statistical.zonesearch')
 				</div>
 				<br>
@@ -32,7 +32,7 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
+							<h3 id="title">Jana Laporan</h3>
 							<form style="" id="generateform" method="POST" action="generatesummaryzone">
 					            @csrf
 								<div  class="grid_12 form_container left_label">
@@ -43,7 +43,7 @@
 												
 												<input type="hidden" name="termid" id="gtermid">
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">CUSTOM TITLE<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">TITLE<span class="req">*</span></label>
 													<div  class="form_input">
 														<input id="title" value="STATISTIK HARTA MENGIKUT KAWASAN SEHINGGA PENGGAL" name="title" type="text"  maxlength="50" class="required"/>
 													</div>
@@ -62,7 +62,7 @@
 									<div class="form_input">
 										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>
@@ -82,19 +82,19 @@
 										S No
 									</th>
 									<th>
-										ZONE
+										Mukim
 									</th>
 									<th>
-										SUB ZONE
+										Taman/Kawasan
 									</th>
 									<th>
-										COUNT
+										Bil Harta
 									</th>
 									<th>
 										NT
 									</th>
 									<th>
-										TAX
+										Cukai
 									</th>		
 								</tr>
 							</thead>
@@ -141,7 +141,7 @@
 				return;
 			} else {
 				var id = $('#termid').val();
-				alert(id);
+				// alert(id);
 				window.location = "generatesummaryzone?title="+tilte+"&termid="+id+"&subzone_id="+subzone;
 			}
 			//var type = "delete";

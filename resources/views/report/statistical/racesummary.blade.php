@@ -15,15 +15,15 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_6">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
-						<li><a href="#">Statistcal</a></li>
-						<li>Summary By Property Status and Building Categori vs Race</li>
+						<li><a href="#">Laporan</a></li>
+						<li><a href="#">Statistik</a></li>
+						<li>Ringkasan Status Bangunan dan Kategori Harta vs Bangsa</li>
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a  href="#" onclick="deleteProperty()" >Generate Report</a>				
+					<a  href="#" onclick="deleteProperty()" >Jana Laporan</a>				
 					@include('report.statistical.racesearch')
 				</div>
 				<br>
@@ -40,28 +40,28 @@
 										S No
 									</th>
 									<th>
-										BUILDING STATUS
+										Status Bangunan
 									</th>
 									<th>
-										BUILDING CATEGORY
+										Kategori Harta
 									</th>
 									<th>
-										MELAYU
+										Melayu
 									</th>
 									<th>
-										CINA
+										Cina
 									</th>
 									<th>
-										INDIA
+										India
 									</th>	
 									<th>
-										SYAIKAT
+										Syarikat
 									</th>	
 									<th>
-										LAINLAIN
+										Lain-Lain
 									</th>	
 									<th>
-										TOTAL
+										Jumlah
 									</th>		
 								</tr>
 							</thead>
@@ -104,7 +104,7 @@
 				return;
 			} else {
 				var id = $('#termid').val();
-				alert(id);
+				// alert(id);
 				window.location = "generatesummaryrace?title="+tilte+"&termid="+id;
 			}
 			

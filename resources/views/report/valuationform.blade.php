@@ -19,14 +19,14 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
-						<li>Valuation Form</li>
+						<li><a href="#">Laporan</a></li>
+						<li>Laporan Nilaian</li>
 					</ul>
 				</div>
 				</div>
 
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty()" >Generate Report</a>				
+					<a href="#" onclick="deleteProperty()" >Jana Laporan</a>				
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'valuationformtable', 'searchid' => '15'])
 					
 				</div>
@@ -36,7 +36,7 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
+							<h3 id="title">Jana Laporan</h3>
 							<form style="" id="generateform" method="GET" action="generatevaluation">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts">
@@ -48,7 +48,7 @@
 												<legend>Additional Information</legend>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">VALUER NAME<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">Nama Penilai<span class="req">*</span></label>
 													<div  class="form_input">
 														<select onchange="getposition()" data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle1" tabindex="20">
 																<option></option>
@@ -62,7 +62,7 @@
 												</div>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">VALUER TITTLE<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">Jawatan<span class="req">*</span></label>
 													<div  class="form_input">
 														<input id="name" name="name"   type="text"  maxlength="50" class="required"/>
 													</div>
@@ -80,7 +80,7 @@
 									<div class="form_input">
 										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>

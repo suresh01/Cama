@@ -15,14 +15,14 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Report</a></li>
-						<li>R4 Cover</li>
+						<li><a href="#">Laporan</a></li>
+						<li>Kulit R4</li>
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty()" >Generate Report</a>	
+					<a href="#" onclick="deleteProperty()" >Jana Laporan</a>	
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'r4coverdatatable', 'searchid' => '14'])			
 					
 				</div>

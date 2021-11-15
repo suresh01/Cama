@@ -24,7 +24,7 @@
 						<li><a href="#">{{__('propertyregister.Home')}} </a></li>
 						<li><a href="#">{{__('propertyregister.Data_Maintenance')}} </a></li>
 						<li><a href="propertybasket">{{__('propertyregister.Property_Registration')}} </a></li>
-						<li><a href="propertyregister?pb={{$pb}}">{{$basket_name}}</a></li>
+						<li><a href="existspropertyregister?pb={{$pb}}">{{$basket_name}}</a></li>
 						<li>{{$accountnumbber}}</li>
 					</ul>
 				</div>

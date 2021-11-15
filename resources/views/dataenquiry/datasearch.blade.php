@@ -201,8 +201,8 @@
 		
 		function ExportSCV(){
 			//alert($("#filterForm").serialize());
-			//location.href ="exportcsv?" + $("#filterForm").serialize();
-			console.log($("#filterForm").serialize());
+			location.href ="exportcsv?" + $("#filterForm").serialize();
+			//console.log($("#filterForm").serialize());
 		
 		}
 

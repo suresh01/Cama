@@ -15,7 +15,8 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li>Report</li>
+						<li>Laporan</li>
+						<li>Ekport Kepada Excel</li>
 					</ul>
 				</div>
 				</div>
@@ -25,7 +26,7 @@
             <input type="hidden" name="termid" id="termid">
 		</form>
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="exportexcel()">Generate Report</a>				
+					<a href="#" onclick="exportexcel()">Jana Laporan</a>				
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'exportexceltable', 'searchid' => '17'])	
 					
 				</div>
@@ -34,7 +35,7 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
+							<h3 id="title">Jana Laporan</h3>
 							<form style="" id="generateform" method="GET" action="http://{{$serverhost}}:8002/generatesummaryzone">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts">
@@ -98,7 +99,7 @@
 									<div class="form_input">
 										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>
@@ -119,16 +120,16 @@
 										S No
 									</th>
 									<th>
-										Term Name
+										Nama Penggal
 									</th>
 									<th>
-										Term Date
+										Penggal
 									</th>
 									<th>
-										Enforce Date
+										Tarikh Kuatkuasa
 									</th>
 									<th>
-										Property Count
+										Bilangan Harta
 									</th>
 								</tr>
 							</thead>
