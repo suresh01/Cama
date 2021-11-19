@@ -18,7 +18,7 @@
 					<ul >
 						<li><a href="#">{{__('CodeMaintenance.Home')}}</a></li>
 						<li><a href="#">{{__('CodeMaintenance.Data_Maintenance')}}</a></li>
-						<li>{{__('CodeMaintenance.File_Name')}}Ratepayer_Registration</li>
+						<li>{{__('CodeMaintenance.Ratepayer_Registration')}}</li>
 					</ul>
 				</div>
 				<br>

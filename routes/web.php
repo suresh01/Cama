@@ -462,14 +462,17 @@ Route::get('addresslogtables','HomeController@addressLogTables');
 
 Route::get('addresslog','HomeController@addressLog');
 
-
 Route::get('propaddresslogtables','HomeController@propAddressLogTables');
+
+Route::get('nolotlog','HomeController@noLotLog');
+
+Route::get('nolotlogtables','HomeController@noLotLogTables');
 
 Route::get('generateOwnershipreport','HomeController@generateOwnershipreport');
 
 Route::get('generateRemisireport','HomeController@generateRemisireport');
 
-Route::get('ownerlogdata','HomeController@ownerLogTables');
+Route::get('ownerlogtable','HomeController@ownerLogTables');
 
 Route::get('owneradddresTables','HomeController@owneradddresTables');
 

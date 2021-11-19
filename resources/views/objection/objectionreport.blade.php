@@ -107,7 +107,7 @@
 						</div>
 					</div>
 				</div>
-								</br>	
+								<br>	
 							
 							<table id="agendatbl" class="display ">
 							<thead style="text-align: left;">
@@ -474,7 +474,7 @@
 			
 			var type = "delete";
 			
-console.log(account.toString());
+			console.log(account.toString());
 			var noty_id = noty({
 				layout : 'center',
 				text: 'Are want to Generate Report?',

@@ -58,7 +58,7 @@ class InspectionController extends Controller
     	$search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid 
-        from tbsearchdetail mtb where sd_se_id = 13 ');
+        from tbsearchdetail mtb where sd_se_id = 13 order by sd_sort');
         App::setlocale(session()->get('locale'));
     	return view('inspection.newproperty')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id);
     }
@@ -315,7 +315,7 @@ PB_APPLICATIONTYPE_ID = '".$aptype."'");
         $search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = 18 ');
+        from tbsearchdetail mtb where sd_se_id = 18 order by sd_sort');
         App::setlocale(session()->get('locale'));
         return view('existspropertyregister.grab.property')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id);
     }
@@ -1111,7 +1111,7 @@ on subzone.tdi_key = ma_subzone_id where vd_id = ifnull("'.$prop_id.'",0)');
     	$search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid 
-        from tbsearchdetail mtb where sd_se_id = 1333 ');
+        from tbsearchdetail mtb where sd_se_id = 1333 order by sd_sort');
         App::setlocale(session()->get('locale'));
     	return view('searchpopup.ratepayer')->with(array('state'=> $state,'citizen'=> $citizen,'race'=> $race,'activeind'=> $activeind, 'applntype' => $applntype, 'ratepayertype' => $ratepayertype,'search'=>$search,'id'=>3,'property'=>$property));
     }
@@ -1161,7 +1161,7 @@ on subzone.tdi_key = ma_subzone_id where vd_id = ifnull("'.$prop_id.'",0)');
     	$search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid 
-        from tbsearchdetail mtb where sd_se_id = 13333 ');
+        from tbsearchdetail mtb where sd_se_id = 13333 order by sd_sort');
         $state = DB::select("select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE'");
         $citizen = DB::select("select tdi_key citizen_id, tdi_value citizen from tbdefitems where tdi_td_name = 'CITIZEN'");
         $race = DB::select("select tdi_key race_id, tdi_value race from tbdefitems where tdi_td_name = 'RACE'");

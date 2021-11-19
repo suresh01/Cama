@@ -18,7 +18,7 @@
 					<ul >
 						<li><a href="#">{{__('toneoflist.Home')}} </a></li>
 						<li><a href="#">{{__('toneoflist.Tone_of_List')}} </a></li>
-						<li>{{__('toneoflist.Property_Type')}} Basket Management</li>
+						<li>{{__('toneoflist.taxbasket')}}</li>
 					</ul>
 				</div>
 				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('toneoflist.Add_Basket')}}</span></button>
@@ -68,7 +68,7 @@
 						<td class="">							
 							@if($rec->trlist_activeind_id == '1')
 								
-								<spane><a  class=" new-action-icons reverse" onclick="approve('{{$rec->trlist_id}}',1)" title="In Active" href="#"></a></span>;
+								<span><a  class=" new-action-icons reverse" onclick="approve('{{$rec->trlist_id}}',1)" title="In Active" href="#"></a></span>;
 													
 							@elseif($rec->trlist_activeind_id == '2')
 							 <span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trlist_id}}',2)"  title=" Active" href="#"></a></span>'	
@@ -223,7 +223,7 @@
 	}
 
 	function openBasket(){
-		$("#title").html("Add Basket");
+		$("#title").html("{{__('toneoflist.addbasket')}}");
 		$('#year').val('');
 		$('#eyear').val('');
 		$('#desc').val('');

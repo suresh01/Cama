@@ -44,14 +44,14 @@
 						
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" id="" onclick="addfilter(1)" class=""><span>{{__('search.add')}} </span></a>
+						<a href="#" id="" onclick="addfilter(1)" class=""><span>{{__('search.add')}}</span></a>
 					</div>
 					<div class="btn_24_blue">						
 						<!--<button id="addsubmit"type="submit" class="btn_small btn_blue"><span>Submit</span></button>	-->
-						<a href="#" disabled="true" onclick="submitForm()" class=""><span>{{__('search.submit')}}  </span></a>	
+						<a href="#" disabled="true" onclick="submitForm()" class=""><span>{{__('search.submit')}}</span></a>	
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" onclick="terminate()" class="simplemodal-close"><span>{{__('search.close')}} </span></a>
+						<a href="#" onclick="terminate()" class="simplemodal-close"><span>{{__('search.close')}}</span></a>
 					</div>
 					</form>
 			</div>

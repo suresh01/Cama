@@ -45,7 +45,7 @@ class CodeMaintenanceController extends Controller
         $search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "25" ');
+        from tbsearchdetail mtb where sd_se_id = "25" order by sd_sort ');
         
         $state = DB::select("select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE'");
         $citizen = DB::select("select tdi_key citizen_id, tdi_value citizen from tbdefitems where tdi_td_name = 'CITIZEN'");
@@ -217,7 +217,7 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
         $search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "26" ');
+        from tbsearchdetail mtb where sd_se_id = "26" order by sd_sort  ');
         
         $transtype = DB::select("select tdi_key, tdi_value from tbdefitems where tdi_td_name = 'TRANSACTIONTYPE' order by tdi_sort");
         $lotcode = DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE"');
@@ -317,7 +317,7 @@ left join (SELECT tdi_key, tdi_value FROM cama.tbdefitems where tdi_td_name = 'A
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid , sd_keymaintable , sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = "24" ');
+        from tbsearchdetail mtb where sd_se_id = "24" order by sd_sort ');
 
         $totalcount = DB::table('cm_tone_building')->count('tbldg_id');
 
@@ -458,7 +458,7 @@ where tollist_id = tland_tone_id');
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  , sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = "28" ');
+        from tbsearchdetail mtb where sd_se_id = "28" order by sd_sort');
 
         $totalcount = DB::table('cm_tone_land')->count();
 
@@ -645,7 +645,7 @@ where tollist_id = tstand_tone_id');
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  , sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = "29" ');
+        from tbsearchdetail mtb where sd_se_id = "29" order by sd_sort');
 
         $totalcount = DB::table('cm_tone_land_standart')->count();
 
@@ -770,7 +770,7 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
         $search=DB::select(' select sd_key, sd_label,  
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid , sd_keymaintable, sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = "30" ');
+        from tbsearchdetail mtb where sd_se_id = "30" order by sd_sort');
 
         $totalcount = DB::table('cm_tone_land_standart')->count();
 

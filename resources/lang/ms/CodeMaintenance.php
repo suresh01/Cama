@@ -56,12 +56,22 @@ return [
 	// addresslog.blade.php
 	'Property_Address_Log'=>'Log Alamat Harta',
 	'Log_Id'=>'Id Log',
+	'No_Lot_Log'=>'Log No Lot',
 	'Account_Number'=>'No Akaun',
 	'File_Number'=>'No Fail',
 	'Zone'=>'Mukim',
 	'SubZone'=>'Taman/Kawasan',
 	// lotlog.blade.php
 	'Property_Information'=>'Maklumat Harta',
+	'LogNoLot_Id' => 'No Lot Log Id',
+	'LogNoLot_NoLot' => 'No Lot',
+	'LogNoLot_NoLotAlt' => 'No Lot Alternatif',
+	'LogNoLot_NoTitle' => 'No Hakmilik',
+	'LogNoLot_NoTitleAlt' => 'No Hakmilik Alternatif',
+	'LogNoLot_LandUse' => 'Kegunaan Tanah',
+	'LogNoLot_TenantType' => 'Jenis Pajakan',
+	'LogNoLot_LandSize' => 'Luas Tanah',
+	'LogNoLot_SizeType' => 'Unit Luas',
 	'Stata_Number'=>'No Strata',
 	// ownerdetail.blade.php
 	'Property_Address'=>'Maklumat Alamat',

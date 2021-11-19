@@ -154,7 +154,7 @@
 									<input type="hidden" name="bldgid" id="bldgid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>{{__('toneoflist.Basket_Information')}} </legend>
+										<legend>{{__('toneoflist.basketinfo')}} </legend>
 										<div class="form_grid_12">
 											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Tone_Basket')}} <span class="req">*</span></label>
 											<div  class="form_input">
@@ -439,7 +439,7 @@
 	}
 
 	function editBasket(id){
-		$("#title").html("Update Building");
+		$("#title").html("{{__('toneoflist.Edit_Building')}}");
 		$('#basketid').val($('#basketid_'+id).val());
 		$('#subzone').val($('#suzone_'+id).val());
 		$('#propstoery').val($('#propstoery_'+id).val());
@@ -492,7 +492,7 @@
 	}
 
 	function openBasket(){
-		$("#title").html("Add Building");
+		$("#title").html("{{__('toneoflist.Add_Building')}}");
 		$('#basketid').val('');
 		$('#subzone').val('');
 		$('#propstoery').val('');

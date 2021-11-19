@@ -32,6 +32,7 @@
 					<div id="breadCrumb3"  class="breadCrumb grid_3">
 						<ul >
 							<li><a href="#">{{__('group.Home')}} </a></li>
+							<li><a href="#">{{__('CodeMaintenance.Data_Maintenance')}}</a></li>
 							<li>{{__('group.Plan_Registeration')}} </li>
 						</ul>
 					</div>

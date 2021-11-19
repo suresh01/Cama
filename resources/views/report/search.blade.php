@@ -9,19 +9,19 @@
 					</ul>	
 					
 					<div class="btn_24_blue">
-						<a href="#" onclick="addfilter(1)" class=""><span>Add </span></a>
+						<a href="#" onclick="addfilter(1)" class=""><span>{{__('search.add')}}</span></a>
 					</div>
 					<div class="btn_24_blue">						
 						<!--<button id="addsubmit"type="submit" class="btn_small btn_blue"><span>Submit</span></button>	-->
-						<a href="#" onclick="submitForm()" class=""><span>Submit </span></a>	
+						<a href="#" onclick="submitForm()" class=""><span>{{__('search.submit')}}</span></a>	
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" class="simplemodal-close"><span>Close </span></a>
+						<a href="#" class="simplemodal-close"><span>{{__('search.close')}}</span></a>
 					</div>
 				</form>
 			</div>
 			<div style="display: none;" id="view"></div>
-			<a href="#" onclick="addfilter(0)" class="basic-modal">Add Filter</a>
+			<a href="#" onclick="addfilter(0)" class="basic-modal">{{__('search.addfilter')}}</a>
 			<div style="display: none;" id="manaual-filter-placeholder">
 				
 			</div>

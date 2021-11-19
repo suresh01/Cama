@@ -74,7 +74,7 @@
 								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',2,1)"  title="{{__('common.Approve')}} " href="#"></a></span>
 								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',2,2)"  title="{{__('common.Reject')}} " href="#"></a></span>
 							@elseif($rec->tdepre_approvaltdeprestatus_id == '3')
-								<spane><a class=" new-action-icons reverse" onclick="approve('{{$rec->tdepre_id}}',3)" title="{{__('common.Revise')}} " href="#"></a></span>	
+								<span><a class=" new-action-icons reverse" onclick="approve('{{$rec->tdepre_id}}',3)" title="{{__('common.Revise')}} " href="#"></a></span>	
 									
 							@elseif($rec->tdepre_approvaltdeprestatus_id == '4')
 								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editBasket('{{ $rec->tdepre_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
@@ -112,7 +112,7 @@
 									<input type="hidden" name="depreciationid" id="depreciationid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>{{__('toneoflist.Basket_Information')}} </legend>
+										<legend>{{__('toneoflist.basketinfo')}} </legend>
 										<div class="form_grid_12">
 											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Basket')}} <span class="req">*</span></label>
 											<div  class="form_input">
@@ -255,7 +255,7 @@
 
 	}
 	function editBasket(id){
-		$("#title").html("Update Depreciation");
+		$("#title").html("{{__('toneoflist.Edit_Depreciation')}}");
 		$('#basketid').val($('#basketid_'+id).val());
 		$('#bldgcond').val($('#bldgcond_'+id).val());
 		$('#value').val($('#value_'+id).val());
@@ -268,7 +268,7 @@
 	}
 
 	function openBasket(){
-		$("#title").html("Add Depreciation");
+		$("#title").html("{{__('toneoflist.Add_Depreciation')}}");
 		$('#basketid').val('');
 		$('#bldgcond').val('');
 		$('#value').val('');

@@ -109,10 +109,15 @@ where va_vt_id = vt_id and vd_approvalstatus_id <> '12' and va_approvalstatus_id
           on termstage.tdi_key = vt_approvalstatus_id 
         left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbase
         on valbase.tdi_key = vt_valbase_id ".$termcondition."  order by vt_termDate desc");
-        $basket_count=DB::select('select  count(*) basket_count from cm_appln_val');
-        $property_count=DB::select('select  count(vd_id) property_count from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id');
-            $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
-            $valbase = DB::select('select * from tbdefitems where tdi_td_name = "VALUATIONBASE" ');
+        $basket_count=DB::select('select  count(*) basket_count 
+                                from cm_appln_val
+                                inner join cm_appln_valterm ON vt_id = va_vt_id '.$termcondition);
+        $property_count=DB::select('select  count(vd_id) property_count 
+                                from cm_appln_valdetl 
+                                inner join cm_appln_val on va_id = vd_va_id
+                                inner join cm_appln_valterm ON vt_id = va_vt_id '.$termcondition);
+        $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
+        $valbase = DB::select('select * from tbdefitems where tdi_td_name = "VALUATIONBASE" ');
 
         App::setlocale(session()->get('locale'));
         
@@ -136,7 +141,7 @@ public function valbasket(Request $request){
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "18" ');
+        from tbsearchdetail mtb where sd_se_id = "18" order by sd_sort');
         $termcondition = "";
         if(userpermission::checkaccess('515') == "false"){
           $termcondition = " where vt_approvalstatus_id in ('01','02') ";
@@ -215,7 +220,7 @@ inner join cm_appln_valdetl on vd_id = de_vd_id group by vd_va_id ) decision on 
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "18" ');
+        from tbsearchdetail mtb where sd_se_id = "18" order by sd_sort');
         $termcondition = "";
         if(userpermission::checkaccess('515') == "false"){
           $termcondition = " where vt_approvalstatus_id in ('01','02') ";
@@ -377,7 +382,7 @@ DB::statement("insert into tempQuery values(select * from )");
         $search=DB::select(' select sd_key, sd_label, sd_keymainfield,
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "18" ');
+        from tbsearchdetail mtb where sd_se_id = "18" order by sd_sort');
         
         $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
         $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
@@ -393,7 +398,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
    
      public function addressLogTables(Request $request){
-        Log::info('Test');
+        Log::info('addressLogTables');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -470,7 +475,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
 
      public function propertyTables(Request $request){
-        Log::info('Test');
+        Log::info('propertyaddressdata');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -537,7 +542,7 @@ DB::statement("insert into tempQuery values(select * from )");
          $search=DB::select(' select sd_key, sd_label, sd_keymainfield,
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "18" ');
+        from tbsearchdetail mtb where sd_se_id = "18" order by sd_sort');
         
         $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
         $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
@@ -555,7 +560,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
     public function propertyLotDetail(Request $request) {
       $prop_id = $request->input('prop_id');  
-         $lotlist = DB::select('select distinct DATE_FORMAT(lo_startdate, "%d/%m/%Y") lo_startdate1, DATE_FORMAT(lo_expireddate, "%d/%m/%Y") lo_expireddate1,cm_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
+         $lotlist = DB::select('select DATE_FORMAT(lo_startdate, "%d/%m/%Y") lo_startdate1, DATE_FORMAT(lo_expireddate, "%d/%m/%Y") lo_expireddate1,cm_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
         , unitsize.tdi_value unitsize, concat(lotcode.tdi_value,lo_no) lotnumber, concat(titletype.tdi_value,lo_titleno) titlenumber, landuse.tdi_value landuse, tentype.tdi_value tentype
          from cm_lot  inner join cm_masterlist on ma_id = lo_ma_id
          left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = lo_lotcode_id
@@ -620,7 +625,7 @@ DB::statement("insert into tempQuery values(select * from )");
          $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "27" ');
+        from tbsearchdetail mtb where sd_se_id = "27" order by sd_sort');
 
         $zone = DB::select("select tdi_key, tdi_value from tbdefitems where tdi_td_name = 'ZONE'");
             $applntype = DB::select('select * from tbdefitems where tdi_td_name = "PLANAPPLICATIONTYPE"');
@@ -679,16 +684,16 @@ DB::statement("insert into tempQuery values(select * from )");
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "14" ');
-      $group = DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "USERGROUP"');
+        from tbsearchdetail mtb where sd_se_id = "14" order by sd_sort');
+        $group = DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "USERGROUP"');
         $ownregister = DB::select('select otar_id, otar_accno, otar_ownertransgroup_id, grouptb.tdi_value colgroup, statustb.tdi_value colstatus, otar_createby, 
-owntype.tdi_value owntype, otar_ownertranstype_id,
-DATE_FORMAT(otar_createdate, "%d/%m/%Y") otar_createdate  
-FROM cm_ownertrans_applnreg 
-inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
-inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE"
-inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and owntype.tdi_td_name = "OWNERSHIPTRANSTYPE"
- where otar_ownertransstatus_id in (1,2,4) and otar_ownertranstype_id in (1,2)');
+    owntype.tdi_value owntype, otar_ownertranstype_id,
+    DATE_FORMAT(otar_createdate, "%d/%m/%Y") otar_createdate  
+    FROM cm_ownertrans_applnreg 
+    inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
+    inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE"
+    inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and owntype.tdi_td_name = "OWNERSHIPTRANSTYPE"
+    where otar_ownertransstatus_id in (1,2,4) and otar_ownertranstype_id in (1,2)');
 
         App::setlocale(session()->get('locale'));
         
@@ -726,7 +731,7 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
                $search=DB::select(' select sd_key, sd_label, 
                         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
                       then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-                      from tbsearchdetail mtb where sd_se_id = "19" ');
+                      from tbsearchdetail mtb where sd_se_id = "19" order by sd_sort');
               $ownertransfer=DB::select('select DATE_FORMAT(otar_createdate, "%d/%m/%Y")   otar_createdate1, cm_ownertrans_applnreg.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, 
                   state.tdi_value state, grouptb.tdi_value colgroup, statustb.tdi_value colstatus,
                   transtype.tdi_value transtype, otar_ownertranstype_id
@@ -750,7 +755,7 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
                  $search=DB::select(' select sd_key, sd_label, 
                         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
                       then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-                      from tbsearchdetail mtb where sd_se_id = "18" ');
+                      from tbsearchdetail mtb where sd_se_id = "18" order by sd_sort');
                 $ownertransfer=DB::select('select DATE_FORMAT(otar_createdate, "%d/%m/%Y")   otar_createdate1, cm_ownertrans_applnreg.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, 
                   state.tdi_value state, grouptb.tdi_value colgroup, statustb.tdi_value colstatus,
                   transtype.tdi_value transtype, otar_ownertranstype_id
@@ -793,7 +798,7 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
              $search=DB::select(' select sd_key, sd_label, 
                     case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
                   then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-                  from tbsearchdetail mtb where sd_se_id = "18" ');
+                  from tbsearchdetail mtb where sd_se_id = "18" order by sd_sort');
             $ownertransfer=DB::select('select DATE_FORMAT(otar_createdate, "%d/%m/%Y")   otar_createdate1, cm_ownertrans_applnreg.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, state.tdi_value state, grouptb.tdi_value colgroup, statustb.tdi_value colstatus, transtype.tdi_value transtype
               from cm_masterlist 
               inner join cm_owner on to_ma_id = ma_id
@@ -964,38 +969,26 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
 
     public function ownerLog(Request $request){
      
-                 $search=DB::select(' select sd_key, sd_label, 
-                        case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
-                      then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-                      from tbsearchdetail mtb where sd_se_id = "18" ');
-    /*  $log = DB::select('select  date_format(ota_transtocenterdate,"%d/%m/%Y") ota_transtocenterdate, cm_ownertrans_applnreg.*, ownstatus.tdi_value ownstatus, ttype.tdi_value ttype, tstatus.tdi_value transstauts, date_format(otar_updatedate,"%d/%m/%Y") otar_updatedate, date_format(otar_createdate,"%d/%m/%Y") otar_createdate, cm_ownertrans_appln.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, state.tdi_value state, ownrace.tdi_value ownrace
-        from cm_masterlist 
-        inner join cm_owner on to_ma_id = ma_id
-        inner join cm_ownertrans_appln on ota_ownno = TO_OWNNO and ota_transferapplntype_id = 1
-        inner join cm_ownertrans_applnreg on otar_accno = ma_accno
-        left join tbdefitems owntype on owntype.tdi_key = ota_owntype_id and owntype.tdi_td_name = "OWNTYPE"
-        left join tbdefitems ownrace on ownrace.tdi_key = ota_race_id and ownrace.tdi_td_name = "RACE"
-        left join tbdefitems state on state.tdi_key = TO_STATE_ID and state.tdi_td_name = "STATE"
-        left join tbdefitems subzone 
-        on subzone.tdi_key = ma_subzone_id and subzone.tdi_td_name = "SUBZONE"
-        left join tbdefitems tstatus 
-        on tstatus.tdi_key = ota_transtocenterstatus_id and tstatus.tdi_td_name = "OWNERSHIPSTAGE"
-        left join tbdefitems ttype  
-        on ttype.tdi_key = ota_transferapplntype_id and ttype.tdi_td_name = "TRANSFERTYPE"
-        left join tbdefitems ownstatus 
-        on ownstatus.tdi_key = ota_transferapplntypestatus_id and ownstatus.tdi_td_name = "OWNERSHIPSTATUS"
-        
-       ');*/
-      $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser, usr_id usr_position FROM tbuser');
+        // $search=DB::select(' select sd_key, sd_label, 
+        //     case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        //     then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
+        //     from tbsearchdetail mtb where sd_se_id = "18" order by sd_sort');
+        $search=DB::select('select sd_key, sd_label, 
+          case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  , sd_keymainfield
+        from tbsearchdetail mtb where sd_se_id = "43"  order by sd_sort');
+        $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
+   
+        $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser, usr_id usr_position FROM tbuser');
 
         App::setlocale(session()->get('locale'));
         
-         return view("ownershiptransfer.ownerlog")->with(array( 'userlist'=>$userlist, 'search'=>$search));
+        return view("ownershiptransfer.ownerlog")->with(array( 'userlist'=>$userlist, 'search'=>$search));
     }
 
 
     public function ownerLogTables(Request $request){
-        Log::info('Test');
+        Log::info('ownerLogTables');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -1070,54 +1063,29 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
 
 
     public function addressLog(Request $request){
-      $page = $request->input('page');
-     $search=DB::select(' select sd_key, sd_label, 
-            case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
-          then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-          from tbsearchdetail mtb where sd_se_id = "0" ');
-    /*  $log = DB::select('select  date_format(ota_transtocenterdate,"%d/%m/%Y") ota_transtocenterdate, cm_ownertrans_applnreg.*, ownstatus.tdi_value ownstatus, ttype.tdi_value ttype, tstatus.tdi_value transstauts, date_format(otar_updatedate,"%d/%m/%Y") otar_updatedate, date_format(otar_createdate,"%d/%m/%Y") otar_createdate, cm_ownertrans_appln.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, state.tdi_value state, ownrace.tdi_value ownrace
-        from cm_masterlist 
-        inner join cm_owner on to_ma_id = ma_id
-        inner join cm_ownertrans_appln on ota_ownno = TO_OWNNO and ota_transferapplntype_id = 1
-        inner join cm_ownertrans_applnreg on otar_accno = ma_accno
-        left join tbdefitems owntype on owntype.tdi_key = ota_owntype_id and owntype.tdi_td_name = "OWNTYPE"
-        left join tbdefitems ownrace on ownrace.tdi_key = ota_race_id and ownrace.tdi_td_name = "RACE"
-        left join tbdefitems state on state.tdi_key = TO_STATE_ID and state.tdi_td_name = "STATE"
-        left join tbdefitems subzone 
-        on subzone.tdi_key = ma_subzone_id and subzone.tdi_td_name = "SUBZONE"
-        left join tbdefitems tstatus 
-        on tstatus.tdi_key = ota_transtocenterstatus_id and tstatus.tdi_td_name = "OWNERSHIPSTAGE"
-        left join tbdefitems ttype  
-        on ttype.tdi_key = ota_transferapplntype_id and ttype.tdi_td_name = "TRANSFERTYPE"
-        left join tbdefitems ownstatus 
-        on ownstatus.tdi_key = ota_transferapplntypestatus_id and ownstatus.tdi_td_name = "OWNERSHIPSTATUS"
-        
-       ');*/
-      $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
+        //$page = $request->input('page');
+        $search=DB::select('select sd_key, sd_label, 
+          case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  , sd_keymainfield
+        from tbsearchdetail mtb where sd_se_id = "41"  order by sd_sort');
+        $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
 
         App::setlocale(session()->get('locale'));
-        if($page == '1'){
-             return view("codemaintenance.ownershiptransfer.addresslog")->with(array( 'userlist'=>$userlist, 'search'=>$search, 'page'=>$page));
-        } else {
-          return view("codemaintenance.ownershiptransfer.lotlog")->with(array( 'userlist'=>$userlist, 'search'=>$search, 'page'=>$page));
-        }
-    }
-        
-        
+        // return view("codemaintenance.ownershiptransfer.addresslog")->with(array( 'userlist'=>$userlist, 'search'=>$search, 'page'=>$page));
+        return view('codemaintenance.ownershiptransfer.addresslog')->with('search',$search)->with('userlist',$userlist);
 
-
-
-
+    }     
 
     public function propAddressLogTables(Request $request){
-        Log::info('Test');
+        Log::info('propaddresslogtables');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
 
         $isfilter = $request->input('filter');
-        $page = $request->input('page');
+        //$page = $request->input('page');
         $filterquery = '';
+
         if($isfilter == 'true'){
             $input = $request->input();
             $condition = $input['condition'];
@@ -1147,46 +1115,110 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
             if($filterquery != ''){
                 $filterquery  = ' and '. $filterquery ;
             }
-            Log::info($filterquery);
+            //Log::info($filterquery);
 
         }
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
-        /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
-        'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
-        'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
-    // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
-        if($page =='1') {
-          $property = DB::select("select * FROM cm_masterlist_log 
+        
+        
+     $property = DB::select("select * FROM cm_masterlist_log 
           inner join (select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE') state on state_id = mal_state_id
           inner join (select tdi_key subzone_id,tdi_parent_name zone, tdi_value subzone from tbdefitems where tdi_td_name = 'SUBZONE') subzone 
           on subzone_id = mal_subzone_id 
           inner join (select tdi_key ,tdi_parent_name , tdi_value  tstatus from tbdefitems where tdi_td_name = 'OWNERSHIPSTAGE') tstatus 
           on tdi_key = mal_approvalstatus_id
-          where mal_approvalstatus_id in ('5','6','7','8') ");
-        } else {
-           $property = DB::select('select cm_lot_log.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
-            , unitsize.tdi_value unitsize, concat(lotcode.tdi_value,log_no) lotnumber, concat(titletype.tdi_value, LOG_TITLENO) titlenumber, 
-            landuse.tdi_value landuse, tentype.tdi_value tentype, tstatus, ma_accno
-            from cm_lot_log
-            inner join cm_lot on lot_id = log_lot_id
-            inner join cm_masterlist on ma_id = lo_ma_id
-            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = LOG_LOTCODE_ID
-            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = LO_ROADTYPE_ID
-            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = LOG_TITLETYPE_ID
-            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") unitsize on unitsize.tdi_key = LO_SIZEUNIT_ID
-            left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  LO_LANDUSE_ID = landuse.tdi_key
-            left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  LOG_TENURETYPE_ID = tentype.tdi_key 
-            left join (select tdi_key ,tdi_parent_name , tdi_value tstatus from tbdefitems where tdi_td_name = "OWNERSHIPSTAGE") tstatus 
-            on tstatus.tdi_key = log_approvalstatus_id');
-        }
+          where mal_approvalstatus_id in ('5','6','7','8')".$filterquery);
+        
 
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);
    
         return $propertyDetails;
     }
+
+    public function nolotlog(Request $request){
+            //$page = $request->input('page');
+            $search=DB::select('select sd_key, sd_label, 
+            case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+            then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  , sd_keymainfield
+            from tbsearchdetail mtb where sd_se_id = "42"  order by sd_sort');
+            $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
+
+            App::setlocale(session()->get('locale'));
+            return view('codemaintenance.ownershiptransfer.nolotlog')->with('search',$search)->with('userlist',$userlist);
+
+    }      
+
+public function nolotlogtables(Request $request){
+        Log::info('nolotlogtables');
+        ini_set('memory_limit', '2056M');
+       // $baskedid = $request->input('id');
+        $maxRow = 30;
+
+        $isfilter = $request->input('filter');
+        //$page = $request->input('page');
+        $filterquery = '';
+
+        if($isfilter == 'true'){
+            $input = $request->input();
+            $condition = $input['condition'];
+            $value = $input['value'];
+            $logic = $input['logic'];
+            $fieldcolumn = $input['field'];
+
+             foreach ($input['field'] as $fieldindex => $field) {
+                if ($fieldcolumn[$fieldindex] == "tdi_key") {
+                    $fieldcolumn[$fieldindex] = 'tbdefitems_subzone.tdi_key';
+                }/*
+                if ($fieldcolumn[$fieldindex] == "vt_id") {
+                    $fieldcolumn[$fieldindex] = '';
+                }*/
+                if($value[$fieldindex] != ""){
+                    if($fieldindex == count($input['field']) - 1) {
+                        if($fieldcolumn[$fieldindex] != ""){
+                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
+                         }
+                    } else {
+                        if($fieldcolumn[$fieldindex] != ""){
+                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
+                        }   
+                    }
+                }               
+            }
+            if($filterquery != ''){
+                $filterquery  = ' and '. $filterquery ;
+            }
+            //Log::info($filterquery);
+
+        }
+       // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
+        Log::info($filterquery);
+        
+        
+     $property = DB::select('select ma_accno, log_id,
+lotcode.tdi_value lotcode, concat(lotcode.tdi_value, " ",lo_no) lotnumber, LO_ALTNO, roadtype.tdi_value roadtype, titletype.tdi_value titletype, 
+unitsize.tdi_value unitsize, concat(titletype.tdi_value, " ",lo_titleno) titlenumber, LO_ALTTITLENO, LO_SIZE, landuse.tdi_value landuse, tentype.tdi_value tentype,
+DATE_FORMAT(lo_startdate, "%d/%m/%Y") lo_startdate1, DATE_FORMAT(lo_expireddate, "%d/%m/%Y") lo_expireddate1,
+tstatus.tdi_value tstatus 
+from cm_lot  
+inner join cm_masterlist on ma_id = lo_ma_id
+inner join cm_lot_log on log_lot_id = lot_id
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = lo_lotcode_id
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = lo_roadtype_id
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = lo_titletype_id
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") unitsize on unitsize.tdi_key = lo_sizeunit_id
+left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  lo_landuse_id = landuse.tdi_key
+left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  lo_tenuretype_id = tentype.tdi_key 
+inner join (select tdi_key, tdi_parent_name, tdi_value  from tbdefitems where tdi_td_name = "OWNERSHIPSTAGE") tstatus on tstatus.tdi_key = log_approvalstatus_id
+          where log_approvalstatus_id in ("5","6","7","8")'.$filterquery);
+        
+
+       // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
+        $propertyDetails = Datatables::collection($property)->make(true);
+   
+        return $propertyDetails;
+}
 
 public function owneradddresTables(Request $request){
         Log::info('Test');
@@ -1368,7 +1400,7 @@ public function generateRemisireport(Request $request) {
       $search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = 32 ');
+        from tbsearchdetail mtb where sd_se_id = 32 order by sd_sort');
 
         $basket = DB::select('select va_approvalstatus_id FROM cm_appln_val  ');
             $applntype = DB::select("select da_name
@@ -1526,7 +1558,7 @@ public function generateRemisireport(Request $request) {
        $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_id and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid ,sd_keymainfield 
-        from tbsearchdetail mtb where sd_se_id = "22" order by sd_id ');
+        from tbsearchdetail mtb where sd_se_id = "22" order by sd_sort');
 
         App::setlocale(session()->get('locale'));
         
@@ -1940,7 +1972,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "18" ');
+        from tbsearchdetail mtb where sd_se_id = "18" order by sd_sort');
        $termcondition = "";
         if(userpermission::checkaccess('515') == "false"){
           $termcondition = " where vt_approvalstatus_id = '01' ";
@@ -2040,7 +2072,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "18" ');
+        from tbsearchdetail mtb where sd_se_id = "18" order by sd_sort');
         $termcondition = "";
         if(userpermission::checkaccess('515') == "false"){
           $termcondition = " where vt_approvalstatus_id in ('01','02') ";
@@ -2122,7 +2154,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
       $search=DB::select(' select sd_key, sd_label,  sd_keymainfield ,
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid 
-        from tbsearchdetail mtb where sd_se_id = 39 ');
+        from tbsearchdetail mtb where sd_se_id = 39 order by sd_sort');
         App::setlocale(session()->get('locale'));
       return view('ownershiptransfer.popup.accountsearch')->with('search',$search)->with('totalcount','0');
     }
@@ -2222,7 +2254,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         $search=DB::select(' select sd_key, sd_label, sd_keymainfield,
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-        from tbsearchdetail mtb where sd_se_id = "18" ');
+        from tbsearchdetail mtb where sd_se_id = "18" order by sd_sort');
         
         
         $userlist=DB::select('select usr_id, concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, concat(usr_firstname, " " ,usr_lastname) usr_name , usr_position FROM tbuser');
@@ -2355,7 +2387,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         $search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = 18 ');
+        from tbsearchdetail mtb where sd_se_id = 18 order by sd_sort');
         $state = DB::select("select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE'");
 
         $group = DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "USERGROUP"');
@@ -2407,7 +2439,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         $search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = 18 ');
+        from tbsearchdetail mtb where sd_se_id = 18 order by sd_sort');
         $state = DB::select("select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE'");
         App::setlocale(session()->get('locale'));
         return view('remisi.addapplication')->with('state',$state)->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id);
@@ -2420,7 +2452,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         $search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = 18 ');
+        from tbsearchdetail mtb where sd_se_id = 18 order by sd_sort');
 
         $state = DB::select("select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE'");
 
@@ -2511,7 +2543,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         $search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
-        from tbsearchdetail mtb where sd_se_id = 18 ');
+        from tbsearchdetail mtb where sd_se_id = 18 order by sd_sort');
 
         App::setlocale(session()->get('locale'));
         

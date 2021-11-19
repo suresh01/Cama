@@ -15,17 +15,17 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_4">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li><a href="#">Ownership Transfer</a> </li>
-						<li>Ownership Process Log</li>
+						<li><a href="#">Penyelenggaraan Data</a></li>
+						{{-- <li><a href="#">Ownership Transfer</a> </li> --}}
+						<li>Log Pindah Milik</li>
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
 					
-					<!--<a href="#" onclick="demo()">Demo</a>-->
-					@include('ownershiptransfer.logsearch')
+					@include('ownershiptransfer.logsearch',['tableid'=>'proptble', 'action' => 'ownerlogtable', 'searchid' => '43'])	
+					{{-- @include('ownershiptransfer.logsearch') --}}
 				</div>
 				<br>
         		
@@ -300,7 +300,7 @@ $(document).ready(function (){
 		        "serverSide": false,
 		        "retrieve": true,
 		        /*"dom": '<"toolbar">frtip',*/
-				 "ajax": 'ownerlogdata',
+				 "ajax": 'ownerlogtable',
 		        "columns": [
 			        {"data": "otar_id", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": null, "name": "sno"},

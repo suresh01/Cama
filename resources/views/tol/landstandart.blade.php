@@ -109,7 +109,7 @@
 									<input type="hidden" name="landid" id="landid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>{{__('toneoflist.Basket_Information')}}</legend>
+										<legend>{{__('toneoflist.basketinfo')}}</legend>
 										<div class="form_grid_12">
 											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Basket')}} <span class="req">*</span></label>
 											<div  class="form_input">
@@ -239,7 +239,7 @@
 
 <script>
 	function editBasket(id){
-		$("#title").html("Update Land Standard");
+		$("#title").html("{{__('toneoflist.Edit_Land_Standard')}}");
 		$('#basketid').val($('#basketid_'+id).val());
 		$('#subzone').val($('#subzone_'+id).val());
 		$('#proptype').val($('#proptype_'+id).val());
@@ -287,7 +287,7 @@
 	}
 
 	function openBasket(){
-		$("#title").html("Add Land Standard");
+		$("#title").html("{{__('toneoflist.Add_Land_Standard')}}");
 		$('#basketid').val('');
 		$('#subzone').val('');
 		$('#proptype').val('');

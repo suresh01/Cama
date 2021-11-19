@@ -95,7 +95,7 @@
 									<input type="hidden" name="taxid" id="taxid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>{{__('toneoflist.Basket_Information')}} </legend>
+										<legend>{{__('toneoflist.basketinfo')}} </legend>
 										<div class="form_grid_12">
 											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Basket')}} <span class="req">*</span></label>
 											<div  class="form_input">
@@ -198,7 +198,7 @@
 <script src="js/propertyregister/tab-script.js"></script>
 <script>
 	function editBasket(id){
-		$("#title").html("Update Building");
+		$("#title").html("{{__('toneoflist.Edit_Tax_Rate')}}");
 		$('#basketid').val($('#basketid_'+id).val());
 		$('#zone').val($('#zone_'+id).val());
 		$('#hasbldg').val($('#hasbldg_'+id).val());
@@ -226,7 +226,7 @@
 	}
 
 	function openBasket(){
-		$("#title").html("Add Building");
+		$("#title").html("{{__('toneoflist.Add_Tax_Rate')}}");
 		$('#basketid').val('');
 		$('#zone').val('');
 		$('#hasbldg').val('');

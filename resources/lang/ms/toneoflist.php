@@ -5,8 +5,9 @@
 return [
 	//allowance.blade.php
 	'home' => 'Laman Utama',
-    'tol' => 'ARAS NILAI',
-    'tbasket' => 'BASKET TONE',
+    'tol' => 'Aras Nilai',
+    'tbasket' => 'Bakul Aras Nilai',
+	'taxbasket' => 'Bakul Cukai',
     'addbasket' => 'Tambah Bakul',
     'sno' => 'S No',
     'id' => 'ID',
@@ -42,10 +43,13 @@ return [
     'col16' => 'Aksi',
 	'SNo'=>'SNo',
 	'Home'=>'Lamat Utama',
+	//Allowance
 	'TOL_Allowance'=>'Elaun',
 	'Tone_of_List'=>'Aras Nilai',
 	'Allowance'=>'Elaun',
 	'Add_Allowance'=>'Tambah Elaun',
+	'Edit_Allowance'=>'Kemaskini Elaun',
+	//
 	'ID'=>'ID',
 	'Tone_Basket'=>'Bakul Aras Nilai',
 	'Allowance_Category'=>'Kategori Elaun',
@@ -60,11 +64,12 @@ return [
 	'Basket_Information'=>'Maklumat Bakul',
 	'Basket'=>'Bakul Aras Nilai',
 	'Buliding_Category'=>'Kategori Bangunan',
-	//basket.blade.php
+	//Building.blade.php
 	'TOL_Basket_Management'=>'TOL Basket Management',
 	'TOL_Building'=>'Bangunan',
 	'Building'=>'Bangunan',
 	'Add_Building'=>'Tambah Aras Bangunan',
+	'Edit_Building'=>'Kemaskini Aras Bangunan',
 	'Count'=>'Bilangan',
 	'Transaction_Type'=>'Jenis Transaksi',
 	'Zone'=>'Mukim',
@@ -76,18 +81,24 @@ return [
 	'Area_Level'=>'Aras',
 	'Area_Category'=>'Kategori Ruang',
 	'Area_Use'=>'Kegunaan Ruang',
-	//
+	//Depreciation
 	'TOL_Depreciation'=>'Susut Nilai',
+	'Add_Depreciation'=>'Tambah Susut Nilai',
+	'Edit_Depreciation'=>'Kemaskini Susut Nilai',
 	'Depreciation'=>'Susut Nilai',
 	'Building_Condition'=>'Keadaan Bangunan',
-	'Add_Land_Standard'=>'Tambah Luas Tanah Piawai',
+	
 	//land.blade.php
 	'TOL_Land'=>'Aras Nilai Tanah',
 	'Land'=>'Tanah',
 	'Add_Land'=>'Tambah Aras Tanah',
+	'Edit_Land'=>'Kemaskini Aras Tanah',
 	'Has_Building'=>'Berbangunan',
+
 	// landstandard
 	'TOL_Land_Standard'=>'Luas Tanah Piawai',
+	'Add_Land_Standard'=>'Tambah Luas Tanah Piawai',
+	'Edit_Land_Standard'=>'Kemaskini Luas Tanah Piawai',
 	'Land_Standard'=>'Luas Tanah Piawai',
 	'Standard_Area'=>'Luas Piawai',
 	'Next_Area'=>'Luas Seterusnya',
@@ -99,8 +110,9 @@ return [
 	'Description'=>'Description',
 	// taxrate.blade.php
 	'TOL_Tax_Rate'=>'Kadar Cukai',
-	'Tax_Rate'=>'Kadar Cukaie',
 	'Add_Tax_Rate'=>'Tambah Kadar Cukai',
+	'Edit_Tax_Rate'=>'Kemaskini Kadar Cukai',
+	'Tax_Rate'=>'Kadar Cukai',
 	'Rate_Basket'=>'Bakul Kadar Cukai'
 
 ];

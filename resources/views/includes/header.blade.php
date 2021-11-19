@@ -469,10 +469,10 @@ $('.mainNav li:has(ul)').addClass('has-child');
 								<a style="" onclick="check_access('3102','propertylot');" href="#">{{__('menu.propertylot')}}</a>
 							</li>
 							<li>
-								<a style="" onclick="check_access('394','addresslog?page=1');" href="#">{{__('menu.maintenancelog')}}</a>
+								<a style="" onclick="check_access('394','addresslog');" href="#">{{__('menu.propertyaddresslog')}}</a>
 							</li>
 							<li>
-								<a style="" onclick="check_access('394','addresslog?page=2');" href="#">Property Lot Log</a>
+								<a style="" onclick="check_access('394','nolotlog');" href="#">{{__('menu.propertylotlog')}}</a>
 							</li>
 			            </ul>
 		          	</li>

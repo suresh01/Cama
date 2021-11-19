@@ -16,7 +16,7 @@
 				<div id="breadCrumb3"  class="breadCrumb grid_3">
 					<ul >
 						<li><a href="#">{{__('toneoflist.Home')}} </a></li>
-						<li><a href="#">{{__('toneoflist.Tone_of_List')}} Tone of List</a></li>
+						<li><a href="#">{{__('toneoflist.Tone_of_List')}}</a></li>
 						<li>{{__('toneoflist.Allowance')}} </li>
 					</ul>
 				</div>
@@ -85,7 +85,7 @@
 								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',2,1)"  title="{{__('common.Approve')}}" href="#"></a></span>
 								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',2,2)"  title="{{__('common.Reject')}}" href="#"></a></span>
 							@elseif($rec->tallo_approvaltallostatus_id == '3')
-								<spane><a class=" new-action-icons reverse" onclick="approve('{{$rec->tallo_id}}',3)" title="{{__('common.Revise')}}" href="#"></a></span>	
+								<span><a class=" new-action-icons reverse" onclick="approve('{{$rec->tallo_id}}',3)" title="{{__('common.Revise')}}" href="#"></a></span>	
 									
 							@elseif($rec->tallo_approvaltallostatus_id == '4')
 								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editBasket('{{ $rec->tallo_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
@@ -127,7 +127,7 @@
 									<input type="hidden" name="allowanceid" id="allowanceid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>{{__('common.Approve_Revision')}} Basket Information</legend>
+										<legend>{{__('toneoflist.basketinfo')}}</legend>
 										<div class="form_grid_12">
 											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Basket')}} <span class="req">*</span></label>
 											<div  class="form_input">
@@ -311,7 +311,7 @@
 	}
 
 	function editBasket(id){
-		$("#title").html("Update Building");
+		$("#title").html("{{__('toneoflist.Edit_Allowance')}}");
 		$('#basketid').val($('#basketid_'+id).val());
 		$('#allowancetype').val($('#allowancetype_'+id).val());
 		$('#bldgcate').val($('#bldgcate_'+id).val());
@@ -342,7 +342,7 @@
 	}
 
 	function openBasket(){
-		$("#title").html("Add Building");
+		$("#title").html("{{__('toneoflist.Add_Allowance')}}");
 		$('#basketid').val('');
 		$('#allowancetype').val('');
 		$('#bldgcate').val('');

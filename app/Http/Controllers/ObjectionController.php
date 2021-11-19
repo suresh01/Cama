@@ -146,7 +146,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid   ,sd_keymainfield 
-        from tbsearchdetail mtb where sd_se_id = "33" ');
+        from tbsearchdetail mtb where sd_se_id = "33" order by sd_sort');
 
         App::setlocale(session()->get('locale'));
         return view('objection.grab.basket')->with(array('term'=>$term,'id'=>$id, 'search' =>$search ));
@@ -226,7 +226,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid   ,sd_keymainfield 
-        from tbsearchdetail mtb where sd_se_id = "34" ');
+        from tbsearchdetail mtb where sd_se_id = "34" order by sd_sort');
 
         App::setlocale(session()->get('locale'));
         return view('objection.popup.property')->with(array('term'=>$term,'search'=>$search,'id'=>$id));
@@ -296,7 +296,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid   ,sd_keymainfield 
-        from tbsearchdetail mtb where sd_se_id = "31" ');
+        from tbsearchdetail mtb where sd_se_id = "31" order by sd_sort');
 
        //  $property = DB::select('select no_id, no_vd_id, no_accno, ob_desc,ob_listyear FROM cm_objection_notis inner join cm_objection on ob_id = no_ob_id where ob_id = '.$id);
         $agendacnt = DB::select("select count(*) agenda_count from cm_objection
@@ -330,7 +330,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid   ,sd_keymainfield 
-        from tbsearchdetail mtb where sd_se_id = "31" ');
+        from tbsearchdetail mtb where sd_se_id = "31" order by sd_sort');
 
 
 
@@ -449,7 +449,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid   ,sd_keymainfield 
-        from tbsearchdetail mtb where sd_se_id = "35" ');
+        from tbsearchdetail mtb where sd_se_id = "35" order by sd_sort');
 
         $meetingroom =DB::select('select tdi_value from tbdefitems where tdi_td_name = "MEETINGROOM"');
         $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
@@ -544,7 +544,7 @@ on ma_subzone_id = subzone.tdi_key
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid   ,sd_keymainfield 
-        from tbsearchdetail mtb where sd_se_id = "36" ');
+        from tbsearchdetail mtb where sd_se_id = "36" order by sd_sort');
 
          $property = DB::select("select vd_id, va_id, va_vt_id, vd_accno, va_name, vt_name, ob_desc
             from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id
@@ -693,7 +693,7 @@ on ma_subzone_id = subzone.tdi_key
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid   ,sd_keymainfield 
-        from tbsearchdetail mtb where sd_se_id = "37" ');
+        from tbsearchdetail mtb where sd_se_id = "37" order by sd_sort');
 
         $agendacnt = DB::select("select count(*) agenda_count from cm_objection
         inner join cm_objection_agenda on ag_ob_id = ob_id  where ob_id =  ".$id);
@@ -927,7 +927,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid   ,sd_keymainfield 
-        from tbsearchdetail mtb where sd_se_id = "38" ');
+        from tbsearchdetail mtb where sd_se_id = "38" order by sd_sort');
 
           
          $property = DB::select("select vd_id, va_id, va_vt_id, vd_accno, va_name, vt_name, ob_desc, if(ol_id>0,'Yes',null) objection

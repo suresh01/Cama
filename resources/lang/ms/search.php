@@ -7,7 +7,7 @@ return [
     'add'=>'Tambah',
     'submit'=>'Carian',
     'close'=>'Tutup',
-    'filter'=>'Tapi',
+    'filter'=>'Tapis',
     'field'=>'Medan',
     'condition'=>'Keadaan',
     'value'=>'Nilai',
