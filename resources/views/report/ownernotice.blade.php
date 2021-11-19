@@ -415,16 +415,17 @@ $(document).ready(function (){
 
 function getposition(){
 	var userid = $('#usernameA').val();
-	//alert (userid);
-	$('#username').val($("#usernameA option:selected").text());
-	$.ajax({
-		type:'GET',
-		url:'/getuserdetail',
-		data:{id:userid},
-		success:function(data){	        	
-			$('#jawatan').val(data.userposition);
-		}
-	});
+	if(userid.length != 0){
+		$('#username').val($("#usernameA option:selected").text());
+		$.ajax({
+			type:'GET',
+			url:'/getuserdetail',
+			data:{id:userid},
+			success:function(data){	        	
+				$('#jawatan').val(data.userposition);
+			}
+		});
+	}
 }
 function reportA(){
 	var table = $('#proptble').DataTable();

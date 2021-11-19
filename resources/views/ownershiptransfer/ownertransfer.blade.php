@@ -230,16 +230,18 @@
 
 		function getposition(){
 			var userid = $('#tittle').val();
-			$('#username').val($("#tittle option:selected").text());
-			$.ajax({
-		        type:'GET',
-		        url:'/getuserdetail',
-		        data:{id:userid},
-		        success:function(data){	        	
-		        	console.log(data);
-		        	$('#name').val(data.userposition);
-		        }
-		    });
+			if(userid.length != 0){
+				$('#username').val($("#tittle option:selected").text());
+				$.ajax({
+					type:'GET',
+					url:'/getuserdetail',
+					data:{id:userid},
+					success:function(data){	        	
+						console.log(data);
+						$('#name').val(data.userposition);
+					}
+				});
+			}
 		}
 
 

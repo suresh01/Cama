@@ -98,7 +98,7 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
+							<h3 id="title">Jana Laporan</h3>
 							<form style="" id="generateform" method="GET" action="generateOwnershipreport">
 					            @csrf
 					            <input type="hidden" name="type" id="type">
@@ -108,10 +108,10 @@
 										<li>
 											
 											<fieldset>
-												<legend>Additional Information</legend>
+												<legend>Maklumat Penilai</legend>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">VALUER TITTLE<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">Nama Penilai<span class="req">*</span></label>
 													<div  class="form_input">
 														<select data-placeholder="Choose a Status..." onchange="getposition()"  style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle" tabindex="20">
 																<option></option>
@@ -124,7 +124,7 @@
 												</div>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">VALUER NAME<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">Jawatan Penilai<span class="req">*</span></label>
 													<div  class="form_input">
 														<input id="name" name="name"  type="text"  maxlength="50" class="required"/>
 													</div>
@@ -140,9 +140,9 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Jana</span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>
@@ -168,16 +168,19 @@
 
 		function getposition(){
 			var userid = $('#tittle').val();
-			$('#username').val($("#tittle option:selected").text());
-			$.ajax({
-		        type:'GET',
-		        url:'/getuserdetail',
-		        data:{id:userid},
-		        success:function(data){	        	
-		        	console.log(data);
-		        	$('#name').val(data.userposition);
-		        }
-		    });
+			if(userid.length != 0){
+		      	$('#username').val($("#tittle option:selected").text());
+				$.ajax({
+					type:'GET',
+					url:'/getuserdetail',
+					data:{id:userid},
+					success:function(data){	        	
+						console.log(data);
+						$('#name').val(data.userposition);
+					}
+		    	});
+			}
+			
 		}
 
 		function Resend(id){
@@ -331,9 +334,9 @@ $(document).ready(function (){
 						} else {
 							if(data.otar_ownertranstype_id == 1 || data.otar_ownertranstype_id == 2) {
 					        	if(data.otar_ownertransstatus_id == 5 || data.otar_ownertransstatus_id == 7 || data.otar_ownertransstatus_id == 8 || data.otar_ownertransstatus_id == 9) {
-									return "<a href='#'  style='	width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title='Success Report' onclick='reportSuccess("+data.otar_accno+")'></a>"+abdstr;
+									return "<a href='#'  style='	width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title='Success Report' onclick='reportSuccess("+data.ota_id+")'></a>"+abdstr;
 								} else if(data.otar_ownertransstatus_id == 3 || data.otar_ownertransstatus_id == 6) {
-									return "<a href='#' style='	width: 16px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -983px -102px;!important;display: inline-block; float: left;'  title='Rejected Report' onclick='reportFailure("+data.otar_accno+")'></a>"+abdstr;
+									return "<a href='#' style='	width: 16px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -983px -102px;!important;display: inline-block; float: left;'  title='Rejected Report' onclick='reportFailure("+data.ota_id+")'></a>"+abdstr;
 								}
 							}
 						}

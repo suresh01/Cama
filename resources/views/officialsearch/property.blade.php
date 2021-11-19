@@ -205,16 +205,17 @@
 		}
 		function getposition(){
 			var userid = $('#name').val();
-			
-			$('#username').val($("#name option:selected").text());
-			$.ajax({
-		        type:'GET',
-		        url:'/getuserdetail',
-		        data:{id:userid},
-		        success:function(data){	        	
-		        	$('#title').val(data.userposition);
-		        }
-		    });
+			if(userid.length != 0){
+				$('#username').val($("#name option:selected").text());
+				$.ajax({
+					type:'GET',
+					url:'/getuserdetail',
+					data:{id:userid},
+					success:function(data){	        	
+						$('#title').val(data.userposition);
+					}
+				});
+			}
 		}
 		
 		function approve(id,currstatus){

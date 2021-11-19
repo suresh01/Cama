@@ -1290,19 +1290,21 @@ public function owneradddresTables(Request $request){
       $tittle = $request->input('tittle');
       $name = $request->input('name');
       if($type == 'Successs'){
-        $jasper_path = base_path('/reports/ownertransfers.jasper');
-        $dowload_path = base_path('/reports/ownertransfers.pdf');
+        $jasper_path = base_path('/reports/ownertransferSuccess.jasper');
+        $dowload_path = base_path('/reports/ownertransferSuccess.pdf');
         $filename = 'OnwerTransferSuccess.pdf';
       } else {
-        $jasper_path = base_path('/reports/ownertransferF.jasper');
-        $dowload_path = base_path('/reports/ownertransferF.pdf');
+        $jasper_path = base_path('/reports/ownertransferFail.jasper');
+        $dowload_path = base_path('/reports/ownertransferFail.pdf');
         $filename = 'OnwerTransferFailure.pdf';
       }
-          
+       Log::info($type);   
               // Compile a JRXML to Jasper
            //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
           
-          $filter = ' otar_id = '. $accountnumber;
+          $filter = ' ota_id = '. $accountnumber;
+Log::info($type);           
+Log::info($filter); 
           JasperPHP::process(
              $jasper_path,
                   false,
