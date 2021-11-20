@@ -9,6 +9,9 @@ use Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use DataTables;
+// use Storage;
+use File;
+use ZipArchive;
 use userpermission;
 use App;
 
@@ -881,12 +884,19 @@ $master ='{"aa":"ss '.$type.'"}';
     public function generateTextFile(Request $request){
         ini_set('memory_limit', '2056M');
         ini_set('max_execution_time', '200');
-        $fileName = 'TermCSV.csv';
         $param_value = $request->input('param_value');
-       
+        $terms=DB::select('SELECT DATE_FORMAT(vt_termDate, "%d%m%Y") term FROM cm_appln_valterm WHERE vt_id ='.$param_value);
+        foreach ($terms as $obj) {    
+             $term = $obj->term;
+        }
+        $param_value = $request->input('param_value');
+        $year = $request->input('term_year');
         $name=Auth::user()->name;
+        $newPropFileName = $term.'_HartaBaru.csv';
+        $existPropFileName = $term.'_HartaSediada.csv';
+        $zipFileName =  'FileCSV_'.$term.'_'.$name.'.zip';
         //$param = $request->input('param');
-        Log::info($param_value);
+        Log::info($name);
 
         $property = DB::select("
         SELECT 
@@ -929,74 +939,178 @@ $master ='{"aa":"ss '.$type.'"}';
         where cm_appln_valterm.vt_id = ".$param_value."
         ");
 
-        $headers = array(
-                    "Content-type"        => "text/csv",
-                    "Content-Disposition" => "attachment; filename=$fileName",
-                    "Pragma"              => "no-cache",
-                    "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-                    "Expires"             => "0"
-                );
-
-    $columns = array('STATUS', 'KATEGORI', 'ID', 'AKAUN', 'NT', 'KADAR', 'TTK', 'KM_BAKUL_ID', 'DAERAH', 'MUKIM', 'KAWASAN_KOD', 
+        $NewProperty = collect($property)->where('STATUS', '0')->all();
+        $ExistProperty = collect($property)->where('STATUS', '1')->all();
+        //dd($baru);
+        $columns = array('STATUS', 'KATEGORI', 'ID', 'AKAUN', 'NT', 'KADAR', 'TTK', 'KM_BAKUL_ID', 'DAERAH', 'MUKIM', 'KAWASAN_KOD', 
                      'BIL_PEMILIK', 'NAMA', 'NO_RUM', 'JALAN', 'TEMPAT', 'KAWASAN', 'BANDAR', 'NEGERI', 'NO_RUM_POS', 'JALAN_POS', 
                      'TEMPAT_POS', 'KAWASAN_POS', 'BANDAR_POS', 'NEGERI_POS', 'KP', 'NO_TEL', 'NO_HP', 'LOT_KOD', 'LOT_NO', 'RESCOM', 'KAT_BGN');
+            $file = fopen(base_path('reports\\temp\\'.$newPropFileName), 'w');    
+            fputcsv($file, $columns);
 
-                $callback = function() use($property, $columns) {
-                $file = fopen('php://output', 'w');
-                fputcsv($file, $columns);
+            foreach ($NewProperty as $rec) {
+                $row['STATUS']  = $rec->STATUS;
+                $row['KATEGORI']  = $rec->KATEGORI;
+                $row['ID']  = $rec->ID;
+                $row['AKAUN']  = $rec->AKAUN;
+                $row['NT']  = $rec->NT;
+                $row['KADAR']  = $rec->KADAR;
+                $row['TTK']  = $rec->TTK;
+                $row['KM_BAKUL_ID']  = $rec->KM_BAKUL_ID;
+                $row['DAERAH']  = $rec->DAERAH;
+                $row['MUKIM']  = $rec->MUKIM;
+                $row['KAWASAN_KOD']  = $rec->KAWASAN_KOD;
+                $row['BIL_PEMILIK']  = $rec->BIL_PEMILIK;
+                $row['NAMA']  = $rec->NAMA;
+                $row['NO_RUM']  = $rec->NO_RUM;
+                $row['JALAN']  = $rec->JALAN;
+                $row['TEMPAT']  = $rec->TEMPAT;
+                $row['KAWASAN']  = $rec->KAWASAN;
+                $row['BANDAR']  = $rec->BANDAR;
+                $row['NEGERI']  = $rec->NEGERI;
+                $row['NO_RUM_POS']  = $rec->NO_RUM_POS;
+                $row['JALAN_POS']  = $rec->JALAN_POS;
+                $row['TEMPAT_POS']  = $rec->TEMPAT_POS;
+                $row['KAWASAN_POS']  = $rec->KAWASAN_POS;
+                $row['BANDAR_POS']  = $rec->BANDAR_POS;
+                $row['NEGERI_POS']  = $rec->NEGERI_POS;
+                $row['KP']  = $rec->KP;
+                $row['NO_TEL']  = $rec->NO_TEL;
+                $row['NO_HP']  = $rec->NO_HP;
+                $row['LOT_KOD']  = $rec->LOT_KOD;
+                $row['LOT_NO']  = $rec->LOT_NO;
+                $row['RESCOM']  = $rec->RESCOM;
+                $row['KAT_BGN']  = $rec->KAT_BGN;
 
-                foreach ($property as $rec) {
-                    $row['STATUS']  = $rec->STATUS;
-                    $row['KATEGORI']  = $rec->KATEGORI;
-                    $row['ID']  = $rec->ID;
-                    $row['AKAUN']  = $rec->AKAUN;
-                    $row['NT']  = $rec->NT;
-                    $row['KADAR']  = $rec->KADAR;
-                    $row['TTK']  = $rec->TTK;
-                    $row['KM_BAKUL_ID']  = $rec->KM_BAKUL_ID;
-                    $row['DAERAH']  = $rec->DAERAH;
-                    $row['MUKIM']  = $rec->MUKIM;
-                    $row['KAWASAN_KOD']  = $rec->KAWASAN_KOD;
-                    $row['BIL_PEMILIK']  = $rec->BIL_PEMILIK;
-                    $row['NAMA']  = $rec->NAMA;
-                    $row['NO_RUM']  = $rec->NO_RUM;
-                    $row['JALAN']  = $rec->JALAN;
-                    $row['TEMPAT']  = $rec->TEMPAT;
-                    $row['KAWASAN']  = $rec->KAWASAN;
-                    $row['BANDAR']  = $rec->BANDAR;
-                    $row['NEGERI']  = $rec->NEGERI;
-                    $row['NO_RUM_POS']  = $rec->NO_RUM_POS;
-                    $row['JALAN_POS']  = $rec->JALAN_POS;
-                    $row['TEMPAT_POS']  = $rec->TEMPAT_POS;
-                    $row['KAWASAN_POS']  = $rec->KAWASAN_POS;
-                    $row['BANDAR_POS']  = $rec->BANDAR_POS;
-                    $row['NEGERI_POS']  = $rec->NEGERI_POS;
-                    $row['KP']  = $rec->KP;
-                    $row['NO_TEL']  = $rec->NO_TEL;
-                    $row['NO_HP']  = $rec->NO_HP;
-                    $row['LOT_KOD']  = $rec->LOT_KOD;
-                    $row['LOT_NO']  = $rec->LOT_NO;
-                    $row['RESCOM']  = $rec->RESCOM;
-                    $row['KAT_BGN']  = $rec->KAT_BGN;
- 
-                    fputcsv($file, array(
-                        $row['STATUS'], $row['KATEGORI'], $row['ID'], $row['AKAUN'], $row['NT'], $row['KADAR'], $row['TTK'], $row['KM_BAKUL_ID'], $row['DAERAH'], 
-                        $row['MUKIM'], $row['KAWASAN_KOD'], $row['BIL_PEMILIK'], $row['NAMA'], $row['NO_RUM'], $row['JALAN'], $row['TEMPAT'], $row['KAWASAN'], 
-                        $row['BANDAR'], $row['NEGERI'], $row['NO_RUM_POS'], $row['JALAN_POS'], $row['TEMPAT_POS'], $row['KAWASAN_POS'], $row['BANDAR_POS'], $row['NEGERI_POS'], 
-                        $row['KP'], $row['NO_TEL'], $row['NO_HP'], $row['LOT_KOD'], $row['LOT_NO'], $row['RESCOM'], $row['KAT_BGN']
-                    ));
+                fputcsv($file, array(
+                    $row['STATUS'], $row['KATEGORI'], $row['ID'], $row['AKAUN'], $row['NT'], $row['KADAR'], $row['TTK'], $row['KM_BAKUL_ID'], $row['DAERAH'], 
+                    $row['MUKIM'], $row['KAWASAN_KOD'], $row['BIL_PEMILIK'], $row['NAMA'], $row['NO_RUM'], $row['JALAN'], $row['TEMPAT'], $row['KAWASAN'], 
+                    $row['BANDAR'], $row['NEGERI'], $row['NO_RUM_POS'], $row['JALAN_POS'], $row['TEMPAT_POS'], $row['KAWASAN_POS'], $row['BANDAR_POS'], $row['NEGERI_POS'], 
+                    $row['KP'], $row['NO_TEL'], $row['NO_HP'], $row['LOT_KOD'], $row['LOT_NO'], $row['RESCOM'], $row['KAT_BGN']
+                ));
+            }   
+
+            fclose($file);
+
+            $file = fopen(base_path('reports\\temp\\'.$existPropFileName), 'w');    
+            fputcsv($file, $columns);
+
+            foreach ($ExistProperty as $rec) {
+                $row['STATUS']  = $rec->STATUS;
+                $row['KATEGORI']  = $rec->KATEGORI;
+                $row['ID']  = $rec->ID;
+                $row['AKAUN']  = $rec->AKAUN;
+                $row['NT']  = $rec->NT;
+                $row['KADAR']  = $rec->KADAR;
+                $row['TTK']  = $rec->TTK;
+                $row['KM_BAKUL_ID']  = $rec->KM_BAKUL_ID;
+                $row['DAERAH']  = $rec->DAERAH;
+                $row['MUKIM']  = $rec->MUKIM;
+                $row['KAWASAN_KOD']  = $rec->KAWASAN_KOD;
+                $row['BIL_PEMILIK']  = $rec->BIL_PEMILIK;
+                $row['NAMA']  = $rec->NAMA;
+                $row['NO_RUM']  = $rec->NO_RUM;
+                $row['JALAN']  = $rec->JALAN;
+                $row['TEMPAT']  = $rec->TEMPAT;
+                $row['KAWASAN']  = $rec->KAWASAN;
+                $row['BANDAR']  = $rec->BANDAR;
+                $row['NEGERI']  = $rec->NEGERI;
+                $row['NO_RUM_POS']  = $rec->NO_RUM_POS;
+                $row['JALAN_POS']  = $rec->JALAN_POS;
+                $row['TEMPAT_POS']  = $rec->TEMPAT_POS;
+                $row['KAWASAN_POS']  = $rec->KAWASAN_POS;
+                $row['BANDAR_POS']  = $rec->BANDAR_POS;
+                $row['NEGERI_POS']  = $rec->NEGERI_POS;
+                $row['KP']  = $rec->KP;
+                $row['NO_TEL']  = $rec->NO_TEL;
+                $row['NO_HP']  = $rec->NO_HP;
+                $row['LOT_KOD']  = $rec->LOT_KOD;
+                $row['LOT_NO']  = $rec->LOT_NO;
+                $row['RESCOM']  = $rec->RESCOM;
+                $row['KAT_BGN']  = $rec->KAT_BGN;
+
+                fputcsv($file, array(
+                    $row['STATUS'], $row['KATEGORI'], $row['ID'], $row['AKAUN'], $row['NT'], $row['KADAR'], $row['TTK'], $row['KM_BAKUL_ID'], $row['DAERAH'], 
+                    $row['MUKIM'], $row['KAWASAN_KOD'], $row['BIL_PEMILIK'], $row['NAMA'], $row['NO_RUM'], $row['JALAN'], $row['TEMPAT'], $row['KAWASAN'], 
+                    $row['BANDAR'], $row['NEGERI'], $row['NO_RUM_POS'], $row['JALAN_POS'], $row['TEMPAT_POS'], $row['KAWASAN_POS'], $row['BANDAR_POS'], $row['NEGERI_POS'], 
+                    $row['KP'], $row['NO_TEL'], $row['NO_HP'], $row['LOT_KOD'], $row['LOT_NO'], $row['RESCOM'], $row['KAT_BGN']
+                ));
+            }   
+
+            fclose($file);
+
+            $isExists = File::exists(base_path('reports\\temp\\'.$newPropFileName));
+            $zip      = new ZipArchive;
+            if($isExists){
+                if ($zip->open(base_path('reports\\temp\\'.$zipFileName), ZipArchive::CREATE) === TRUE) {
+                    
+                    $relativeName = basename(base_path('reports\\temp\\'.$newPropFileName));
+                    $zip->addFile(base_path('reports\\temp\\'.$newPropFileName), $relativeName);
+
+                    $relativeName = basename(base_path('reports\\temp\\'.$existPropFileName));
+                    $zip->addFile(base_path('reports\\temp\\'.$existPropFileName), $relativeName);
+                    $zip->close();
                 }
-
-                fclose($file);
-            };
+                $isExists = File::exists(base_path('reports\\temp\\'.$zipFileName));
+                if($isExists){
+                    return response()->download(base_path('reports\\temp\\'.$zipFileName));
+                }else{
+                    return response('Tak Wujud', 200);
+                }
+            }else{
+                return response('Tak Wujud', 200);
+            }
+            
         
-            return response()->stream($callback, 200, $headers);
-        $propertycnt = 0;
+        // $propertycnt = 0;
 
-            Log::info("call proc_approvepropreg('".$param_value."',    '".$name."','".$module."', '".$param."', '".$param_str."', '".$param_status."')"); 
-            $register=DB::select("call proc_approvepropreg(".$param_value.",   '".$name."', '".$module."', '".$param."', '".$param_str."', '".$param_status."')");
+        // Log::info("call proc_approvepropreg('".$param_value."',    '".$name."','".$module."', '".$param."', '".$param_str."', '".$param_status."')"); 
+        // $register=DB::select("call proc_approvepropreg(".$param_value.",   '".$name."', '".$module."', '".$param."', '".$param_str."', '".$param_status."')");
 
-        return response()->json(array('checkdigit'=> 'succsess','propertycnt'=>$propertycnt), 200);
+        // return response()->json(array('checkdigit'=> 'succsess','propertycnt'=>$propertycnt), 200);
     }
+
+    public function testGenerateTextFile(Request $request) {
+        
+        $param_value = $request->input('param_value');
+        $year = $request->input('term_year');
+        
+        
+
+    
+
+    $path ="cama/termaa/".$year."/".$param_value."/";
+
+    $fileName = 'TermCSV.csv';
+
+    $exists = Storage::disk('local')->exists($path);
+
+    Log::info( base_path('reports\\'.$fileName));
+    $file = fopen(base_path('reports\\'.$fileName), 'w');
+
+    $columns = array('First Name', 'Email Address');
+
+    fputcsv($file, $columns);
+
+        $data = [
+            'First Name' => 'MOHD',  
+            'Email Address' => 'Gebra2',    
+        ];
+
+
+    fputcsv($file, $data);
+
+    fclose($file);
+
+    // $symlink = 'public/docs/user_docs/'.$user->id.'/';
+
+    // $fileModel = new UserDocument;
+    // $fileModel->name = 'csv';
+    // $fileModel->file_path = $symlink.$fileName;
+    // $fileModel->save();
+
+    return response(base_path('reports\\'.$fileName), 200)->header('Content-Type', 'text/plain');
+
+}
     
 }

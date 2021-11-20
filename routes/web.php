@@ -225,6 +225,8 @@ Route::get('approve', 'PropertyRegisterationController@approve');
 
 Route::get('generatetextfile', 'PropertyRegisterationController@generateTextFile');
 
+Route::get('testgeneratetextfile', 'PropertyRegisterationController@testGenerateTextFile');
+
 Route::get('datatransfer', 'UserController@dataTransfer');
 
 Route::get('evidentmgmt', 'CodeMaintenanceController@evidentManagement');

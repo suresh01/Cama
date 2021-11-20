@@ -154,7 +154,7 @@
 							<div style="text-align: right;    height: 48px;" class="grid_12">
 								
 										<div class="form_input">
-											<input type="button" id="addsubmit" onclick="addAttachment();" class="btn_small btn_blue" value="Submit">				
+											<input type="button" id="addsubmit" onclick="addAttachment();" class="btn_small btn_blue" value="Muat Naik">				
 																	
 											<button id="close" onclick="closeNew()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 											<span class=" label_intro"></span>

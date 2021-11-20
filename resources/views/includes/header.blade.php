@@ -410,7 +410,8 @@ $('.mainNav li:has(ul)').addClass('has-child');
 			        </li>			        
     			</ul>
 			</li>
-			<li class="dropdown-submenu dropdown"><a style="    width: 100%;{{ $page == 'datamaintenance' ? 'background-color: #95C9F5;' : '' }}" class="test" tabindex="-1" href="#"><span class="stats_icon data_maintance"></span><span class="label">{{__('menu.datamaintenance')}}</span></a>
+			<li class="dropdown-submenu dropdown"><a style="width: 100%;{{ $page == 'datamaintenance' ? 'background-color: #95C9F5;' : '' }}"  href="#" class="test"><span class="stats_icon data_maintance"></span><span class="label">{{__('menu.datamaintenance')}}</span></a>
+			{{-- <li class="dropdown-submenu dropdown"><a style="width: 100%;{{ $page == 'datamaintenance' ? 'background-color: #95C9F5;' : '' }}" class="test" tabindex="-1" href="#"><span class="stats_icon data_maintance"></span><span class="label">{{__('menu.datamaintenance')}}</span></a> --}}
 				<ul class="mainNav dropdown-menu" style="display:none">
 			        <li style="" class="dropdown-submenu">
 			            <a style=""  onclick="check_access('31','codemaintenance')" class="test" href="#">{{__('menu.codemaintenance')}}<span class="caret"></span></a>

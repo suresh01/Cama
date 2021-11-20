@@ -411,7 +411,7 @@ WHEN tbldg_approvalbldgstatus_id = "2" THEN 2
 WHEN tbldg_approvalbldgstatus_id = "5" THEN 3
 WHEN tbldg_approvalbldgstatus_id = "4" THEN 4
  WHEN tbldg_approvalbldgstatus_id = "3" THEN 5
- WHEN tbldg_approvalbldgstatus_id = "6" THEN 5
+ WHEN tbldg_approvalbldgstatus_id = "6" THEN 2
 END ASC, tbldg_updatedate'
   );
 
@@ -543,7 +543,7 @@ WHEN tland_approvaltlandstatus_id = "2" THEN 2
 WHEN tland_approvaltlandstatus_id = "5" THEN 3
 WHEN tland_approvaltlandstatus_id = "4" THEN 4
  WHEN tland_approvaltlandstatus_id = "3" THEN 5
- WHEN tland_approvaltlandstatus_id = "6" THEN 5
+ WHEN tland_approvaltlandstatus_id = "6" THEN 2
 END ASC, tland_updatedate
 '  );
 
@@ -583,7 +583,16 @@ END ASC, tland_updatedate
     left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "ALLOWANCETYPE") alltype
     on alltype.tdi_key = tallo_allowancetype_id 
     left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tallo_approvaltallostatus_id
-    where tollist_id = tallo_tone_id');
+    where tollist_id = tallo_tone_id
+    ORDER BY 
+            CASE
+                WHEN tallo_approvaltallostatus_id = "1" THEN 1
+                WHEN tallo_approvaltallostatus_id = "2" THEN 2
+                WHEN tallo_approvaltallostatus_id = "5" THEN 3
+                WHEN tallo_approvaltallostatus_id = "4" THEN 4
+                WHEN tallo_approvaltallostatus_id = "3" THEN 5
+                WHEN tallo_approvaltallostatus_id = "6" THEN 2
+            END ASC, tallo_updatedate');
 
         $bldgcate=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGCATEGORY"');
         $basket=DB::select('select tollist_id, tollis_year, tollis_desc from cm_toneoflistbasket '); 
@@ -611,7 +620,16 @@ END ASC, tland_updatedate
 FROM cm_toneoflistbasket
 inner join `cm_tone_bldg_depreciation` on  tollist_id = tdepre_tone_id
 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGCONDN") bldgcond on bldgcond.tdi_key = tdepre_bldgcondn_id
-left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tdepre_approvaltdeprestatus_id');
+left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tdepre_approvaltdeprestatus_id
+ORDER BY 
+            CASE
+                WHEN tdepre_approvaltdeprestatus_id = "1" THEN 1
+                WHEN tdepre_approvaltdeprestatus_id = "2" THEN 2
+                WHEN tdepre_approvaltdeprestatus_id = "5" THEN 3
+                WHEN tdepre_approvaltdeprestatus_id = "4" THEN 4
+                WHEN tdepre_approvaltdeprestatus_id = "3" THEN 5
+                WHEN tdepre_approvaltdeprestatus_id = "6" THEN 2
+            END ASC, tdepre_updatedate');
 
         $bldgcond=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGCONDN"'); 
         $basket=DB::select('select tollist_id, tollis_year, tollis_desc from cm_toneoflistbasket '); 
@@ -658,7 +676,7 @@ where tollist_id = tstand_tone_id');
         $basket=DB::select('select tollist_id, tollis_year, tollis_desc from cm_toneoflistbasket '); 
         
         App::setlocale(session()->get('locale'));
-        
+        // return view("tol.landstandart")->with(array('bldgtype'=> $bldgtype,'bldgcate'=> $bldgcate,'bldgstore'=> $bldgstore,'zone'=> $zone,'subzone'=> $subzone,'basket' => $basket,'search'=> $search,'totalcount'=> $totalcount));
         return view("tol.landstandart")->with(array('result'=> $result,'bldgtype'=> $bldgtype,'bldgcate'=> $bldgcate,'bldgstore'=> $bldgstore,'zone'=> $zone,'subzone'=> $subzone,'basket' => $basket,'search'=> $search,'totalcount'=> $totalcount));
     }
 
@@ -725,7 +743,7 @@ WHEN tstand_approvaltstandstatus_id = "2" THEN 2
 WHEN tstand_approvaltstandstatus_id = "5" THEN 3
 WHEN tstand_approvaltstandstatus_id = "4" THEN 4
  WHEN tstand_approvaltstandstatus_id = "3" THEN 5
- WHEN tstand_approvaltstandstatus_id = "6" THEN 5
+ WHEN tstand_approvaltstandstatus_id = "6" THEN 2
 END ASC, tstand_updatedate'  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
@@ -846,7 +864,7 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
                 WHEN trate_approvaltratestatus_id = "5" THEN 3
                 WHEN trate_approvaltratestatus_id = "4" THEN 4
                 WHEN trate_approvaltratestatus_id = "3" THEN 5
-                WHEN trate_approvaltratestatus_id = "6" THEN 5
+                WHEN trate_approvaltratestatus_id = "6" THEN 2
             END ASC, trate_updatedate'  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,

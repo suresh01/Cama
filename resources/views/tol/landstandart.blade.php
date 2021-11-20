@@ -239,6 +239,7 @@
 
 <script>
 	function editBasket(id){
+		
 		$("#title").html("{{__('toneoflist.Edit_Land_Standard')}}");
 		$('#basketid').val($('#basketid_'+id).val());
 		$('#subzone').val($('#subzone_'+id).val());
@@ -250,7 +251,6 @@
 		$('#zone').val($('#zone_'+id).val());
 		$('#bldgcate').val($('#propcate_'+id).val());
 		
-
 	    	var param_value = $('#zone_'+id).val();
 	    	var param = 'subzone';
 	        $.ajax({
@@ -284,6 +284,7 @@
 		$("#basket_table").hide();
 		$("#addbasketform").show();
 	 	$("label.error").remove();
+		
 	}
 
 	function openBasket(){

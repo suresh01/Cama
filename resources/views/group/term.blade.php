@@ -168,10 +168,11 @@
 											<span><a class="action-icons c-edit" onclick="editTerm('{{$rec->vt_id}}')" title="Edit Term" href="#">Edit</a></span>
 											@endif
 										@endif
-										@if($rec->vt_approvalstatus_id == '03' )
-											<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="generateTextFile('{{$rec->vt_id}}')" disabled="true" title="Jana Text File" href="#"></a></span>
+										@if($rec->vt_approvalstatus_id == '03' || $rec->vt_approvalstatus_id == '05')
+											<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -982px  -2px !important;display: inline-block; float: left;" onclick="generateTextFile('{{$rec->vt_id}}','{{$rec->termYear}}')"  title="Jana Text File" href="#"></a></span>
+											{{-- <span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="generateTextFile('{{$rec->vt_id}}','{{$rec->termYear}}')" disabled="true" title="Jana Text File" href="#"></a></span> --}}
 										@endif
-										@if($rec->vt_approvalstatus_id == '04' )
+										@if($rec->vt_approvalstatus_id == '03' )
 											<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="enforceTerm('{{$rec->vt_id}}')" disabled="true" title="Enforce Term" href="#"></a></span>
 										@endif
 
@@ -504,9 +505,11 @@
 
 		}	
 
-		function generateTextFile(id){
+		function generateTextFile(id,termyear){
 			//alert($("#filterForm").serialize());
-			location.href ="generatetextfile?" + "param_value="+id;
+			//alert(termyear);
+			location.href ="generatetextfile?" + "param_value="+id+"&term_year="+termyear;
+			// location.href ="testgeneratetextfile?" + "param_value="+id+"&term_year="+termyear;
 			//console.log($("#filterForm").serialize());
 		
 		}

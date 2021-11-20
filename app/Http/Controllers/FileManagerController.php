@@ -283,14 +283,14 @@ at_updatedate  from cm_attachment where at_linkid = ".$id);
         if ($exists == ''){
             Storage::makeDirectory($filepath);
         }
-
+        Log::info($file);
         if(!empty($file)){
             $storepath = Storage::putFileAs(
                 'cama/term', $request->file('path'), $year.'/'.$id.'/'.$name.'.'.$ext
             );
 
         }
-$username=Auth::user()->name;
+        $username=Auth::user()->name;
 
         Log::info("call pro_termattachment_trn(".$id.",'".$storepath."','".$name."','".$orgfilename."','".$desc."','".$ext."','".$attachtype."',1,'".$username."')");
         $proc=DB::select("call pro_termattachment_trn(".$id.",'".$storepath."','".$name."','".$orgfilename."','".$desc."','".$ext."','".$attachtype."',1,'".$username."')");
