@@ -392,7 +392,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
         App::setlocale(session()->get('locale'));
         
-         return view("codemaintenance.ownershiptransfer.propertyaddress")->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
+         return view("codemaintenance.propertyaddresschange.propertyaddress")->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     
     }
 
@@ -468,7 +468,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
         App::setlocale(session()->get('locale'));
         
-         return view("codemaintenance.ownershiptransfer.ownerdetail")->with(array('district'=>$district, 'state'=>$state, 'zone'=>$zone, 'subzone'=>$subzone, 'master'=>$master));
+         return view("codemaintenance.propertyaddresschange.ownerdetail")->with(array('district'=>$district, 'state'=>$state, 'zone'=>$zone, 'subzone'=>$subzone, 'master'=>$master));
     
     }
 
@@ -555,7 +555,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
         App::setlocale(session()->get('locale'));
         
-         return view("codemaintenance.ownershiptransfer.propertylot")->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist)->with('lotcode',$lotcode)->with('titiletype',$titiletype)->with('tnttype',$tnttype);
+         return view("codemaintenance.propertyaddresschange.propertylot")->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist)->with('lotcode',$lotcode)->with('titiletype',$titiletype)->with('tnttype',$tnttype);
     }
 
     public function propertyLotDetail(Request $request) {
@@ -588,7 +588,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
         App::setlocale(session()->get('locale'));
         
-         return view("codemaintenance.ownershiptransfer.popup.propertylotdetail")->with(array('lotcode'=>$lotcode, 'master'=>$master, 'titiletype'=>$titiletype, 'tnttype'=>$tnttype, 'prop_id'=>$prop_id));
+         return view("codemaintenance.propertyaddresschange.popup.propertylotdetail")->with(array('lotcode'=>$lotcode, 'master'=>$master, 'titiletype'=>$titiletype, 'tnttype'=>$tnttype, 'prop_id'=>$prop_id));
     
     }
 
@@ -1071,8 +1071,8 @@ DB::statement("insert into tempQuery values(select * from )");
         $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
 
         App::setlocale(session()->get('locale'));
-        // return view("codemaintenance.ownershiptransfer.addresslog")->with(array( 'userlist'=>$userlist, 'search'=>$search, 'page'=>$page));
-        return view('codemaintenance.ownershiptransfer.addresslog')->with('search',$search)->with('userlist',$userlist);
+        // return view("codemaintenance.propertyaddresschange.addresslog")->with(array( 'userlist'=>$userlist, 'search'=>$search, 'page'=>$page));
+        return view('codemaintenance.propertyaddresschange.addresslog')->with('search',$search)->with('userlist',$userlist);
 
     }     
 
@@ -1146,7 +1146,7 @@ DB::statement("insert into tempQuery values(select * from )");
             $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
 
             App::setlocale(session()->get('locale'));
-            return view('codemaintenance.ownershiptransfer.nolotlog')->with('search',$search)->with('userlist',$userlist);
+            return view('codemaintenance.propertyaddresschange.nolotlog')->with('search',$search)->with('userlist',$userlist);
 
     }      
 
@@ -2548,7 +2548,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
 
         App::setlocale(session()->get('locale'));
         
-        return view('codemaintenance.ownershiptransfer.popup.search')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id)->with('page',$page);
+        return view('codemaintenance.propertyaddresschange.popup.search')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id)->with('page',$page);
     }
 
      public function searchPropertyAddressData(Request $request){

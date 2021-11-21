@@ -23,7 +23,7 @@
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
 							
-					@include('codemaintenance.ownershiptransfer.search')
+					@include('codemaintenance.propertyaddresschange.search')
 				</div>
 				<br>
         

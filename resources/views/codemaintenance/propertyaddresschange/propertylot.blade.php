@@ -25,7 +25,7 @@
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">		
-					@include('codemaintenance.ownershiptransfer.newsearch')
+					@include('codemaintenance.propertyaddresschange.newsearch')
 					<a href="#" onclick="addProperty()">{{__('CodeMaintenance.Add_Property')}}</a>
 				</div>
 				<br>

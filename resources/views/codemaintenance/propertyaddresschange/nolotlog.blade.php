@@ -16,14 +16,14 @@
 				<ul>
 					<li><a href="#">{{__('CodeMaintenance.Home')}} </a></li>
 					<li><a href="#">{{__('CodeMaintenance.Data_Maintenance')}}</a></li>
-					<li>{{__('CodeMaintenance.Property_Address_Log')}} </li>
+					<li>{{__('CodeMaintenance.No_Lot_Log')}} </li>
 				</ul>
 			</div>
 		</div>
 		
 		<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
-			@include('codemaintenance.ownershiptransfer.searchMasterlistLog',['tableid'=>'proptble', 'action' => 'propaddresslogtables', 'searchid' => '41'])	
-			{{-- @include('codemaintenance.ownershiptransfer.search') --}}
+			@include('codemaintenance.propertyaddresschange.searchNoLotLog',['tableid'=>'proptble', 'action' => 'nolotlogtables', 'searchid' => '42'])	
+			{{-- @include('codemaintenance.propertyaddresschange.search') --}}
 		</div>
 		<br>
 		
@@ -39,34 +39,34 @@
 								S No
 							</th>
 							<th>
-								{{__('CodeMaintenance.Log_Id')}}
+								{{__('CodeMaintenance.LogNoLot_Id')}}
 							</th>
 							<th>
 								{{__('CodeMaintenance.Account_Number')}}
 							</th>
 							<th>
-								{{__('CodeMaintenance.File_Number')}}
+								{{__('CodeMaintenance.LogNoLot_NoLot')}}
 							</th>
 							<th>
-								{{__('CodeMaintenance.Zone')}}
+								{{__('CodeMaintenance.LogNoLot_NoLotAlt')}}
 							</th>
 							<th>
-								{{__('CodeMaintenance.SubZone')}}
+								{{__('CodeMaintenance.LogNoLot_NoTitle')}}
 							</th>
 							<th>
-								{{__('CodeMaintenance.Address1')}} 
+								{{__('CodeMaintenance.LogNoLot_NoTitleAlt')}} 
 							</th>
 							<th>
-								{{__('CodeMaintenance.Address2')}} 
+								{{__('CodeMaintenance.LogNoLot_LandUse')}} 
 							</th>
 							<th>
-								{{__('CodeMaintenance.Address3')}} 
+								{{__('CodeMaintenance.LogNoLot_TenantType')}} 
 							</th>
 							<th>
-								{{__('CodeMaintenance.Post_Code')}} 
+								{{__('CodeMaintenance.LogNoLot_LandSize')}} 
 							</th>
 							<th>
-								{{__('CodeMaintenance.City')}}
+								{{__('CodeMaintenance.LogNoLot_SizeType')}}
 							</th>
 							<th>
 								{{__('CodeMaintenance.Status')}}
@@ -101,7 +101,7 @@
 		        /*"dom": '<"toolbar">frtip',*/
 				 "ajax": {
 		"type": "GET",
-		"url": 'propaddresslogtables',
+		"url": 'nolotlogtables',
 		"contentType": 'application/json; charset=utf-8',
 				"headers": {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -110,19 +110,19 @@
 		        // ajax: '{{ url("inspectionproperty") }}',
 		        /*"ajax": '/bookings/datatables',*/
 		        "columns": [
-					{"data": "mal_id", "orderable": false, "searchable": false, "name":"mal_id" },
+					{"data": "log_id", "orderable": false, "searchable": false, "name":"log_id" },
 					{"data": null, "orderable": false, "searchable": false, "name":"sno" },
-					{"data": "mal_id", "name":"mal_id" },
-					{"data": "mal_accno", "name": "sno"},
-					{"data": "mal_fileno", "name": "account number"},
-					{"data": "zone", "name": "account number"},
-					{"data": "subzone", "name": "fileno"},
-					{"data": "mal_addr_ln1", "name": "zone"},
-					{"data": "mal_addr_ln2", "name": "ishasbldg"},
-					{"data": "mal_addr_ln3", "name": "owntype"},
-					{"data": "mal_postcode", "name": "TO_OWNNAME"},
-					{"data": "mal_city", "name": "bldgcount"},
-					{"data": "tstatus", "name": "bldgcount"}
+					{"data": "log_id", "name":"log_id" },
+					{"data": "ma_accno", "name": "sno"},
+					{"data": "lotnumber", "name": "lotnumber"},
+					{"data": "LO_ALTNO", "name": "LO_ALTNO"},
+					{"data": "titlenumber", "name": "titlenumber"},
+					{"data": "LO_ALTTITLENO", "name": "LO_ALTTITLENO"},
+					{"data": "landuse", "name": "landuse"},
+					{"data": "tentype", "name": "tentype"},
+					{"data": "LO_SIZE", "name": "LO_SIZE"},
+					{"data": "unitsize", "name": "unitsize"},
+					{"data": "tstatus", "name": "tstatus"}
 				],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();
