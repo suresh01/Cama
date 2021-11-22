@@ -20,7 +20,7 @@
 
 		<div id="usertable" class="grid_12">
 				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">   
-					<a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
+					<a href="#" id="" onclick="closeWindow()" class=""><span>Tutup</span></a> 
 				</div>
 			<br>
 
@@ -28,7 +28,7 @@
 				<div class="widget_wrap">
 					<div class="widget_top">
 						<!--<span class="h_icon list"></span>-->
-						<h6>Property Inspection</h6>
+						<h6>Proses Pindah Milik</h6>
 						<div id="top_tabby">
 						</div>
 					</div>
@@ -37,22 +37,22 @@
 						<!--<h3>Property Registration</h3>-->
 						<form action="" id="propertyinspectionform" class="form_container left_label">
 							@foreach ($owndetail as $owner)
-							<fieldset title="Step 1">		
-								<legend>Owner Address Information</legend>	
+							<fieldset title="Langkah 1">		
+								<legend>Maklumat Pemilik</legend>	
 								<div id="tab3">
 									
 									<div class="grid_6 ">
 										<ul>
 										<li>
 										<fieldset>
-												<legend>Owner Information</legend>
+												<legend>Pemilik Semasa</legend>
 												<br><br><br>
 												<div class="form_grid_12">
-											<label class="field_title" id="lusername" for="username">OWNER APPLICATION TYPE<span class="req">*</span></label>
+											<label class="field_title" id="lusername" for="username">KAD/SMK<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownaplntype" name="ownaplntype" tabindex="1">
 													<option></option>
-													<option value='C'>CMK</option>
+													{{-- <option value='C'>CMK</option> --}}
 													<option value='K'>KAD</option>
 												</select>
 											</div>
@@ -60,7 +60,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">TYPE OF OWNER<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">Jenis Id<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="typeofown" name="typeofown" tabindex="1">
 													<option></option>
@@ -73,28 +73,28 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER NUMBER<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">No Id<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ownnum" readonly="true" name="ownnum" value="{{$owner->TO_OWNNO}}" type="text" tabindex="1"  maxlength="15" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Nama<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ownname" readonly="true" value="{{$owner->TO_OWNNAME}}" name="ownname" tabindex="1" type="text"  maxlength="200" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 1<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">No Bangunan<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ownaddr1" readonly="true" name="ownaddr1"  tabindex="1"  type="text" value="{{$owner->TO_ADDR_LN1}}" maxlength="50" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 2</label>
+											<label class="field_title" id="llevel" for="level">Jalan</label>
 											<div  class="form_input">
 												<input id="ownaddr2" readonly="true" value="{{$owner->TO_ADDR_LN2}}" name="ownaddr2"  tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
@@ -102,14 +102,14 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 3</label>
+											<label class="field_title" id="llevel" for="level">Kawasan</label>
 											<div  class="form_input">
 												<input id="ownaddr3" readonly="true" name="ownaddr3" tabindex="1"  type="text" value="{{$owner->TO_ADDR_LN3}}" maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">OWNER ADDRES 4</label>
+											<label class="field_title" id="lposition" for="position">Tempat</label>
 											<div  class="form_input">
 												<input id="ownaddr4" readonly="true" value="{{$owner->TO_ADDR_LN4}}" name="ownaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
@@ -117,21 +117,21 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">Poskod<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ownpostcode" value="{{$owner->TO_POSTCODE}}" readonly="true" name="ownpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">Bandar<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="city"  name="city" tabindex="1"  value="{{$owner->TO_CITY}}"  readonly="true" type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Negeri<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownstate" name="ownstate" tabindex="1">
 													<option></option>
@@ -143,14 +143,14 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-												<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
+												<label class="field_title" id="llevel" for="level">No Tel<span class="req">*</span></label>
 												<div  class="form_input">
 													<input id="telno" readonly="true" name="telno" tabindex="1" type="text" value="{{$owner->TO_TELNO}}" maxlength="15" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
-												<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
+												<label class="field_title" id="llevel" for="level">No Fax<span class="req">*</span></label>
 												<div  class="form_input">
 													<input id="faxno" readonly="true" name="faxno" tabindex="1" type="text" value="{{$owner->TO_FAXNO}}" maxlength="15" class=""/>
 												</div>
@@ -158,14 +158,14 @@
 											</div>
 										
 											<div class="form_grid_12">
-												<label class="field_title" id="llevel" for="level">Email ID<span class="req">*</span></label>
+												<label class="field_title" id="llevel" for="level">Alamat Email<span class="req">*</span></label>
 												<div  class="form_input">
 													<input id="emailid" name="emailid" tabindex="1" type="text" value="{{$owner->TO_EMAIL}}"  readonly="true" value="" maxlength="" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">CITIZENSHIP<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Warganegara<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="citizen" name="citizen" tabindex="1">
 													<option></option>
@@ -177,7 +177,7 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">RACE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">Bangsa<span class="req">*</span></label>
 											<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="race" name="race" tabindex="1">
 													<option></option>
 													@foreach ($race as $rec)
@@ -188,14 +188,14 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">NUMERATOR</label>
+											<label class="field_title" id="lposition" for="position">Pengangka Syer</label>
 											<div  class="form_input">
 												<input id="numerator" readonly="true" tabindex="1" name="numerator" value="{{$owner->TO_NUMETR}}" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">DENOMINATOR</label>
+											<label class="field_title" id="lposition" for="position">Penyebut Syer</label>
 											<div  class="form_input">
 												<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;"  name="demominator" value="{{$owner->TO_DENOMTR}}" readonly="true"  type="number" tabindex="1"  maxlength="5" class=""/>
 											</div>
@@ -234,10 +234,10 @@
 											<input type="hidden" value="0" name="tableindex" id="tableindex">
 										
 										<fieldset>
-												<legend>New Owner Information</legend>
+												<legend>Pemilik Baru</legend>
 
 												<div class="form_grid_12">
-													<label class="field_title">Copy Previous Owner Detail</label>
+													<label class="field_title">Salin Dari Pemilik Lama</label>
 													<div class="form_input">
 														<span>
 														<input name="field08" id="copydetail" onchange="copyDetail()" class="checkbox" type="checkbox"  tabindex="7">
@@ -246,11 +246,11 @@
 													</div>
 												</div>
 												<div class="form_grid_12">
-											<label class="field_title" id="lusername" for="username">OWNER APPLICATION TYPE<span class="req">*</span></label>
+											<label class="field_title" id="lusername" for="username">KAD/SMK<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="nownaplntype" name="nownaplntype" tabindex="1">
 													<option></option>
-													<option value='C'>CMK</option>
+													{{-- <option value='C'>CMK</option> --}}
 													<option value='K'>KAD</option>
 												</select>
 											</div>
@@ -258,7 +258,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">TYPE OF OWNER<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">Jenis Id<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ntypeofown" name="ntypeofown" tabindex="1">
 													<option></option>
@@ -271,14 +271,14 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER NUMBER<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">No Id<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="nownnum" name="nownnum" value="{{$owner->ota_ownno}}" type="text" tabindex="1"  maxlength="15" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Nama<span class="req">*</span></label>
 											<div  class="form_input"> 
 												<input id="nownname" name="nownname" value="{{$owner->ota_ownname}}" tabindex="1" type="text"  maxlength="200" />
 											</div>
@@ -286,14 +286,14 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 1<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">No Bangunan<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="nownaddr1" name="nownaddr1" value="{{$owner->ota_addr_ln1}}" tabindex="1"  type="text"  maxlength="50" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 2</label>
+											<label class="field_title" id="llevel" for="level">Jalan</label>
 											<div  class="form_input">
 												<input id="nownaddr2" name="nownaddr2" value="{{$owner->ota_addr_ln2}}" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
@@ -301,14 +301,14 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 3</label>
+											<label class="field_title" id="llevel" for="level">Kawasan</label>
 											<div  class="form_input">
 												<input id="nownaddr3" value="{{$owner->ota_addr_ln3}}" name="nownaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">OWNER ADDRES 4</label>
+											<label class="field_title" id="lposition" for="position">Tempat</label>
 											<div  class="form_input">
 												<input id="nownaddr4" value="{{$owner->ota_addr_ln4}}" name="nownaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
@@ -316,21 +316,21 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">Poskod<span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="nownpostcode"  name="nownpostcode" tabindex="1" type="number" value="{{$owner->ota_postcode}}" maxlength="50" class=""/>
+												<input id="nownpostcode"  name="nownpostcode" tabindex="1" type="number" value="{{$owner->ota_postcode}}" maxlength="6" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">Bandar<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ncity" value="{{$owner->ota_city}}"  name="ncity" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Negeri<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="nownstate" name="nownstate" tabindex="1">
 													<option></option>
@@ -342,21 +342,21 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-												<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
+												<label class="field_title" id="llevel" for="level">No Tel<span class="req">*</span></label>
 												<div  class="form_input">
 													<input id="ntelno" name="ntelno" tabindex="1" type="text" value="{{$owner->ota_phoneno}}" maxlength="15" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
-												<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
+												<label class="field_title" id="llevel" for="level">No Fax<span class="req">*</span></label>
 												<div  class="form_input">
 													<input id="nfaxno" name="nfaxno" tabindex="1" type="text" value="{{$owner->ota_faxno}}" maxlength="15" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
-												<label class="field_title" id="llevel" for="level">Email ID<span class="req">*</span></label>
+												<label class="field_title" id="llevel" for="level">Alamat Email<span class="req">*</span></label>
 												<div  class="form_input">
 													<input id="nemailid" name="nemailid" tabindex="1" type="text" value="{{$owner->ota_emailid}}" maxlength="" class=""/>
 												</div> 
@@ -364,7 +364,7 @@
 											</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">CITIZENSHIP<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Warganegara<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ncitizen" name="ncitizen" tabindex="1">
 													<option></option>
@@ -376,7 +376,7 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">RACE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">Bangsa<span class="req">*</span></label>
 											<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="nrace" name="nrace" tabindex="1">
 													<option></option>
 													@foreach ($race as $rec)
@@ -387,14 +387,14 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">NUMERATOR</label>
+											<label class="field_title" id="lposition" for="position">Pengangka Syer</label>
 											<div  class="form_input">
 												<input id="nnumerator" tabindex="1" name="nnumerator" value="{{$owner->ota_numetr}}" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">DENOMINATOR</label>
+											<label class="field_title" id="lposition" for="position">Penyebut Syer</label>
 											<div  class="form_input">
 												<input id="ndemominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name="ndemominator" value="{{$owner->ota_denomtr}}"  type="number" tabindex="1"  maxlength="5" class=""/>
 											</div>
@@ -409,8 +409,8 @@
 								</div>	
 							</fieldset>
 
-							<fieldset title="Step 2">
-								<legend>Applicant Information</legend>
+							<fieldset title="Langkah 2">
+								<legend>Maklumat Pemohon</legend>
 								<div>
 									<div class="grid_12 ">
 								<ul>
@@ -423,10 +423,10 @@
 									<input type="hidden" value="0" name="tableindex" id="tableindex">
 								<div class="grid_6 ">
 								<fieldset>
-										<legend>Applicant Information</legend>
+										<legend>Pemohon</legend>
 
 										<div class="form_grid_12">
-											<label class="field_title">is Applicant</label>
+											<label class="field_title">Salin Dari Pemilik Baru</label>
 											<div class="form_input">
 												<span>
 												<input name="field08" id="copyadddetail" onchange="copyAddDetail()" class="checkbox" type="checkbox"  tabindex="7">
@@ -437,7 +437,7 @@
 								
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">NAME<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">Nama<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addname" name="addname" value="{{$owner->ota_agentname}}" tabindex="1" type="text"  maxlength="200" />
 									</div>
@@ -446,14 +446,14 @@
 								
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">ADDRES 1<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">No Bangunan<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addaddr1" value="{{$owner->ota_agentaddr_ln1}}"  name="addaddr1" tabindex="1"  type="text"  maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">ADDRES 2</label>
+									<label class="field_title" id="llevel" for="level">Jalan</label>
 									<div  class="form_input">
 										<input id="addaddr2" value="{{$owner->ota_agentaddr_ln2}}"  name="addaddr2" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -461,14 +461,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">ADDRES 3</label>
+									<label class="field_title" id="llevel" for="level">Kawasan</label>
 									<div  class="form_input">
 										<input id="addaddr3" value="{{$owner->ota_agentaddr_ln3}}"  name="addaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">ADDRES 4</label>
+									<label class="field_title" id="lposition" for="position">Tempat</label>
 									<div  class="form_input">
 										<input id="addaddr4" value="{{$owner->ota_agentaddr_ln4}}"  name="addaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -476,14 +476,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">Poskod<span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="addpostcode"  value="{{$owner->ota_agentpostcode}}"  name="addpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
+										<input id="addpostcode"  value="{{$owner->ota_agentpostcode}}"  name="addpostcode" tabindex="1" type="number"  maxlength="6" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">Negeri<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="addstate" name="addstate" tabindex="1">
 											<option></option>
@@ -501,9 +501,9 @@
 								@if($page == 1)
 
 								<fieldset>
-										<legend>General Information</legend>
+										<legend>Maklumat Permohonan</legend>
 								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">REQUEST DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">Tarikh Mohon<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="reqdate"  value="{{$owner->applydate}}"  name="reqdate" class="" type="text"  maxlength="50" />
 										</div>
@@ -511,7 +511,7 @@
 								</div>
 
 								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">ACCEPT DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">Tarikh Majlis Terima<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="addacceptdt" readonly="" name="addacceptdt" class="" type="text"  value="{{$owner->recievedate}}"   maxlength="50" />
 										</div>
@@ -519,7 +519,7 @@
 								</div>
 
 								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TRANSACTION DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">Tarikh Transaksi Jualbeli<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="addtrndate"  value="{{$owner->transactiondate}}"  name="addtrndate" class="" type="text"  maxlength="50" />
 										</div>
@@ -527,7 +527,7 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">TRANACTION VALUE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">Nilai Jual Beli (RM)<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addtrnvalue"  value="{{$owner->ota_transactionprice}}"  name="addtrnvalue" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
@@ -535,7 +535,7 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">REFERENCE NO<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">Rujukan Majlis<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addref" readonly="" name="addref" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -543,7 +543,7 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">APPLICANT REFERENCE NO<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">Rujukan Pemohon<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addapplicatref"  name="addapplicatref" tabindex="1" type="text"  value="{{$owner->ota_agentrefno}}"  maxlength="50" class=""/>
 									</div>
@@ -558,8 +558,8 @@
 							</fieldset>
 							
 							@if($page == 1)
-							<fieldset title="Step 2">
-								<legend>Reason Information</legend>
+							<fieldset title="Langkah 3">
+								<legend>Sebab Pemohonan Tolak</legend>
 								<div class="grid_12 ">
 								<ul>
 								<li>
@@ -569,7 +569,7 @@
 									<input type="hidden" value="0" name="tableindex" id="tableindex">
 								
 								<fieldset>
-										<legend>Reason </legend>
+										<legend>Sebab-Sebab</legend>
 
 										<div class="form_grid_2">
 											
@@ -581,8 +581,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">the registered owner's name differs from our records</label>
-											
+											<label style="width: 80%;" class="field_title">Nama pemilik berdaftar berbeza dengan rekod kami.</label>											
 										</div>
 										<div class="form_grid_2">
 											
@@ -594,8 +593,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">the premises have not been rated yet
-											</label>
+											<label style="width: 80%;" class="field_title">Premis tersebut belum dinilai lagi.</label>
 										</div>
 										<div class="form_grid_2">
 											
@@ -607,8 +605,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">Nombor Lot/PT berlainan dari rekod majlis.
-											</label>
+											<label style="width: 80%;" class="field_title">Nombor Lot/PT berlainan dari rekod majlis.</label>
 										</div>
 										<div class="form_grid_2">
 											
@@ -619,8 +616,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">Alamat lengkap premis tidak dinyatakan/salah.
-											</label>
+											<label style="width: 80%;" class="field_title">Alamat lengkap premis tidak dinyatakan/salah.</label>
 										</div>
 										<div class="form_grid_2">
 											
@@ -632,8 +628,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">Suratcara penukaran hakmilik tidak teratur.
-											</label>
+											<label style="width: 80%;" class="field_title">Suratcara penukaran hakmilik tidak teratur.</label>
 										</div>
 										<div class="form_grid_2">
 											
@@ -645,8 +640,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">Borang I hendaklah dihantar dalam 2 salinan.
-											</label>
+											<label style="width: 80%;" class="field_title">Borang I hendaklah dihantar dalam 2 salinan.</label>
 										</div>
 										<div class="form_grid_2">
 											
@@ -658,8 +652,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">Bahagian/Mukim yang dicatatkan adalah salah/berlainan.
-											</label>
+											<label style="width: 80%;" class="field_title">Bahagian/Mukim yang dicatatkan adalah salah/berlainan.</label>
 										</div>
 										<div class="form_grid_2">
 											
@@ -671,8 +664,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">Wang proses sebanyak RM 30.00 tidak disertakan.
-											</label>
+											<label style="width: 80%;" class="field_title">Wang proses sebanyak RM 30.00 tidak disertakan.</label>
 										</div>
 										<div class="form_grid_2">
 											
@@ -684,8 +676,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">Salinan geran atau Perjanjian Jual-Beli tidak disertakan.
-											</label>
+											<label style="width: 80%;" class="field_title">Salinan geran atau Perjanjian Jual-Beli tidak disertakan.</label>
 										</div>
 										<div class="form_grid_2">
 											
@@ -697,8 +688,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">Salinan resit Cukai Taksiran Harta yang terkini tidak disertakan.
-											</label>
+											<label style="width: 80%;" class="field_title">Salinan resit Cukai Taksiran Harta yang terkini tidak disertakan.</label>
 										</div>
 										<input type="hidden" name="readsoncount" id="readsoncount">
 								
@@ -778,11 +768,17 @@
 										to_replace.attr("class", "checked");
 										$("#reason9:checkbox").attr("checked","checked");
 										$("#reason9").val('{{$owner->ota_rejectreason9}}');
+									}
+									if('{{$owner->ota_rejectreason10}}' == 1){				
+										var to_replace = $("#uniform-reason10").find('span');
+										to_replace.attr("class", "checked");
+										$("#reason10:checkbox").attr("checked","checked");
+										$("#reason10").val('{{$owner->ota_rejectreason10}}');
 									} 
 								});
 							</script>
 							@endforeach
-							<input type="submit" onclick="transfer()" class="finish" id="finish" value="Finish!"/>
+							<input type="submit" onclick="transfer()" class="finish" id="finish" value="Kemaskini"/>
 						</form>
 					</div>
 				</div>
@@ -799,7 +795,7 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
+							<h3 id="title">Jana Repot</h3>
 							<form style="" id="generateform" method="GET" action="generateOwnershipreport">
 					            @csrf
 					            <input type="hidden" name="type" id="type">
@@ -809,10 +805,10 @@
 										<li>
 											
 											<fieldset>
-												<legend>Additional Information</legend>
+												<legend>Maklumat Tambahan</legend>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">VALUER TITTLE<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">Nama Penilai<span class="req">*</span></label>
 													<div  class="form_input">
 														<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle" tabindex="20">
 																<option></option>
@@ -825,7 +821,7 @@
 												</div>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">VALUER NAME<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">Jawatan<span class="req">*</span></label>
 													<div  class="form_input">
 														<input id="name" name="name"  type="text"  maxlength="50" class="required"/>
 													</div>
@@ -841,9 +837,9 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Jana</span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>

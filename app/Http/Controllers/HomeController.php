@@ -1034,7 +1034,7 @@ DB::statement("insert into tempQuery values(select * from )");
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
-      $property = DB::select('select tstatus.tdi_value logstatus, date_format(ota_transtocenterdate,"%d/%m/%Y") ota_transtocenterdate1, cm_ownertrans_applnreg.*, ownstatus.tdi_value ownstatus, 
+      $property = DB::select('select otar_id, tstatus.tdi_value logstatus, date_format(ota_transtocenterdate,"%d/%m/%Y") ota_transtocenterdate1, cm_ownertrans_applnreg.*, ownstatus.tdi_value ownstatus, 
       ttype.tdi_value ttype, tstatus.tdi_key ttypekey, tstatus.tdi_value transstauts, date_format(otar_updatedate,"%d/%m/%Y") otar_updatedate, 
       date_format(otar_createdate,"%d/%m/%Y") otar_createdate, cm_ownertrans_appln.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, 
       state.tdi_value state, ownrace.tdi_value ownrace
@@ -1302,7 +1302,7 @@ public function owneradddresTables(Request $request){
               // Compile a JRXML to Jasper
            //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
           
-          $filter = ' ota_id = '. $accountnumber;
+          $filter = ' otar_id = '. $accountnumber;
 Log::info($type);           
 Log::info($filter); 
           JasperPHP::process(
