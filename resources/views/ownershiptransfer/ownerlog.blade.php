@@ -39,46 +39,46 @@
 										S No
 									</th>
 									<th>
-										Application ID
+										Id Permohonan
 									</th>
 									<th>
-										No Account
+										No Harta
 									</th>
 									<th>
-										Application Type
+										Jenis Aplikasi
 									</th>
 									<th>
-										Transfer Status 
+										Status Pemohonan 
 									</th>
 									<th>
-										Register Date
+										Tarikh Daftar
 									</th>		
 									<th>
-										Transfer by /Date
+										Ditransfer Oleh/Pada
 									</th>
 									<th>
-										Updated by / Date
+										Dikemaskini Oleh/Pada
 									</th>	
 									<th>
-										Applicator Name
+										Nama Pemilik Baru
 									</th>
 									<th>
-										Id Type
+										Jenis Id
 									</th>	
 									<th>
-										Id No
+										No Id
 									</th>	
 									<th>
-										Race
+										Bangsa
 									</th>
 									<th>
-										Address 1
+										No Bgn
 									</th>	
 									<th>
-										Address 2
+										Jalan
 									</th>	
 									<th>
-										Action
+										Aksi
 									</th>				
 								</tr>
 							</thead>
@@ -320,12 +320,12 @@ $(document).ready(function (){
 			        		}
 			        	return data.ota_updateby +" / "+update;
 			        }, "name": "owner"}, 
-			        {"data": "ota_agentname", "name": "ishasbldg"},
+			        {"data": "ota_ownname", "name": "ota_ownname"},
 			        {"data": "owntype", "name": "owntype"}, 
-			        {"data": "TO_OWNNO", "name": "TO_OWNNAME"}, 
-			        {"data": "ownrace", "name": "TO_OWNNAME"},
-			        {"data": "ota_addr_ln1", "name": "TO_OWNNAME"},
-			        {"data": "ota_addr_ln2", "name": "TO_OWNNAME"},
+			        {"data": "TO_OWNNO", "name": "TO_OWNNO"}, 
+			        {"data": "ownrace", "name": "ownrace"},
+			        {"data": "ota_addr_ln1", "name": "ota_addr_ln1"},
+			        {"data": "ota_addr_ln2", "name": "ota_addr_ln2"},
 			        {"data": function(data) {
 			        	var abdstr='';
 			        	if(data.ttypekey == 4) {
@@ -334,9 +334,9 @@ $(document).ready(function (){
 						} else {
 							if(data.otar_ownertranstype_id == 1 || data.otar_ownertranstype_id == 2) {
 					        	if(data.otar_ownertransstatus_id == 5 || data.otar_ownertransstatus_id == 7 || data.otar_ownertransstatus_id == 8 || data.otar_ownertransstatus_id == 9) {
-									return "<a href='#'  style='	width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title='Success Report' onclick='reportSuccess("+data.ota_id+")'></a>"+abdstr;
+									return "<a href='#'  style='	width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title='Success Report' onclick='reportSuccess("+data.otar_id+")'></a>"+abdstr;
 								} else if(data.otar_ownertransstatus_id == 3 || data.otar_ownertransstatus_id == 6) {
-									return "<a href='#' style='	width: 16px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -983px -102px;!important;display: inline-block; float: left;'  title='Rejected Report' onclick='reportFailure("+data.ota_id+")'></a>"+abdstr;
+									return "<a href='#' style='	width: 16px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -983px -102px;!important;display: inline-block; float: left;'  title='Rejected Report' onclick='reportFailure("+data.otar_id+")'></a>"+abdstr;
 								}
 							}
 						}

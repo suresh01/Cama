@@ -1275,7 +1275,9 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
             $ownerdetail = DB::select('select * from cm_ownertrans_appln inner join cm_ownertrans_applnreg on otar_id = ota_otar_id
             inner join (select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = "STATE") state on state_id = ota_state_id
              where ota_otar_id ='.$param_value.' ');
-            Log::info($ownerdetail );
+            // Log::info('host:'.env('ORA_DB_HOST', 'test').'|port:'.env('ORA_DB_PORT', 'test').'|SID:'.env('ORA_DB_SID', 'test').'|username:'.env('ORA_DB_USERNAME', 'test').'|password:'.env('ORA_DB_USERNAME', 'test'));
+            // $testing = DB::connection('oracle')->select('select * from PEMILIK_SB WHERE rownum <= 5');
+            // Log::info($testing );
             foreach ($ownerdetail as $rec) {            
                 //$lastcode = $rec->tdi_key;
                 $result = DB::connection('oracle')->update("

@@ -174,7 +174,7 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
+							<h3 id="title">Jana Laporan</h3>
 							<form style="" id="generateform" method="GET" action="generateOwnershipreport">
 					            @csrf
 					            <input type="hidden" name="type" id="type">
@@ -183,10 +183,10 @@
 									<ul>
 										<li>											
 											<fieldset>
-												<legend>Additional Information</legend>
+												<legend>Maklumat Tambahan</legend>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">VALUER NAME<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">Nama Pegawai<span class="req">*</span></label>
 													<div  class="form_input">
 														<select data-placeholder="Choose a Status..." onchange="getposition()" style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle" tabindex="20">
 																<option></option>
@@ -199,7 +199,7 @@
 												</div>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">VALUER TITTLE<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">Jawatan<span class="req">*</span></label>
 													<div  class="form_input">
 														<input id="name" name="name"  type="text"  maxlength="50" class="required"/>
 													</div>
@@ -212,9 +212,9 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Jana</span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>
@@ -266,14 +266,23 @@
 
 		function edit(acc) {		
 		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
+			
 		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
 		        w.location = "ownertransferprocess?account="+acc+"&page=1";
+				var timer = setInterval(function() { 
+					if(w.closed) {
+						clearInterval(timer);
+						// alert('closed');
+						location.reload();
+					}
+				}, 1000);
 		    }	    
 		    if (w.outerWidth < screen.availWidth || w.outerHeight < screen.availHeight)
 			{
 				w.moveTo(0,0);
 				w.resizeTo(screen.availWidth, screen.availHeight);
 			}
+			
 		}
 
 		function approve(id,currstatus){	
@@ -298,7 +307,7 @@
 					        	},
 						        error:function(data){
 									//$('#loader').css('display','none');	
-						        	alert('error');
+						        	alert('Berlaku Gangguan Semasa Pemindahan Data, Sila Cuba Sekali Lagi. Jika masih berlaku, Hubungi Administrator');
 					        	}
 					    	});
 						  }
