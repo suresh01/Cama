@@ -173,6 +173,7 @@ return [
 
         //oracle
         Yajra\Oci8\Oci8ServiceProvider::class,
+        //Collective\IronQueue\IronQueueServiceProvider::class,
 
     ],
 

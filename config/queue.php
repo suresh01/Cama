@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_DRIVER', 'sync'),
+    'default' => env('QUEUE_DRIVER', 'async'),
 
     /*
     |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ return [
     'connections' => [
 
         'sync' => [
-            'driver' => 'sync',
+            'driver' => 'async',
         ],
 
         'database' => [
@@ -64,6 +64,16 @@ return [
             'retry_after' => 90,
             'block_for' => null,
         ],
+
+        /*'iron' => [
+            'driver'  => 'iron',
+            'host'    => 'mq-aws-us-east-1-1.iron.io',
+            'token'   => 'your-token',
+            'project' => 'your-project-id',
+            'queue'   => 'your-queue-name',
+            'encrypt' => true,
+            'timeout' => 60
+        ],*/
 
     ],
 

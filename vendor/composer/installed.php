@@ -408,6 +408,15 @@
       ),
       'reference' => 'e3086ee8cb1f54a39ae8dcb72d1c37d10128997d',
     ),
+    'laravelcollective/html' => 
+    array (
+      'pretty_version' => 'v5.6.10',
+      'version' => '5.6.10.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '974605fcd22a7e4d19f0b2ef635a0d1d7400387d',
+    ),
     'league/flysystem' => 
     array (
       'pretty_version' => '1.0.45',
