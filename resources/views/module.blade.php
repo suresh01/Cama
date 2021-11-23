@@ -45,9 +45,9 @@
 	
 			<br>
 			<div class="form_input">
-				<button id="adduser" onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Module</span></button>
+				
 
-				<div id="breadCrumb3" style="float:right;" class="breadCrumb grid_3">
+				<div id="breadCrumb3" class="breadCrumb grid_3">
 					<ul >
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Admin</a></li>
@@ -55,6 +55,11 @@
 						<li>Module</li>
 					</ul>
 				</div>
+				<div  style="float:right;margin-right: 20px;">		
+					<button id="adduser" onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Module</span></button>		
+				</div>
+				<br>
+
 			</div>
 		
 				<div class="widget_wrap">					
@@ -173,11 +178,12 @@
 											@if($rec->mod_parent == 0 )	
 														<option value="{{ $rec->mod_id }}"> {{ $rec->mod_name }}  </option>
 											@endif
+											{{-- Comment by geb on 22/11/2021 to prevent hang --}}
 											@foreach ($module as $sub_rec)
 												@if($rec->mod_id == $sub_rec->mod_parent && $rec->mod_parent == 0)	
 														<option value="{{ $sub_rec->mod_id }}">  {{ $rec->mod_name }} ->{{ $sub_rec->mod_name }}   </option>							
 												@endif
-												@foreach ($module as $sub_sub_rec)
+												{{-- @foreach ($module as $sub_sub_rec)
 													@if($rec->mod_id == $sub_rec->mod_parent && $sub_rec->mod_id == $sub_sub_rec->mod_parent && $rec->mod_parent == 0)
 														<option value="{{ $sub_sub_rec->mod_id }}">  {{ $rec->mod_name }} ->{{ $sub_rec->mod_name }}-> {{ $sub_sub_rec->mod_name }}   </option>	
 													@endif
@@ -186,7 +192,7 @@
 															<option onclick="blockParent(1)" value="{{ $sub_sub_sub_rec->mod_id }}">  {{ $rec->mod_name }} ->{{ $sub_rec->mod_name }}-> {{ $sub_sub_rec->mod_name }}-> {{ $sub_sub_sub_rec->mod_name }}   </option>		
 														@endif		
 													@endforeach	
-												@endforeach											
+												@endforeach											 --}}
 											@endforeach
 										@endforeach
 									</select>

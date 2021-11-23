@@ -284,6 +284,7 @@ Log::info($lang);
         $module=DB::select('select * from tbmodule');        
 
         App::setlocale(session()->get('locale'));
+
         return view('module')->with('module',$module);
     }
 
