@@ -294,22 +294,22 @@ $(document).ready(function (){
 			        	var action = "";
 			        		
 							var editaction =
-							"&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick='deleteBasket("+data.rg_id+")' href='#' title='Delete'></a></span>";
+							"&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick='deleteBasket("+data.rg_id+")' href='#' title='Delete'></a></span>";
 
 							if(data.rg_remisistatus_id == '0'  ){
-								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',0)"  title="Submit For Investigation" href="#"></a></span>';							
+								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',0)"  title="Submit For Investigation" href="#"></a></span>';							
 							} else if(data.rg_remisistatus_id == '2'){
-								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',2)"  title="Submit For Proposed" href="#"></a></span>';
+								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',2)"  title="Submit For Proposed" href="#"></a></span>';
 						
 							} else if(data.rg_remisistatus_id == '3'){
-								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',3)"  title="Submit For Decision" href="#"></a></span>';
+								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',3)"  title="Submit For Decision" href="#"></a></span>';
 						
 							} else if(data.rg_remisistatus_id == '4'){
-								action =     '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',5)"  title="Approve" href="#"></a></span>' + 
-								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',6)"  title="Reject" href="#"></a></span>' + editaction;							
+								action =     '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',5)"  title="Approve" href="#"></a></span>' + 
+								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',6)"  title="Reject" href="#"></a></span>' + editaction;							
 							} else if(data.rg_remisistatus_id == '5'){
-								action =   '<spane><a style="width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat -843px -102px !important;display: inline-block; float: left;" onclick="reportRemisi('+data.rg_id+')" title="Report Remisi" href="#"></a></span>' + 							
-								'<spane><a style="width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat -843px -102px !important;display: inline-block; float: left;"  onclick="reportRemisiLawat('+data.rg_id+')" title="Report Remisi" title="Report Lawat Periksa Remisi" href="#"></a></span>'
+								action =   '<spane><a style="width: 14px;	height: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat -843px -102px !important;display: inline-block; float: left;" onclick="reportRemisi('+data.rg_id+')" title="Report Remisi" href="#"></a></span>' + 							
+								'<spane><a style="width: 14px;	height: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat -843px -102px !important;display: inline-block; float: left;"  onclick="reportRemisiLawat('+data.rg_id+')" title="Report Remisi" title="Report Lawat Periksa Remisi" href="#"></a></span>'
 							}
 							
 

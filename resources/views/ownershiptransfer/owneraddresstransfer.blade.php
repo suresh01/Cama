@@ -89,16 +89,16 @@
 											{{$rec->colstatus}}
 										</td>
 										<td>
-											<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: left;" onclick="submitForm('{{$rec->ma_accno}}')"  title="View Log" href="#"></a></span>&nbsp;&nbsp;
+											<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: left;" onclick="submitForm('{{$rec->ma_accno}}')"  title="View Log" href="#"></a></span>&nbsp;&nbsp;
 
 											
 											@if($rec->otar_ownertransstatus_id == '2')
-												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',2)"  title="Submit To Approve" href="#"></a></span>
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',2)"  title="Submit To Approve" href="#"></a></span>
 												<span><a class="action-icons c-Delete delete_tenant" onclick="deleteT('{$rec->otar_accno}}','{{$rec->otar_ownertransgroup_id}}')" href='#' title="{{__('common.Delete')}}">{{__('common.Delete')}}</a></span>
 											@endif
 
 											@if($rec->otar_ownertransstatus_id == '5')
-												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',5)" title="Transfer" href="#"></a></span>
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',5)" title="Transfer" href="#"></a></span>
 											@endif
 										</td>
 									</tr>

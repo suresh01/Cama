@@ -217,7 +217,7 @@ $('.mainNav li:has(ul)').addClass('has-child');
 		} else { 
 			$.ajax({
 		        type:'GET',
-		        url:'/getaccess',
+		        url:'getaccess',
 		        data:{module:module},
 		        success:function(data){	        	
 		        	if(data.msg === "false"){
@@ -243,7 +243,7 @@ $('.mainNav li:has(ul)').addClass('has-child');
 		 var status = false;
 			$.ajax({
 		        type:'GET',
-		        url:'/getaccess',
+		        url:'getaccess',
 		        data:{module:module},
 		        success:function(data){	        	
 		        	if(data.msg === "false"){
@@ -269,7 +269,7 @@ $('.mainNav li:has(ul)').addClass('has-child');
 		var status = false;
 		$.ajax({
 	        type:'GET',
-	        url:'/getaccess',
+	        url:'getaccess',
 	        data:{module:module},
 	        success:function(data){	        	
 	        	if(data.msg === "false"){
@@ -298,7 +298,7 @@ $('.mainNav li:has(ul)').addClass('has-child');
 		$.ajax({
 	        type:'GET',
 	        async: false,
-	        url:'/getaccess',
+	        url:'getaccess',
 	        data:{module:module},
 	        success:function(data){	  
 	    		//alert(data.msg);  
@@ -321,7 +321,7 @@ $('.mainNav li:has(ul)').addClass('has-child');
 		$.ajax({
 	        type:'GET',
 	        async: false,
-	        url:'/getaccess',
+	        url:'getaccess',
 	        data:{module:module},
 	        success:function(data){	  
 	    		//alert(data.msg);  

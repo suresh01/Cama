@@ -100,9 +100,9 @@
 										</td>
 										<td>
 											@if($rec->otar_ownertransstatus_id == '4')
-												<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',4,1)"  title="Approve" href="#"></a></span>
+												<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',4,1)"  title="Approve" href="#"></a></span>
 
-												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',4,2)"  title="Reject" href="#"></a></span>
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',4,2)"  title="Reject" href="#"></a></span>
 											@endif
 										</td>
 									</tr>

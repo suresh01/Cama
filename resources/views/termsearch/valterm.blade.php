@@ -176,7 +176,7 @@
 										{{$rec->termstage}}
 									</td>
 									<td>
-										<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -982px  -2px !important;display: inline-block; float: left;" onclick="attachment('{{$rec->vt_id}}','{{$rec->termDate}}')"  title="Attachment" href="#"></a></span>
+										<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -982px  -2px !important;display: inline-block; float: left;" onclick="attachment('{{$rec->vt_id}}','{{$rec->termDate}}')"  title="Attachment" href="#"></a></span>
 									</td>
 								</tr>
 								<div style="display: none;">

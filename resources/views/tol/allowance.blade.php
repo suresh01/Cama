@@ -77,23 +77,23 @@
 						</td>	
 						<td class="">
 							@if($rec->tallo_approvaltallostatus_id == '1' || $rec->tallo_approvaltallostatus_id == '6')
-							<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editBasket('{{ $rec->tallo_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
-								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick="deleteBasket('{{ $rec->tallo_id }}')" href='#' title="{{__('common.Delete')}}"></a></span>
+							<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editBasket('{{ $rec->tallo_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
+								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick="deleteBasket('{{ $rec->tallo_id }}')" href='#' title="{{__('common.Delete')}}"></a></span>
 								
-								 <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',1)"  title="{{__('common.Submit_To_Approve')}} " href="#"></a></span>					
+								 <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',1)"  title="{{__('common.Submit_To_Approve')}} " href="#"></a></span>					
 							@elseif($rec->tallo_approvaltallostatus_id == '2')
-								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',2,1)"  title="{{__('common.Approve')}}" href="#"></a></span>
-								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',2,2)"  title="{{__('common.Reject')}}" href="#"></a></span>
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',2,1)"  title="{{__('common.Approve')}}" href="#"></a></span>
+								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',2,2)"  title="{{__('common.Reject')}}" href="#"></a></span>
 							@elseif($rec->tallo_approvaltallostatus_id == '3')
 								<span><a class=" new-action-icons reverse" onclick="approve('{{$rec->tallo_id}}',3)" title="{{__('common.Revise')}}" href="#"></a></span>	
 									
 							@elseif($rec->tallo_approvaltallostatus_id == '4')
-								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editBasket('{{ $rec->tallo_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
-								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick="deleteBasket('{{ $rec->tallo_id }}')" href='#' title="{{__('common.Delete')}}"></a></span>
+								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editBasket('{{ $rec->tallo_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
+								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick="deleteBasket('{{ $rec->tallo_id }}')" href='#' title="{{__('common.Delete')}}"></a></span>
 								
-								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',1)"  title="{{__('common.Submit_To_Approve')}}" href="#"></a></span>				
+								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',1)"  title="{{__('common.Submit_To_Approve')}}" href="#"></a></span>				
 							@elseif($rec->tallo_approvaltallostatus_id == '5')
-								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',5)"  title="{{__('common.Approve_Revision')}}" href="#"></a></span>						
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tallo_id}}',5)"  title="{{__('common.Approve_Revision')}}" href="#"></a></span>						
 							@endif
 							
 						</td>

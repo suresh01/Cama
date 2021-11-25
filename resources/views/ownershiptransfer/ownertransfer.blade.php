@@ -96,27 +96,27 @@
 											{{$rec->colstatus}}
 										</td>
 										<td>
-											<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: left;" onclick="submitForm('{{$rec->ma_accno}}')"  title="View Log" href="#"></a></span>&nbsp;&nbsp;
+											<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: left;" onclick="submitForm('{{$rec->ma_accno}}')"  title="View Log" href="#"></a></span>&nbsp;&nbsp;
 
 											
 											@if($rec->otar_ownertransstatus_id == '2')
 
-												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',2)"  title="Submit To Approve" href="#"></a></span>
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',2)"  title="Submit To Approve" href="#"></a></span>
 												<span><a class="action-icons c-Delete delete_tenant" onclick="deleteT('{$rec->otar_accno}}','{{$rec->otar_ownertransgroup_id}}')" href='#' title='Delete'>Delete</a></span>
 											@endif
 
 											@if($rec->otar_ownertransstatus_id == '5')
-												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',5)" title="Transfer" href="#"></a></span>
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',5)" title="Transfer" href="#"></a></span>
 											@endif
 
 											@if($rec->otar_ownertransstatus_id == '3' || $rec->otar_ownertransstatus_id == '6')
 
-												<a href='#' style='	width: 16px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -983px -102px;!important;display: inline-block; float: left;' onclick='reportFailure("{{$rec->otar_id}}")'  title='Rejected Report'></a>
+												<a href='#' style='	width: 16px;	height: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position:  -983px -102px;!important;display: inline-block; float: left;' onclick='reportFailure("{{$rec->otar_id}}")'  title='Rejected Report'></a>
 											@endif
 
 											@if($rec->otar_ownertransstatus_id == '4' || $rec->otar_ownertransstatus_id == '5' || $rec->otar_ownertransstatus_id == '7' || $rec->otar_ownertransstatus_id == '8' || $rec->otar_ownertransstatus_id == '9')
 
-												<a href='#' onclick='reportSuccess("{{$rec->otar_id}}")' style='width: 14px;height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title='Sucess Report'></a>
+												<a href='#' onclick='reportSuccess("{{$rec->otar_id}}")' style='width: 14px;height: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title='Sucess Report'></a>
 											@endif
 
 										</td>

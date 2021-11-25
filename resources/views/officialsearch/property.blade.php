@@ -465,21 +465,21 @@ var table = $('#proptble').DataTable({
 			        	var action = "";
 			        		
 							var editaction =
-							"&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick='deleteBasket("+data.os_id+")' href='#' title='Delete'></a></span>";
+							"&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick='deleteBasket("+data.os_id+")' href='#' title='Delete'></a></span>";
 
 							if(data.os_officialsearchstatus_id == '1'  || data.os_officialsearchstatus_id == '6'){
-								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',1)"  title="Submit To Approve" href="#"></a></span>';							
+								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',1)"  title="Submit To Approve" href="#"></a></span>';							
 							} else if(data.os_officialsearchstatus_id == '2'){
-								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',2,1)"  title="Approve" href="#"></a></span>' + 
-								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',2,2)"  title="Reject" href="#"></a></span>';							
+								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',2,1)"  title="Approve" href="#"></a></span>' + 
+								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',2,2)"  title="Reject" href="#"></a></span>';							
 							} else if(data.os_officialsearchstatus_id == '3'){
-								action =  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -142px !important;display: inline-block; float: left;" onclick="generateReport('+data.os_id+')"  title="Print" href="#"></a></span>';
+								action =  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -142px !important;display: inline-block; float: left;" onclick="generateReport('+data.os_id+')"  title="Print" href="#"></a></span>';
 						
 							} else if(data.os_officialsearchstatus_id == '4'){
-								action =  editaction +   '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',1)"  title="Submit To Approve" href="#"></a></span>';
+								action =  editaction +   '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',1)"  title="Submit To Approve" href="#"></a></span>';
 
 							} else if(data.os_officialsearchstatus_id == '5'){
-								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',5)"  title="Approve Revise" href="#"></a></span>';						
+								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',5)"  title="Approve Revise" href="#"></a></span>';						
 							} 
 							
 

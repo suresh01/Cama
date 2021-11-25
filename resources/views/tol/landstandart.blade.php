@@ -554,22 +554,22 @@
 			        	
 			        	var action = "";
 
-			        		var editaction ="<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick='editBasket("+data.tstand_id+")' href='#' title='Edit'></a></span> " +
-							"&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick='deleteBasket("+data.tstand_id+")' href='#' title='Delete'></a></span>";
+			        		var editaction ="<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick='editBasket("+data.tstand_id+")' href='#' title='Edit'></a></span> " +
+							"&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick='deleteBasket("+data.tstand_id+")' href='#' title='Delete'></a></span>";
 
 							if(data.tstand_approvaltstandstatus_id == '1' || data.tstand_approvaltstandstatus_id == '6'){
-								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',1)"  title="Submit To Approve" href="#"></a></span>';							
+								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',1)"  title="Submit To Approve" href="#"></a></span>';							
 							} else if(data.tstand_approvaltstandstatus_id == '2'){
-								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',2,1)"  title="Approve" href="#"></a></span>' + 
-								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',2,2)"  title="Reject" href="#"></a></span>';							
+								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',2,1)"  title="Approve" href="#"></a></span>' + 
+								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',2,2)"  title="Reject" href="#"></a></span>';							
 							} else if(data.tstand_approvaltstandstatus_id == '3'){
 								action =  '<spane><a  class=" new-action-icons reverse" onclick="approve('+data.tstand_id+',3)" title="Revise" href="#"></a></span>';
 						
 							} else if(data.tstand_approvaltstandstatus_id == '4'){
-								action =  editaction +   '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',1)"  title="Submit To Approve" href="#"></a></span>';
+								action =  editaction +   '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',1)"  title="Submit To Approve" href="#"></a></span>';
 
 							} else if(data.tstand_approvaltstandstatus_id == '5'){
-								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',5)"  title="Approve Revise" href="#"></a></span>';						
+								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',5)"  title="Approve Revise" href="#"></a></span>';						
 							} 
 							
 			        									

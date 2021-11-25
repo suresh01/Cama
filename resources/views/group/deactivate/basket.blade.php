@@ -111,9 +111,9 @@
 											<span><a class="action-icons c-delete delete_term"  onclick="delProperty('{{$rec->da_id}}')" disabled="true" title="{{__('group.Delete_Basket')}}" href="#"></a></span>										
 										@endif
 										@if($rec->da_approved == '01')
-										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->da_id}}')" disabled="true" title="{{__('group.Approve_Deletion')}}" href="#"></a></span>									
+										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->da_id}}')" disabled="true" title="{{__('group.Approve_Deletion')}}" href="#"></a></span>									
 										@endif
-										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -121px !important;display: inline-block; float: left;" onclick="editGroup('{{ $rec->da_id }}')" disabled="true" title="{{__('group.Edit_Basket')}}" href="#"></a></span>
+										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -121px !important;display: inline-block; float: left;" onclick="editGroup('{{ $rec->da_id }}')" disabled="true" title="{{__('group.Edit_Basket')}}" href="#"></a></span>
 										<!--<span><a class="action-icons c-edit " onclick="editGroup('{{ $rec->da_id }}')" href="#" title="Edit">Edit</a></span>-->										
 									</td>
 								</tr>

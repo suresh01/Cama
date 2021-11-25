@@ -156,7 +156,7 @@
 										@if($rec->plan_planstatus_id != 9)
 										<!--<span><a class="action-icons c-edit" onclick="editTerm('{{$rec->plan_id}}')" title="Edit plan" href="#">{{__('common.Edit')}} </a></span>-->
 										@endif
-										<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -982px  -2px !important;display: inline-block; float: left;" onclick="attachment('{{$rec->plan_id}}')"  title="Attachment" href="#"></a></span>
+										<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -982px  -2px !important;display: inline-block; float: left;" onclick="attachment('{{$rec->plan_id}}')"  title="Attachment" href="#"></a></span>
 									</td>
 								</tr>
 								<div style="display: none;">

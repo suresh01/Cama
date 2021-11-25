@@ -2215,8 +2215,10 @@ bldgcategory,bldgtype ');
         }
 
         App::setlocale(session()->get('locale'));
+
+        $path = base_path('reports/r4cover.jasper');
         
-      return view('report.r4cover')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
+      return view('report.r4cover')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist)->with('path',$path);
     }
 
     public function r4coverDataTables(Request $request){
@@ -2355,30 +2357,30 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12")  '.$filterquery);
         
         $filter = " vd_id in (". $account.")";
         
-       
+       Log::info(base_path('reports/r4cover.jasper'));
       /* $input = $request->input();
             $account1 = $input['accounts'];
         Log::info($account1);*/
             // Compile a JRXML to Jasper
         //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
-        //  Log::info(JasperPHP::process(
-        //     base_path('/reports/r4cover.jasper'),
-        //         false,
-        //         array("pdf"),               
-        //         array("param_condition" => $filter,"logo" =>  base_path('/public/images/logo.jpeg')),
-        //     array(
-        //       'driver' => 'generic',
-        //       'username' => env('DB_USERNAME',''),
-        //       'password' => env('DB_PASSWORD',''),
-        //       'jdbc_driver' => 'com.mysql.jdbc.Driver',
-        //       'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-        //     ))->output());
+        Log::info(JasperPHP::process(
+           base_path('reports/r4cover.jasper'),
+               false,
+               array("pdf"),               
+             array("param_condition" => $filter,"logo" =>  base_path('images/logo.jpeg')),
+           array(
+           'driver' => 'generic',
+             'username' => env('DB_USERNAME',''),
+             'password' => env('DB_PASSWORD',''),
+             'jdbc_driver' => 'com.mysql.jdbc.Driver',
+            'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+          ))->output());
 
       JasperPHP::process(
-            base_path('/reports/r4cover.jasper'),
+            base_path('reports/r4cover.jasper'),
                 false,
                 array("pdf"),               
-                array("param_condition" => $filter,"background" =>  base_path('/reports/images/r4cover_bg.jpg')),
+                array("param_condition" => $filter,"background" =>  base_path('images/r4cover_bg.jpg')),
             array(
               'driver' => 'generic',
               'username' => env('DB_USERNAME',''),
@@ -2391,7 +2393,7 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12")  '.$filterquery);
               'Content-Type: application/pdf',
             );
 
-        return response()->download(base_path('/reports/r4cover.pdf'), 'r4cover.pdf', $headers);
+        return response()->download(base_path('reports/r4cover.pdf'), 'r4cover.pdf', $headers);
 
     }
 

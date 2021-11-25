@@ -438,7 +438,7 @@ var table = $('#proptble').DataTable({
 			        		var deleteuri = '';
 			        	}
 			        	
-						return '<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -121px !important;display: inline-block; float: left;" onclick="newGroup('+data.dad_id+')" disabled="true" title="Edit Basket" href="#"></a></span>' +deleteuri;
+						return '<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -121px !important;display: inline-block; float: left;" onclick="newGroup('+data.dad_id+')" disabled="true" title="Edit Basket" href="#"></a></span>' +deleteuri;
 
 			        }, "name": "propertstatus"}
 		   		],

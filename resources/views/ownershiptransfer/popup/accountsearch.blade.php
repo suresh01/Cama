@@ -124,7 +124,7 @@
 			        {"data": "zone", "name": "address"},
 			        {"data": "subzone", "name": "address"},
 			        {"data": function(data){
-			        	return '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" disabled="true" title="Select Asset Area" class="select-assetdba"  href="#"></a></span>';
+			        	return '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" disabled="true" title="Select Asset Area" class="select-assetdba"  href="#"></a></span>';
 			        }, "name": "address"}
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {

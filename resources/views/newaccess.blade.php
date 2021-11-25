@@ -55,7 +55,7 @@
     height: 20px;
     width: 20px;
     display: inline-block;
-    background: #fff url(../images/sprite-icons/icons-color.png) no-repeat;
+    background: #fff url(images/sprite-icons/icons-color.png) no-repeat;
     text-indent: -999999px;
     border: #ccc 1px solid;
     -moz-border-radius: 3px;

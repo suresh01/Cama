@@ -88,7 +88,7 @@
 								<span><a  class=" new-action-icons reverse" onclick="approve('{{$rec->tollist_id}}',1)" title="In Active" href="#"></a></span>;
 													
 							@elseif($rec->tollis_activeind_id == '2')
-							 <span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tollist_id}}',2)"  title=" Active" href="#"></a></span>'	
+							 <span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tollist_id}}',2)"  title=" Active" href="#"></a></span>'	
 								<span><a class="action-icons c-edit" onclick="editBasket('{{ $rec->tollist_id }}')" href="#" title="{{__('common.Edit')}}">{{__('common.Edit')}}</a></span>
 								<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket('{{ $rec->tollist_id }}')" href="#" title="{{__('common.Delete')}}">{{__('common.Delete')}}</a></span>
 							@endif

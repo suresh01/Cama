@@ -27,7 +27,7 @@
 					
 				</div>
 				<br>
-        
+        	
 				<div class="widget_wrap">					
 					<div class="widget_content">						
 						<table id="proptble" class="display select">
@@ -35,7 +35,7 @@
 								<tr>
 									<th><input name="select_all" value="1" type="checkbox"></th>
 									<th class="table_sno">
-										{{__('inspection.SNo')}}
+										{{__('inspection.SNo')}} - y - {{$path}}} 
 									</th>
 									<th>{{__('inspection.Account_Number')}} </th>
 									<th>{{__('inspection.File_Number')}} </th>
