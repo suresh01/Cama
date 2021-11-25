@@ -419,7 +419,7 @@ function getposition(){
 		$('#username').val($("#usernameA option:selected").text());
 		$.ajax({
 			type:'GET',
-			url:'/getuserdetail',
+			url:'getuserdetail',
 			data:{id:userid},
 			success:function(data){	        	
 				$('#jawatan').val(data.userposition);

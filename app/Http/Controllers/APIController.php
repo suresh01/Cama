@@ -45,7 +45,7 @@ class APIController extends Controller
 	        //$pb = $request->input('pb');
 	        // $name=Auth::user()->name;
         
-            //Log::info('tt '.$prop_id);
+            Log::info('APIController.f_getValuation');
             Log::info('rrt '.$id);
              $tax = DB::select('select subzone.tdi_value subzone, subzone.tdi_parent_name zone, ap_bldgstatus_id, proptype.tdi_value proptype, 
                 proptype.tdi_parent_name propcategorty,  bldgstatus.tdi_value bldgstatus, bldgstorey.tdi_value  bldgstorey,

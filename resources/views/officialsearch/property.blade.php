@@ -209,7 +209,7 @@
 				$('#username').val($("#name option:selected").text());
 				$.ajax({
 					type:'GET',
-					url:'/getuserdetail',
+					url:'getuserdetail',
 					data:{id:userid},
 					success:function(data){	        	
 						$('#title').val(data.userposition);

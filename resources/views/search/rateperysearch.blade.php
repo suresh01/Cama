@@ -231,7 +231,7 @@
 		$('.basic-modal').click(function(){
 			$.ajax({
 		        type:'GET',
-		        url:'/getaccess',
+		        url:'getaccess',
 		        data:{module:211},
 		        success:function(data){	        	
 		        	if(data.msg === "false"){

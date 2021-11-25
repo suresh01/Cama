@@ -91,7 +91,7 @@
 		//alert();
 		$.ajax({
 	        type:'GET',
-	        url:'/getaccess',
+	        url:'getaccess',
 	        data:{module:module},
 	        success:function(data){	        	
 	        	if(data.msg === "false"){

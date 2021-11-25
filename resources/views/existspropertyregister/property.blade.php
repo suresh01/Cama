@@ -328,7 +328,7 @@ var table = $('#proptble').DataTable();
 		function check_access_local(id){
 			$.ajax({
 		        type:'GET',
-		        url:'/getaccess',
+		        url:'getaccess',
 		        data:{module:323},
 		        success:function(data){	        	
 		        	if(data.msg === "false"){
@@ -514,7 +514,7 @@ var table = $('#proptble').DataTable();
 			}
 			$.ajax({
 		        type:'GET',
-		        url:'/getaccess',
+		        url:'getaccess',
 		        data:{module:3233},
 		        success:function(data){	        	
 		        	if(data.msg === "false"){
@@ -632,7 +632,7 @@ var table = $('#proptble').DataTable();
 
 			$.ajax({
 		        type:'GET',
-		        url:'/getaccess',
+		        url:'getaccess',
 		        data:{module:3234},
 		        success:function(data){	        	
 		        	if(data.msg === "false"){

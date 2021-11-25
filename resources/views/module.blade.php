@@ -183,7 +183,7 @@
 												@if($rec->mod_id == $sub_rec->mod_parent && $rec->mod_parent == 0)	
 														<option value="{{ $sub_rec->mod_id }}">  {{ $rec->mod_name }} ->{{ $sub_rec->mod_name }}   </option>							
 												@endif
-												{{-- @foreach ($module as $sub_sub_rec)
+												@foreach ($module as $sub_sub_rec)
 													@if($rec->mod_id == $sub_rec->mod_parent && $sub_rec->mod_id == $sub_sub_rec->mod_parent && $rec->mod_parent == 0)
 														<option value="{{ $sub_sub_rec->mod_id }}">  {{ $rec->mod_name }} ->{{ $sub_rec->mod_name }}-> {{ $sub_sub_rec->mod_name }}   </option>	
 													@endif
@@ -192,7 +192,7 @@
 															<option onclick="blockParent(1)" value="{{ $sub_sub_sub_rec->mod_id }}">  {{ $rec->mod_name }} ->{{ $sub_rec->mod_name }}-> {{ $sub_sub_rec->mod_name }}-> {{ $sub_sub_sub_rec->mod_name }}   </option>		
 														@endif		
 													@endforeach	
-												@endforeach											 --}}
+												@endforeach											
 											@endforeach
 										@endforeach
 									</select>
