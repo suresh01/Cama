@@ -71,9 +71,9 @@
 	
 			<br>
 			<div class="form_input">
-				<button id="adduser" onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add User</span></button>
-
-				<div id="breadCrumb3" style="float:right;" class="breadCrumb grid_3">
+				
+				{{-- style="float:right;" --}}
+				<div id="breadCrumb3"  class="breadCrumb grid_3"> 
 					<ul >
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Admin</a></li>
@@ -81,6 +81,11 @@
 						<li>Users</li>
 					</ul>
 				</div>
+
+				<div  style="float:right;margin-right: 20px;">		
+					<button id="adduser" onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add User</span></button>		
+				</div>
+				<br>
 			</div>
 		
 				<div class="widget_wrap">					
