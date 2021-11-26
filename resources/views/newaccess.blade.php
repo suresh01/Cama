@@ -346,7 +346,8 @@ $('.mainNav li:has(ul)').addClass('has-child');
 			        </li>			        
     			</ul>
 			</li>
-			<li class="dropdown-submenu dropdown"><a style="    width: 100%;" class="test" tabindex="-1" href="#"><span class="stats_icon data_maintance"></span><span class="label">{{__('menu.datamaintenance')}}</span></a>
+			<li class="dropdown-submenu dropdown"><a style="width: 100%;"  href="#" class="test"><span class="stats_icon data_maintance"></span><span class="label">{{__('menu.datamaintenance')}}</span></a>
+			{{-- <li class="dropdown-submenu dropdown"><a style="width: 100%;" class="test" tabindex="-1" href="#"><span class="stats_icon data_maintance"></span><span class="label">{{__('menu.datamaintenance')}}</span></a> --}}
 				<ul class="mainNav dropdown-menu" style="display:none">
 			        <li style="" class="dropdown-submenu">
 			            <a style=""  onclick="check_access('31','codemaintenance')" class="test" href="#">{{__('menu.codemaintenance')}}<span class="caret"></span></a>
@@ -405,10 +406,10 @@ $('.mainNav li:has(ul)').addClass('has-child');
 								<a style="" onclick="check_access('3102','propertylot');" href="#">{{__('menu.propertylot')}}</a>
 							</li>
 							<li>
-								<a style="" onclick="check_access('394','addresslog?page=1');" href="#">{{__('menu.maintenancelog')}}</a>
+								<a style="" onclick="check_access('394','addresslog');" href="#">{{__('menu.propertyaddresslog')}}</a>
 							</li>
 							<li>
-								<a style="" onclick="check_access('394','addresslog?page=2');" href="#">Property Lot Log</a>
+								<a style="" onclick="check_access('394','nolotlog');" href="#">{{__('menu.propertylotlog')}}</a>
 							</li>
 			            </ul>
 		          	</li>
@@ -461,29 +462,54 @@ $('.mainNav li:has(ul)').addClass('has-child');
 			        </li>
     			</ul>
 			</li>
+			
 			<li class="dropdown-submenu dropdown"><a style=""  href="#" class="test"><span class="stats_icon finished_work_sl"></span><span class="label">{{__('menu.report')}}</span></a>
 				<ul class="mainNav dropdown-menu" style="display:none">
 			        <li class="dropdown-submenu">
-			            <a style="" onclick="check_access('61','inspectionform')" class="test" href="#">Inspection Form<span class="caret"></span></a>
+			            <a style="" onclick="check_access('61','inspectionform')" class="test" href="#">Borang Lawat Periksa<span class="caret"></span></a>
 			        </li>
 			        <li class="dropdown-submenu">
-			            <a style="" onclick="check_access('62','valuationform')" class="test" href="#">Valuation Form<span class="caret"></span></a>
+			            <a style="" onclick="check_access('62','valuationform')" class="test" href="#">Laporan Nilaian<span class="caret"></span></a>
 			        </li>
 			        <li class="dropdown-submenu">
 			            <a style=""  class="test" href="#">Valuation Data...<span class="caret"></span></a>
 			            <ul class="dropdown-menu child" style="display:none;">
 			                <li>					
-								<a style="" onclick="check_access('631','valuationdata?page=1');" href="#">Valuation List By Basket</a>							
+								<a style="" onclick="check_access('631','valuationdata?page=1');" href="#">Senarai Nilaian(Bakul)</a>							
 							</li>
 							<li>
-								<a style="" onclick="check_access('632','valuationdata?page=2');" href="#">Valuation List By Term</a>
+								<a style="" onclick="check_access('632','valuationdata?page=2');" href="#">Senarai Nilaian(Pada Penggal)</a>
 							</li>
 							<li>
-								<a style="" onclick="check_access('633','valuationdata?page=3');" href="#">Valuation List By Active Term</a>
+								<a style="" onclick="check_access('633','valuationdata?page=3');" href="#">Senarai Nilaian(Sehingga Penggal)</a>
 							</li>
 			            </ul>
 		          	</li>
 		          	<li class="dropdown-submenu">
+			            <a style=""  class="test" href="#">Laporan-Laporan Statistik...<span class="caret"></span></a>
+			            <ul class="dropdown-menu child" style="display:none;">
+			                <li>					
+								<a style="" onclick="check_access('714','subzonesummary');" href="#">Senarai NT dan Kadar Mengikut Mukim/Kawasan</a>							
+							</li>
+							<!--<li>
+								{{-- <a style="" onclick="check_access('714','subzonesummary');" href="#">Laporan Senarai Industri (Select by Property Categori)</a> --}}
+								<a style="" onclick="check_access('714','zonebldgsummary');" href="#">Laporan Senarai Industri (Select by Property Categori)</a>
+							</li>-->
+							<li>
+								<a style="" onclick="check_access('714','pivotreport?page=1');" href="#">Laporan Pivot (Property Status = Building)</a>
+							</li>
+			                <li>					
+								<a style="" onclick="check_access('714','pivotreport?page=0');" href="#">Laporan Pivot (Property Status = Empty Lot)</a>							
+							</li>
+							<li>
+								<a style="" onclick="check_access('714','racesummary');" href="#">Laporan Pivot Bangsa</a>
+							</li>
+							<li>
+								<a style="" onclick="check_access('714','statisticsreport');" href="#">Laporan Statistik</a>
+							</li>
+			            </ul>
+		          	</li>
+		          	<!--<li class="dropdown-submenu">
 			            <a style=""  class="test" href="#">Statistical Report...<span class="caret"></span></a>
 			            <ul class="dropdown-menu child" style="display:none;">
 			                <li>					
@@ -510,7 +536,7 @@ $('.mainNav li:has(ul)').addClass('has-child');
 								<a style="" onclick="check_access('714','bldgcollection');" href="#">Summary By Zon and Property Status vs Bulding Category</a>
 							</li>
 			            </ul>
-		          	</li>
+		          	</li>-->
 
 			        <li class="dropdown-submenu">
 			            <a style="" onclick="check_access('714','exportexcel')" class="test" href="#">Export Excel<span class="caret"></span></a>
@@ -522,34 +548,77 @@ $('.mainNav li:has(ul)').addClass('has-child');
 			            <a style="" onclick="check_access('714','borangb')" class="test" href="#">Borang B<span class="caret"></span></a>
 			        </li>
 			        <li class="dropdown-submenu">
+			            <a style="" onclick="check_access('714','r4cover')" class="test" href="#">Kulit R4<span class="caret"></span></a>
+			        </li>
+			        <li class="dropdown-submenu">
+			            <a style="" onclick="check_access('714','defunctreport')" class="test" href="#">Senarai Harta Batal<span class="caret"></span></a>
+			        </li>
+			        <li class="dropdown-submenu">
+			            <a style="" onclick="check_access('714','ownernotice')" class="test" href="#">Notis Kepada Pemlik<span class="caret"></span></a>
+			        </li>
+			        <li class="dropdown-submenu">
+			            <a style="" onclick="check_access('714','ownertransferlist')" class="test" href="#">Senarai Pindah Milik<span class="caret"></span></a>
+			        </li>
+			        <li class="dropdown-submenu">
 			            <a style="" onclick="check_access('714','statistical')" class="test" href="#">Simulation Function<span class="caret"></span></a>
 			        </li>
 		          	
     			</ul>
 			</li>
 			<li class="dropdown-submenu dropdown">
-       			 <a style="background-color: #95C9F5" class="test" tabindex="-1" href="#"><span class="stats_icon user_sl"></span><span class="label">Admin</span></a>
+       			 <a style="background-color: #95C9F5;" class="test" tabindex="-1" href="#"><span class="stats_icon user_sl"></span><span class="label">Admin</span></a>
 		        <ul class="mainNav dropdown-menu" style="display:none">
 		          <li class="dropdown-submenu">
-		            <a style=""  class="test" href="#">Users Management...<span class="caret"></span></a>
+		            <a style=""  class="test" href="#">Pengurusan Pengguna...<span class="caret"></span></a>
 		            <ul class="dropdown-menu child" style="display:none;">
 		                <li>					
-							<a style="" onclick="check_access('711','user');" href="#">Users</a>							
+							<a style="" onclick="check_access('711','user');" href="#">Senarai Pengguna</a>							
 						</li>
 						<li>
-							<a style="" onclick="check_access('712','role');" href="#">Role</a>
+							<a style="" onclick="check_access('712','role');" href="#">Senarai Peranan</a>
 						</li>
 						<li>
-							<a style="" onclick="return check_access('713','module');" href="#">Module</a>
+							<a style="" onclick="return check_access('713','module');" href="#">Senarai Modul</a>
 						</li>
 						<li>
-							<a style="" onclick="return check_access('714','access');" href="#">Access</a>
+							<a style="" onclick="return check_access('714','access');" href="#">Capaian</a>
 						</li>
 		            </ul>
 		          </li>
-		          <li><a style="" tabindex="-1" onclick="return check_access('73','search');" href="#">Search Parameter Management</a></li>
+		          <li><a style="" tabindex="-1" onclick="return check_access('73','search');" href="#">Pengurusan Parameter Carian</a></li>
 		        </ul>
       		</li>
+			<!--<li class="dropdown-submenu"><a data-toggle="dropdown" style="/*background-color: #95C9F5;*/" class="dropdown-toggle active"><span class="stats_icon user_sl"></span><span class="label">Admin</span></a>
+				<div style="width: 100%;" class="notification_list dropdown-menu blue_d">
+					<div class="white_lin nlist_block">
+						<ul  >
+							<li >
+								
+							<div class="list_inf">
+								<a onclick="check_access('106','user')" href="#">Users</a>								
+							</div>
+							</li>
+							<li>
+							<div class="list_inf">
+								<a onclick="check_access('107','role')" href="#">Role</a>
+							</div>
+
+							</li>
+							<li>
+							<div class="list_inf">
+								<a onclick="return check_access('108','module');" href="#">Module</a>
+							</div>
+							</li>
+							<li>
+							<div class="list_inf">
+								<a onclick="return check_access('109','access');" href="#">Access</a>
+							</div>
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+				</li>-->
 		</ul>
 	</div>
 	

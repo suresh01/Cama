@@ -281,11 +281,13 @@ Log::info($lang);
         }   
  
         ini_set('memory_limit', '2056M');
-        $module=DB::select('select * from tbmodule');        
+        $module=DB::select('select * from tbmodule');   
+        $categories = Category::where('mod_parent', '=', 0)->get();
+        $allCategories = Category::pluck('mod_name','mod_id')->all();       
 
         App::setlocale(session()->get('locale'));
 
-        return view('module')->with('module',$module);
+        return view('module',compact('categories','allCategories'))->with('module',$module);
     }
 
     /*

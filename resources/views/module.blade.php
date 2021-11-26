@@ -174,27 +174,17 @@
 								<div class="form_input">
 									<select style="width:39.3%;" data-placeholder="Choose a Parent..." class="cus-select" id="moduleid" name="parent" tabindex="20">
 										<option value="0">Root</option>
-										@foreach ($module as $rec)
-											@if($rec->mod_parent == 0 )	
-														<option value="{{ $rec->mod_id }}"> {{ $rec->mod_name }}  </option>
-											@endif
-											{{-- Comment by geb on 22/11/2021 to prevent hang --}}
-											@foreach ($module as $sub_rec)
-												@if($rec->mod_id == $sub_rec->mod_parent && $rec->mod_parent == 0)	
-														<option value="{{ $sub_rec->mod_id }}">  {{ $rec->mod_name }} ->{{ $sub_rec->mod_name }}   </option>							
-												@endif
-												@foreach ($module as $sub_sub_rec)
-													@if($rec->mod_id == $sub_rec->mod_parent && $sub_rec->mod_id == $sub_sub_rec->mod_parent && $rec->mod_parent == 0)
-														<option value="{{ $sub_sub_rec->mod_id }}">  {{ $rec->mod_name }} ->{{ $sub_rec->mod_name }}-> {{ $sub_sub_rec->mod_name }}   </option>	
-													@endif
-													@foreach ($module as $sub_sub_sub_rec)
-														@if($rec->mod_id == $sub_rec->mod_parent && $sub_rec->mod_id == $sub_sub_rec->mod_parent && $sub_sub_rec->mod_id == $sub_sub_sub_rec->mod_parent && $rec->mod_parent == 0)	
-															<option onclick="blockParent(1)" value="{{ $sub_sub_sub_rec->mod_id }}">  {{ $rec->mod_name }} ->{{ $sub_rec->mod_name }}-> {{ $sub_sub_rec->mod_name }}-> {{ $sub_sub_sub_rec->mod_name }}   </option>		
-														@endif		
-													@endforeach	
-												@endforeach											
-											@endforeach
-										@endforeach
+
+										@foreach($categories as $category)
+							               	
+												<option value="{{ $category->mod_id }}"> {{ $category->mod_name }}  </option>
+							                 	
+							                    @if(count($category->childs))
+							                        @include('moduleChild',['childs' => $category->childs])
+							                    @endif
+							                
+							            @endforeach
+										
 									</select>
 								</div>
 								<span class=" label_intro"></span>
