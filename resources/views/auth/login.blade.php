@@ -91,8 +91,7 @@
 <script src="{{ url('js/chart-plugins/jqplot.pointLabels.min.js') }}"></script>
 <script src="{{ url('js/chart-plugins/jqplot.meterGaugeRenderer.min.js') }}"></script>
 <script src="{{ url('js/custom-scripts.js') }}"></script>
-<script src="{{ url('js/common/MD5.js') }}"></script>
-<script src="{{ url('js/common/common.js') }}"></script>
+
 <script type="text/javascript">
 $(function(){
     $(window).resize(function(){
