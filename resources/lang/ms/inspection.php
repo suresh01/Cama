@@ -158,7 +158,8 @@ return [
 	'Measurement'=>'Ukuran',
 	'Unit_Of_Measurement'=>'Unit Ukuran',
 	'Total_Size'=>'Jumlah Ukuran',
-	'Ceilling_Type'=>'Siling',
+	'Ceiling_Type'=>'Siling',
+	
 	'Detailid'=>'Detail Id',
 	'Building_Structure'=>'Struktur',
 	'Roof_Type'=>'Bumbung',

@@ -73,6 +73,7 @@
 			<br>
 			<div style="float:right;margin-right: 10px;"  class="btn_24_blue">					
 					@include('ownershiptransfer.popup.search')
+					{{-- @include('inspection.grab.search') --}}
 				</div>
 				<br>
 				<div class="widget_wrap">					

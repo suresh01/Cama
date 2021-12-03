@@ -4,25 +4,28 @@
 <div style="float:right;margin-right: 0px;"  class="btn_24_blue">	      
 	<a href="#" onclick="addInvestigation()" class=""><span>{{__('remisiLang.Add_Investigation')}}  </span></a> 
 </div>
-</br>	</br></br>		
+<br>	<br><br>		
 	<table id="invesitgatetable" class="display ">
 		<thead style="text-align: left;">
 			<tr>
-				<th Class="table_sno">{{__('remisiLang.SNO')}} </th>
-				<th>{{__('remisiLang.Investigation_Type')}}  </th>
-				<th>{{__('remisiLang.Investigation_Officer')}}  </th>
-				<th>{{__('remisiLang.Investigation_Date')}}  </th>
-				<th>{{__('remisiLang.Action')}}   </th>	
-				<th>{{__('remisiLang.Actioncode')}}  </th>
-				<th>{{__('remisiLang.Id')}}   </th>	
-				<th>{{__('remisiLang.Instype')}}   </th>	
-				<th>{{__('remisiLang.Insofficer')}}   </th>		
-				<th>{{__('remisiLang.Review')}}   </th>		
-				<th>{{__('remisiLang.Finding1')}}   </th>		
-				<th>{{__('remisiLang.Finding2')}}   </th>		
-				<th>{{__('remisiLang.Finding3')}}   </th>		
-				<th>{{__('remisiLang.Finding4')}}   </th>			
-				<th>{{__('remisiLang.Finding5')}}  </th>		
+				<th Class="table_sno">{{__('remisiLang.SNO')}}</th>
+				<th>{{__('remisiLang.Investigation_Type')}}</th>
+				<th>{{__('remisiLang.Investigation_Officer')}}</th>
+				<th>{{__('remisiLang.Investigation_Date')}}</th>
+				<th>{{__('remisiLang.Action')}}</th>	
+				<th>{{__('remisiLang.Actioncode')}}</th>
+				<th>{{__('remisiLang.Id')}}</th>	
+				<th>{{__('remisiLang.Instype')}}</th>	
+				<th>{{__('remisiLang.Insofficer')}}</th>		
+				<th>{{__('remisiLang.Review')}}</th>		
+				<th>{{__('remisiLang.Finding1')}}</th>		
+				<th>{{__('remisiLang.Finding2')}}</th>		
+				<th>{{__('remisiLang.Finding3')}}</th>		
+				<th>{{__('remisiLang.Finding4')}}</th>			
+				<th>{{__('remisiLang.Finding5')}}</th>
+				<th>{{__('remisiLang.Finding6')}}</th>
+				<th>{{__('remisiLang.Finding7')}}</th>
+				<th>{{__('remisiLang.Finding8')}}</th>		
 			</tr>
 		</thead>
 		<tbody>
@@ -87,73 +90,95 @@
 		<li>
 			<fieldset>
 				<legend>{{__('remisiLang.Investigation_Finding')}}  </legend>
-				<div class="form_grid_2">
-											
+
+				<div class="form_grid_2">					
 					<div style="width: 20%;" class="form_input ">
 						<span>
-						
-						<input name="finreason1" id="finreason1" value="1" class="checkbox findreason" type="checkbox"  tabindex="7">
+							<input name="finreason1" id="finreason1" value="1" class="checkbox findreason" type="checkbox"  tabindex="7">
 						</span>
 					</div>
 				</div>
 				<div class="form_grid_10">
-					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding1')}} </label>
-					
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding1')}}</label>
 				</div>
 				
-				<div class="form_grid_2">
-											
+				<div class="form_grid_2">				
 					<div style="width: 20%;" class="form_input ">
 						<span>
-						
-						<input name="finreason2" value="1"  id="finreason2" class="checkbox findreason" type="checkbox"  tabindex="7">
+							<input name="finreason2" value="1"  id="finreason2" class="checkbox findreason" type="checkbox"  tabindex="7">
 						</span>
 					</div>
 				</div>
 				<div class="form_grid_10">
-					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding2')}} </label>
-					
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding2')}}</label>
 				</div>
-				<div class="form_grid_2">
-											
+
+				<div class="form_grid_2">					
 					<div style="width: 20%;" class="form_input ">
 						<span>
-						
-						<input name="finreason3" value="1"  id="finreason3" class="checkbox findreason" type="checkbox"  tabindex="7">
+							<input name="finreason3" value="1"  id="finreason3" class="checkbox findreason" type="checkbox"  tabindex="7">
 						</span>
 					</div>
 				</div>
 				<div class="form_grid_10">
-					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding3')}} </label>
-					
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding3')}}</label>
 				</div>
-				<div class="form_grid_2">
-											
+
+				<div class="form_grid_2">					
 					<div style="width: 20%;" class="form_input ">
 						<span>
-						
-						<input name="finreason4" value="1"  id="finreason4" class="checkbox findreason" type="checkbox"  tabindex="7">
+							<input name="finreason4" value="1"  id="finreason4" class="checkbox findreason" type="checkbox"  tabindex="7">
 						</span>
 					</div>
 				</div>
 				<div class="form_grid_10">
-					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding4')}} </label>
-					
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding4')}}</label>
 				</div>
-				<div class="form_grid_2">
-											
+
+				<div class="form_grid_2">					
 					<div style="width: 20%;" class="form_input ">
 						<span>
-						
-						<input name="finreason5" value="1"  id="finreason5" class="checkbox findreason" type="checkbox"  tabindex="7">
+							<input name="finreason5" value="1"  id="finreason5" class="checkbox findreason" type="checkbox"  tabindex="7">
 						</span>
 					</div>
 				</div>
 				<div class="form_grid_10">
-					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding5')}} </label>
-					
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding5')}}</label>	
 				</div>
-				
+
+				<div class="form_grid_2">					
+					<div style="width: 20%;" class="form_input ">
+						<span>
+							<input name="finreason6" value="1"  id="finreason6" class="checkbox findreason" type="checkbox"  tabindex="8">
+						</span>
+					</div>
+				</div>
+				<div class="form_grid_10">
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding6')}}</label>
+				</div>
+
+				<div class="form_grid_2">					
+					<div style="width: 20%;" class="form_input ">
+						<span>
+							<input name="finreason7" value="1"  id="finreason7" class="checkbox findreason" type="checkbox"  tabindex="9">
+						</span>
+					</div>
+				</div>
+				<div class="form_grid_10">
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding7')}}</label>
+				</div>
+
+				<div class="form_grid_2">					
+					<div style="width: 20%;" class="form_input ">
+						<span>
+							<input name="finreason8" value="1"  id="finreason8" class="checkbox findreason" type="checkbox"  tabindex="10">
+						</span>
+					</div>
+				</div>
+				<div class="form_grid_10">
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding8')}}</label>
+				</div>
+
 				<div class="form_grid_2">
 					<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('remisiLang.Review')}} <span class="req">*</span></label>
 				</div>
@@ -179,6 +204,10 @@
 		$('#finreason2').val('');
 		$('#finreason3').val('');
 		$('#finreason4').val('');
+		$('#finreason5').val('');
+		$('#finreason6').val('');
+		$('#finreason7').val('');
+		$('#finreason8').val('');
 
 
 		$('#review').val('');
@@ -194,6 +223,9 @@
 		$("#uniform-finreason3").find('span').attr("class", "");
 		$("#uniform-finreason4").find('span').attr("class", "");
 		$("#uniform-finreason5").find('span').attr("class", "");
+		$("#uniform-finreason6").find('span').attr("class", "");
+		$("#uniform-finreason7").find('span').attr("class", "");
+		$("#uniform-finreason8").find('span').attr("class", "");
 	}
 	function closeIns(){
 		//alert();
@@ -214,7 +246,9 @@
 			var finreason3 = 0;
 			var finreason4 = 0;
 			var finreason5 = 0;
-
+			var finreason6 = 0;
+			var finreason7 = 0;
+			var finreason8 = 0;
 
 
 			if($('#finreason1').is(":checked")) {
@@ -233,8 +267,16 @@
 			if($('#finreason5').is(":checked")) {
 				finreason5 = 1;
 			}
-				
-			t.row.add([ 'New', $('#instype option:selected').text(), $('#insofficer option:selected').text(), $('#insvdate').val(),  '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>','new',$('#insid').val(), $('#instype').val(),$('#insofficer').val(),$('#review').val(),finreason1,finreason2,finreason3,finreason4,finreason5 ]).draw( false );			
+			if($('#finreason6').is(":checked")) {
+				finreason6 = 1;
+			}
+			if($('#finreason7').is(":checked")) {
+				finreason7 = 1;
+			}
+			if($('#finreason8').is(":checked")) {
+				finreason8 = 1;
+			}	
+			t.row.add([ 'New', $('#instype option:selected').text(), $('#insofficer option:selected').text(), $('#insvdate').val(),  '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>','new',$('#insid').val(), $('#instype').val(),$('#insofficer').val(),$('#review').val(),finreason1,finreason2,finreason3,finreason4,finreason5,finreason6,finreason7,finreason8 ]).draw( false );			
 			
 		//} else {
 		//	editINSRow();
@@ -249,11 +291,11 @@
 
 		var insdata = [];
 	 		@foreach ($insdata as $rec)
-	 			insdata.push( [ '{{$loop->iteration}}', '{{$rec->tdi_value}}','{{$rec->officername}}', '{{$rec->ri_insofficerdate}}', '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>', 'noaction', '{{$rec->ri_id}}',  '{{$rec->ri_instype_id}}', '{{$rec->ri_insofficer}}','{{$rec->ri_review}}', '{{$rec->ri_insfind1}}', '{{$rec->ri_insfind2}}', '{{$rec->ri_insfind3}}', '{{$rec->ri_insfind4}}', '{{$rec->ri_insfind5}}' ] );
+	 			insdata.push( [ '{{$loop->iteration}}', '{{$rec->tdi_value}}','{{$rec->officername}}', '{{$rec->ri_insofficerdate}}', '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>', 'noaction', '{{$rec->ri_id}}',  '{{$rec->ri_instype_id}}', '{{$rec->ri_insofficer}}','{{$rec->ri_review}}', '{{$rec->ri_insfind1}}', '{{$rec->ri_insfind2}}', '{{$rec->ri_insfind3}}', '{{$rec->ri_insfind4}}', '{{$rec->ri_insfind5}}', '{{$rec->ri_insfind6}}', '{{$rec->ri_insfind7}}', '{{$rec->ri_insfind8}}' ] );
 	 		@endforeach
 		$('#invesitgatetable').DataTable({
             data:           insdata,
-            "columns": [ null, null, null,null,null,{ "visible": false}, { "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false}],
+            "columns": [ null, null, null,null,null,{ "visible": false}, { "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false}],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			oLanguage: {
@@ -292,6 +334,9 @@
 			$("#uniform-finreason3").find('span').attr("class", "");
 			$("#uniform-finreason4").find('span').attr("class", "");
 			$("#uniform-finreason5").find('span').attr("class", "");
+			$("#uniform-finreason6").find('span').attr("class", "");
+			$("#uniform-finreason7").find('span').attr("class", "");
+			$("#uniform-finreason8").find('span').attr("class", "");
 			
 			$.each( ldata, function( key, value ) {
 
@@ -299,7 +344,7 @@
             });
 
             $.each( lotdata, function( key, val ) {
-            	if(key != 'finreason1' && key != 'finreason2' && key != 'finreason3' && key != 'finreason4' && key != 'finreason5'  ){
+            	if(key != 'finreason1' && key != 'finreason2' && key != 'finreason3' && key != 'finreason4' && key != 'finreason5' && key != 'finreason6' && key != 'finreason7' && key != 'finreason8' ){
             		$('#'+key).val(val);
             	}
             	
@@ -369,6 +414,9 @@
 		var finreason3 = 0;
 		var finreason4 = 0;
 		var finreason5 = 0;
+		var finreason6 = 0;
+		var finreason7 = 0;
+		var finreason8 = 0;
 
 		if($('#finreason1').is(":checked")) {
 			finreason1 = 1;
@@ -385,7 +433,16 @@
 		if($('#finreason5').is(":checked")) {
 			finreason5 = 1;
 		}
-		data=[operation,$('#instype option:selected').text(),  $('#insofficer option:selected').text(), $('#insvdate').val(),  '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>',operation_code,$('#insid').val(), $('#instype').val(),$('#insofficer').val(),$('#review').val(),finreason1,finreason2,finreason3,finreason4,finreason5];
+		if($('#finreason6').is(":checked")) {
+			finreason6 = 1;
+		}
+		if($('#finreason7').is(":checked")) {
+			finreason7 = 1;
+		}
+		if($('#finreason8').is(":checked")) {
+			finreason8 = 1;
+		}
+		data=[operation,$('#instype option:selected').text(),  $('#insofficer option:selected').text(), $('#insvdate').val(),  '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>',operation_code,$('#insid').val(), $('#instype').val(),$('#insofficer').val(),$('#review').val(),finreason1,finreason2,finreason3,finreason4,finreason5,finreason6,finreason7,finreason8];
 		
 		row.data(data);
 		closeIns();

@@ -392,7 +392,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
         App::setlocale(session()->get('locale'));
         
-         return view("codemaintenance.propertyaddresschange.propertyaddress")->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
+         return view("datamaintenance.propertyaddresschange.propertyaddress")->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     
     }
 
@@ -468,7 +468,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
         App::setlocale(session()->get('locale'));
         
-         return view("codemaintenance.propertyaddresschange.ownerdetail")->with(array('district'=>$district, 'state'=>$state, 'zone'=>$zone, 'subzone'=>$subzone, 'master'=>$master));
+         return view("datamaintenance.propertyaddresschange.ownerdetail")->with(array('district'=>$district, 'state'=>$state, 'zone'=>$zone, 'subzone'=>$subzone, 'master'=>$master));
     
     }
 
@@ -555,7 +555,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
         App::setlocale(session()->get('locale'));
         
-         return view("codemaintenance.propertyaddresschange.propertylot")->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist)->with('lotcode',$lotcode)->with('titiletype',$titiletype)->with('tnttype',$tnttype);
+         return view("datamaintenance.propertyaddresschange.propertylot")->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist)->with('lotcode',$lotcode)->with('titiletype',$titiletype)->with('tnttype',$tnttype);
     }
 
     public function propertyLotDetail(Request $request) {
@@ -588,7 +588,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
         App::setlocale(session()->get('locale'));
         
-         return view("codemaintenance.propertyaddresschange.popup.propertylotdetail")->with(array('lotcode'=>$lotcode, 'master'=>$master, 'titiletype'=>$titiletype, 'tnttype'=>$tnttype, 'prop_id'=>$prop_id));
+         return view("datamaintenance.propertyaddresschange.popup.propertylotdetail")->with(array('lotcode'=>$lotcode, 'master'=>$master, 'titiletype'=>$titiletype, 'tnttype'=>$tnttype, 'prop_id'=>$prop_id));
     
     }
 
@@ -1071,8 +1071,8 @@ DB::statement("insert into tempQuery values(select * from )");
         $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
 
         App::setlocale(session()->get('locale'));
-        // return view("codemaintenance.propertyaddresschange.addresslog")->with(array( 'userlist'=>$userlist, 'search'=>$search, 'page'=>$page));
-        return view('codemaintenance.propertyaddresschange.addresslog')->with('search',$search)->with('userlist',$userlist);
+        // return view("datamaintenance.propertyaddresschange.addresslog")->with(array( 'userlist'=>$userlist, 'search'=>$search, 'page'=>$page));
+        return view('datamaintenance.propertyaddresschange.addresslog')->with('search',$search)->with('userlist',$userlist);
 
     }     
 
@@ -1146,7 +1146,7 @@ DB::statement("insert into tempQuery values(select * from )");
             $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
 
             App::setlocale(session()->get('locale'));
-            return view('codemaintenance.propertyaddresschange.nolotlog')->with('search',$search)->with('userlist',$userlist);
+            return view('datamaintenance.propertyaddresschange.nolotlog')->with('search',$search)->with('userlist',$userlist);
 
     }      
 
@@ -1291,11 +1291,11 @@ public function owneradddresTables(Request $request){
       $name = $request->input('name');
       if($type == 'Successs'){
         $jasper_path = base_path('/reports/ownertransferSuccess.jasper');
-        $dowload_path = base_path('/reports/ownertransferSuccess.pdf');
+        $dowload_path = base_path('/reports/temp/ownertransferSuccess');
         $filename = 'OnwerTransferSuccess.pdf';
       } else {
         $jasper_path = base_path('/reports/ownertransferFail.jasper');
-        $dowload_path = base_path('/reports/ownertransferFail.pdf');
+        $dowload_path = base_path('/reports/temp/ownertransferFail');
         $filename = 'OnwerTransferFailure.pdf';
       }
        Log::info($type);   
@@ -1306,8 +1306,8 @@ public function owneradddresTables(Request $request){
 Log::info($type);           
 Log::info($filter); 
           JasperPHP::process(
-             $jasper_path,
-                  false,
+                $jasper_path,
+                  $dowload_path,
                   array("pdf"),
                   array("propid" => $filter,'user'=>$name),
                   array(
@@ -1322,7 +1322,8 @@ Log::info($filter);
               'Content-Type: application/pdf',
           );
 
-          return response()->download($dowload_path, $filename, $headers);
+        //   return response()->download($dowload_path, $filename, $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
       }
 
 public function generateRemisireport(Request $request) {
@@ -1332,11 +1333,11 @@ public function generateRemisireport(Request $request) {
       $name = $request->input('username');
       if($type == 'type1'){
         $jasper_path = base_path('/reports/remisi.jasper');
-        $dowload_path = base_path('/reports/remisi.pdf'); 
+        $dowload_path = base_path('reports/temp/remisi'); 
         $filename = 'remisi.pdf';
       } else {
         $jasper_path = base_path('/reports/remisiInspection.jasper');
-        $dowload_path = base_path('/reports/remisiInspection.pdf');
+        $dowload_path = base_path('reports/temp/remisiInspection');
         $filename = 'remisiInspection.pdf';
       }
           
@@ -1350,8 +1351,8 @@ public function generateRemisireport(Request $request) {
           $filter = ' rg_id = '. $accountnumber;
 
           JasperPHP::process(
-             $jasper_path,
-                  false,
+            $jasper_path,
+            $dowload_path,
                   array("pdf"),
                   array("propid" => $filter,'user'=>$name),
                   array(
@@ -1366,7 +1367,9 @@ public function generateRemisireport(Request $request) {
               'Content-Type: application/pdf',
           );
 
-          return response()->download($dowload_path, $filename, $headers);
+        //   return response()->download($dowload_path, $filename, $headers,'inline');
+           return response()->file($dowload_path.'.pdf', $headers);
+
       }
       
  public function deactive(Request $request){
@@ -2205,20 +2208,26 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         }
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
-        /* $property = DB::table('cm_appln_valdetl')->join('cm_masterlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
-        'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
-        'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
-    // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
-       $property = DB::select('select ma_subzone_id,ma_id, ma_pb_id,  ma_accno,  zone.tdi_value zone, subzone.tdi_value subzone,
-          ma_addr_ln1, isbldg.tdi_value isbldg
-        from cm_masterlist
-        inner join tbdefitems subzone
-        on ma_subzone_id = subzone.tdi_key and subzone.tdi_td_name = "SUBZONE"
-        inner join tbdefitems  zone
-        on subzone.tdi_parent_key = zone.tdi_key and zone.tdi_td_name = "ZONE"
-        inner join tbdefitems isbldg
-        on ma_ishasbuilding_id = isbldg.tdi_key and isbldg.tdi_td_name = "ISHASBUILDING"  '. $filterquery);
+       
+       $property = DB::select('select 
+vd_id, vd_va_id, ma_id, ma_pb_id, ma_fileno, ma_accno, vd_accno,
+tbdefitems_subzone.tdi_parent_name zone, tbdefitems_subzone.tdi_value subzone, ma_addr_ln1,  ma_addr_ln2, 
+tbdefitems_ishasbuilding.tdi_value isbldg, concat(tbdefitems_bldgtype.tdi_parent_name, " || ", tbdefitems_bldgtype.tdi_value, " || ", tbdefitems_bldgsotery.tdi_value ) bldgtype
+from cm_appln_valdetl
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+inner join cm_masterlist on vd_ma_id = ma_id
+left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") tbdefitems_subzone on tbdefitems_subzone.tdi_key = ma_subzone_id
+left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "ISHASBUILDING") tbdefitems_ishasbuilding on tbdefitems_ishasbuilding.tdi_key = vd_ishasbuilding
+left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") tbdefitems_bldgtype on tbdefitems_bldgtype.tdi_key = vd_bldgtype_id
+left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BUILDINGSTOREY") tbdefitems_bldgsotery on tbdefitems_bldgsotery.tdi_key = vd_bldgstorey_id
+inner join (select max(vt_termDate) termdate,  vd_ma_id, vd_accno as accountno from cm_appln_valdetl
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+where  vt_id  IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = "05") 
+and vd_accno NOT IN (select cm_appln_deactivedetl.dad_accno from cm_appln_deactivedetl inner join  cm_appln_deactive on cm_appln_deactivedetl.dad_da_id = cm_appln_deactive.da_id 
+inner join cm_appln_valterm on cm_appln_deactive.da_vt_id = cm_appln_valterm.vt_id where vt_id IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = "05") )
+group by vd_ma_id, vd_accno) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno'. $filterquery);
         
         $propertyDetails = Datatables::collection($property)->make(true);
    
@@ -2548,7 +2557,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
 
         App::setlocale(session()->get('locale'));
         
-        return view('codemaintenance.propertyaddresschange.popup.search')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id)->with('page',$page);
+        return view('datamaintenance.propertyaddresschange.popup.search')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id)->with('page',$page);
     }
 
      public function searchPropertyAddressData(Request $request){

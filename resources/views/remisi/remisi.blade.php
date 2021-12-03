@@ -69,16 +69,16 @@
 										{{__('remisi.col11')}}
 									</th>
 									<th>
-										Decision Officer
-									</th>
-									<th>
-										Decision Date
-									</th>	
-									<th>
 										{{__('remisi.col12')}}
 									</th>
 									<th>
 										{{__('remisi.col13')}}
+									</th>	
+									<th>
+										{{__('remisi.col14')}}
+									</th>
+									<th>
+										{{__('remisi.col15')}}
 									</th>		
 								</tr>
 							</thead>
@@ -99,8 +99,8 @@
 			<div class="widget_wrap">
 				
 				<div class="widget_content">
-					<h3 id="generatereport">Generate Report</h3>
-					<form style="" id="generateform" method="GET" action="generateRemisireport">
+					<h3 id="generatereport">Jana Laporan</h3>
+					<form style="" id="generateform" method="GET" action="generateRemisireport" target="_blank">
 						@csrf
 						<input type="hidden" name="type" id="type">
 						<input type="hidden" name="accountnumber" id="accountnumber">
@@ -110,10 +110,10 @@
 								<li>
 									
 									<fieldset>
-										<legend>Additional Information</legend>
+										<legend>Maklumat Tambahan</legend>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">VALUER NAME<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">Nama Pegawai<span class="req">*</span></label>
 											<div  class="form_input">
 												<select onchange="getposition()" data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="name" tabindex="7" name="name" tabindex="20">
 														<option></option>
@@ -127,7 +127,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">VALUER TITLE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">Jawatan<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="title" name="title"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -287,7 +287,7 @@ $(document).ready(function (){
 			        	}
 			        }, "name": "ishasbldg"}, 
 			        {"data": "rg_desiofficer", "name": "ishasbldg"}, 
-			        {"data": "rg_desiofficerdate_frmt", "name": "ishasbldg"}, 
+			        {"data": "rg_desiofficerdate", "name": "ishasbldg"}, 
 			        {"data": "approvalstatus", "name": "ishasbldg"}, 
 			        {"data":  function(data){
 			        	

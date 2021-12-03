@@ -2792,7 +2792,7 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
       $name = $request->input('username');
       if($type == 'Successs'){
         $jasper_path = base_path('/reports/officialsearch.jasper');
-        $dowload_path = base_path('/reports/officialsearch.pdf');
+        $dowload_path = base_path('/reports/temp/officialsearch');
         $filename = 'Official Search.pdf';
       }
           
@@ -2806,8 +2806,8 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
           $filter = ' os_id = '. $accountnumber;
 
           JasperPHP::process(
-             $jasper_path,
-                  false,
+            $jasper_path,
+            $dowload_path,
                   array("pdf"),
                   array("propid" => $filter,'user'=>$name),
                   array(
@@ -2822,7 +2822,8 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
               'Content-Type: application/pdf',
           );
 
-          return response()->download($dowload_path, $filename, $headers);
+        //   return response()->download($dowload_path, $filename, $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
 
     }
 

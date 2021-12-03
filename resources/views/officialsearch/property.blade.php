@@ -138,8 +138,8 @@
 		<div class="widget_wrap">
 			
 			<div class="widget_content">
-				<h3 id="generatereport">Generate Report</h3>
-				<form style="" id="generateform" method="GET" action="generateoffsReport">
+				<h3 id="generatereport">Jana Laporan</h3>
+				<form style="" id="generateform" method="GET" action="generateoffsReport" target="_blank">
 					@csrf
 					<input type="hidden" name="type" id="type">
 					<input type="hidden" name="accountnumber" id="accountnumber">
@@ -148,10 +148,10 @@
 							<li>
 								
 								<fieldset>
-									<legend>Additional Information</legend>
+									<legend>Maklumat Tambahan</legend>
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">VALUER NAME<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">Nama Pegawai<span class="req">*</span></label>
 										<div  class="form_input">
 											<select onchange="getposition()" data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="name" tabindex="7" name="name" tabindex="20">
 											<option></option>
@@ -165,7 +165,7 @@
 									</div>
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">VALUER TITLE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">Jawatan<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="title" name="title"  type="text"  maxlength="50" class="required"/>
 										</div>

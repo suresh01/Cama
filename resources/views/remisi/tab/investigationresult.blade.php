@@ -142,7 +142,7 @@
 						<div style="width: 20%;" class="form_input ">
 							<span>
 							
-							<input name="rjreason2" id="rjreason2" value="2" class="checkbox rjreason2" type="checkbox"  tabindex="7">
+							<input name="rjreason2" id="rjreason2" value="1" class="checkbox rjreason2" type="checkbox"  tabindex="7">
 							</span>
 						</div>
 					</div>
@@ -155,7 +155,7 @@
 						<div style="width: 20%;" class="form_input ">
 							<span>
 							
-							<input name="rjreason3" id="rjreason3" value="3" class="checkbox rjreason3" type="checkbox"  tabindex="7">
+							<input name="rjreason3" id="rjreason3" value="1" class="checkbox rjreason3" type="checkbox"  tabindex="7">
 							</span>
 						</div>
 					</div>
@@ -163,7 +163,19 @@
 						<label style="width: 80%;" class="field_title">{{__('remisiLang.Reason3')}} </label>
 						
 					</div>
-
+					<div class="form_grid_2">
+												
+						<div style="width: 20%;" class="form_input ">
+							<span>
+							
+							<input name="rjreason4" id="rjreason4" value="1" class="checkbox rjreason4" type="checkbox"  tabindex="7">
+							</span>
+						</div>
+					</div>
+					<div class="form_grid_10">
+						<label style="width: 80%;" class="field_title">{{__('remisiLang.Reason4')}} </label>
+						
+					</div>
 					
 					
 					
@@ -202,17 +214,35 @@
 
 			
 			if('{{$master->rg_rerejectreason1}}' == 1){				
-				var to_replace = $("#uniform-rjreason1").find('span');
-				to_replace.attr("class", "checked");
+				// var to_replace = $("#uniform-rjreason1").find('span');
+				// to_replace.attr("class", "checked");
+				var checkbox = $("#uniform-rjreason1").find('span');
+				checkbox.attr("class", "checked");
+				$("#rjreason1:checkbox").attr("checked","checked");
 			} 
-			 if('{{$master->rg_rerejectreason2}}' == 2){		
-				var to_replace = $("#uniform-rjreason2").find('span');
-				to_replace.attr("class", "checked");
+			if('{{$master->rg_rerejectreason2}}' == 1){		
+				// var to_replace = $("#uniform-rjreason2").find('span');
+				// to_replace.attr("class", "checked");
+				var checkbox = $("#uniform-rjreason2").find('span');
+				checkbox.attr("class", "checked");
+				$("#rjreason2:checkbox").attr("checked","checked");
 			} 
-			 if('{{$master->rg_rerejectreason3}}' == 3){		
-				var to_replace = $("#uniform-rjreason3").find('span');
-				to_replace.attr("class", "checked");
+			if('{{$master->rg_rerejectreason3}}' == 1){		
+				// var to_replace = $("#uniform-rjreason3").find('span');
+				// to_replace.attr("class", "checked");
+				var checkbox = $("#uniform-rjreason3").find('span');
+				checkbox.attr("class", "checked");
+				$("#rjreason3:checkbox").attr("checked","checked");
+			}
+			if('{{$master->rg_rerejectreason4}}' == 1){		
+				// var to_replace = $("#uniform-rjreason4").find('span');
+				// to_replace.attr("class", "checked");
+				var checkbox = $("#uniform-rjreason4").find('span');
+				checkbox.attr("class", "checked");
+				$("#rjreason4:checkbox").attr("checked","checked");
 			} 
+
+					
 		});
 
 

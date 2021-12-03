@@ -251,7 +251,10 @@ class PropertyRegisterationController extends Controller
         $status=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ACTIVEIND" order by tdi_sort ');
         $mbldg=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISMAINBLDG" order by tdi_sort ');
 
-        $master = DB::select('select * from cm_masterlist where ma_id = ifnull("'.$prop_id.'",0)');
+        $master = DB::select('select cm_masterlist.*, zone.tdi_key zoneid
+from cm_masterlist
+left join tbdefitems subzone on subzone.tdi_key = ma_subzone_id and subzone.tdi_td_name = "SUBZONE"
+left join tbdefitems zone on zone.tdi_key = subzone.tdi_parent_key and zone.tdi_td_name = "ZONE" where ma_id = ifnull("'.$prop_id.'",0)');
 
         $iseditable = 1;
         foreach ($master as $obj) {  

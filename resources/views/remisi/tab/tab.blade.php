@@ -71,7 +71,7 @@
 </div>
 <script>
 
-	let invesitagemap = new Map([["0","sno"],["1", "typetxt"],["2", "officertxt"],["3", "insvdate"],["4", "action"],["5", "actioncode"],["6", "insid"],["7", "instype"], ["8", "insofficer"],  ["9", "review"],["10", "finreason1"], ["11", "finreason2"],["12", "finreason3"], ["13", "finreason4"],["14", "finreason5"]]);
+	let invesitagemap = new Map([["0","sno"],["1", "typetxt"],["2", "officertxt"],["3", "insvdate"],["4", "action"],["5", "actioncode"],["6", "insid"],["7", "instype"], ["8", "insofficer"],  ["9", "review"],["10", "finreason1"], ["11", "finreason2"],["12", "finreason3"], ["13", "finreason4"],["14", "finreason5"],["15", "finreason6"],["16", "finreason7"],["17", "finreason8"]]);
 	function closeWindow(){
 	    
 	    window.close();

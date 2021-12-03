@@ -173,7 +173,16 @@
 								<ul>
 								<li >
 									<fieldset>
-										<legend>{{__('propertyregister.Address_Information')}} </legend>
+								<legend>{{__('propertyregister.Address_Information')}} </legend>
+								<div class="form_grid_12">
+									<label class="field_title">{{__('CodeMaintenance.Copy_Previous_Detail')}} </label>
+									<div class="form_input">
+										<span>
+											<input name="field08" id="copydetail" onchange="copyDetail()" class="checkbox" type="checkbox"  tabindex="7">
+											
+										</span>
+									</div>
+								</div>
 								<div class="form_grid_12">
 									<label class="field_title" id="llevel" for="level">{{__('propertyregister.Owner_Addres1')}} <span class="req">*</span></label>
 									<div  class="form_input">
@@ -518,6 +527,30 @@ function addownerRow(){
 
 									
 									
+						}
+						function copyDetail(){
+							
+							if($('#copydetail').prop("checked") == true){
+								$("#ownaddr1").val($("#address1").val());
+								$("#ownaddr2").val($("#address2").val());
+								$("#ownaddr3").val($("#address3").val());
+								$("#ownaddr4").val($("#address4").val());
+								$("#ownpostcode").val($("#postcode").val());
+								$("#owncity").val($("#city").val());
+								$('#ownstate').val($('#state').val());
+								
+							}
+							else if($('#copydetail').prop("checked") == false){
+								$("#ownaddr1").val('');
+								$("#ownaddr2").val('');
+								$("#ownaddr3").val('');
+								$("#ownaddr4").val('');
+								$("#ownpostcode").val('');
+								$("#owncity").val('');
+								$("#ownstate").val('');
+							}
+							
+							
 						}
 					</script>
 							

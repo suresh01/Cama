@@ -16,10 +16,11 @@ return [
     'col8'=>'Tingkat Harta',
     'col9'=>'Didaftar Oleh',
     'col01'=>'Didaftar Pada',
-    'col11'=>'Keputusan',
-    'col12'=>'Status',
-    'col13'=>'Aksi',
-
+    'col11'=>'Cadangan Keputusan',
+    'col12'=>'Pegawai',
+    'col13'=>'Tarikh',
+    'col14'=>'Status',
+    'col15'=>'Aksi',
 
     'addapplication'=>'Aplikasi'
 

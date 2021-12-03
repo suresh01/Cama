@@ -16,7 +16,7 @@
       
       <a href="#" id="" onclick="getSelectedProp()" class=""><span>{{__('existspropertyregisyter.Add_Property')}}  </span></a>
       <!--<a href="#" id="" onclick="back()" class=""><span>Back </span></a> -->
-      <a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}}  </span></a>
+      <a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}}</span></a>
     </div>
     <div style="float:right;margin-right: 15px;"  class="btn_24_blue">
       @include('existspropertyregister.grab.search')

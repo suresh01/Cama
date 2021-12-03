@@ -128,7 +128,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">{{__('propertyregister.Address4')}}<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address4"  name="address4" tabindex="11"  type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
+						<input id="address4"  name="address4" tabindex="11"  type="text" value="{{$master->ma_addr_ln4}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>

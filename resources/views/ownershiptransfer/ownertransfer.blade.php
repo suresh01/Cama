@@ -175,7 +175,7 @@
 						
 						<div class="widget_content">
 							<h3 id="title">Jana Laporan</h3>
-							<form style="" id="generateform" method="GET" action="generateOwnershipreport">
+							<form style="" id="generateform" method="GET" action="generateOwnershipreport" target="_blank">
 					            @csrf
 					            <input type="hidden" name="type" id="type">
 					            <input type="hidden" name="accountnumber" id="accountnumber">

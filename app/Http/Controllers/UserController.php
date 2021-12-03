@@ -677,7 +677,7 @@ $roles = '';
        // Log::info(2);
         //$search=DB::select('select * from tbsearchdetail');
         App::setlocale(session()->get('locale'));
-        return view('codemaintenance')->with(array('searchmodule' => $searchmodule, 'codemaintenance' =>$result));
+        return view('datamaintenance.codemaintenance.codemaintenance')->with(array('searchmodule' => $searchmodule, 'codemaintenance' =>$result));
     }
 
     public function codeMaintenancetrn(Request $request) {
@@ -836,7 +836,7 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
         App::setlocale(session()->get('locale'));
 
 
-        return view('codemaintenancedetail')->with('codedetail',$codedetail)->with('name',$td_name)->with('isparent',$isparent)->with('search',$search)->with('childparent',$childparent)->with('lastcode',$lastcode)->with('id',$id);
+        return view('datamaintenance.codemaintenance.codemaintenancedetail')->with('codedetail',$codedetail)->with('name',$td_name)->with('isparent',$isparent)->with('search',$search)->with('childparent',$childparent)->with('lastcode',$lastcode)->with('id',$id);
     }
 
     public function codemaintenancedetailtrn(Request $request){

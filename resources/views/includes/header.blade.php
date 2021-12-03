@@ -15,7 +15,7 @@
 <link href="css/gradient.css" rel="stylesheet" type="text/css">
 <link href="css/tree.css" rel="stylesheet" type="text/css">
 <link href="css/custom-nav.css" rel="stylesheet" type="text/css">
-	
+<link rel="shortcut icon" href="{{ asset('favicon.ico') }}"  type='image/x-icon'>	
 <style>
 .dropdown-submenu .dropdown-menu {
     /**left: 100%;*/

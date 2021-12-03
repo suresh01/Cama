@@ -112,7 +112,7 @@
 										<span class=" label_intro"></span>
 									</div>									
 									<div class="form_grid_2">									
-										<input type="button" id="btn_search" onclick="openSearch()" value="Search Acc" name="">
+										<input type="button" id="btn_search" onclick="openSearch()" value="Carian No Akaun" name="">
 										<span class=" label_intro"></span>
 									</div>	
 
