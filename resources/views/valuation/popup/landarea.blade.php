@@ -15,7 +15,7 @@
       <div class="grid_12">
         <div class="widget_wrap">
           <div class="widget_top">
-            <h6>Valuation</h6>
+            <h6>{{__('valuation.Valuation')}}</h6>
           </div>
           <div class="widget_content">
             <div class=" page_content">
@@ -29,24 +29,24 @@
                     <span>{{$rec->lotnumber}}</span>  
                   </div>
                   <div class="grid_3 invoice_to">   
-                    <strong><span>{{__('valuation.Lot_Position')}}  : </span></strong>
+                    <strong><span>{{__('valuation.Lot_Position')}} : </span></strong>
                     <span>{{$rec->landposition}}</span>
                   </div>
                   <div class="grid_3 invoice_from">
-                    <strong><span>{{__('valuation.Alternate_Lot_No')}}  : </span></strong>
+                    <strong><span>{{__('valuation.Alternate_Lot_No')}} : </span></strong>
                     <span>{{$rec->titlenumber}}</span>
                   </div>
                   <div class="grid_3 invoice_from">
-                    <strong><span>{{__('valuation.Tenure_Type')}}  : </span></strong>
+                    <strong><span>{{__('valuation.Tenure_Type')}} : </span></strong>
                     <span>{{$rec->tentype}}</span>
                   </div>
                   <br>  <br>  <br>
                   <div class="grid_3 invoice_from">
-                    <strong><span>{{__('valuation.Land_Area')}}  : </span></strong>
+                    <strong><span>{{__('valuation.Land_Area')}} : </span></strong>
                     <span>{{$rec->vl_size}}</span>
                   </div>
                   <div class="grid_3 invoice_from">
-                    <strong><span>{{__('valuation.Tenure_Duration')}}  : </span></strong>
+                    <strong><span>{{__('valuation.Tenure_Duration')}} : </span></strong>
                     <span>{{$rec->duration}}</span>
                   </div>
                
@@ -79,7 +79,7 @@
                     <ul>
                       <li>
                           <div class="form_grid_6">
-                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Net_Land_Value')}}  <span class="req">*</span></label>
+                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Net_Land_Value')}}<span class="req">*</span></label>
                         </div>
                         <div class="form_grid_6">
                           <div  class="form_input">
@@ -90,7 +90,7 @@
                       </li>
                       <li>
                           <div class="form_grid_6">
-                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Rounded_Value')}} <span class="req">*</span></label>
+                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Rounded_Value')}}<span class="req">*</span></label>
                         </div>
                         <div class="form_grid_6">
                           <div  class="form_input">

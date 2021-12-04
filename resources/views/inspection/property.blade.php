@@ -500,26 +500,26 @@ var table = $('#proptble').DataTable({
 			        	}
 			        	return '';
 			        }, "name": "account number"},
-			        {"data": "ma_fileno", "name": "zone"},
+			        {"data": "ma_fileno", "name": "ma_fileno"},
 			        {"data": "zone", "name": "subzone"},
 			        {"data": "subzone", "name": "subzone"},
-			        {"data": "isbldg", "name": "address"},
+			        {"data": "isbldg", "name": "isbldg"},
 			        {"data": function(data){
 			            return data.bldgcategory+" || "+data.bldgtype+" || "+data.bldgsotery;
-			        }, "name": "owner"}, 
-			        {"data": "landvalue", "name": "ishasbldg"}, 
-			        {"data": "bldgvalue", "name": "propertstatus"}, 
-			        {"data": "vt_approvednt", "name": "owner", "sClass": "numericCol"}, 
-			        {"data": "vt_proposedrate", "name": "ishasbldg", "sClass": "numericCol"}, 
-			        {"data": "vt_approvedtax", "name": "ishasbldg", "sClass": "numericCol"}, 
+			        }, "name": "building"}, 
+			        {"data": "landvalue", "name": "landvalue", "sClass": "numericCol"}, 
+			        {"data": "bldgvalue", "name": "bldgvalue", "sClass": "numericCol"}, 
+			        {"data": "vt_approvednt", "name": "vt_approvednt", "sClass": "numericCol"}, 
+			        {"data": "vt_proposedrate", "name": "vt_proposedrate", "sClass": "numericCol"}, 
+			        {"data": "vt_approvedtax", "name": "vt_approvedtax", "sClass": "numericCol"}, 
 			        {"data": "propertstatus", "name": "propertstatus"}, 
-			        {"data": "ma_addr_ln1", "name": "propertstatus","visible":false}, 
-			        {"data": "ma_addr_ln2", "name": "ishasbldg","visible":false}, 
-			        {"data": "ma_addr_ln3", "name": "propertstatus","visible":false}, 
-			        {"data": "ma_addr_ln4", "name": "ishasbldg","visible":false}, 
-			        {"data": "ma_postcode", "name": "propertstatus","visible":false}, 
-			        {"data": "ma_city", "name": "ishasbldg","visible":false}, 
-			        {"data": "state", "name": "propertstatus","visible":false},  
+			        {"data": "ma_addr_ln1", "name": "ma_addr_ln1","visible":false}, 
+			        {"data": "ma_addr_ln2", "name": "ma_addr_ln2","visible":false}, 
+			        {"data": "ma_addr_ln3", "name": "ma_addr_ln3","visible":false}, 
+			        {"data": "ma_addr_ln4", "name": "ma_addr_ln4","visible":false}, 
+			        {"data": "ma_postcode", "name": "ma_postcode","visible":false}, 
+			        {"data": "ma_city", "name": "ma_city","visible":false}, 
+			        {"data": "state", "name": "state","visible":false},  
 			        {"data":  function(data){
 			        	
 			        	var deleteuri = '&nbsp;&nbsp;&nbsp;<span><a class="action-icons  "  onclick="deleteProperty('+data.vd_id+')" disabled="true" title="Delete Property" href="#"></a></span>';
@@ -590,9 +590,9 @@ var table = $('#proptble').DataTable({
 	    var rows_selected = [];
 	   
 	    
-	    hideCol('proptble', [11,12,13,14,15,16,17]);
+	    hideCol('proptble', [14,15,16,17]);
 		
-		defaultDatatableColumn(["2","3","4","5","6","7","8","9","10"]);
+		defaultDatatableColumn(["2","3","4","5","6","7","8","9","10","11","12","13"]);
 
 		$('.multiselect-wrapper .multiselect-list span:first').html('');
 		//$('.multiselect-wrapper .multiselect-list hr:first').html('');

@@ -13,6 +13,8 @@ return [
 	'Area_Category'=>'Kategori Ruang',
 	'Area_Use'=>'Kegunaan Ruang',
 	'Area'=>'Ukuran',
+	'TotalArea'=>'Luas Keseluruhan',
+	'BalanceArea'=>'Luas Baki',
 	'Area_Rate'=>'Kadar',
 	'Gross_Area_Value'=>'Nilai Kasar',
 	'Rate'=>'Kadar',

@@ -16,39 +16,39 @@
         <div class="widget_wrap">
 <div id="vlottable" >
           <div class="widget_top">
-            <h6>Valuation</h6>
+            <h6>{{__('valuation.Valuation')}}</h6>
           </div>
           <div class="widget_content">
             <div class=" page_content">
               <div class="invoice_container"> 
                 
                 <fieldset>
-                  <legend>Land Detail</legend>             
+                  <legend>{{__('valuation.Land_Detail')}}</legend>             
                   @foreach ($lotdetail as $rec)
                   <div class="grid_3 invoice_to"> 
-                    <strong><span>Code Lot / No : </span></strong>
+                    <strong><span>{{__('valuation.Code_Lot_No')}} : </span></strong>
                     <span>{{$rec->lotnumber}}</span>  
                   </div>
                   <div class="grid_3 invoice_to">   
-                    <strong><span>Lot Position : </span></strong>
+                    <strong><span>{{__('valuation.Lot_Position')}} : </span></strong>
                     <span>{{$rec->landposition}}</span>
                   </div>
                   <div class="grid_3 invoice_from">
-                    <strong><span>Alternate Lot No : </span></strong>
+                    <strong><span>{{__('valuation.Alternate_Lot_No')}} : </span></strong>
                     <span>{{$rec->titlenumber}}</span>
                   </div>
                   <div class="grid_3 invoice_from">
-                    <strong><span>Tenure Type : </span></strong>
+                    <strong><span>{{__('valuation.Tenure_Type')}} : </span></strong>
                     <span>{{$rec->tentype}}</span>
                   </div>
                   <br>  <br>  <br>
                   <div class="grid_3 invoice_from">
-                    <strong><span>Land Area : </span></strong>
+                    <strong><span>{{__('valuation.Land_Area')}} : </span></strong>
                     <span>{{$rec->al_size}}</span>
                     <input type="hidden" id="landsize" value="{{$rec->al_size}}">
                   </div>
                   <div class="grid_3 invoice_from">
-                    <strong><span>Tenure Duration : </span></strong>
+                    <strong><span>{{__('valuation.Tenure_Duration')}} : </span></strong>
                     <span>{{$rec->duration}}</span>
                   </div>
                
@@ -57,7 +57,7 @@
                 <span class="clear"></span>
                 <div class="grid_12 invoice_details">
                   <div style="float:right;margin-right: 30px;"  class="btn_24_blue">
-                    <a href="#" onclick="addLand()">Add Lotdetail</a>  
+                    <a href="#" onclick="addLand()">Tambah Luas</a>  
                   </div>
                   <br>
                   <br>
@@ -66,25 +66,25 @@
                         <thead>
                         <tr class=" gray_sai">
                           <th>
-                            S No
+                            {{__('valuation.SNo')}}
                           </th>
                           <th>
-                            Area Name
+                            {{__('valuation.Area_Name')}}
                           </th>
                           <th>
-                            Area
+                            {{__('valuation.Area')}}
                           </th>
                           <th>
-                            Rate(smp)
+                            {{__('valuation.Rate_smp')}}
                           </th>
                           <th>
-                            Discount Rate(%)
+                            {{__('valuation.Discount_Rate')}} (%)
                           </th>
                           <th>
-                            Gross Value
+                            {{__('valuation.Gross_Value')}}
                           </th>
                           <th>
-                            Action
+                            {{__('valuation.Action')}}
                           </th>
                           <th>
                             rate
@@ -109,7 +109,7 @@
                     <ul>
                       <li>
                           <div class="form_grid_6">
-                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Net Land Value<span class="req">*</span></label>
+                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Net_Land_Value')}}<span class="req">*</span></label>
                         </div>
                         <div class="form_grid_6">
                           <div  class="form_input">
@@ -120,7 +120,7 @@
                       </li>
                       <li>
                           <div class="form_grid_6">
-                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Rounded Value <span class="req">*</span></label>
+                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Rounded_Value')}}<span class="req">*</span></label>
                         </div>
                         <div class="form_grid_6">
                           <div  class="form_input">
@@ -135,9 +135,9 @@
                 <div style="height: 48px; float: right; " class="grid_12">
                 
                   <div class="form_input">
-                    <button id="addsubmit" name="adduser" style="float: right; "  onclick="updateCalculation()" type="button" class="btn_small btn_blue"><span>Update</span></button>      
+                    <button id="addsubmit" name="adduser" style="float: right; "  onclick="updateCalculation()" type="button" class="btn_small btn_blue"><span>Kemaskini</span></button>      
                               
-                    <button id="close" name="close" type="button" onclick="closeWindow()"  class="btn_small btn_blue"><span>Close</span></button>
+                    <button id="close" name="close" type="button" onclick="closeWindow()"  class="btn_small btn_blue"><span>Tutup</span></button>
                     <span class=" label_intro"></span>
                   </div>
                   
@@ -155,7 +155,7 @@
       <div id="addgroup" style="display:none" class="grid_10 full_block">
         <div class="widget_wrap">
           <div class="widget_content">
-            <h3 id="title">Add Land Area</h3>
+            <h3 id="title">Tambah Luas Tanah</h3>
             
               <input type="hidden" name="id" id="id" value="0">
               <input type="hidden" name="operation" id="operation" value="0">
@@ -163,28 +163,28 @@
                 <ul>
                   <li>                
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="termname" for="termid">Area Description<span class="req">*</span></label>
+                      <label class="field_title" id="termname" for="termid">{{__('valuation.Area_Name')}}<span class="req">*</span></label>
                       <div class="form_input">                        
                         <input id="desc" required="true"  name="desc" type="text"  value="" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>                
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Area Size<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('valuation.Area')}}<span class="req">*</span></label>
                       <div class="form_input">
                         <input id="size" required="true" onchange="calBalance()" name="size" type="text"  value="" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>                 
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Total Area<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('valuation.TotalArea')}}<span class="req">*</span></label>
                       <div class="form_input">
                         <input id="totsize" readonly="true"  name="totsize" type="text"  value="" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>                  
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Balance Area<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('valuation.BalanceArea')}}<span class="req">*</span></label>
                       <div class="form_input">
                         <input id="balancesize" readonly="true"  name="balancesize" type="text"  value="" />
                       </div>
@@ -210,9 +210,9 @@
               
               <div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">                
                 <div class="form_input">
-                  <button id="addsubmit" name="adduser" type="submit" onclick="addLanddetail()" class="btn_small btn_blue"><span>Submit</span></button>     
+                  <button id="addsubmit" name="adduser" type="submit" onclick="addLanddetail()" class="btn_small btn_blue"><span>Tambah</span></button>     
                             
-                  <button id="close" onclick="closeLand()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+                  <button id="close" onclick="closeLand()" name="close" type="button" class="btn_small btn_blue"><span>Tutup</span></button>
                   <span class=" label_intro"></span>
                 </div>
                 
