@@ -128,9 +128,10 @@
 												@endforeach												
 												<tr>
 													<td colspan="4" class="grand_total">
-														{{__('valuation.Total_Land_Value')}}:
+														{{-- {{__('valuation.Total_Land_Value')}}: --}}
 													</td>
-													<td>
+													<td class="grand_total">
+														{{__('valuation.Total_Land_Value')}}:
 														<input type="text" readonly="true" onchange="taxCalculation()" style="float: right; "  value="{{number_format($totalland1,2)}}" class="tbl-total" id="landtotal">
 													</td>
 												</tr>
@@ -202,9 +203,10 @@
 												@endforeach
 												<tr>
 													<td colspan="7" class="grand_total">
-														Total Building Net Value
+														{{-- {{__('valuation.Total_Building_Net_Value')}}  --}}
 													</td>
-													<td>
+													<td class="grand_total">
+														{{__('valuation.Total_Building_Net_Value')}}:
 														<input type="text" style="float: right; " readonly="true" value="{{number_format($totalbldg,2)}}" class="tbl-total" id="vd_bldgtotal">
 													</td>
 												</tr>
@@ -229,9 +231,9 @@
 														<th style="width: 30%;">{{__('valuation.Description')}}</th>
 														<th>{{__('valuation.Area')}}</th>
 														<th>{{__('valuation.Rate')}}</th>
-														<th> {{__('valuation.Gross_Value')}}</th>
-														<th> {{__('valuation.Round_Value')}}</th>
-														<th style="width: 10%;"> {{__('valuation.Action')}}  </th>
+														<th>{{__('valuation.Gross_Value')}}</th>
+														<th>{{__('valuation.Round_Value')}}</th>
+														<th style="width: 60px">{{__('valuation.Action')}}  </th>
 
 													<th style="display: none;">
 														actioncode 
@@ -271,12 +273,14 @@
 												
 												</tbody>
 												<tr>
-													<td colspan="6" class="grand_total">
+													<td colspan="5" class="grand_total">
 														@if($iseditable == 1)
-														<button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>{{__('valuation.Add_Additional_value')}}</span></button>@endif							
-														{{__('valuation.Total_Additional_Value')}}:
+															<button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>{{__('valuation.Add_Additional_value')}}</span></button>
+														@endif							
+														
 													</td>
-													<td>
+													<td class="grand_total">
+														{{__('valuation.Total_Additional_Value')}}:
 														<input type="text" readonly="true"  style="float: right; "  value="{{number_format($totaladditonal,2)}}" class="tbl-total" id="additionaltotal">
 													</td>
 												</tr>
@@ -320,7 +324,7 @@
 												</div>
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">{{__('valuation.Gross_value')}} <span class="req">*</span></label>
+														<label class="field_title" id="luserid" for="userid">{{__('valuation.Gross_Value')}} <span class="req">*</span></label>
 														<div class="form_input">
 															<input id="add_grossvalue" readonly="true"  name="add_grossvalue" type="text"  value="" />
 														</div>
@@ -1131,7 +1135,8 @@
 	        alert('Please enter rate');
 	        return false;
 	    } else {
-	    	var t = $('#additionaltable').DataTable({"columns":[ null, null, null, null, null, null, null, { "visible": false }]});
+	    	// var t = $('#additionaltable').DataTable({"columns":[ null, null, null, null, null, null, null, { "visible": false }]});
+			var t = $('#additionaltable').DataTable();
 			$('#additionaltable_filter').remove();
 		    $('#additionaltable_info').remove();
 		    $('#additionaltable_paginate').remove();

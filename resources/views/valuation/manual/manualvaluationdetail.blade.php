@@ -21,8 +21,8 @@
 
 				<div id="breadCrumb3" class="breadCrumb grid_12">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Valuation Process</a></li>
+						<li><a href="#">{{__('valuation.Home')}}</a></li>
+						<li><a href="#">{{__('valuation.Valuation_Process')}}</a></li>
 						<li><a href="group?param={{$termid}}">{{$viewparamterm}} </a></li>
 						<li><a href="property?id={{$pb}}">{{$viewparambasket}} - {{$viewparambasketstatus}}</a></li>
 						<li>{{$accountnumber}} </li>
@@ -32,7 +32,7 @@
 
 				<div class="widget_wrap">
 					<div class="widget_top">
-						<h6>Valuation</h6>
+						<h6>{{__('valuation.Valuation')}}</h6>
 					</div>
 					<div class="widget_content">
 						<div class=" page_content">
@@ -43,30 +43,30 @@
 
 
 										<div style="line-height: 2;">	
-											<strong><span>Zone : </span></strong>
+											<strong><span>{{__('valuation.Zone')}} : </span></strong>
 											<span>{{$rec->zone}}</span>	
 										</div>
 										<div style="line-height: 2;">		
-											<strong><span>Sub Zone : </span></strong>
+											<strong><span>{{__('valuation.Sub_Zone')}} : </span></strong>
 											<span>{{$rec->subzone}}</span>
 										</div>
 									</div>
 									<div class="grid_4">		
 
 										<div style="line-height: 2;">
-											<strong><span>Property Category : </span></strong>
+											<strong><span>{{__('valuation.Property_Category')}} : </span></strong>
 											<span>{{$rec->propcategorty}}</span>
 										</div>
 										<div style="line-height: 2;">
-											<strong><span>Property Type : </span></strong>
+											<strong><span>{{__('valuation.Property_Type')}} : </span></strong>
 											<span>{{$rec->proptype}}</span>
 										</div>
 										<div style="line-height: 2;">
-											<strong><span>Property Status : </span></strong>
+											<strong><span>{{__('valuation.Property_Status')}} : </span></strong>
 											<span>{{$rec->bldgstatus}}</span>
 										</div>
 										<div style="line-height: 2;">
-											<strong><span>Property Storey : </span></strong>
+											<strong><span>{{__('valuation.Property_Storey')}} : </span></strong>
 											<span>{{$rec->bldgstorey}}</span>
 										</div>
 									</div>
@@ -78,86 +78,87 @@
 									<!--<div style="float:right;margin-right: 30px;"  class="btn_24_blue">
 										<a href="#" onclick="addLand()">Add Land</a>	
 									</div>-->
-									<button id="addadditional" onclick="addLand()" name="adduser" style="float: right; "  type="button" class="  btn_small btn_blue "><span>Add Land / Building</span></button>
+									<button id="addadditional" onclick="addLand()" name="adduser" style="float: right; "  type="button" class="  btn_small btn_blue "><span>Tambah Tanah / Bangunan</span></button>
 									<br>
 									<br>
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Land Calculation</h6>
+											<h6>{{__('valuation.Land_Calculation')}}</h6>
 										</div>
 										<div class="widget_content">
 											<div class="invoice_tbl">
 												<table id="landtable">
-												<thead>
-												<tr class=" gray_sai">
-													<th style="width: 40px;">
-														S No
-													</th>
-													<th>
-														Lot Code / Lot No
-													</th>
-													<th>
-														Land Area
-													</th>
-													<th>
-														Net Value
-													</th>
-													<th>
-														Round Value
-													</th>													
-													<th>
-														Action
-													</th>												
-													<th style="display: none;">
-														lotid
-													</th>											
-													<th style="display: none;">
-														actioncode
-													</th>
-												</tr>
-												</thead>
-												<tbody>
-												
-												@php($totalland1 = 0)
-													@php($totalbldg = 0)
-													@foreach ($lot as $rec)
-													<tr>
-														<td>
-															{{$loop->iteration}}
-														</td>
-														<td>
-															<a href="#" onclick="addLandStandard()">{{$rec->lotnumber}}</a>
-														</td>
-														<td style="text-align:right;">
-															{{$rec->vl_size}}
-														</td>
-														<td id="gross_{{$loop->iteration}}" style="text-align:right;">
-															{{number_format($rec->vl_grosslandvalue,2)}}
-
-														</td>
-														<td id="netvalue_{{$loop->iteration}}" style="text-align:right;">
-															{{number_format($rec->vl_roundnetlandvalue,2)}}
-														</td>
-														<td>
-															<span><a onclick="" class="action-icons c-edit editaddrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span>
-														</td>
-														<td style="display: none;">
-															{{$rec->vl_id}}
-														</td>
-														<td style="display: none;">
-															noaction
-														</td>
-														@php($totalland1 = $totalland1 + $rec->vl_roundnetlandvalue)
+													<thead>
+													<tr class=" gray_sai">
+														<th style="width: 40px;">
+															{{__('valuation.SNo')}}
+														</th>
+														<th>
+															{{__('valuation.Lot_Code')}} / {{__('valuation.Lot_No')}}
+														</th>
+														<th>
+															{{__('valuation.Land_Area')}}
+														</th>
+														<th>
+															{{__('valuation.Net_Value')}}
+														</th>
+														<th>
+															{{__('valuation.Total_Land_Value')}}
+														</th>													
+														<th style="width: 60px">
+															{{__('valuation.Action')}}
+														</th>												
+														<th style="display: none;">
+															lotid
+														</th>											
+														<th style="display: none;">
+															actioncode
+														</th>
 													</tr>
-												@endforeach	
-												</tbody>	
+													</thead>
+													<tbody>
+													
+														@php($totalland1 = 0)
+														@php($totalbldg = 0)
+														@foreach ($lot as $rec)
+															<tr>
+																<td>
+																	{{$loop->iteration}}
+																</td>
+																<td>
+																	<a href="#" onclick="addLandStandard()">{{$rec->lotnumber}}</a>
+																</td>
+																<td style="text-align:right;">
+																	{{$rec->vl_size}}
+																</td>
+																<td id="gross_{{$loop->iteration}}" style="text-align:right;">
+																	{{number_format($rec->vl_grosslandvalue,2)}}
+
+																</td>
+																<td id="netvalue_{{$loop->iteration}}" style="text-align:right;">
+																	{{number_format($rec->vl_roundnetlandvalue,2)}}
+																</td>
+																<td>
+																	<span><a onclick="" class="action-icons c-edit editaddrow" href="#" title="Edit">Kemaskini</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Padam</a></span>
+																</td>
+																<td style="display: none;">
+																	{{$rec->vl_id}}
+																</td>
+																<td style="display: none;">
+																	noaction
+																</td>
+																@php($totalland1 = $totalland1 + $rec->vl_roundnetlandvalue)
+															</tr>
+														@endforeach	
+													</tbody>	
 													<tr>
 														<td colspan="4" class="grand_total">
 															
-															Total Land Value:
+															{{-- {{__('valuation.Total_Land_Value')}}: --}}
 														</td>
-														<td>
+														<td class="grand_total">
+															{{__('valuation.Total_Land_Value')}}:
 															<input type="text" readonly="true" onchange="taxCalculation()" style="float: right; "  value="{{number_format($totalland1,2)}}" class="tbl-total" id="landtotal">
 														</td>
 													</tr>
@@ -175,7 +176,7 @@
 
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Building Calculation</h6>
+											<h6>{{__('valuation.Building_Calculation')}}</h6>
 										</div>
 										<div class="widget_content">
 											<div class="invoice_tbl">
@@ -183,34 +184,34 @@
 												<thead>
 												<tr class=" gray_sai">
 													<th  style="width: 40px;">
-														S No
+														{{__('valuation.SNo')}}
 													</th>
 													<th>
-														Building Category
+														{{__('valuation.Building_Category')}}
 													</th>
 													<th>
-														Building Type
+														{{__('valuation.Building_Type')}}
 													</th>
 													<!--<th>
 														Building Area
 													</th>-->
 													<th>
-														Building Value
+														{{__('valuation.Building_Value')}}
 													</th>
 													<th>
-														Allowancess Value
+														{{__('valuation.Allowancess_Value')}}
 													</th>
 													<th>
-														Depreciation Value
+														{{__('valuation.Depreciation_Value')}}
 													</th>
 													<th>
-														Net Building Value
+														{{__('valuation.Net_Building_Value')}}
 													</th>
 													<th>
-														Round Value 
+														{{__('valuation.Round_Value')}} 
 													</th>
-													<th>
-														Action 
+													<th style="width: 60px">
+														{{__('valuation.Action')}} 
 													</th>
 												</tr>
 												</thead>
@@ -221,9 +222,10 @@
 												<tr>
 													<td colspan="7" class="grand_total">
 														<!--<button id="addadditional" onclick="addLand()" name="adduser" style="float: left; "  type="button" class=" btn_small btn_blue "><span>Add Building</span></button>-->
-														Total Building Net Value
+														{{-- {{__('valuation.Total_Building_Net_Value')}} : --}}
 													</td>
-													<td>
+													<td class="grand_total">
+														{{__('valuation.Total_Building_Net_Value')}} :
 														<input type="text" style="float: right; " readonly="true" value="" class="tbl-total" id="vd_bldgtotal">
 													</td>
 												</tr>
@@ -236,34 +238,36 @@
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Additional Calculation</h6>
+											<h6>{{__('valuation.Additional_Calculation')}}</h6>
 										</div>
 										<div class="widget_content">
 											<div class="invoice_tbl">
 												<table id="additionaltable">
 												<thead>
-												<th style="width: 40px;">
-														S No
+												<tr class=" gray_sai">
+													<th style="width: 40px;">
+														{{__('valuation.SNo')}}
 													</th>
 													<th style="width: 30%;">
-														Description
+														{{__('valuation.Description')}}
 													</th>
 													<th>
-														Area
+														{{__('valuation.Area')}}
 													</th>
 													<th>
-														Rate
+														{{__('valuation.Rate')}}
 													</th>
 													<th>
-														Gross Value
+														{{__('valuation.Gross_Value')}}
 													</th>
 													<th>
-														Round Value
+														{{__('valuation.Round_Value')}}
 													</th>
-													<th style="width: 10%;">
-														Action 
+													<th style="width: 60px">
+														{{__('valuation.Action')}} 
 													</th>
-													<th style="display: none;">
+													<th style="display: none;"> 
+														 {{--  --}}
 														actioncode 
 													</th>
 												</tr>
@@ -275,16 +279,18 @@
 												
 												</tbody>
 												<tr>
-													<td colspan="6" class="grand_total">
+													<td colspan="5" class="grand_total">
 														
 														<button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>Add Additional value</span></button>							
-														Total Additional Value:
+														
 													</td>
-													<td>
+													<td class="grand_total">
+														{{__('valuation.Add_Additional_value')}}:   
 														<input type="text" readonly="true"  style="float: right; "  value="" class="tbl-total" id="additionaltotal">
+														{{-- <input type="text" readonly="true"  style="float: right; "  value="" class="tbl-total" id="additionaltotal"> --}}
 													</td>
 												</tr>
-												</table>
+											</table>
 											</div>
 										</div>
 									</div>
@@ -1100,7 +1106,8 @@
 	        alert('Please enter rate');
 	        return false;
 	    } else {
-	    	var t = $('#additionaltable').DataTable({"columns":[ null, null, null, null, null, null, null, { "visible": false }]});
+	    	var t = $('#additionaltable').DataTable();
+			// var t = $('#additionaltable').DataTable({"columns":[ null, null, null, null, null, null, null, { "visible": false }] });
 			$('#additionaltable_filter').remove();
 		    $('#additionaltable_info').remove();
 		    $('#additionaltable_paginate').remove();

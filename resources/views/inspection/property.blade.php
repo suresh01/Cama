@@ -129,8 +129,8 @@
 									<option value='5'>{{__('inspection.Subzone')}}</option> 
 									<option value='6'>{{__('inspection.Status_Harta')}}</option> 
 									<option value='7'>{{__('inspection.Property_Category')}}</option> 
-									<option value='8'>Land Value</option> 
-									<option value='9'>Building Value</option> 
+									<option value='8'>{{__('inspection.LandValue')}}</option> 
+									<option value='9'>{{__('inspection.BuildingValue')}}</option> 
 									<option value='10'>{{__('inspection.Nt')}}</option> 
 									<option value='11'>{{__('inspection.Rate')}}</option> 
 									<option value='12'>{{__('inspection.Tax_Rate')}}</option> 
@@ -159,10 +159,10 @@
 									<th>{{__('inspection.Subzone')}} </th>
 									<th>{{__('inspection.Status_Harta')}}</th>	
 									<th>{{__('inspection.Property_Category')}}</th>	
-									<!--<th>{{__('inspection.owner')}}Owner Name</th>											
+									<!-- <th>{{__('inspection.owner')}}Owner Name</th>											
 									<th>{{__('inspection.owner')}}Owner Type / Owner Number</th>-->	
-									<th>Land Value</th>
-									<th>Building Value</th>	
+									<th>{{__('inspection.LandValue')}}</th>
+									<th>{{__('inspection.BuildingValue')}}</th>	
 									<th>{{__('inspection.Nt')}}</th>		
 									<th>{{__('inspection.Rate')}}</th>	
 									<th>{{__('inspection.Tax_Rate')}}</th>	
@@ -222,7 +222,7 @@
 			</div>
 
 			<div style="display: none;height: 160px;"  id="open-modal-content">
-				<h3>{{__('inspection.Stage_Information')}} </h3>
+				<h3>{{__('inspection.Stage_Selection')}} </h3>
 				<form action="validateValuation" id="valuationcheckform" method="post" class="form_container">	
 					@csrf
 				<input type="hidden" id="val_id" name="val_id" >			
@@ -285,7 +285,8 @@ function showCheckboxes() {
 			var property = $('#property').val();
 			var propstatus = $('#propstatus').val();
 			//alert(propstatus);
-			if(propstatus == "7" || propstatus == "9"){
+			// if((propstatus == "7" || propstatus == "9") && url == "valuationdetail"){
+			if((propstatus == "7") && url == "valuationdetail"){
 				url="manualvaluation";
 			}
 			//alwet(basket+" "+property)

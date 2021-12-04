@@ -72,27 +72,27 @@
 		<div class="grid_12">	
 			<br>
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">					
-					<a href="#" onclick="closeWindow()">Close</a>
+					<a href="#" onclick="closeWindow()">Tutup</a>
 				</div>
 				<br>
 				<div class="widget_wrap">	
 					<div class="widget_top">
-						<h6>Land</h6>
+						<h6>Tanah</h6>
 					</div>					
 					<div class="widget_content">						
 						<table style="width: 100%;" id="propdatatable" class="display ">							
 							<thead style="text-align: left;">
 					  		<tr>
 								<th class="table_sno"> S NO</th>
-								<th>LOT TYPE</th>
-								<th>LOT NUMBER</th>
-								<th>LOT TITLE TYPE</th>
-								<th>LOT TITLE NUMBER</th>
-								<th>ALTERNATIF TITLE NUMBER</th>
-								<th>LAND AREA</th>
-								<th>LAND AREA UNIT</th>
-								<th>LAND USE</th>
-								<th>ACTION</th>
+								<th>Jenis Lot</th>
+								<th>No Lot</th>
+								<th>Jenis Hakmilik</th>
+								<th>No Hakmilik</th>
+								<th>No Lot Lama</th>
+								<th>Luas Tanah</th>
+								<th>Unit Luas</th>
+								<th>Kegunaan Tanah</th>
+								<th>Aksi</th>
 								<th style="display: none;">id</th>
 							</tr>
 							</thead>
@@ -127,7 +127,7 @@
 										{{$rec->landuse}}
 									</td>
 									<td>
-										<span><a onclick="addLot()" class="action-icons c-edit editaddrow" href="#" title="Add">Add</a></span>
+										<span><a onclick="addLot()" class="action-icons c-edit editaddrow" href="#" title="Add">Tambah</a></span>
 									</td>
 									<td style="display: none;">
 										{{$rec->al_id}}
@@ -142,21 +142,21 @@
 
 				<div class="widget_wrap">	
 					<div class="widget_top">
-						<h6>Building</h6>
+						<h6>Bangunan</h6>
 					</div>				
 					<div class="widget_content">						
 						<table style="width: 100%;" id="bldgtable" class="display ">							
 							<thead style="text-align: left;">
 					  		<tr>
 								<th class="table_sno"> S NO</th>
-								<th>BUILDING NUMBER</th>
-								<th>BUILDING CATEGORY</th>
-								<th>BUILDING TYPE</th>
-								<th>BUILDING STOREY</th>
-								<th>BUILDING STRUCTURE</th>
-								<th>ROOF TYPE</th>
-								<th>MAIN BUILDING</th>
-								<th>ACTION</th>
+								<th>Label Bangunan</th>
+								<th>Kategori Bangunan</th>
+								<th>Jenis Bangunan</th>
+								<th>Tingkat Bangunan</th>
+								<th>Struktur Bangunan</th>
+								<th>Tingkat Bangunan</th>
+								<th>Bangunan Utama</th>
+								<th>Aksi</th>
 								<th style="display: none;">id</th>
 							</tr>
 							</thead>
@@ -188,7 +188,7 @@
 										{{$rec->ab_ismainbldg_id}}
 									</td>
 									<td>
-										<span><a onclick="addBldg()" class="action-icons c-edit editbldgrow" href="#" title="Add">Add</a></span>
+										<span><a onclick="addBldg()" class="action-icons c-edit editbldgrow" href="#" title="Add">Tambah</a></span>
 									</td>
 									<td style="display: none;">
 										{{$rec->ab_id}}
@@ -233,7 +233,7 @@
 			    window.opener.$('#landtable_paginate').remove();
 			    window.opener.$('#landtable_length').remove();
 				t.row.add([ 'New','<a href="#" onclick="addLandStandard()">'+data[1]+' '+data[2]+'</a>', data[6], '0', '0', '<span><a onclick="" class="action-icons c-edit editaddrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span>',data[10],'new']).draw( false );	
-				alert('Land Added');
+				alert('Tanah ditambah');
 		   	
 		});
 
@@ -256,7 +256,7 @@
 			    window.opener.$('#bldgtable_paginate').remove();
 			    window.opener.$('#bldgtable_length').remove();
 				t.row.add([ 'New','<a href="#" onclick="addBldg('+data[9]+','+data[0]+')">'+data[3]+'</a>', data[4], '0', '0','0','0','0', '<span><a onclick="" class="action-icons c-edit editaddrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span>']).draw( false );	
-				alert('Building Added');
+				alert('Bangunan ditambah');
 		   	
 		});
 

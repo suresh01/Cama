@@ -44,9 +44,12 @@ return [
 	'Row_Selected'=>'Baris Dipilih',
 	'Please_select_Stage'=>'Sila Pilih Fasa',
 	'Stage_Information'=>'Maklumat Fasa',
+	'Stage_Selection'=>'Pilih Fasa',
 	'Revise_Information'=>'Semak Semula',
 	'Inspection'=>'Lawat Periksa',
 	'Valuation'=>'Penilaian',
+	'LandValue' => 'Nilai Tanah',
+	'BuildingValue' => 'Nilai Bangunan',
 	// newproperty.blade.php
 	'Add_Property'=>'Tambah Harta',
 	'owner'=>'Pemilik',
