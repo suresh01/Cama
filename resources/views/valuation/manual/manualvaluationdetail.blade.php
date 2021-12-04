@@ -281,7 +281,7 @@
 												<tr>
 													<td colspan="5" class="grand_total">
 														
-														<button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>Add Additional value</span></button>							
+														<button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>Tambah Nilai Tambahan</span></button>							
 														
 													</td>
 													<td class="grand_total">
@@ -296,14 +296,14 @@
 									</div>
 								</div>
 								<div  id="basic-modal-content">
-									<h3>Additional Valuation</h3>
+									<h3>{{__('valuation.Additional_Valuation')}}</h3>
 									<div  class="grid_12 form_container left_label">
 										<ul>	
 											<li class="li">
 												<input type="hidden" id="index">
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Description<span class="req">*</span></label>
+														<label class="field_title" id="luserid" for="userid">{{__('valuation.Description')}}<span class="req">*</span></label>
 														<div class="form_input">
 															<input id="add_description" required="true"  name="add_description" type="text"  value="" />
 														</div>
@@ -312,7 +312,7 @@
 												</div>
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Area<span class="req">*</span></label>
+														<label class="field_title" id="luserid" for="userid">{{__('valuation.Area')}}<span class="req">*</span></label>
 														<div class="form_input">
 															<input id="add_area" required="true" onchange="additionalCal()"  name="add_area" type="text"  value="" />
 														</div>
@@ -321,7 +321,7 @@
 												</div>
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Rate<span class="req">*</span></label>
+														<label class="field_title" id="luserid" for="userid">{{__('valuation.Rate')}}<span class="req">*</span></label>
 														<div class="form_input">
 															<input id="add_rate" required="true" onchange="additionalCal()" name="add_rate" type="text"  value="" />
 														</div>
@@ -330,7 +330,7 @@
 												</div>
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Grass value<span class="req">*</span></label>
+														<label class="field_title" id="luserid" for="userid">{{__('valuation.Gross_Value')}}<span class="req">*</span></label>
 														<div class="form_input">
 															<input id="add_grossvalue" readonly="true"  name="add_grossvalue" type="text"  value="" />
 														</div>
@@ -339,7 +339,7 @@
 												</div>
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Round Value<span class="req">*</span></label>
+														<label class="field_title" id="luserid" for="userid">{{__('valuation.Round_Value')}}<span class="req">*</span></label>
 														<div class="form_input">
 															<input id="add_roundvalue" readonly="true"  name="add_roundvalue" type="text"  value="" />
 														</div>
@@ -351,11 +351,11 @@
 									</div>
 									<span class="clear"></span>
 										<div class="btn_24_blue">
-											<a href="#" id="add" onclick="addAdditional()" class=""><span>Add </span></a>
-											<a href="#" id="edit" onclick="editAdditional()" class=""><span>Update </span></a>
+											<a href="#" id="add" onclick="addAdditional()" class=""><span>Tambah </span></a>
+											<a href="#" id="edit" onclick="editAdditional()" class=""><span>Kemaskini </span></a>
 										</div>
 										<div class="btn_24_blue">
-											<a href="#" class="simplemodal-close"><span>Close </span></a>
+											<a href="#" class="simplemodal-close"><span>Tutup </span></a>
 										</div>
 									
 								</div>
@@ -363,13 +363,13 @@
 								
 								
 								<fieldset>
-									<legend>Tax Calculation</legend>
+									<legend>{{__('valuation.Tax_Calculation')}}</legend>
 									<form action="" id="taxvaluationform" class="form_container left_label">
 									<div style="float: right;" class="grid_5 form_container left_label">
 											<ul>
 												<li>
 													<div class="form_grid_4">
-													<label class="field_title"   id="accnumberlbl" style="width: 100%;" for="username">Valuer Discretion<span class="req">*</span></label>
+													<label class="field_title"   id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Valuer_Discretion')}}<span class="req">*</span></label>
 													</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -379,7 +379,7 @@
 												</div>
 												
 												<div class="form_grid_4">
-													<label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Gross NT<span class="req">*</span></label>
+													<label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Gross_NT')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -389,7 +389,7 @@
 												</div>
 										
 												<div class="form_grid_4">
-													<label class="field_title" id="accnumberlbl" style="width: 100%;" id="lposition" for="position">Proposed NT<span class="req">*</span></label>
+													<label class="field_title" id="accnumberlbl" style="width: 100%;" id="lposition" for="position">{{__('valuation.Proposed_NT')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  classs="form_input" style="width: 70%;  margin-left: 30%;  position: relative;">
@@ -399,7 +399,7 @@
 												</div>
 											
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Proposed Rate<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Proposed_Rate')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -409,7 +409,7 @@
 												</div>
 										 	
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Calculated Rate (%)<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Calculated_Rate')}} (%)<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -419,7 +419,7 @@
 												</div>
 											
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Proposed Tax<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Proposed_Tax')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -439,7 +439,7 @@
 											<li>													
 												<br /><br /><br /><br /><br />
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved NT<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Approved_NT')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -449,7 +449,7 @@
 												</div>
 											
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved Rate<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Approved_Rate')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -459,7 +459,7 @@
 												</div>
 										 		
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Adjustment<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Adjustment')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -469,7 +469,7 @@
 												</div>
 											
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved Tax<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Approved_Tax')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -487,7 +487,7 @@
 											<li>													
 												<br /><br /><br /><br /><br />
 												<div class="form_grid_2">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">NOTES<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Notes')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_9">
 													<div style="margin-left: 0px"  class="form_input"> 
