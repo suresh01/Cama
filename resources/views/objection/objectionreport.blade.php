@@ -43,23 +43,26 @@
 							<li>{{$objectiondetail}}</li>
 						</ul>
 					</div>
-					<div style="float:right;margin-right: 0px;"  class="btn_24_blue">   
+					<div style="float:right;margin-right: 10px;"  class="btn_24_blue">   
+			          	@include('objection.search.newsearch',['tableid'=>'baskettbl', 'action' => 'objectionbaskettable?', 'searchid' => '35'])
+			        </div>
+					<div style="float:right;margin-right: 40px;"  class="btn_24_blue">   
 						<!--<a href="#" onclick="deleteProperty()">Generate Report</a>		-->
 						<a href="#" onclick="updateReason()" title="Set time, reason and recommendation valued" >{{__('common.Update')}}</a>	
 
 						<a href="#" onclick="deleteProperty2()" >{{__('objection.Objection_List')}}</a>	
 						<a href="#" onclick="deleteProperty()" >{{__('objection.Invitation_Letter')}}</a>	
-						<a href="#" onclick="addProperty()" title="Add New Property">{{__('objection.Add_Property')}} </a>
+						
 					</div>
 					<div style="float:right;margin-right: 20px;"  class="btn_24_orange">   
-			            <!--<a href="#" id="" onclick="getSelectedProp()" class=""><span>Add Basket </span></a>  -->
-			          	<a href="#" id="" onclick="deleteObjection()" title="Delete Selected"><span>{{__('common.Delete')}} </span></a> 
+			            
+			          	<a href="#" id="" onclick="deleteObjection()" title="Delete Selected"><span>{{__('common.Delete')}}</span></a> 
 		        	</div>
-
-		        	 <div style="float:right;margin-right: 10px;"  class="btn_24_blue">   
-			          @include('objection.search.newsearch',['tableid'=>'baskettbl', 'action' => 'objectionbaskettable?', 'searchid' => '35'])
-			           
+					<div style="float:right;margin-right: 10px;"  class="btn_24_blue">   
+			          <a href="#" onclick="addProperty()" title="Add New Property">{{__('objection.Add_Property')}}</a>
 			        </div>
+
+					
 
 					<br>
 				</div>	
@@ -263,7 +266,7 @@
             <input type="hidden" name="accounts" id="accounts">
 		</form>-->
 
-		<form style="display: hidden;" id="generateform2" method="GET" action="generateobjection2">
+		<form style="display: hidden;" id="generateform2" method="post" action="generateObjectionList" target="_blank">
             @csrf
             <input type="hidden" name="accounts" id="accounts2">
 		</form>
@@ -273,7 +276,7 @@
 						
 						<div class="widget_content">
 							<h3 id="title">{{__('objection.Generate_Report')}}</h3>
-							<form style="" id="generateform" method="GET" action="generateobjection1">
+							<form style="" id="generateform" method="post" action="generateNotis9" target="_blank">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts">
 								<div  class="grid_12 form_container left_label">
@@ -317,7 +320,7 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>{{__('common.Submit')}} </span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>{{__('common.GenerateButton')}} </span></button>									
 										
 										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>{{__('common.Close')}} </span></button>
 										<span class=" label_intro"></span>
@@ -443,10 +446,10 @@
 		function deleteProperty(){
 			var table = $('#agendatbl').DataTable();
 
-			 var account = $.map(table.rows('.selected').data(), function (item) {
-		       return item['ol_vd_id']
-		      });
-			 console.log(table.rows('.selected').data());
+			var account = $.map(table.rows('.selected').data(), function (item) {
+			return item['ol_vd_id']
+			});
+			console.log(table.rows('.selected').data());
 			
 			var type = "delete";
 			
@@ -467,10 +470,10 @@
 		function deleteProperty2(){
 			var table = $('#agendatbl').DataTable();
 
-			 var account = $.map(table.rows('.selected').data(), function (item) {
-		       return item['ol_vd_id']
-		      });
-			 console.log(table.rows('.selected').data());
+			var account = $.map(table.rows('.selected').data(), function (item) {
+			return item['ol_vd_id']
+			});
+			console.log(table.rows('.selected').data());
 			
 			var type = "delete";
 			
@@ -484,27 +487,6 @@
 						$noty.close();
 						$('#accounts2').val(account.toString());
 						$('#generateform2').submit();
-					/*	$.ajax({
-					        type:'GET',
-					        url:'generateinspectionreport',
-					        data:{accounts:account.toString(),type:type,id:'id'},
-					        success:function(data){
-					        	
-								//location.reload();				        		
-					        	//$("#finish").attr("disabled", true);
-					        	//clearTableError(4);
-				        	},
-					        error:function(data){
-								//$('#loader').css('display','none');	
-					        	   	
-					        		var noty_id = noty({
-									layout : 'to p',
-									text: 'Report Not generated!',
-									modal : true,
-									type : 'error', 
-								});
-				        	}
-						});*/
 					  }
 					},
 					{type: 'button blue', text: 'Cancel', click: function($noty) {
@@ -667,7 +649,7 @@ $(document).ready(function (){
 	                {"data": "diff", "name": "address", "sClass": "numericCol","visible":false},
 	                {"data": "percentage", "name": "address", "sClass": "numericCol","visible":false},
 	                {"data":  function(data){
-			        	return '<span><a onclick="updateMeeting('+data.ol_id+')" class="action-icons c-edit  edtlotrow" href="#" title="Update Agenda">New Agenda</a></span>';
+			        	return '<span><a onclick="updateMeeting('+data.ol_id+')" class="action-icons c-edit  edtlotrow" href="#" title="Update Agenda">Kemaskini</a></span>';
 			        }, "name": "address"}
 	          ],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {

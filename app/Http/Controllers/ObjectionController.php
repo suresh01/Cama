@@ -897,7 +897,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
         $property = DB::select("select de_id, de_ob_id, de_accno, ol_time, ol_reason, format(ol_valuerrecommend, 2) ol_valuerrecommend,  va_name,
     vt_approvedrate,vt_adjustment,  vd_accno, vd_id, format(vt_proposednt,2) vt_proposednt, format(vt_proposedrate, 2) vt_proposedrate, format(vt_proposedtax, 2) vt_proposedtax, format(vt_approvedtax, 2) vt_approvedtax, format(vt_approvednt, 2) vt_approvednt, subzone.tdi_value subzone, subzone.tdi_parent_name zone, ap_bldgstatus_id, proptype.tdi_value proptype, 
     proptype.tdi_parent_name propcategorty, vt_valuedescretion, vt_grossvalue, vt_calculatedrate, vt_note,
-    format(vl_roundnetlandvalue,2) landvalue, format(vb_roundnetnt,2) bldgvalue, (vt_approvednt - vt_proposednt) diff,
+    format(vl_roundnetlandvalue,2) landvalue, format(vb_roundnetnt,2) bldgvalue, format((vt_approvednt - vt_proposednt),2) diff,
   format((((vt_approvednt - vt_proposednt)/vt_proposednt)*100),2) percentage
     from cm_objection_decision
     inner join cm_appln_valdetl on vd_id = de_vd_id

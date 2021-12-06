@@ -315,7 +315,7 @@ Route::get('valuationdatatable', 'ReportController@valuationDataTable');
 
 Route::get('valuationdatatablebasket', 'ReportController@basketTables');
 
-Route::get('generateValuationData','ReportController@generateValuationData');
+Route::post('generateValuationData','ReportController@generateValuationData');
 
 Route::get('generateValuationForm','ReportController@generateValuationForm');
 
@@ -386,9 +386,9 @@ Route::get('decisioncal','ObjectionController@decisionCalculation');
 
 Route::get('generateAgenda','ReportController@generateAgenda');
 
-Route::get('generateNotis','ReportController@generateNotis');
+Route::post('generateNotis8','ReportController@generatenotis8');
 
-Route::get('generateNotis2','ReportController@generateNotis2');
+Route::post('generateNotisTolak','ReportController@generatenotistolak');
 
 Route::get('result','ObjectionController@result');
 
@@ -404,11 +404,11 @@ Route::get('noticeTables','ObjectionController@noticeTables');
 
 Route::get('decisiontrn','ObjectionController@decisionTrn');
 
-Route::get('generateobjection1','ReportController@generateObjection1');
+Route::post('generateNotis9','ReportController@generatenotis9');
 
-Route::get('generateobjection2','ReportController@generateObjection2');
+Route::post('generateObjectionList','ReportController@generateobjectionlist');
 
-Route::get('generateResult','ReportController@generateResult');
+Route::post('generateNotis10','ReportController@generatenotis10');
 
 Route::get('decisiongrab','ObjectionController@decisionGrab');
  
@@ -470,9 +470,9 @@ Route::get('nolotlog','HomeController@noLotLog');
 
 Route::get('nolotlogtables','HomeController@noLotLogTables');
 
-Route::get('generateOwnershipreport','HomeController@generateOwnershipreport');
+Route::post('generateOwnershipreport','HomeController@generateOwnershipreport');
 
-Route::get('generateRemisireport','HomeController@generateRemisireport');
+Route::post('generateRemisireport','HomeController@generateRemisireport');
 
 Route::get('ownerlogtable','HomeController@ownerLogTables');
 
@@ -510,11 +510,11 @@ Route::get('racesummary', 'ReportController@racSummary');
 
 Route::get('racesummarytable', 'ReportController@racesummaryTables');
 
-Route::get('generatesummaryzone', 'ReportController@generateSummaryZone');
+Route::post('generatesummaryzone', 'ReportController@generateSummaryZone');
 
 Route::get('generatesummarybldg', 'ReportController@generateSummaryBLDG');
 
-Route::get('generatesummaryrace', 'ReportController@generateSummaryRace');
+Route::post('generatesummaryrace', 'ReportController@generateSummaryRace');
 
 
 Route::get('summarypropertystatuszone', 'ReportController@summaryPropertystatusZone');
@@ -627,15 +627,15 @@ Route::get('insresult',  function () {
 
 
 
-Route::get('generateinspectionform', 'ReportController@generateInspectionForm');
+Route::post('generateinspectionform', 'ReportController@generateInspectionForm');
 
 
-Route::get('generatevaluation', 'ReportController@generateValuationR5');
+Route::post('generatevaluation', 'ReportController@generateValuationR5');
 
 
 Route::get('r4cover', 'ReportController@r4cover');
 
-Route::get('generater4cover', 'ReportController@generateR4Cover');
+Route::post('generater4cover', 'ReportController@generateR4Cover');
 
 
 Route::get('r4coverdatatable', 'ReportController@r4coverDataTables');
@@ -646,7 +646,7 @@ Route::get('ownernotice', 'ReportController@ownerNotice');
 
 Route::get('ownernoticedata', 'ReportController@ownerNoticeDataTables');
 
-Route::get('generateowntypa', 'ReportController@generateOwnerTypeA');
+Route::post('generateowntypa', 'ReportController@generateOwnerTypeA');
 
 // Route::get('generateowntypb', 'ReportController@generateOwnerTypeB');
 
@@ -654,15 +654,15 @@ Route::get('ownertransferlist', 'ReportController@ownerTransferList');
 
 Route::get('ownertransferlistdata', 'ReportController@ownerTransferListData');
 
-Route::get('generateownertransferlist', 'ReportController@generateOwnerTransferList');
+Route::post('generateownertransferlist', 'ReportController@generateOwnerTransferList');
 
 Route::get('pivotreport', 'ReportController@pivotReport');
 
-Route::get('generatePivotReport','ReportController@generatePivotReport');
+Route::post('generatePivotReport','ReportController@generatePivotReport');
 
-Route::get('generateoffsReport','ReportController@officialSearchReport');
+Route::post('generateoffsReport','ReportController@officialSearchReport');
 
-Route::get('generatedeactive','ReportController@generateDeactive');
+Route::post('generatedeactive','ReportController@generateDeactive');
 
 //Route::get('exportcsv','HomeController@ExportDataEnqueryCSV');
 

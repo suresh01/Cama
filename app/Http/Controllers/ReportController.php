@@ -551,12 +551,13 @@ from  cm_appln_valterm
             //   'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
             // ))->output());
 
-
-      JasperPHP::process(
-            base_path('/reports/'.$report_name.'.jasper'),
-                false,
-                array("pdf"),               
-                array("basketid" => $filter,'title'=>$title),
+        $jasper_path = base_path('/reports/'.$report_name.'.jasper');
+        $dowload_path = base_path('/reports/temp/'.$report_name); 
+        JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),               
+            array("basketid" => $filter,'title'=>$title),
             array(
               'driver' => 'generic',
               'username' => env('DB_USERNAME',''),
@@ -568,8 +569,8 @@ from  cm_appln_valterm
        $headers = array(
               'Content-Type: application/pdf',
             );
-
-        return response()->download(base_path('/reports/'.$report_name.'.pdf'), 'valuationdata.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
+        // return response()->download(base_path('/reports/'.$report_name.'.pdf'), 'valuationdata.pdf', $headers);
 
     }
 
@@ -651,79 +652,93 @@ from  cm_appln_valterm
 
     }
 
-     public function generateNotis(Request $request)
+     public function generatenotis8(Request $request)
     {        
         //$jasper = new JasperPHP;        
         $account = $request->input('accounts');
         $type = $request->input('type');
         Log::info($account);
-        $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);
-            // Compile a JRXML to Jasper
-         //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
+        // $input = $request->input();
+        // $account1 = $input['accounts'];
+        // Log::info($account1);
+            
         $reportname ="";
+        $filter = 'vd_id in ('. $account.')';
         if($type == '1'){
             $reportname ="notis141a";
-            $filter = 'vd_id in ('. $account.')';
-        JasperPHP::process(
-            base_path('/reports/'.$reportname.'.jasper'),
-                false,
-                array("pdf"),
-                array("propid" => $filter),
-                array(
-                      'driver' => 'generic',
-                      'username' => env('DB_USERNAME',''),
-                      'password' => env('DB_PASSWORD',''),
-                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
-                ))->execute();
         } else if($type == '2'){
             $reportname ="notis141b";
-            $filter = 'vd_id in ('. $account.')';
-        JasperPHP::process(
-            base_path('/reports/'.$reportname.'.jasper'),
-                false,
-                array("pdf"),
-                array("propid" => $filter,"logo" =>  base_path('/public/images/logo.jpeg')),
-                array(
-                      'driver' => 'generic',
-                      'username' => env('DB_USERNAME',''),
-                      'password' => env('DB_PASSWORD',''),
-                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
-                ))->execute();
         } else if($type == '3'){
-            $reportname ="notis144a";
-            $filter = 'vd_id in ('. $account.')';
-        JasperPHP::process(
-            base_path('/reports/'.$reportname.'.jasper'),
-                false,
-                array("pdf"),
-                array("propid" => $filter),
-                array(
-                      'driver' => 'generic',
-                      'username' => env('DB_USERNAME',''),
-                      'password' => env('DB_PASSWORD',''),
-                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
-                ))->execute();
+            $reportname ="notis144a";        
         } else if($type == '4'){
-            $reportname ="notis144b";
-            $filter = 'vd_id in ('. $account.')';
-        JasperPHP::process(
-            base_path('/reports/'.$reportname.'.jasper'),
-                false,
-                array("pdf"),
-                array("propid" => $filter),
-                array(
-                      'driver' => 'generic',
-                      'username' => env('DB_USERNAME',''),
-                      'password' => env('DB_PASSWORD',''),
-                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
-                ))->execute();
+          $reportname ="notis144b";      
         }
+
+        $jasper_path = base_path('/reports/'.$reportname.'.jasper');
+        $dowload_path = base_path('/reports/temp/'.$reportname);
+
+        if($type == '1' || $type == '3'){
+            // $reportname ="notis141a";
+            // $filter = 'vd_id in ('. $account.')';
+        JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),
+            array("propid" => $filter),
+            array(
+                    'driver' => 'generic',
+                    'username' => env('DB_USERNAME',''),
+                    'password' => env('DB_PASSWORD',''),
+                    'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                    'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+            ))->execute();
+        } else if($type == '2' || $type == '4'){
+            // $reportname ="notis141b";
+            // $filter = 'vd_id in ('. $account.')';
+            JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),
+            array("propid" => $filter,"logo" =>  base_path('/public/images/logo.jpeg')),
+            array(
+                    'driver' => 'generic',
+                    'username' => env('DB_USERNAME',''),
+                    'password' => env('DB_PASSWORD',''),
+                    'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                    'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+                ))->execute();
+        } 
+        // else if($type == '3'){
+        //     $reportname ="notis144a";
+        //     $filter = 'vd_id in ('. $account.')';
+        // JasperPHP::process(
+        //     base_path('/reports/'.$reportname.'.jasper'),
+        //         false,
+        //         array("pdf"),
+        //         array("propid" => $filter),
+        //         array(
+        //               'driver' => 'generic',
+        //               'username' => env('DB_USERNAME',''),
+        //               'password' => env('DB_PASSWORD',''),
+        //               'jdbc_driver' => 'com.mysql.jdbc.Driver',
+        //               'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+        //         ))->execute();
+        // } else if($type == '4'){
+        //     $reportname ="notis144b";
+        //     $filter = 'vd_id in ('. $account.')';
+        // JasperPHP::process(
+        //     base_path('/reports/'.$reportname.'.jasper'),
+        //         false,
+        //         array("pdf"),
+        //         array("propid" => $filter),
+        //         array(
+        //               'driver' => 'generic',
+        //               'username' => env('DB_USERNAME',''),
+        //               'password' => env('DB_PASSWORD',''),
+        //               'jdbc_driver' => 'com.mysql.jdbc.Driver',
+        //               'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+        //         ))->execute();
+        // }
         
        
 
@@ -731,65 +746,53 @@ from  cm_appln_valterm
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/reports/'.$reportname.'.pdf'), 'Notice.pdf', $headers);
-
+        // return response()->download(base_path('/reports/'.$reportname.'.pdf'), 'Notice.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 
-    public function generateNotis2(Request $request)
+    public function generatenotistolak(Request $request)
     {        
         //$jasper = new JasperPHP;        
         $account = $request->input('accounts');
         Log::info($account);
-        $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);
+        // $input = $request->input();
+        // $account1 = $input['accounts'];
+        // Log::info($account1);
         $inspector = $request->input('inspector');
-            // Compile a JRXML to Jasper
-         //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
-        
         $filter = 'vd_id in ('. $account.')';
-Log::info(JasperPHP::process(
-            base_path('/reports/type2notis.jasper'),
-                false,
-                array("pdf"),
-                array("propid" => $filter,'user'=>$inspector),
-                array(
-                      'driver' => 'generic',
-                      'username' => env('DB_USERNAME',''),
-                      'password' => env('DB_PASSWORD',''),
-                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-                ))->output());
+
+        $jasper_path = base_path('/reports/type2notis.jasper');
+        $dowload_path = base_path('/reports/temp/type2notis');
 
         JasperPHP::process(
-            base_path('/reports/type2notis.jasper'),
-                false,
-                array("pdf"),
-                array("propid" => $filter,'user'=>$inspector),
-                array(
-                      'driver' => 'generic',
-                      'username' => env('DB_USERNAME',''),
-                      'password' => env('DB_PASSWORD',''),
-                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
-                ))->execute();
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),
+            array("propid" => $filter,'user'=>$inspector),
+            array(
+                    'driver' => 'generic',
+                    'username' => env('DB_USERNAME',''),
+                    'password' => env('DB_PASSWORD',''),
+                    'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                    'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+            ))->execute();
 
         $headers = array(
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/reports/type2notis.pdf'), 'Rejection Notice.pdf', $headers);
-
+        // return response()->download(base_path('/reports/type2notis.pdf'), 'Rejection Notice.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 
-    public function generateObjection1(Request $request)
+    public function generatenotis9(Request $request)
     {        
         //$jasper = new JasperPHP;        
         $account = $request->input('accounts');
         Log::info($account);
-        $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);
+        // $input = $request->input();
+        // $account1 = $input['accounts'];
+        // Log::info($account1);
         $meetingroom = $request->input('meetingroom');
         $user = $request->input('user');
             // Compile a JRXML to Jasper
@@ -797,10 +800,12 @@ Log::info(JasperPHP::process(
         
         $filter = 'ol_vd_id  in ('. $account.')';
 
-        
+        $jasper_path = base_path('/reports/invitationletter.jasper');
+        $dowload_path = base_path('/reports/temp/invitationletter');
+
         JasperPHP::process(
-            base_path('/reports/invitationletter.jasper'),
-                false,
+            $jasper_path,
+            $dowload_path,
                 array("pdf"),
                 array("propid" => $filter,'meetingroom' => $meetingroom,'user' => $user,"letterhead" =>  base_path('/reports/images/invitationlatter.jpg')),
                 array(
@@ -817,75 +822,77 @@ Log::info(JasperPHP::process(
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/reports/invitationletter.pdf'), 'Objection Invitation Letter.pdf', $headers);
-
+        // return response()->download(base_path('/reports/invitationletter.pdf'), 'Objection Invitation Letter.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 
-    public function generateObjection2(Request $request)
+    public function generateobjectionlist(Request $request)
     {        
         //$jasper = new JasperPHP;        
         $account = $request->input('accounts');
         Log::info($account);
-        $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);
-            // Compile a JRXML to Jasper
-         //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
+        // $input = $request->input();
+        //     $account1 = $input['accounts'];
+        // Log::info($account1);
+
         
         $filter = 'ol_vd_id in ('. $account.')';
+
+        $jasper_path = base_path('/reports/objectionlist.jasper');
+        $dowload_path = base_path('/reports/temp/objectionlist');
         JasperPHP::process(
-            base_path('/reports/objectionlist.jasper'),
-                false,
-                array("pdf"),
-                array("basketid" => $filter),
-                array(
-                      'driver' => 'generic',
-                      'username' => env('DB_USERNAME',''),
-                      'password' => env('DB_PASSWORD',''),
-                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
-                ))->execute();
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),
+            array("basketid" => $filter),
+            array(
+                    'driver' => 'generic',
+                    'username' => env('DB_USERNAME',''),
+                    'password' => env('DB_PASSWORD',''),
+                    'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                    'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+            ))->execute();
 
         $headers = array(
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/reports/objectionlist.pdf'), 'objectionlist.pdf', $headers);
-
+        // return response()->download(base_path('/reports/objectionlist.pdf'), 'objectionlist.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 
-    public function generateResult(Request $request)
+    public function generatenotis10(Request $request)
     {        
         //$jasper = new JasperPHP;        
         $account = $request->input('accounts');
         Log::info($account);
-        $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);
+        // $input = $request->input();
+        //     $account1 = $input['accounts'];
+        // Log::info($account1);
         $user = $request->input('user');
-            // Compile a JRXML to Jasper
-         //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
         
         $filter = 'vd_id in ('. $account.')';
+        $jasper_path = base_path('/reports/result.jasper');
+        $dowload_path = base_path('/reports/temp/result');
         JasperPHP::process(
-            base_path('/reports/result.jasper'),
-                false,
-                array("pdf"),
-                array("propid" => $filter,'user' => $user),
-                array(
-                      'driver' => 'generic',
-                      'username' => env('DB_USERNAME',''),
-                      'password' => env('DB_PASSWORD',''),
-                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-                ))->execute();
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),
+            array("propid" => $filter,'user' => $user),
+            array(
+                    'driver' => 'generic',
+                    'username' => env('DB_USERNAME',''),
+                    'password' => env('DB_PASSWORD',''),
+                    'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                    'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->execute();
 
         $headers = array(
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/reports/result.pdf'), 'result.pdf', $headers);
-
+        // return response()->download(base_path('/reports/result.pdf'), 'result.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 
 
@@ -1114,33 +1121,23 @@ Log::info(JasperPHP::process(
         //$jasper = new JasperPHP;    
         ini_set('max_execution_time', '200');    
 
-        $termid = $request->input('termid');
-        $title = $request->input('title');
+        $termid = $request->input('idterm');
+        $title = $request->input('titlereport');
         $subzone_id = $request->input('subzone_id');
-Log::info($subzone_id);
- $filter = '';
-      if($subzone_id != ''){
-      
-       $filter = ' `tbdefitems_subzone`.`tdi_key` in ('. $subzone_id.')';
-     } 
-        
-       // $account = $request->input('accounts');
-        //Log::info($account);
-        //$input = $request->input();
-       //     $account1 = $input['accounts'];
-     //   Log::info($account1);
-        //$user = $request->input('user');
-            // Compile a JRXML to Jasper
-         //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
-        
-      //  $filter = 'vd_id in ('. $account.')';
-     JasperPHP::process(
-            base_path('/reports/newsummaryzone.jasper'),
-                false,
-                array("pdf"),
-                 //array("termid" => $termid,"title" => $title,"subzone" => $filter ),
-                 array("termid" => $termid,"title" => $title),
-                array(
+        Log::info($termid.'/'.$title.'/'.$subzone_id);
+        $filter = '';
+        if($subzone_id != ''){
+            $filter = ' `tbdefitems_subzone`.`tdi_key` in ('. $subzone_id.')';
+        } 
+        $jasper_path = base_path('/reports/newsummaryzone.jasper');
+        $dowload_path = base_path('/reports/temp/newsummaryzone'); 
+        JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),
+                //array("termid" => $termid,"title" => $title,"subzone" => $filter ),
+                array("termid" => $termid,"title" => $title),
+            array(
                       'driver' => 'generic',
                       'username' => env('DB_USERNAME',''),
                       'password' => env('DB_PASSWORD',''),
@@ -1151,8 +1148,8 @@ Log::info($subzone_id);
         $headers = array(
             'Content-Type: application/pdf',
         );
-
-        return response()->download(base_path('/reports/newsummaryzone.pdf'), 'summaryzone.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
+        // return response()->download(base_path('/reports/newsummaryzone.pdf'), 'summaryzone.pdf', $headers);
 
     }
 
@@ -1259,12 +1256,15 @@ Log::info($subzone_id);
         
       //  $filter = 'vd_id in ('. $account.')';
 
-      $termid = $request->input('termid');
-      $title = $request->input('title');
+        $termid = $request->input('idterm');
+        $title = $request->input('title');
+    
+        $jasper_path = base_path('/reports/summaryrace1.jasper');
+        $dowload_path = base_path('/reports/temp/summaryrace1');
 
-     JasperPHP::process(
-            base_path('/reports/summaryrace1.jasper'),
-                false,
+        JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
                 array("pdf"),
                  array("termid" => $termid,"title" => $title ),
                 array(
@@ -1279,8 +1279,8 @@ Log::info($subzone_id);
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/reports/summaryrace1.pdf'), 'summaryrace.pdf', $headers);
-
+        // return response()->download(base_path('/reports/summaryrace1.pdf'), 'summaryrace.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 
 
@@ -1883,43 +1883,45 @@ from  cm_appln_valterm ".$filterquery);
     public function generateBorangc(Request $request)
     {        
        
-      $reportname = DB::select(" select * FROM tbconfig where config_name = 'CMKLOCALAUTHORITIESNAME' ");
-      $reportstate = DB::select(" select * FROM tbconfig where config_name = 'CMKLOCALAUTHORITIESSTATE' ");
+        $reportname = DB::select(" select * FROM tbconfig where config_name = 'CMKLOCALAUTHORITIESNAME' ");
+        $reportstate = DB::select(" select * FROM tbconfig where config_name = 'CMKLOCALAUTHORITIESSTATE' ");
         //Log::info($permission);
-      $temreportname = '';
-      $temreportstate = '';
+        $temreportname = '';
+        $temreportstate = '';
         foreach ($reportname as $obj) {            
-          $temreportname = $obj->config_value;             
+            $temreportname = $obj->config_value;             
         }
         foreach ($reportstate as $obj) {            
-          $temreportstate = $obj->config_value;                   
+            $temreportstate = $obj->config_value;                   
         }
 
 
-      $termid = $request->input('termid');
-      $ratepayertype = $request->input('ratepayertypeid');
-      $ratepayer = $request->input('ratepayername');
-      Log::info($termid);
-      Log::info($ratepayertype);
-      Log::info($ratepayer);
-     JasperPHP::process(
-            base_path('/reports/borangc.jasper'),
-                false,
-                array("pdf"),
-                 array("name" => $temreportname,"state" => $temreportstate ,"termid" => $termid ,"ratepayertype" => $ratepayertype ,"ratepayer" => $ratepayer ),
-                array(
-                      'driver' => 'generic',
-                      'username' => env('DB_USERNAME',''),
-                      'password' => env('DB_PASSWORD',''),
-                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
-                ))->execute();
+        $termid = $request->input('termid');
+        $ratepayertype = $request->input('ratepayertypeid');
+        $ratepayer = $request->input('ratepayername');
+        Log::info($termid);
+        Log::info($ratepayertype);
+        Log::info($ratepayer);
+        $jasper_path = base_path('/reports/borangcV2.jasper');
+        $dowload_path = base_path('/reports/temp/borangc');
+        JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),
+            array("name" => $temreportname,"state" => $temreportstate ,"termid" => $termid ,"ratepayertype" => $ratepayertype ,"ratepayer" => $ratepayer ),
+            array(
+                    'driver' => 'generic',
+                    'username' => env('DB_USERNAME',''),
+                    'password' => env('DB_PASSWORD',''),
+                    'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                    'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+            ))->execute();
 
         $headers = array(
             'Content-Type: application/pdf',
         );
-
-        return response()->download(base_path('/reports/borangc.pdf'), 'borangc.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
+        // return response()->download(base_path('/reports/borangc.pdf'), 'borangc.pdf', $headers);
 
     }
 
@@ -1960,29 +1962,31 @@ from  cm_appln_valterm ".$filterquery);
     public function generateBorangB(Request $request)
     {        
        
-      $reportname = DB::select(" select * FROM tbconfig where config_name = 'CMKLOCALAUTHORITIESNAME' ");
-      $reportstate = DB::select(" select * FROM tbconfig where config_name = 'CMKLOCALAUTHORITIESSTATE' ");
+        $reportname = DB::select(" select * FROM tbconfig where config_name = 'CMKLOCALAUTHORITIESNAME' ");
+        $reportstate = DB::select(" select * FROM tbconfig where config_name = 'CMKLOCALAUTHORITIESSTATE' ");
         //Log::info($permission);
-      $temreportname = '';
-      $temreportstate = '';
+        $temreportname = '';
+        $temreportstate = '';
         foreach ($reportname as $obj) {            
-          $temreportname = $obj->config_value;             
+            $temreportname = $obj->config_value;             
         }
         foreach ($reportstate as $obj) {            
-          $temreportstate = $obj->config_value;                   
+            $temreportstate = $obj->config_value;                   
         }
 
 
-      $termid = $request->input('termid');
-      $ratepayertype = $request->input('ratepayertypeid');
-      $ratepayer = $request->input('ratepayername');
-      
-      Log::info($termid);
-      Log::info($ratepayertype);
-      Log::info($ratepayer);
-     JasperPHP::process(
-            base_path('/reports/borangb.jasper'),
-                false,
+        $termid = $request->input('termid');
+        $ratepayertype = $request->input('ratepayertypeid');
+        $ratepayer = $request->input('ratepayername');
+        
+        Log::info($termid);
+        Log::info($ratepayertype);
+        Log::info($ratepayer);
+        $jasper_path = base_path('/reports/borangb.jasper');
+        $dowload_path = base_path('/reports/temp/borangb');
+        JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
                 array("pdf"),
                  array("name" => $temreportname,"state" => $temreportstate ,"termid" => $termid ,"ratepayertype" => $ratepayertype ,"ratepayer" => $ratepayer ),
                 array(
@@ -1997,8 +2001,8 @@ from  cm_appln_valterm ".$filterquery);
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/reports/borangb.pdf'), 'borangb.pdf', $headers);
-
+        // return response()->download(base_path('/reports/borangb.pdf'), 'borangb.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
  public function statistical(Redirect $request){
       $search=DB::select(' select sd_key, sd_label, 
@@ -2140,13 +2144,14 @@ bldgcategory,bldgtype ');
         $account1 = $input['accounts'];
         Log::info($account1);
         $filter = 'vd_id in ('. $account.')';
-            
+        $jasper_path = base_path('/reports/inspection.jasper');
+        $dowload_path = base_path('/reports/temp/inspectionform');    
             
             JasperPHP::process(
-                base_path('/reports/inspection.jasper'),
-                  false,
-                    array("pdf"),
-                    array("propid" => $filter,"inspectorname" => $inspector,"inspectordate" => $insdate,"insapprover" => $approvedby,"insapprovedate" => $approveddate,"logo" =>  base_path('/public/images/logo.jpeg'),"SUBREPORT_DIR" => base_path('/reports/')),
+                $jasper_path,
+                $dowload_path,
+                array("pdf"),
+                array("propid" => $filter,"inspectorname" => $inspector,"inspectordate" => $insdate,"insapprover" => $approvedby,"insapprovedate" => $approveddate,"logo" =>  base_path('/public/images/logo.jpeg'),"SUBREPORT_DIR" => base_path('/reports/')),
                 array(
                   'driver' => 'generic',
                   'username' => env('DB_USERNAME',''),
@@ -2159,9 +2164,9 @@ bldgcategory,bldgtype ');
            $headers = array(
                   'Content-Type: application/pdf',
                 );
-           $output_path = base_path('/reports/inspection.pdf'  );
-       
-        return response()->download($output_path, 'inspectionform.pdf', $headers);
+        // $output_path = base_path('/reports/inspection.pdf'  );
+        return response()->file($dowload_path.'.pdf', $headers);
+        // return response()->download($output_path, 'inspectionform.pdf', $headers);
 
     }
 
@@ -2178,10 +2183,11 @@ bldgcategory,bldgtype ');
         $account1 = $input['accounts'];
         Log::info($account1);
         $filter = 'vd_id in ('. $account.')';            
-            
+        $jasper_path = base_path('/reports/valuationform.jasper');
+        $dowload_path = base_path('/reports/temp/valuationform');    
         JasperPHP::process(
-        base_path('/reports/valuationform.jasper'),
-          false,
+        $jasper_path,
+        $dowload_path,
             array("pdf"),
             array("propid" => $filter,"valuer" => $name,"valuertitle" => $tittle,"logo" =>  base_path('/public/images/logo.jpeg')),
         array(
@@ -2192,13 +2198,12 @@ bldgcategory,bldgtype ');
           'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
         ))->execute();
 
-        Log::info('3');
         $headers = array(
           'Content-Type: application/pdf',
         );
-        $output_path = base_path('/reports/valuationform.pdf'  );
-       
-        return response()->download($output_path, 'valuationform.pdf', $headers);
+        // $output_path = base_path('/reports/valuationform.pdf'  );
+        return response()->file($dowload_path.'.pdf', $headers);
+        // return response()->download($output_path, 'valuationform.pdf', $headers);
 
     }
 
@@ -2218,7 +2223,7 @@ bldgcategory,bldgtype ');
 
         $path = base_path('reports/r4cover.jasper');
         
-      return view('report.r4cover')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist)->with('path',$path);
+        return view('report.r4cover')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist)->with('path',$path);
     }
 
     public function r4coverDataTables(Request $request){
@@ -2354,33 +2359,16 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12")  '.$filterquery);
     {        
              //$jasper = new JasperPHP;
         $account = $request->input('accounts');
-        
         $filter = " vd_id in (". $account.")";
-        
-       Log::info(base_path('reports/r4cover.jasper'));
-      /* $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);*/
-            // Compile a JRXML to Jasper
-        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
-        Log::info(JasperPHP::process(
-           base_path('reports/r4cover.jasper'),
-               false,
-               array("pdf"),               
-             array("param_condition" => $filter,"logo" =>  base_path('images/logo.jpeg')),
-           array(
-           'driver' => 'generic',
-             'username' => env('DB_USERNAME',''),
-             'password' => env('DB_PASSWORD',''),
-             'jdbc_driver' => 'com.mysql.jdbc.Driver',
-            'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-          ))->output());
+        Log::info($filter);
+        $jasper_path = base_path('/reports/r4cover.jasper');
+        $dowload_path = base_path('/reports/temp/r4cover');     
 
-      JasperPHP::process(
-            base_path('reports/r4cover.jasper'),
-                false,
-                array("pdf"),               
-                array("param_condition" => $filter,"background" =>  base_path('images/r4cover_bg.jpg')),
+        JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),               
+            array("param_condition" => $filter,"background" =>  base_path('/reports/images/r4cover_bg.jpg')),
             array(
               'driver' => 'generic',
               'username' => env('DB_USERNAME',''),
@@ -2393,8 +2381,8 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12")  '.$filterquery);
               'Content-Type: application/pdf',
             );
 
-        return response()->download(base_path('reports/r4cover.pdf'), 'r4cover.pdf', $headers);
-
+        // return response()->download(base_path('reports/r4cover.pdf'), 'r4cover.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 
     public function generateOwnerTypeA(Request $request)
@@ -2412,38 +2400,22 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12")  '.$filterquery);
        Log::info($type . ' ' . $prntdate . ' ' . $tarikhhijri . ' ' . $filter);
        if($type == 'type1') {
         $reportname = "ownernoticea";
-      } else if($type == 'type2')  {
-        // $reportname = "summaryofsubzonvspropcate";
-        $reportname = "ownernoticeb";
-      } else  {
-        $reportname = "summaryofpropcate";
-      }
-      /* $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);*/
-            // Compile a JRXML to Jasper
-        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
-        //  Log::info(JasperPHP::process(
-        //     base_path('/reports/ownernoticea.jasper'),
-        //         false,
-        //         array("pdf"),
-        //         array("propid" => $filter,"p_date" =>  $prntdate),               
-        //         //array("param_condition" => $filter,"background" =>  base_path('/public/images/onwertypea.jpg')),
+        } else if($type == 'type2')  {
+            // $reportname = "summaryofsubzonvspropcate";
+            $reportname = "ownernoticeb";
+        } else  {
+            $reportname = "summaryofpropcate";
+        }
+      
+        $jasper_path = base_path('/reports/'.$reportname.'.jasper');
+        $dowload_path = base_path('/reports/temp/'.$reportname);
 
-        //     array(
-        //       'driver' => 'generic',
-        //       'username' => env('DB_USERNAME',''),
-        //       'password' => env('DB_PASSWORD',''),
-        //       'jdbc_driver' => 'com.mysql.jdbc.Driver',
-        //       'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-        //     ))->output());
-
-      JasperPHP::process(
-            base_path('/reports/'.$reportname.'.jasper'),
-                false,
-                array("pdf"),    
-                array("propid" => $filter,"p_date" =>  $prntdate,"username" => $username,"usernametitle" => $title,"hijri_date" => $tarikhhijri),             
-                //array("param_condition" => $filter,"background" =>  base_path('/reports/images/onwertypea.jpg')),
+        JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),    
+            array("propid" => $filter,"p_date" =>  $prntdate,"username" => $username,"usernametitle" => $title,"hijri_date" => $tarikhhijri),             
+            //array("param_condition" => $filter,"background" =>  base_path('/reports/images/onwertypea.jpg')),
             array(
               'driver' => 'generic',
               'username' => env('DB_USERNAME',''),
@@ -2456,8 +2428,8 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12")  '.$filterquery);
               'Content-Type: application/pdf',
             );
 
-        return response()->download(base_path('/reports/'.$reportname.'.pdf'), 'Notis Pemilik.pdf', $headers);
-
+        // return response()->download(base_path('/reports/'.$reportname.'.pdf'), 'Notis Pemilik.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 
      public function ownerNotice(Redirect $request){
@@ -2673,30 +2645,14 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
         
         $filter = " otar_id in (". $account.")";
         
-       
-      /* $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);*/
-            // Compile a JRXML to Jasper
-        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
-         Log::info(JasperPHP::process(
-            base_path('/reports/ownershiptransferlist.jasper'),
-                false,
-                array("pdf"),               
-                array("basketid" => $filter),
-            array(
-              'driver' => 'generic',
-              'username' => env('DB_USERNAME',''),
-              'password' => env('DB_PASSWORD',''),
-              'jdbc_driver' => 'com.mysql.jdbc.Driver',
-              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-            ))->output());
+        $jasper_path = base_path('/reports/ownershiptransferlist.jasper');
+        $dowload_path = base_path('/reports/temp/ownershiptransferlist');
 
-      JasperPHP::process(
-            base_path('/reports/ownershiptransferlist.jasper'),
-                false,
-                array("pdf"),               
-                array("basketid" => $filter),
+        JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),               
+            array("basketid" => $filter),
             array(
               'driver' => 'generic',
               'username' => env('DB_USERNAME',''),
@@ -2709,8 +2665,8 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
               'Content-Type: application/pdf',
             );
 
-        return response()->download(base_path('/reports/ownershiptransferlist.pdf'), 'Onwership Transfer List.pdf', $headers);
-
+        // return response()->download(base_path('/reports/ownershiptransferlist.pdf'), 'Onwership Transfer List.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 
      public function pivotReport(Request $request){
@@ -2745,29 +2701,15 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
 
         $report_name = "";
 
-       
-       
-        
-            Log::info(JasperPHP::process(
-            base_path('/reports/summarbldg.jasper'),
-                false,
-                array("pdf"),               
-                 array("termid" => $account,"title" => $title ,"bldgstatu" => $page ),
-            array(
-              'driver' => 'generic',
-              'username' => env('DB_USERNAME',''),
-              'password' => env('DB_PASSWORD',''),
-              'jdbc_driver' => 'com.mysql.jdbc.Driver',
-              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-            ))->output());
+        $jasper_path = base_path('/reports/summarbldg.jasper');
+        $dowload_path = base_path('/reports/temp/summarbldg');
 
-
-      JasperPHP::process(
-            base_path('/reports/summarbldg.jasper'),
-                false,
-                array("pdf"),               
-                 array("termid" => $account,"title" => $title ,"bldgstatu" => $page ),
-            array(
+        JasperPHP::process(
+        $jasper_path,
+        $dowload_path,
+        array("pdf"),               
+        array("termid" => $account,"title" => $title ,"bldgstatu" => $page ),
+        array(
               'driver' => 'generic',
               'username' => env('DB_USERNAME',''),
               'password' => env('DB_PASSWORD',''),
@@ -2779,38 +2721,38 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
               'Content-Type: application/pdf',
             );
 
-        return response()->download(base_path('/reports/summarbldg.pdf'), 'Summary Report.pdf', $headers);
-
+        // return response()->download(base_path('/reports/summarbldg.pdf'), 'Summary Report.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 
 
     public function officialSearchReport(Request $request)
     {        
-      $type = $request->input('type');
-      $accountnumber = $request->input('accountnumber');
-      $tittle = $request->input('title');
-      $name = $request->input('username');
-      if($type == 'Successs'){
-        $jasper_path = base_path('/reports/officialsearch.jasper');
-        $dowload_path = base_path('/reports/temp/officialsearch');
-        $filename = 'Official Search.pdf';
-      }
+        $type = $request->input('type');
+        $accountnumber = $request->input('accountnumber');
+        $tittle = $request->input('title');
+        $name = $request->input('username');
+        if($type == 'Successs'){
+            $jasper_path = base_path('/reports/officialsearch.jasper');
+            $dowload_path = base_path('/reports/temp/officialsearch');
+            $filename = 'Official Search.pdf';
+        }
           
               // Compile a JRXML to Jasper
            //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
           
-      //Log::info($type);
-      //Log::info($accountnumber);
-      //Log::info($name);
+        //Log::info($type);
+        //Log::info($accountnumber);
+        //Log::info($name);
  
-          $filter = ' os_id = '. $accountnumber;
+        $filter = ' os_id = '. $accountnumber;
 
-          JasperPHP::process(
-            $jasper_path,
-            $dowload_path,
-                  array("pdf"),
-                  array("propid" => $filter,'user'=>$name),
-                  array(
+        JasperPHP::process(
+        $jasper_path,
+        $dowload_path,
+                array("pdf"),
+                array("propid" => $filter,'user'=>$name),
+                array(
                         'driver' => 'generic',
                         'username' => env('DB_USERNAME',''),
                         'password' => env('DB_PASSWORD',''),
@@ -2830,37 +2772,20 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
     public function generateDeactive(Request $request)
     {        
              //$jasper = new JasperPHP;
-        $title = $request->input('title');
-        $termid = $request->input('termid');
+        $title = $request->input('titlereport');
+        $termid = $request->input('idterm');
         if($termid == 'All'){
           $filter = " da_vt_id = da_vt_id";
         } else {
           $filter = " da_vt_id = ". $termid;
         }
         
-        
-       
-      /* $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);*/
-            // Compile a JRXML to Jasper
-        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
-        //  Log::info(JasperPHP::process(
-        //     base_path('/reports/deactiveproperty.jasper'),
-        //         false,
-        //         array("pdf"),               
-        //         array("basketid" => $filter,"title" => $title),
-        //     array(
-        //       'driver' => 'generic',
-        //       'username' => env('DB_USERNAME',''),
-        //       'password' => env('DB_PASSWORD',''),
-        //       'jdbc_driver' => 'com.mysql.jdbc.Driver',
-        //       'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-        //     ))->output());
+        $jasper_path = base_path('/reports/newdeactiveproperty.jasper');
+        $dowload_path = base_path('/reports/temp/newdeactiveproperty');
 
-      JasperPHP::process(
-            base_path('/reports/newdeactiveproperty.jasper'),
-                false,
+        JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
                 array("pdf"),               
                 array("basketid" => $filter,"title" => $title),
             array(
@@ -2875,8 +2800,8 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
               'Content-Type: application/pdf',
             );
 
-        return response()->download(base_path('/reports/newdeactiveproperty.pdf'), 'Deactive List.pdf', $headers);
-
+        // return response()->download(base_path('/reports/newdeactiveproperty.pdf'), 'Deactive List.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 
     public function ExportDataEnqueryCSV(Request $request){
@@ -3062,40 +2987,42 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
                 where  vt_approvalstatus_id = '05'
                 order by vt_termDate desc");
         
-       $propcategory = DB::select(" select * FROM tbdefitems where tdi_td_name ='BULDINGCATEGORY' order by tdi_sort");
+        $propcategory = DB::select(" select * FROM tbdefitems where tdi_td_name ='BULDINGCATEGORY' order by tdi_sort");
 
         App::setlocale(session()->get('locale'));
         
-      return view('report.statistical.statistics')->with('search',$search)->with('term',$term)->with('propcategory',$propcategory);
+        return view('report.statistical.statistics')->with('search',$search)->with('term',$term)->with('propcategory',$propcategory);
     }
 
 
     public function generateStatisticsReport(Request $request)
     {        
 
-      $termid = $request->input('termid');
-      $title = $request->input('title');
-      $reporttype = $request->input('reporttype');
-      $propcategory = $request->input('propcategory');
+        $termid = $request->input('termid');
+        $title = $request->input('title');
+        $reporttype = $request->input('reporttype');
+        $propcategory = $request->input('propcategory');
 
-      $reportname = "";
-      $reportpdf = "";
+        $reportname = "";
+        $reportpdf = "";
 
-      if($reporttype == 1) {
-        $reportname = "summaryofsubzonvspropcate";
-      } else if($reporttype == 2)  {
-        // $reportname = "summaryofsubzonvspropcate";
-        $reportname = "bldgstatus_summary";
-      } else  {
-        $reportname = "summaryofpropcate";
-      }
+        if($reporttype == 1) {
+            $reportname = "summaryofsubzonvspropcate";
+        } else if($reporttype == 2)  {
+            // $reportname = "summaryofsubzonvspropcate";
+            $reportname = "bldgstatus_summary";
+        } else  {
+            $reportname = "summaryofpropcate";
+        }
 
-      JasperPHP::process(
-          base_path('/reports/'.$reportname.'.jasper'),
-              false,
-              array("pdf"),
-               array("termid" => $termid,"title" => $title,"propcategory" => $propcategory ),
-              array(
+        $jasper_path = base_path('/reports/'.$reportname.'.jasper');
+        $dowload_path = base_path('/reports/temp/'.$reportname);
+        JasperPHP::process(
+            $jasper_path,
+            $dowload_path,
+            array("pdf"),
+            array("termid" => $termid,"title" => $title,"propcategory" => $propcategory ),
+            array(
                     'driver' => 'generic',
                     'username' => env('DB_USERNAME',''),
                     'password' => env('DB_PASSWORD',''),
@@ -3103,10 +3030,10 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
                     'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
           ))->execute();
 
-      $headers = array(
-          'Content-Type: application/pdf',
-      );  
-      return response()->download(base_path('/reports/'.$reportname.'.pdf'), 'Summary Report.pdf', $headers);
-
+        $headers = array(
+            'Content-Type: application/pdf',
+        );  
+        // return response()->download(base_path('/reports/'.$reportname.'.pdf'), 'Summary Report.pdf', $headers);
+        return response()->file($dowload_path.'.pdf', $headers);
     }
 } 

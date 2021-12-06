@@ -28,7 +28,7 @@
 				<div class="widget_wrap">					
 					<div class="widget_content">
 						<h3 id="title">Jana Laporan</h3>
-						<form id="addgroupfrom"  autocomplete="off" class="" method="post" action="generateborangc" >
+						<form id="addgroupfrom"  autocomplete="off" class="" method="post" action="generateborangc" target="_blank" >
 							@csrf
 							<input type="hidden" name="id" id="id" value="0">
 							<input type="hidden" name="operation" id="operation" value="0">

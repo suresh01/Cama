@@ -33,17 +33,17 @@
 						
 						<div class="widget_content">
 							<h3 id="title">Jana Laporan</h3>
-							<form style="" id="generateform" method="POST" action="generatesummaryzone">
+							{{-- <form style="" id="generateform" method="post" action="generatesummaryzone" target="_blank">
 					            @csrf
 								<div  class="grid_12 form_container left_label">
 									<ul>
 										<li>											
 											<fieldset>
-												<legend>Additional Information</legend>
+												<legend>Maklumat Tambahan</legend>
 												
 												<input type="hidden" name="termid" id="gtermid">
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">TITLE<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">Tajuk<span class="req">*</span></label>
 													<div  class="form_input">
 														<input id="title" value="STATISTIK HARTA MENGIKUT KAWASAN SEHINGGA PENGGAL" name="title" type="text"  maxlength="50" class="required"/>
 													</div>
@@ -60,14 +60,14 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Jana</span></button>									
 										
 										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>
 								</div>
-							</form>
+							</form> --}}
 						</div>
 					</div>
 				</div>
@@ -107,10 +107,12 @@
 			</div>
 			<input type="hidden" name="termid" id="termid">
 			
-		<!-- <form style="display: hidden;" id="generateform" method="GET" action="generateinspectionreport">
+		<form style="display: hidden;" id="generateform" method="post" action="generatesummaryzone" target="_blank">
             @csrf
-            <input type="hidden" name="accounts" id="accounts">
-		</form>-->
+            <input type="hidden" name="subzone_id" id="subzone_id">
+			<input type="hidden" name="idterm" id="idterm">
+            <input type="hidden" name="titlereport" id="titlereport">
+		</form>
 		
 		
 	</div>
@@ -129,7 +131,7 @@
 
 		function deleteProperty(){
 			//alert();
-			var tilte = prompt("Report Title", "STATISTIK HARTA MENGIKUT KAWASAN SEHINGGA PENGGAL");
+			var title = prompt("Report Title", "STATISTIK HARTA MENGIKUT KAWASAN SEHINGGA PENGGAL");
 			var table = $('#proptble').DataTable();
 //console.log(table.rows('.selected').data());
 			var subzone = $.map(table.rows().data(), function (item) {
@@ -137,12 +139,34 @@
 	        	return item['subzone_id']
 	   		});
 
-			if (tilte == null || tilte == "") {
+			if (title == null || title == "") {
 				return;
 			} else {
 				var id = $('#termid').val();
-				// alert(id);
-				window.location = "generatesummaryzone?title="+tilte+"&termid="+id+"&subzone_id="+subzone;
+				
+				// window.location = "generatesummaryzone?title="+tilte+"&termid="+id+"&subzone_id="+subzone;
+				var noty_id = noty({
+				layout : 'center',
+				text: 'Jana Laporan?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Jana', click: function($noty) {
+						$noty.close();
+						$('#subzone_id').val(subzone.toString());
+						$('#idterm').val(id.toString());
+						// var tilte = prompt("Report Title", "STATISTIK HARTA MENGIKUT KAWASAN SEHINGGA PENGGAL ");
+						$('#titlereport').val(title.toString());
+						// alert($('#idterm').val() + '/' + $('#titlereport').val() + '/' + $('#subzone_id').val());
+						$('#generateform').submit();
+					  }
+					},
+					{type: 'button blue', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 	type : 'success', 
+			 	});
 			}
 			//var type = "delete";
 			

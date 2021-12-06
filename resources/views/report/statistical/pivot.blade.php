@@ -65,7 +65,7 @@
 				</div>
 			</div>
 				
-		<form style="display: hidden;" id="generateform" method="GET" action="generatePivotReport">
+		<form style="display: hidden;" id="generateform" method="post" action="generatePivotReport"  target="_blank">
             @csrf
             <input type="hidden" name="accounts" id="accounts">
             <input type="hidden" name="title" id="title">
@@ -90,29 +90,34 @@
 			var termdate = '';
 			var title_txt = '';
 //console.log(table.rows('.selected').data());termdate
-			
+			$('#page').val('{{$page}}');
 				var account = $.map(table.rows('.selected').data(), function (item) {
 					//console.log(item);
 		        	termdate= item['termDate'];
 		        	return item['vt_id']
 		   		});
-		   		title_txt="STATISTIK HARTA MENGIKUT KATEGORI BANGUNAN SEHINGGA PENGGAL";
+			if ($('#page').val() == 0){
+				title_txt="STATISTIK HARTA MENGIKUT KATEGORI TANAH KOSONG SEHINGGA PENGGAL";
+			}else {
+				title_txt="STATISTIK HARTA MENGIKUT KATEGORI BANGUNAN SEHINGGA PENGGAL";
+			}
+			
 			
 			
 
-	   		$('#page').val('{{$page}}');
+	   		
 			var type = "delete";
 			if(account.length > 0) {
 			console.log(account.toString());
 			var noty_id = noty({
 				layout : 'center',
-				text: 'Are want to Generate Report?',
+				text: 'Jana Laporan?',
 				modal : true,
 				buttons: [
-					{type: 'button pink', text: 'Generate', click: function($noty) {
+					{type: 'button pink', text: 'Jana Laporan', click: function($noty) {
 						$noty.close();
 						$('#accounts').val(account.toString());
-						var tilte = prompt("Report Title", title_txt+" "+termdate);
+						var tilte = prompt("Tajuk Laporan", title_txt);
 						$('#title').val(tilte);
 						$('#generateform').submit();
 					/*	$.ajax({

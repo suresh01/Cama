@@ -35,7 +35,7 @@
 								<tr>
 									<th><input name="select_all" value="1" type="checkbox"></th>
 									<th class="table_sno">
-										{{__('inspection.SNo')}} - y - {{$path}}} 
+										{{__('inspection.SNo')}} 
 									</th>
 									<th>{{__('inspection.Account_Number')}} </th>
 									<th>{{__('inspection.File_Number')}} </th>
@@ -58,7 +58,7 @@
 				</div>
 			</div>
 			
-		<form style="display: hidden;" id="generateform" method="GET" action="generater4cover">
+		<form style="display: hidden;" id="generateform" method="post" action="generater4cover" target="_blank">
             @csrf
             <input type="hidden" name="accounts" id="accounts">
 		</form>

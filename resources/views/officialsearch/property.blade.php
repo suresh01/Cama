@@ -139,7 +139,7 @@
 			
 			<div class="widget_content">
 				<h3 id="generatereport">Jana Laporan</h3>
-				<form style="" id="generateform" method="GET" action="generateoffsReport" target="_blank">
+				<form style="" id="generateform" method="post" action="generateoffsReport" target="_blank">
 					@csrf
 					<input type="hidden" name="type" id="type">
 					<input type="hidden" name="accountnumber" id="accountnumber">
@@ -181,9 +181,9 @@
 					
 					<div class="grid_12">							
 						<div class="form_input">
-							<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+							<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Jana</span></button>									
 							
-							<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+							<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 							<span class=" label_intro"></span>
 						</div>								
 						<span class="clear"></span>

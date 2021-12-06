@@ -26,7 +26,7 @@
 				</div>
 
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty()" >Jana Laporan</a>				
+					<a href="#" onclick="deleteProperty()" >Jana Laporan Nilaian</a>				
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'valuationformtable', 'searchid' => '15'])
 					
 				</div>
@@ -37,7 +37,7 @@
 						
 						<div class="widget_content">
 							<h3 id="title">Jana Laporan</h3>
-							<form style="" id="generateform" method="GET" action="generatevaluation">
+							<form style="" id="generateform" method="post" action="generatevaluation" target="_blank">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts">
 								<div  class="grid_12 form_container left_label">
@@ -45,7 +45,7 @@
 										<li>
 											
 											<fieldset>
-												<legend>Additional Information</legend>
+												<legend>Maklumat Tambahan</legend>
 												
 												<div class="form_grid_12">
 													<label class="field_title" id="lposition" for="position">Nama Penilai<span class="req">*</span></label>
@@ -78,7 +78,7 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Jana</span></button>									
 										
 										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 										<span class=" label_intro"></span>

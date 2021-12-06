@@ -22,7 +22,7 @@
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty()">Jana Laporan</a>				
+					<a href="#" onclick="deleteProperty()">Jana Senarai Nilaian</a>				
 					
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'valuationdatatablebasket', 'searchid' => $msearchid])	
 				</div>
@@ -59,7 +59,7 @@
 				</div>
 			</div>
 				
-		<form style="display: hidden;" id="generateform" method="GET" action="generateValuationData">
+		<form style="display: hidden;" id="generateform" method="post" action="generateValuationData" target="_blank">
             @csrf
             <input type="hidden" name="accounts" id="accounts">
             <input type="hidden" name="title" id="title">
@@ -90,28 +90,28 @@
 			var type = "delete";
 			if(account.length > 0) {
 			//console.log(account.toString());
-			var noty_id = noty({
-				layout : 'center',
-				text: 'Jana Laporan?',
-				modal : true,
-				buttons: [
-					{type: 'button pink', text: 'Generate', click: function($noty) {
-						$noty.close();
-						$('#accounts').val(account.toString());
-						var tilte = prompt("Report Title", "SENARAI NILAIAN PINDAAN DAN HARTA BARU HARTA MAJLIS PERBANDARAN HANG TUAH JAYA BAGI PENGGAL "+termdate);
-						$('#title').val(tilte);
-						$('#generateform').submit();
-					  }
-					},
-					{type: 'button blue', text: 'Cancel', click: function($noty) {
-						$noty.close();
-					  }
-					}
-					],
-				 type : 'success', 
-			 });
+				var noty_id = noty({
+					layout : 'center',
+					text: 'Jana Senarai Nilaian?',
+					modal : true,
+					buttons: [
+						{type: 'button pink', text: 'Jana Senarai Nilaian', click: function($noty) {
+							$noty.close();
+							$('#accounts').val(account.toString());
+							var tilte = prompt("Report Title", "SENARAI NILAIAN PINDAAN DAN HARTA BARU HARTA MAJLIS PERBANDARAN HANG TUAH JAYA BAGI PENGGAL "+termdate);
+							$('#title').val(tilte);
+							$('#generateform').submit();
+						}
+						},
+						{type: 'button blue', text: 'Cancel', click: function($noty) {
+							$noty.close();
+						}
+						}
+						],
+					type : 'success', 
+				});
 			} else {
-				alert('Please atleast one property to generate report');
+				alert('Sila Pilih Sekurang-kurangnya 1 Pilihan');
 			}
 		}
 	

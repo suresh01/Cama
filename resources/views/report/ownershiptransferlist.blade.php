@@ -68,7 +68,7 @@
 				</div>
 			</div>
 			
-		<form style="display: hidden;" id="generateform" method="GET" action="generateownertransferlist">
+		<form style="display: hidden;" id="generateform" method="post" action="generateownertransferlist" target="_blank">
             @csrf
             <input type="hidden" name="accounts" id="accounts">
 		</form>
@@ -103,10 +103,10 @@
 			console.log(account.toString());
 			var noty_id = noty({
 				layout : 'center',
-				text: 'Are want to Generate Report?',
+				text: 'Jana Laporan?',
 				modal : true,
 				buttons: [
-					{type: 'button pink', text: 'Generate', click: function($noty) {
+					{type: 'button pink', text: 'Jana Laporan', click: function($noty) {
 						$noty.close();
 						$('#accounts').val(account.toString());
 					

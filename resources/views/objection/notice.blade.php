@@ -21,29 +21,35 @@
 					</ul>
 				</div>
 				</div>
-				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty2()" > {{__('objection.Rejection_Notice')}} </a>	
-					<a href="#" onclick="deleteProperty3(1)" >Notice 141 A </a>	
-					<a href="#" onclick="deleteProperty3(2)" >Notice 141 B</a>	
-					<a href="#" onclick="deleteProperty3(3)" >Notice 144 A</a>	
-					<a href="#" onclick="deleteProperty3(4)" >Notice 144 B</a>	
-
-					<a href="#" onclick="openNotice()" >Add Notice</a>	
-
 					@include('objection.search.newsearch',['tableid'=>'proptble', 'action' => 'noticeTables', 'searchid' => '31'])
+				</div>
+
+				<div style="float:right;margin-right: 40px;"  class="btn_24_blue">	
+					<a href="#" onclick="deleteProperty2()" > {{__('objection.Rejection_Notice')}} </a>	
+					<a href="#" onclick="deleteProperty3(1)" >{{__('objection.Notice_141_A')}} </a>	
+					<a href="#" onclick="deleteProperty3(2)" >{{__('objection.Notice_141_B')}}</a>	
+					<a href="#" onclick="deleteProperty3(3)" >{{__('objection.Notice_144_A')}}</a>	
+					<a href="#" onclick="deleteProperty3(4)" >{{__('objection.Notice_144_B')}}</a>	
+
+					{{-- <a href="#" onclick="openNotice()" >{{__('objection.Add_Property')}}</a>	 --}}
+
+					{{-- @include('objection.search.newsearch',['tableid'=>'proptble', 'action' => 'noticeTables', 'searchid' => '31']) --}}
 				</div>
 				<div style="float:right;margin-right: 20px;"  class="btn_24_orange">   
 		            <!--<a href="#" id="" onclick="getSelectedProp()" class=""><span>Add Basket </span></a>  -->
 		          	<a href="#" id="" onclick="deleteNotice()" title="Delete Selected"><span>{{__('common.Delete')}} </span></a> 
 		        </div>
+				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
+					<a href="#" onclick="openNotice()" >{{__('objection.Add_Property')}}</a>	
+				</div>
 						<br>
 				<div id="addDetail" style="display:none" class="grid_12">
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
 							<h3 id="title">{{__('objection.Generate_Report')}}</h3>
-							<form style="" id="generateform2" method="GET" action="generateNotis2">
+							<form style="" id="generateform2" method="post" action="generateNotisTolak" target="_blank">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts">
 								<div  class="grid_12 form_container left_label">
@@ -76,7 +82,7 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>{{__('common.GenerateButton')}}</span></button>									
 										
 										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>{{__('common.Close')}}</span></button>
 										<span class=" label_intro"></span>
@@ -131,7 +137,7 @@
 						</div>
 					</div>
 				</div>
-								</br>	
+								<br>	
 					<div class="widget_content">						
 						<table id="proptble" class="display select">
 							<thead style="text-align: left;">
@@ -166,7 +172,7 @@
 				</div>
 			</div>
 				
-		 <form style="display: hidden;" id="generateform" method="GET" action="generateNotis">
+		 <form style="display: hidden;" id="generateform" method="post" action="generateNotis8" target="_blank">
             @csrf
             <input type="hidden" name="accounts" id="accounts2">
             <input type="hidden" name="type" id="nottype">
@@ -234,21 +240,21 @@
 			}
 		}
 
-function deleteProperty2(){
-	var table = $('#proptble').DataTable();
-//console.log(table.rows('.selected').data());
+		function deleteProperty2(){
+			var table = $('#proptble').DataTable();
+		//console.log(table.rows('.selected').data());
 			var account = $.map(table.rows('.selected').data(), function (item) {
 				//console.log(item);
-	        	return item['no_vd_id']
-	   		});
+				return item['no_vd_id']
+			});
 			var type = "delete";
 			$('#accounts').val(account.toString());
 			$('#addDetail').modal();
 			console.log(account.toString());
-}
+		}
 		function deleteProperty3(notype){
 			var table = $('#proptble').DataTable();
-//console.log(table.rows('.selected').data());
+			//console.log(table.rows('.selected').data());
 			var account = $.map(table.rows('.selected').data(), function (item) {
 				//console.log(item);
 	        	return item['no_vd_id']
@@ -256,38 +262,17 @@ function deleteProperty2(){
 			//var type = "delete";
 			//$('#accounts').val(account.toString());
 			//$('#addDetail').modal();
-			console.log(account.toString());
+			// console.log(account.toString());
 			var noty_id = noty({
 				layout : 'center',
-				text: 'Are want to Generate Report?',
+				text: 'Jana Notis?',
 				modal : true,
 				buttons: [
-					{type: 'button pink', text: 'Generate', click: function($noty) {
+					{type: 'button pink', text: 'Jana', click: function($noty) {
 						$noty.close();
 						$('#accounts2').val(account.toString());
 						$('#nottype').val(notype);
 						$('#generateform').submit();
-					/*	$.ajax({
-					        type:'GET',
-					        url:'generateinspectionreport',
-					        data:{accounts:account.toString(),type:type,id:'id'},
-					        success:function(data){
-					        	
-								//location.reload();				        		
-					        	//$("#finish").attr("disabled", true);
-					        	//clearTableError(4);
-				        	},
-					        error:function(data){
-								//$('#loader').css('display','none');	
-					        	   	
-					        		var noty_id = noty({
-									layout : 'top',
-									text: 'Report Not generated!',
-									modal : true,
-									type : 'error', 
-								});
-				        	}
-						});*/
 					  }
 					},
 					{type: 'button blue', text: 'Cancel', click: function($noty) {

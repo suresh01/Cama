@@ -22,7 +22,7 @@
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty()" >Generate Report</a>	
+					<a href="#" onclick="deleteProperty()" >Jana Borang Lawat Periksa</a>	
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'inspectionformtable', 'searchid' => '14'])			
 					
 				</div>
@@ -31,18 +31,18 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
-							<form style="" id="generateform" method="GET" action="generateinspectionform">
+							<h3 id="title">Jana Laporan</h3>
+							<form style="" id="generateform" method="post" action="generateinspectionform" target="_blank">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts">
 								<div  class="grid_12 form_container left_label">
 									<ul>
 										<li>											
 											<fieldset>
-												<legend>Additional Information</legend>
+												<legend>Maklumat Tambahan</legend>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">INSPECTOR NAME<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">Nama Pemeriksa<span class="req">*</span></label>
 													<div  class="form_input">
 														<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="inspector" tabindex="7" name="inspector" tabindex="20">
 																<option></option>
@@ -55,7 +55,7 @@
 												</div>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">INSPECTOR DATE<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">Tarikh Pemeriksaan<span class="req">*</span></label>
 													<div id="insdatehtm" class="form_input">
 														<input id="insdate" name="insdate" autocomplete="off" type="text"  maxlength="50" class="required "/>
 													</div>
@@ -63,7 +63,7 @@
 												</div>
 
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">APPROVED BY<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">Disahkan Oleh<span class="req">*</span></label>
 													<div  class="form_input">
 														
 														<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="approvedby" tabindex="7" name="approvedby" tabindex="20">
@@ -77,7 +77,7 @@
 												</div>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">APPROVED DATE<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">Disahkan Pada<span class="req">*</span></label>
 													<div id="approveddatehtm"  class="form_input">
 														<input id="approveddate" name="approveddate"  type="text"  maxlength="50" autocomplete="off" class="required datepicker"/>
 													</div>
@@ -93,9 +93,9 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Jana</span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>

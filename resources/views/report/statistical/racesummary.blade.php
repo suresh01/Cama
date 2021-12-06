@@ -74,10 +74,11 @@
 			</div>
 			<input type="hidden" name="termid" id="termid">
 			
-		<!-- <form style="display: hidden;" id="generateform" method="GET" action="generateinspectionreport">
+		<form style="display: hidden;" id="generateform" method="post" action="generatesummaryrace"  target="_blank">
             @csrf
-            <input type="hidden" name="accounts" id="accounts">
-		</form>-->
+            <input type="hidden" name="idterm" id="idterm">
+            <input type="hidden" name="title" id="title">
+		</form>
 		
 		
 	</div>
@@ -105,7 +106,28 @@
 			} else {
 				var id = $('#termid').val();
 				// alert(id);
-				window.location = "generatesummaryrace?title="+tilte+"&termid="+id;
+				// window.location = "generatesummaryrace?title="+tilte+"&termid="+id;
+				var noty_id = noty({
+				layout : 'center',
+				text: 'Jana Laporan?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Jana Laporan', click: function($noty) {
+						$noty.close();
+						$('#idterm').val(id.toString());
+						$('#title').val(tilte);
+						$('#generateform').submit();
+					
+					  }
+					},
+						{
+							type: 'button blue', text: 'Cancel', click: function($noty) {
+								$noty.close();
+							}
+						}
+					],
+				 	type : 'success', 
+			 	});
 			}
 			
 		}

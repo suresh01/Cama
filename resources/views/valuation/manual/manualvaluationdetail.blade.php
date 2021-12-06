@@ -1170,177 +1170,176 @@
 
 	    let mapallowancetable = new Map([["0","sno"],["1", "desc"],  ["2", "calmethod"], ["3", "percentage"], ["4", "grossvalue"], ["5", "bldgallowanceid"], ["6", "bldgid"], ["7", "actioncode"]]);
 	    var noty_id = noty({
-					layout : 'center',
-					text: 'Do want submit valuation?',
-					modal : true,
-					buttons: [
-						{type: 'button pink', text: 'Submit', click: function($noty) {	
-								
-						  
-	    var lotdata = [];
+			layout : 'center',
+			text: 'Do want submit valuation?',
+			modal : true,
+			buttons: [
+			{
+				type: 'button pink', text: 'Submit 1', click: function($noty) 
+				{	
+					var lotdata = [];
 
-		for (var i = 0;i<$('#landtable').DataTable().rows().count();i++){
-			var ldata = $('#landtable').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				if ( key !== 1) {
-					if ( key !== 5) {
-						tempdata1[maplottable.get(""+key+"")] = value; 
+					for (var i = 0;i<$('#landtable').DataTable().rows().count();i++){
+						var ldata = $('#landtable').DataTable().row(i).data();
+						var tempdata1 = {};
+						$.each(ldata, function( key, value ) {
+							if ( key !== 1) {
+								if ( key !== 5) {
+									tempdata1[maplottable.get(""+key+"")] = value; 
+								}
+							}
+						//console.log(key);            
+						});
+						//console.log(templotdata);
+						lotdata.push(tempdata1);            	
 					}
-				}
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	lotdata.push(tempdata1);            	
-		}
 
-		var bldgdata = [];
+					var bldgdata = [];
 
-		for (var i = 0;i<$('#bldgtable').DataTable().rows().count();i++){
-			var ldata = $('#bldgtable').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				if ( key !== 1) {
-					if (key !== 8) {
-						tempdata1[mapbldgtable.get(""+key+"")] = value; 
+					for (var i = 0;i<$('#bldgtable').DataTable().rows().count();i++){
+						var ldata = $('#bldgtable').DataTable().row(i).data();
+						var tempdata1 = {};
+						$.each(ldata, function( key, value ) {
+							if ( key !== 1) {
+								if (key !== 8) {
+									tempdata1[mapbldgtable.get(""+key+"")] = value; 
+								}
+							}
+						//console.log(key);          
+						});
+						//console.log(templotdata);
+						bldgdata.push(tempdata1);            	
 					}
-				}
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	bldgdata.push(tempdata1);            	
-		}
 
-		var additionaldata = [];
+					var additionaldata = [];
 
-		for (var i = 0;i<$('#additionaltable').DataTable().rows().count();i++){
-			var ldata = $('#additionaltable').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				if (key !== 6) {
-					tempdata1[mapadditionaltable.get(""+key+"")] = value; 
-				} 
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	additionaldata.push(tempdata1);            	
-		}
-		if ($('#additionaltable').DataTable().rows().count() == 0){
-			additionaldata = '{}';
-		}
+					for (var i = 0;i<$('#additionaltable').DataTable().rows().count();i++){
+						var ldata = $('#additionaltable').DataTable().row(i).data();
+						var tempdata1 = {};
+						$.each(ldata, function( key, value ) {
+							if (key !== 6) {
+								tempdata1[mapadditionaltable.get(""+key+"")] = value; 
+							} 
+						//console.log(key);            
+						});
+						//console.log(templotdata);
+						additionaldata.push(tempdata1);            	
+					}
+					if ($('#additionaltable').DataTable().rows().count() == 0){
+						additionaldata = '{}';
+					}
 
-		var lotareadata = [];
+					var lotareadata = [];
 
-		for (var i = 0;i<$('#hiddenlandarea').DataTable().rows().count();i++){
-			var ldata = $('#hiddenlandarea').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				
-					tempdata1[maplotareatable.get(""+key+"")] = value; 
-				
-				
-				
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	lotareadata.push(tempdata1);            	
-		}
+					for (var i = 0;i<$('#hiddenlandarea').DataTable().rows().count();i++){
+						var ldata = $('#hiddenlandarea').DataTable().row(i).data();
+						var tempdata1 = {};
+						$.each(ldata, function( key, value ) {
+							
+								tempdata1[maplotareatable.get(""+key+"")] = value; 
+							
+							
+							
+						//console.log(key);            
+						});
+						//console.log(templotdata);
+						lotareadata.push(tempdata1);            	
+					}
 
-		var bldgareadata = [];
+					var bldgareadata = [];
 
-		for (var i = 0;i<$('#hiddenbldgarea').DataTable().rows().count();i++){
-			var ldata = $('#hiddenbldgarea').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				
-				tempdata1[mapbldgareatable.get(""+key+"")] = value; 
-				
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	bldgareadata.push(tempdata1);            	
-		}
+					for (var i = 0;i<$('#hiddenbldgarea').DataTable().rows().count();i++){
+						var ldata = $('#hiddenbldgarea').DataTable().row(i).data();
+						var tempdata1 = {};
+						$.each(ldata, function( key, value ) {
+							
+							tempdata1[mapbldgareatable.get(""+key+"")] = value; 
+							
+						//console.log(key);            
+						});
+						//console.log(templotdata);
+						bldgareadata.push(tempdata1);            	
+					}
 
-		var bldgallowancedata = [];
+					var bldgallowancedata = [];
 
-		for (var i = 0;i<$('#hiddenbldgallowance').DataTable().rows().count();i++){
-			var ldata = $('#hiddenbldgallowance').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				
-				tempdata1[mapallowancetable.get(""+key+"")] = value; 
-				
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	bldgallowancedata.push(tempdata1);            	
-		}
+					for (var i = 0;i<$('#hiddenbldgallowance').DataTable().rows().count();i++){
+						var ldata = $('#hiddenbldgallowance').DataTable().row(i).data();
+						var tempdata1 = {};
+						$.each(ldata, function( key, value ) {
+							
+							tempdata1[mapallowancetable.get(""+key+"")] = value; 
+							
+						//console.log(key);            
+						});
+						//console.log(templotdata);
+						bldgallowancedata.push(tempdata1);            	
+					}
 
-		lotdata = "["+ JSON.stringify(lotdata).replace(/]|[[]/g, '') +"]";
-		bldgdata = "["+ JSON.stringify(bldgdata).replace(/]|[[]/g, '') +"]";
-		
-		lotareadata = "["+ JSON.stringify(lotareadata).replace(/]|[[]/g, '') +"]";
-		bldgareadata = "["+ JSON.stringify(bldgareadata).replace(/]|[[]/g, '') +"]";
-		bldgallowancedata = "["+ JSON.stringify(bldgallowancedata).replace(/]|[[]/g, '') +"]";
+					lotdata = "["+ JSON.stringify(lotdata).replace(/]|[[]/g, '') +"]";
+					bldgdata = "["+ JSON.stringify(bldgdata).replace(/]|[[]/g, '') +"]";
+					
+					lotareadata = "["+ JSON.stringify(lotareadata).replace(/]|[[]/g, '') +"]";
+					bldgareadata = "["+ JSON.stringify(bldgareadata).replace(/]|[[]/g, '') +"]";
+					bldgallowancedata = "["+ JSON.stringify(bldgallowancedata).replace(/]|[[]/g, '') +"]";
 
-		if ($('#additionaltable').DataTable().rows().count() > 1)
-			additionaldata = "["+ JSON.stringify(additionaldata).replace(/]|[[]/g, '') +"]";
-		else
-			additionaldata = JSON.stringify(additionaldata).replace(/]|[[]/g, '');
+					if ($('#additionaltable').DataTable().rows().count() > 1)
+						additionaldata = "["+ JSON.stringify(additionaldata).replace(/]|[[]/g, '') +"]";
+					else
+						additionaldata = JSON.stringify(additionaldata).replace(/]|[[]/g, '');
 
-		var taxdata = {};
-		$('#taxvaluationform').serializeArray().map(function(x){taxdata[x.name] = x.value;});
-		console.log(taxdata);
-		var prop_id = '{{$prop_id}}';
-		var d=new Date();
+					var taxdata = {};
+					$('#taxvaluationform').serializeArray().map(function(x){taxdata[x.name] = x.value;});
+					console.log(taxdata);
+					var prop_id = '{{$prop_id}}';
+					var d=new Date();
 					console.log("lotdata");
-		console.log(lotdata);
-		console.log("lotareadata");
-		console.log(lotareadata);
+					console.log(lotdata);
+					console.log("lotareadata");
+					console.log(lotareadata);
 
-
-
-						$.ajax({
-			  				type: 'POST', 
-						    url:'manaualvaluationprocess',
-						    headers: {
-							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-							},
-					        data:{lotdata:lotdata,bldgdata:bldgdata,lotareadata:lotareadata,bldgareadata:bldgareadata,bldgallowancedata:bldgallowancedata,additionaldata:additionaldata,prop_id:prop_id,taxdata:JSON.stringify(taxdata)},
-					        success:function(data){
-					        	
-								$('#finishloader').html('');
-					        	var noty_id = noty({
-									layout : 'top',
-									text: 'Update successfully!',
-									modal : true,
-									type : 'success', 
-								});			
-								
-				        	},
-					        error:function(data){
-								//$('#loader').css('display','none');
-					        	$('#propertystatus').val('UnRegistered');	
-					        	$('#finishloader').html('');     	
-					        		var noty_id = noty({
-									layout : 'top',
-									text: 'Problem while update valuation!',
-									modal : true,
-									type : 'error', 
-								});
-				        	}
-				    	});
+					$.ajax({
+						type: 'POST', 
+						url:'manaualvaluationprocess',
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+						data:{lotdata:lotdata,bldgdata:bldgdata,lotareadata:lotareadata,bldgareadata:bldgareadata,bldgallowancedata:bldgallowancedata,additionaldata:additionaldata,prop_id:prop_id,taxdata:JSON.stringify(taxdata)},
+						success:function(data){
+							
+							$('#finishloader').html('');
+							var noty_id = noty({
+								layout : 'top',
+								text: 'Update successfully!',
+								modal : true,
+								type : 'success', 
+							});			
+							
+						},
+						error:function(data){
+							//$('#loader').css('display','none');
+							$('#propertystatus').val('UnRegistered');	
+							$('#finishloader').html('');     	
+								var noty_id = noty({
+								layout : 'top',
+								text: 'Problem while update valuation!',
+								modal : true,
+								type : 'error', 
+							});
+						}
+					});
 
 						$noty.close();
-						}
-						},
-						{type: 'button blue', text: 'Cancel', click: function($noty) {
-								$noty.close();
-						  	}
-						}
-						],
-					type : 'success', 
-			 	});
+				}
+			},
+			{
+				type: 'button blue', text: 'Cancel 2', click: function($noty) {
+					$noty.close();
+				}
+			}
+		],
+		type : 'success', 
+		});
 
 	}	
 

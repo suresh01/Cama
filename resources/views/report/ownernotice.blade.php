@@ -33,7 +33,7 @@
 						
 						<div class="widget_content">
 							<h3 id="title">Jana Report</h3>
-							<form style="" id="generateforma" method="GET" action="generateowntypa">
+							<form style="" id="generateforma" method="post" action="generateowntypa" target="_blank">
 					            @csrf
 								<input type="hidden" name="type" id="type">
 					            <input type="hidden" name="accounts" id="accountsa">
@@ -41,7 +41,7 @@
 									<ul>
 										<li>											
 											<fieldset>
-												<legend>Additional Information</legend>
+												<legend>Maklumat Tambahan</legend>
 													<div class="form_grid_12">
 														<label class="field_title" id="lposition" for="position">Nama Pegawai<span class="req">*</span></label>
 														<div  class="form_input">
@@ -88,7 +88,7 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Hantar</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Jana</span></button>									
 										
 										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Tutup</span></button>
 										<span class=" label_intro"></span>

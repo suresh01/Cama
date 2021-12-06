@@ -116,7 +116,11 @@
 
 		</div>
 
-
+		<form style="display: hidden;" id="generateform" method="post" action="generatedeactive" target="_blank">
+            @csrf
+            <input type="hidden" name="titlereport" id="titlereport">
+			<input type="hidden" name="idterm" id="idterm">
+		</form>
 	<span class="clear"></span>
 	
 	<script>
@@ -141,7 +145,11 @@
 							return;
 						} else {
 							//var id = $('#value_Term').val();
-							window.location = "generatedeactive?title="+tilte+"&termid="+paramterm;
+							// window.location = "generatedeactive?title="+tilte+"&termid="+paramterm;
+							$('#titlereport').val(tilte.toString());
+							$('#idterm').val(paramterm.toString());
+							$('#generateform').submit();
+							
 						}
 					  }
 					},

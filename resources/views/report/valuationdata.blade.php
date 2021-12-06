@@ -30,7 +30,7 @@
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty()">Jana Laporan</a>				
+					<a href="#" onclick="deleteProperty()">Jana Senarai Nilaian</a>				
 					
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'valuationdatatable?page='.$page, 'searchid' => $msearchid])	
 				</div>
@@ -68,7 +68,7 @@
 				</div>
 			</div>
 				
-		<form style="display: hidden;" id="generateform" method="GET" action="generateValuationData">
+		<form style="display: hidden;" id="generateform" method="post" action="generateValuationData" target="_blank">
             @csrf
             <input type="hidden" name="accounts" id="accounts">
             <input type="hidden" name="title" id="title">
@@ -126,7 +126,7 @@
 				text: 'Jana Laporan?',
 				modal : true,
 				buttons: [
-					{type: 'button pink', text: 'Generate', click: function($noty) {
+					{type: 'button pink', text: 'Jana Laporan', click: function($noty) {
 						$noty.close();
 						$('#accounts').val(account.toString());
 						var tilte = prompt("Report Title", title_txt+" "+termdate);

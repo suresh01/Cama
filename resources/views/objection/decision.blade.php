@@ -36,19 +36,20 @@
 							<li>{{$objectiondetail}}</li>
 						</ul>
 					</div>
-					<div style="float:right;margin-right: 0px;"  class="btn_24_blue">   
-						<!--<a href="#" onclick="deleteProperty()">Generate Report</a>		-->
-						<a href="#" onclick="addProperty()" title="Add_Property">{{__('objection.Add_Property')}}</a>
-					</div>
+
+					<div style="float:right;margin-right: 10px;"  class="btn_24_blue">   
+			          @include('objection.search.newsearch',['tableid'=>'agendatbl', 'action' => '', 'searchid' => '37'])
+			           
+			        </div>
 					<div style="float:right;margin-right: 20px;"  class="btn_24_orange">   
 			            <!--<a href="#" id="" onclick="getSelectedProp()" class=""><span>Add Basket </span></a>  -->
 			          	<a href="#" id="" onclick="deleteDecision()" title="Delete Selected"><span>{{__('common.Delete')}} </span></a> 
 		        	</div>
-
-		        	 <div style="float:right;margin-right: 10px;"  class="btn_24_blue">   
-			          @include('objection.search.newsearch',['tableid'=>'agendatbl', 'action' => '', 'searchid' => '37'])
-			           
-			        </div>
+		        	
+					<div style="float:right;margin-right: 10px;"  class="btn_24_blue">   
+						<!--<a href="#" onclick="deleteProperty()">Generate Report</a>		-->
+						<a href="#" onclick="addProperty()" title="Add_Property">{{__('objection.Add_Property')}}</a>
+					</div>
 
 					<br>
 				</div>	
@@ -95,7 +96,7 @@
 						</div>
 					</div>
 				</div>
-								</br>					
+								<br>					
 							<table id="agendatbl" class="display ">
 							<thead style="text-align: left;">
 			  					<tr>
@@ -103,16 +104,16 @@
 									<th class="table_sno"> {{__('objection.SNO')}}</th>
 									<th> {{__('objection.Account_number')}} </th>
 									<th> {{__('objection.Basket_Name')}} </th>
-									<th> Land Value </th>
-									<th> Building Value </th>
+									<th> Nilai Tanah </th>
+									<th> Nilai Bangunan </th>
 									<th> {{__('objection.Proposed_NT')}} </th>
 									<th> {{__('objection.Proposed_Rate')}} </th>
 									<th> {{__('objection.Proposed_Tax')}} </th>
 									<th> {{__('objection.Valuer_Recommend')}}  </th>
 									<th> {{__('objection.Approved_NT')}}  </th>
 									<th> {{__('objection.Approved_Tax')}} </th>
-									<th> Difference </th>
-									<th> Percentage </th>
+									<th> Selisih </th>
+									<th> (%) </th>
 									<th> {{__('objection.Action')}} </th>
 								</tr>
 							</thead>
@@ -245,9 +246,9 @@
 								<ul>
 									<li>		
 									<fieldset>
-										<legend>Land / Building Information</legend>						
+										<legend>Maklumat Tanah / Bangunan</legend>						
 										<div class="form_grid_10">									
-											<label class="field_title" id="termname" for="termid">Land Value<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">Nilai Tanah<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="landvalue" readonly="true"   name="landvalue" type="text"  value="{{ old('time') }}" />
 											</div>
@@ -255,11 +256,11 @@
 										</div>	
 										<div class="form_grid_2">	
 											<div style="float:right;margin-right: 30px;"  class="btn_24_blue">
-												<a href="#" onclick="udpateland()">Update Valuation</a>
+												<a href="#" onclick="udpateland()">Kemaskini Penilaian</a>
 											</div>		
 										</div>					
 										<div class="form_grid_10">									
-											<label class="field_title" id="lblgroup" for="name">Building Value<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">Nilai Bangunan<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="bldgvalue"  readonly="true" name="bldgvalue" type="text"  value="{{ old('reason') }}" />
 											</div>
@@ -372,8 +373,7 @@
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
-														<input id="taxproposedtax"
-														value=""  tabindex="2" name="taxproposedtax"  readonly="true" type="text"  maxlength="50" class="right-text "/>
+														<input id="taxproposedtax" value=""  tabindex="2" name="taxproposedtax"  readonly="true" type="text"  maxlength="50" class="right-text "/>
 													</div>
 													<span class=" label_intro"></span>
 												</div>
@@ -404,10 +404,10 @@
 											</ul>
 									</div>
 							
-							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
-								
-								<div class="form_input">
-									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>			
+							{{-- <div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12"> --}}
+							<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
+								<div class="form_input" >
+									<button id="addsubmit" name="adduser" type="button" onclick="validateGroup()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>			
 														
 									<button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 									<span class=" label_intro"></span>
@@ -580,25 +580,29 @@
 			$("#landvalue").val($("#landvalue_"+id).val());
 			$("#bldgvalue").val($("#bldgvalue_"+id).val());
 
-
+			
 			$("#taxapprovednt").val($("#nt_"+id).val());
 			$("#taxproposednt").val($("#vt_proposednt_"+id).val());
-			
+			$("#taxproposedtax").val($("#vt_proposedtax_"+id).val());
+			$("#taxadjustment").val($("#adjust_"+id).val());
+			$("#taxapprovedtax").val($("#tax_"+id).val());
+
 			formatMoney("taxvaluerdiscretion",$("#vt_valuedescretion_"+id).val());
 			formatMoney("taxgrossnt",$("#vt_grossvalue_"+id).val());
 			formatMoney("taxcalculaterate",$("#vt_calculatedrate_"+id).val());
+			// alert($("#taxproposedtax").val());
 			//formatMoney("taxproposednt",$("#vt_proposednt_"+id).val());
 			formatMoney("taxproposedrate",$("#vt_proposedrate_"+id).val());
-			formatMoney("taxproposedtax",$("#vt_proposedtax_"+id).val());
+			// formatMoney("taxproposedtax",$("#vt_proposedtax_"+id).val());
 			//formatMoney("taxapprovednt",$("#nt_"+id).val());
 			formatMoney("taxapprovedrate",$("#rate_"+id).val());
-			formatMoney("taxadjustment",$("#adjust_"+id).val());
-			formatMoney("taxapprovedtax",$("#tax_"+id).val());
+			// formatMoney("taxadjustment",$("#adjust_"+id).val());
+			// formatMoney("taxapprovedtax",$("#tax_"+id).val());
 			
 			//console.log($("#nt_"+id).val());
 			//console.log($("#vt_proposednt_"+id).val());
 
-			$("#addsubmit").html("Update");
+			$("#addsubmit").html("Kemaskini");
 		 	$("label.error").remove();	
 		}
 
@@ -850,7 +854,7 @@ $(document).ready(function (){
               {"data": "diff", "name": "address", "sClass": "numericCol"},
               {"data": "percentage", "name": "address", "sClass": "numericCol"},
               {"data":function(data){
-			        	return '<span><a onclick="updateMeeting('+data.de_id+')" class="action-icons c-edit  edtlotrow" href="#" title="New Agenda">New Agenda</a></span>';
+			        	return '<span><a onclick="updateMeeting('+data.de_id+')" class="action-icons c-edit  edtlotrow" href="#" title="Kemaskini">Kemaskini</a></span>';
 			        }, "name": "address"}
           ],
 		        

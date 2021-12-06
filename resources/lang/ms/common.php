@@ -13,6 +13,7 @@ return [
     'Edit'=>'Kemaskini',
     'Delete'=>'Padam',
     'Submit'=>'Hantar',
+    'GenerateButton'=>'Jana',
     'Update_Data'=>'Kemaskini',
     'Please_Select_a_Filter'=>'Pilih Tapisan',
     'Choose_a_Custom'=>'Pilih Kustom ',
