@@ -686,23 +686,18 @@ function updateCalculation(){
     var roundbldg = $('#roundbldg').val(); 
     
     var bldgareatable = window.opener.$("#hiddenbldgarea").DataTable();
+
+   // var lotareatable = window.opener.$("#hiddenlandarea").DataTable();
+    var bldgdetailtable = $("#bldgarea").DataTable();
     
-    for (var l = 0;l < bldgareatable.rows().count() ;l++){
-        var ldata = bldgareatable.row(l).data();
-        
-        if (ldata[8] == {{$id}}) {
-            var row = window.opener.$("#hiddenbldgarea").DataTable().row(l);
-            var data = row.data();
-            var temptable = $("#bldgarea").DataTable();
-            for (var k = 0;k<temptable.rows().count() ;k++){
-                var localdata = temptable.row(k).data();
-                if (localdata[9] == ldata[7]) {
-                  data[5] = localdata[8];
-                  data[6] = localdata[7];
-                  row.data(data);
-                }
-            }            
-        }
+   
+    
+    for (var l = 0;l < bldgdetailtable.rows().count() ;l++){
+        var ldata = bldgdetailtable.row(l).data();
+        var row = bldgdetailtable.row(l);
+       // var temptable = $("#bldgarea").DataTable();            
+
+       bldgareatable.row.add([ ldata[1], ldata[2],ldata[3], ldata[4], ldata[5], ldata[6],ldata[7],ldata[9],ldata[10] ]).draw(false);   
     }
 
     
