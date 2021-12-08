@@ -36,6 +36,9 @@ return [
     'Reference_No'=>'Reference No',
     'Register'=>'Daftar Harta',
     'Pending'=>'PENDING',
-    'Count'=>'COUNT'
+    'Count'=>'COUNT',
+    'Next' => 'Selepasnya',
+    'Back' => 'Sebelumnya',
+    'Finish' => 'Simpan'
 
 ];
