@@ -35,6 +35,10 @@ return [
     'Reference_No'=>'Reference No',
     'Register'=>'Register',
     'Pending'=>'PENDING',
-    'Count'=>'COUNT'
+    'Count'=>'COUNT',
+    'Next' => 'Next',
+    'Back' => 'Back',
+    'Finish' => 'Finish'
+
 
 ];

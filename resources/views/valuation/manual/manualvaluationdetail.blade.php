@@ -212,11 +212,53 @@
 													</th>
 													<th style="width: 60px">
 														{{__('valuation.Action')}} 
+													</th>												
+													<th style="display: none;">
+														bldgid
+													</th>											
+													<th style="display: none;">
+														actioncode
 													</th>
 												</tr>
 												</thead>
 												<tbody>
-												
+													@foreach ($bldg as $rec)
+												<tr>
+													<td>
+														{{$loop->iteration}}
+													</td>
+													<td>
+														<a href="#" onclick="addBldg('{{$rec->vb_id}}','{{$loop->iteration}}')">{{$rec->bldgcategory}} </a>
+													</td>
+													<td>
+														{{$rec->bldgtype}} 
+													</td>
+													<!--<td>
+														
+													</td>-->
+													<td  style="text-align:right;">
+														{{number_format($rec->vb_grossfloorvalue,2)}}
+													</td>
+													<td style="text-align:right;">
+														{{number_format($rec->vb_grossallowancevalue,2)}}
+													</td>
+													<td style="text-align:right;">
+														{{number_format($rec->vb_depreciationvalue,2)}}
+													</td>
+													<td style="text-align:right;">
+														{{number_format($rec->vb_netnt,2)}}
+													</td>
+													<td style="text-align:right;">
+														{{number_format($rec->vb_roundnetnt,2)}} 
+													</td>
+													<td><span><a onclick="" class="action-icons c-edit editaddrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span></td>
+													<td style="text-align:right;display: none;">
+														{{$rec->vb_id}} 
+													</td>
+													<td style="text-align:right;display: none;">noaction</td>
+													@php($totalbldg = $totalbldg + $rec->vb_roundnetnt)
+												</tr>												
+												@endforeach
 												</tbody>
 
 												<tr>
@@ -266,8 +308,7 @@
 													<th style="width: 60px">
 														{{__('valuation.Action')}} 
 													</th>
-													<th style="display: none;"> 
-														 {{--  --}}
+													<th style="display: none;"> 														
 														actioncode 
 													</th>
 												</tr>
@@ -403,7 +444,7 @@
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
-														<input id="taxproposedrate" style="width: 100%;"  value="" tabindex="2"name="taxproposedrate"  onchange="taxCalculation()" type="text"  maxlength="50" class="right-text "/>
+														<input id="taxproposedrate" style="width: 100%;"  value="" tabindex="2"name="taxproposedrate"  onchange="taxCalculation()" type="text" value="0"  maxlength="50" class="right-text "/>
 													</div>
 													<span class=" label_intro"></span>
 												</div>
@@ -413,7 +454,7 @@
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
-														<input id="taxcalculaterate" style="width: 100%;" value="" tabindex="2" name="taxcalculaterate"  type="text" onchange="taxCalculation()"  maxlength="50" class="right-text "/>
+														<input id="taxcalculaterate" style="width: 100%;" value="10" tabindex="2" name="taxcalculaterate"  type="text" onchange="taxCalculation()"  maxlength="50" class="right-text "/>
 													</div>
 													<span class=" label_intro"></span>
 												</div>
@@ -463,7 +504,7 @@
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
-														<input id="taxadjustment" class="right-text " style="width: 100%;" tabindex="2" name="taxadjustment" value="" onchange="taxApprovedCalculation()"  type="text"  maxlength="50" class=""/>
+														<input id="taxadjustment" class="right-text " style="width: 100%;" tabindex="2" name="taxadjustment" value="0" onchange="taxApprovedCalculation()"  type="text"  maxlength="50" class=""/>
 													</div>
 													<span class=" label_intro"></span>
 												</div>
@@ -815,7 +856,7 @@
 		}
 	}
 
-	
+			
 	    @foreach ($tax as $rec)
 			formatMoney('taxvaluerdiscretion','{{$rec -> vt_valuedescretion}}');
 			formatMoney('taxapprovednt','{{$rec -> vt_approvednt}}');
@@ -823,7 +864,8 @@
 			formatMoney('taxadjustment','{{$rec -> vt_adjustment}}');
 			formatMoney('taxapprovedtax','{{$rec -> vt_approvedtax}}');
 			formatMoney('taxgrossnt','{{$rec -> vt_grossvalue}}');
-			formatMoney('taxproposedrate','{{$rec -> vt_proposedrate}}');
+			//formatMoney('taxproposedrate','{{$rec -> vt_proposedrate}}');
+			$('#taxproposedrate').val('{{$rec -> vt_proposedrate}}');
 			formatMoney('taxproposednt','{{$rec -> vt_proposednt}}');
 			formatMoney('taxcalculaterate','{{$rec -> vt_calculatedrate}}');
 			formatMoney('taxproposedtax','{{$rec -> vt_proposedtax}}');
@@ -1045,7 +1087,30 @@
 	    $('#landtable_info').remove();
 	    $('#landtable_paginate').remove();
 	    $('#landtable_length').remove();
+	    $('#taxproposedrate').val(100);
+	    $('#taxadjustment').val(0);
+		
 
+		 $('#bldgtable').DataTable({
+            "columns":[ null, null, null, null, null,null, null,null,null,{ "visible": false },{ "visible": false }],
+            "sPaginationType": "full_numbers",
+			"iDisplayLength": 5,
+			"oLanguage": {
+		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
+		    },
+        	"bAutoWidth": false,
+			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
+			 
+		});
+		$("div.table_top select").addClass('tbl_length');
+		$(".tbl_length").chosen({
+			disable_search_threshold: 4	
+		});
+
+		$('#bldgtable_filter').remove();
+	    $('#bldgtable_info').remove();
+	    $('#bldgtable_paginate').remove();
+	    $('#bldgtable_length').remove();
     	
 	});
 
@@ -1160,7 +1225,7 @@
     function updateValuation(){
 	    let maplottable = new Map([["0","sno"],["1", "lotno"], ["2", "lotarea"], ["3", "netvalue"],["4", "roundvalue"],["5", "action"], ["6", "lotid"], ["7", "actioncode"]]);
 
-	    let mapbldgtable = new Map([["0","sno"],["1", "bldgcategory"], ["2", "bldgtype"], ["3", "bldgvalue"],["4", "allowancevalue"], ["5", "depvalue"],["6", "netbldgvalue"], ["7", "roundbldgvalue"],["8", "bldgid"]]);
+	    let mapbldgtable = new Map([["0","sno"],["1", "bldgcategory"], ["2", "bldgtype"], ["3", "bldgvalue"],["4", "allowancevalue"], ["5", "depvalue"],["6", "netbldgvalue"], ["7", "roundbldgvalue"],["8", "action"],["9", "bldgid"],["10", "actioncode"]]);
 
 	    let mapadditionaltable = new Map([["0","sno"],["1", "desc"],["2", "area"],["3", "rate"],["4", "grossvalue"],["5", "roundvalue"],["6", "action"],  ["7", "actioncode"],  ["8", "addadditionalid"]]);
 	    

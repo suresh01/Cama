@@ -780,8 +780,8 @@ left join (SELECT * FROM tbdefitems where tdi_td_name = "APPLICATIONTYPE") appln
         Log::info('lotdetail:'.$lotarea_param);
         Log::info('bangunan:'.$bldg_param);
         Log::info('bangunandetail'.$bldgarea_param);
-        //Log::info("call proc_manaualvaluation_v2( '".$lot_param."', '".$bldg_param."', '".$lotarea_param."','".$additional_param."', '".$bldgarea_param."', '".$bldgallowance_param."',  '".$taxdata."', '".$name."',".$prop_id.")");
-        // $response = DB::select("call proc_manaualvaluation_v2( '".$lot_param."', '".$bldg_param."', '".$lotarea_param."', '".$additional_param."', '".$bldgarea_param."', '".$bldgallowance_param."', '".$taxdata."', '".$name."',".$prop_id.")"); 
+        Log::info("call proc_manaualvaluation_v2( '".$lot_param."', '".$bldg_param."', '".$lotarea_param."','".$additional_param."', '".$bldgarea_param."', '".$bldgallowance_param."',  '".$taxdata."', '".$name."',".$prop_id.")");
+         $response = DB::select("call proc_manaualvaluation_v2( '".$lot_param."', '".$bldg_param."', '".$lotarea_param."', '".$additional_param."', '".$bldgarea_param."', '".$bldgallowance_param."', '".$taxdata."', '".$name."',".$prop_id.")"); 
         
         // return response()->json(array('response'=> $response), 200);
         return response()->json(array('response'=> 'success'), 200);

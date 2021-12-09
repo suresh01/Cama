@@ -39,17 +39,7 @@
 
 	// tab view
 
-	$('#propertyinspectionform').stepy({
-		backLabel: 'Back',
-		nextLabel: 'Next',
-		errorImage:true,
-		block: true,
-		description: true,
-		legend: false,
-		titleClick: true,
-		titleTarget: '#top_tabby',
-		validate: true
-	});
+	
 
 	$('#propertyregsitration_from').stepy({
 		backLabel: 'Back',
