@@ -48,37 +48,37 @@
                         <thead>
                         <tr class=" gray_sai">
                           <th>
-                            {{__('valuation.SNo')}}
+                            1: {{__('valuation.SNo')}}
                           </th>
                           <th>
-                            {{__('valuation.Area_Type')}}
+                            2: {{__('valuation.Area_Type')}}
                           </th>
                           <th>
-                            {{__('valuation.Area_Level')}}
+                            3: {{__('valuation.Area_Level')}}
                           </th>
                           <th>
-                            {{__('valuation.Area_Category')}}
+                            4: {{__('valuation.Area_Category')}}
                           </th>
                           <th>
-                            {{__('valuation.Area_Used')}}
+                            5: {{__('valuation.Area_Used')}}
                           </th>
                           <th>
-                            {{__('valuation.Area')}}
+                            6: {{__('valuation.Area')}}
                           </th>
                           <th>
-                            {{__('valuation.Area_Rate')}}
+                            7: {{__('valuation.Area_Rate')}}
                           </th>
                           <th >
-                            {{__('valuation.Gross_Area_Value')}}
+                            8: {{__('valuation.Gross_Area_Value')}}
                           </th>
                           <th>
-                            {{__('valuation.Rate')}}
+                            9: {{__('valuation.Rate')}}
                           </th>
                           <th>
-                            {{__('valuation.Bldgarid')}}
+                            10: {{__('valuation.Bldgarid')}}
                           </th>
                           <th>
-                            {{__('valuation.Bldgid')}}
+                            11: {{__('valuation.Bldgid')}}
                           </th>
                         </tr>
                         </thead>
@@ -414,12 +414,13 @@ $(document).ready(function(){
 
     var bldgardata = [];
     @foreach ($bldgar as $rec)        
-      bldgardata.push( [ '{{$loop->iteration}}',  '{{$rec->artype}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->arlvel}}','{{$rec->aba_totsize}}','<input type="text" class="editrate" style="text-align:right;" id="rate" value="0" name="rate">','0', '','','' ] );
+      bldgardata.push( [ '{{$loop->iteration}}',  '{{$rec->artype}}','{{$rec->arlvel}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->aba_totsize}}','<input type="text" class="editrate" style="text-align:right;" id="rate" value="0" name="rate">','0', 'a','{{$rec->aba_id}}','{{$rec->aba_ab_id}}' ] );
     @endforeach
 
     $('#bldgarea').DataTable({
           data:           bldgardata,
-      "columns":[ null, null, null, null, null, { className: "numericCol" }, null,  { className: "numericCol" }, { "visible": false }, { "visible": false }, { "visible": false}],
+      // "columns":[ null, null, null, null, null, { className: "numericCol" }, null,  { className: "numericCol" }, { "visible": false }, { "visible": false }, { "visible": false}],
+      "columns":[ null, null, null, null, null, { className: "numericCol" }, null,  { className: "numericCol" }, null, null, null],
         "sPaginationType": "full_numbers",
         "iDisplayLength": 5,
         "oLanguage": {
@@ -526,7 +527,7 @@ $(document).ready(function(){
     }*/
     $('#bldgtotal').val(formatMoneyHas(totalgross));
 
-var totalallowancegross1 = 0;
+    var totalallowancegross1 = 0;
         var totalbldggross1 = 0;
          for (var i = 0;i<bldgareatable.rows().count();i++){         
               var ldata = $('#bldgallowance').DataTable().row(i).data();   
@@ -586,27 +587,28 @@ var totalallowancegross1 = 0;
     $('#bldgtotal').val(formatMoneyHas(totalgross));
 
     var table = $('#bldgarea').DataTable();
+
     $('#bldgarea tbody').on('change', '.editrate', function () {
         var row = table.row(table.row( $(this).parents('tr') ).index());
         var data = row.data();
 
-        var r = confirm("Allowance will be cleared!");
+        var r = true; //confirm("Allowance will be cleared!");
         if (r == true) {
          // txt = "You pressed OK!";
         var allowancetable = $('#bldgallowance').DataTable();
         var allowancedata;
-         for (var i = 0;i<$('#bldgallowance').DataTable().rows().count();i++){
+          for (var i = 0;i<$('#bldgallowance').DataTable().rows().count();i++){
 
-              var allowrow = allowancetable.row(i),
-          allowancedata = allowrow.data();
-          allowancedata[0]='Deleted';
-        allowancedata[7]='';
-       
-               
-        }
+            var allowrow = allowancetable.row(i),
+            allowancedata = allowrow.data();
+            allowancedata[0]='Deleted';
+            allowancedata[7]='';
+        
+                
+          }
         
                  // allowrow.data(allowancedata);
-                  allowancaCaluation();
+        allowancaCaluation();
 
 
         var rowid =  data[0];
@@ -617,7 +619,7 @@ var totalallowancegross1 = 0;
         area = removeCommas(area);
         rate = removeCommas(rate);
        // calucaterate = removeCommas(calucaterate);
-    
+          alert(rate);
         var gross = area * rate;
         data[6] = '<input type="text" class="editrate" style="text-align:right;" id="rate" value="'+rate+'" name="rate">';
         data[7] = formatMoneyHas(gross);
@@ -629,17 +631,17 @@ var totalallowancegross1 = 0;
         //alert();
         for (var i = 0;i<$('#bldgallowance').DataTable().rows().count();i++){
 
-              var ldata = $('#bldgallowance').DataTable().row(i).data();
-if(ldata[0] !== 'Deleted'){
+            var ldata = $('#bldgallowance').DataTable().row(i).data();
+            if(ldata[0] !== 'Deleted'){
               totalallowancegross1 = totalallowancegross1 + Number(removeCommas(ldata[4]));
             }
              
                
         }
 
-          for (var i = 0;i<$('#bldgarea').DataTable().rows().count();i++){
-              var ldata = $('#bldgarea').DataTable().row(i).data();
-              totalbldggross1 = totalbldggross1 + Number(removeCommas(ldata[7]));
+        for (var i = 0;i<$('#bldgarea').DataTable().rows().count();i++){
+            var ldata = $('#bldgarea').DataTable().row(i).data();
+            totalbldggross1 = totalbldggross1 + Number(removeCommas(ldata[7]));
                
         }
          $('#bldgtotal').val(formatMoneyHas(totalbldggross1));
@@ -731,7 +733,7 @@ function updateCalculation(){
         var row = bldgdetailtable.row(l);
        // var temptable = $("#bldgarea").DataTable();            
 
-       bldgareatable.row.add([ ldata[1], ldata[2],ldata[3], ldata[4], ldata[5], ldata[8],ldata[7],ldata[9],ldata[10] ]).draw(false);   
+       bldgareatable.row.add([ ldata[1], ldata[2],ldata[3], ldata[4], ldata[5], ldata[8],ldata[7],ldata[9],ldata[10],'new' ]).draw(false);   
     }
 
     

@@ -25,34 +25,34 @@
                 <fieldset>
                   <legend>{{__('valuation.Land_Detail')}}</legend>             
                   @foreach ($lotdetail as $rec)
-                  <div class="grid_3 invoice_to"> 
-                    <strong><span>{{__('valuation.Code_Lot_No')}} : </span></strong>
-                    <span>{{$rec->lotnumber}}</span>  
-                  </div>
-                  <div class="grid_3 invoice_to">   
-                    <strong><span>{{__('valuation.Lot_Position')}} : </span></strong>
-                    <span>{{$rec->landposition}}</span>
-                  </div>
-                  <div class="grid_3 invoice_from">
-                    <strong><span>{{__('valuation.Alternate_Lot_No')}} : </span></strong>
-                    <span>{{$rec->titlenumber}}</span>
-                  </div>
-                  <div class="grid_3 invoice_from">
-                    <strong><span>{{__('valuation.Tenure_Type')}} : </span></strong>
-                    <span>{{$rec->tentype}}</span>
-                  </div>
-                  <br>  <br>  <br>
-                  <div class="grid_3 invoice_from">
-                    <strong><span>{{__('valuation.Land_Area')}} : </span></strong>
-                    <span>{{$rec->al_size}}</span>
-                    <input type="hidden" id="landsize" value="{{$rec->al_size}}">
-                  </div>
-                  <div class="grid_3 invoice_from">
-                    <strong><span>{{__('valuation.Tenure_Duration')}} : </span></strong>
-                    <span>{{$rec->duration}}</span>
-                  </div>
-               
-            @endforeach
+                    <div class="grid_3 invoice_to"> 
+                      <strong><span>{{__('valuation.Code_Lot_No')}} : </span></strong>
+                      <span>{{$rec->lotnumber}} / </span>  
+                    </div>
+                    <div class="grid_3 invoice_to">   
+                      <strong><span>{{__('valuation.Lot_Position')}} : </span></strong>
+                      <span>{{$rec->landposition}}</span>
+                    </div>
+                    <div class="grid_3 invoice_from">
+                      <strong><span>{{__('valuation.Alternate_Lot_No')}} : </span></strong>
+                      <span>{{$rec->titlenumber}}</span>
+                    </div>
+                    <div class="grid_3 invoice_from">
+                      <strong><span>{{__('valuation.Tenure_Type')}} : </span></strong>
+                      <span>{{$rec->tentype}}</span>
+                    </div>
+                    <br>  <br>  <br>
+                    <div class="grid_3 invoice_from">
+                      <strong><span>{{__('valuation.Land_Area')}} : </span></strong>
+                      <span>{{$rec->al_size}}</span>
+                      <input type="hidden" id="landsize" value="{{$rec->al_size}}">
+                    </div>
+                    <div class="grid_3 invoice_from">
+                      <strong><span>{{__('valuation.Tenure_Duration')}} : </span></strong>
+                      <span>{{$rec->duration}}</span>
+                    </div>
+                    
+                  @endforeach
             
                 <span class="clear"></span>
                 <div class="grid_12 invoice_details">
@@ -247,7 +247,8 @@ $(document).ready(function(){
     //parenrowid = prmstr[2];
 
     $('#landdetail').DataTable({
-      "columns":[ null, null, null, null, null,  { className: "numericCol" },null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}],
+      // "columns":[ null, null, null, null, null,  { className: "numericCol" },null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}],
+      "columns":[ null, null, null, null, null,  { className: "numericCol" },null, null, null, null, null],
         "sPaginationType": "full_numbers",
         "iDisplayLength": 5,
         "lengthMenu": [5, 10, 15],
@@ -278,9 +279,10 @@ $(document).ready(function(){
          // if (ldata[6] == {{$id}}){
             rate = ldata[2];
             calucatedrate = ldata[3];
+            lotareaid = ldata[5];
             grossvalue = ldata[4];
             var rowid = i+1;
-             $('#landdetail').DataTable().row.add([ rowid,ldata[0], ldata[1], '<input type="text" class="editrate" style="text-align:right;" id="rate_'+rowid+'" value="'+rate+'" name="rate">', '<input type="text" style="text-align:right;"  class="editcalrate" id="calucatedrate_'+rowid+'" value="'+calucatedrate+'" name="rate">', grossvalue,'<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket()" href="#" title="Delete">Delete</a></span>', rate,calucatedrate,0,0]).draw( false );      
+             $('#landdetail').DataTable().row.add([ rowid,ldata[0], ldata[1], '<input type="text" class="editrate" style="text-align:right;" id="rate_'+rowid+'" value="'+rate+'" name="rate">', '<input type="text" style="text-align:right;"  class="editrate" id="calucatedrate_'+rowid+'" value="'+calucatedrate+'" name="rate">', grossvalue,'<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket()" href="#" title="Delete">Delete</a></span>', rate,calucatedrate,lotareaid,"{{$rec->al_id}}"]).draw( false );      
              
               totalgross = totalgross + Number(removeCommas(grossvalue));
           //}
@@ -310,7 +312,7 @@ $(document).ready(function(){
         
         var gross = area * rate * (1 - (calucaterate / 100));
         data[3] = '<input type="text" class="editrate" style="text-align:right;" id="rate_'+rowid+'" value="'+rate+'" name="rate">';
-        data[4] = '<input type="text" class="editcalrate"  style="text-align:right;" id="calucatedrate_'+rowid+'" value="'+calucaterate+'" name="rate">';
+        data[4] = '<input type="text" class="editrate"  style="text-align:right;" id="calucatedrate_'+rowid+'" value="'+calucaterate+'" name="rate">';
         data[5] = formatMoneyHas(gross);
         data[7] = rate;
         data[8] = calucaterate;
@@ -361,7 +363,7 @@ function closeLand(){
 function addLanddetail(){
     var t = $('#landdetail').DataTable();
     var rowid = (t.rows().count())+1;
-    t.row.add([ 'New', $('#desc').val(), $('#size').val(), '<input type="text" class="editrate" style="text-align:right;" value="0" id="rate_'+rowid+'">', '<input type="text" class="editcalrate" style="text-align:right;" value="0" id="calucatedrate_'+rowid+'">', '<input type="text" class="editgross" style="text-align:right;" readonly="true" value="0" id="grossvalue_'+rowid+'">','<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket()" href="#" title="Delete">Delete</a></span>',0,0,0,0]).draw( false );  
+    t.row.add([ 'New', $('#desc').val(), $('#size').val(), '<input type="text" class="editrate" style="text-align:right;" value="0" id="rate_'+rowid+'">', '<input type="text" class="editrate" style="text-align:right;" value="0" id="calucatedrate_'+rowid+'">', '<input type="text" class="editgross" style="text-align:right;" readonly="true" value="0" id="grossvalue_'+rowid+'">','<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket()" href="#" title="Delete">Delete</a></span>',0,0,rowid,"{{$rec->al_id}}"]).draw( false );  
     $('#vlottable').show();
     $('#addgroup').hide();
 }
@@ -408,6 +410,8 @@ function updateCalculation(){
       //  } else {
           
        // }
+
+       
     }
     window.opener.$('#landtotal').val( formatMoneyHas(landtotal));
     window.opener.taxDriveCalculation();

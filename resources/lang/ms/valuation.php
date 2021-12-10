@@ -9,7 +9,7 @@ return [
 	'Allowance'=>'Elaun',
 	'SNo'=>'SNo',
 	'Area_Type'=>'Jenis Ruang',
-	'Area_Level'=>'Ruang Kawasan',
+	'Area_Level'=>'Aras Ruang',
 	'Area_Category'=>'Kategori Ruang',
 	'Area_Use'=>'Kegunaan Ruang',
 	'Area'=>'Ukuran',

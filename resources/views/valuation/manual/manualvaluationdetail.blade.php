@@ -92,28 +92,28 @@
 													<thead>
 													<tr class=" gray_sai">
 														<th style="width: 40px;">
-															{{__('valuation.SNo')}}
+															1: {{__('valuation.SNo')}}
 														</th>
 														<th>
-															{{__('valuation.Lot_Code')}} / {{__('valuation.Lot_No')}}
+															2: {{__('valuation.Lot_Code')}} / {{__('valuation.Lot_No')}}
 														</th>
 														<th>
-															{{__('valuation.Land_Area')}}
+															3: {{__('valuation.Land_Area')}}
 														</th>
 														<th>
-															{{__('valuation.Net_Value')}}
+															4: {{__('valuation.Net_Value')}}
 														</th>
 														<th>
-															{{__('valuation.Total_Land_Value')}}
+															5: {{__('valuation.Total_Land_Value')}}
 														</th>													
 														<th style="width: 60px">
-															{{__('valuation.Action')}}
+															6: {{__('valuation.Action')}}
 														</th>												
-														<th style="display: none;">
-															lotid
+														<th>{{-- <th style="display: none;">  --}}
+															7: lotid
 														</th>											
-														<th style="display: none;">
-															actioncode
+														<th>
+															8: actioncode
 														</th>
 													</tr>
 													</thead>
@@ -142,10 +142,10 @@
 																<td>
 																	<span><a onclick="" class="action-icons c-edit editaddrow" href="#" title="Edit">Kemaskini</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Padam</a></span>
 																</td>
-																<td style="display: none;">
+																<td>{{-- <td style="display: none;"> --}}
 																	{{$rec->vl_id}}
 																</td>
-																<td style="display: none;">
+																<td>
 																	noaction
 																</td>
 																@php($totalland1 = $totalland1 + $rec->vl_roundnetlandvalue)
@@ -213,10 +213,10 @@
 													<th style="width: 60px">
 														{{__('valuation.Action')}} 
 													</th>												
-													<th style="display: none;">
+													<th> {{-- <th style="display: none;"> --}}
 														bldgid
 													</th>											
-													<th style="display: none;">
+													<th>
 														actioncode
 													</th>
 												</tr>
@@ -559,7 +559,8 @@
 		<span class="clear"></span>
 	</div>
 </div>
-<div style="display: none;">
+{{-- <div style="display: none;"> --}}
+	<div class="widget_wrap collapsible_widget">
 	<table id="hiddenlandarea" class="display ">
 		<thead style="text-align: left;">
 			<tr>
@@ -651,6 +652,9 @@
 				<th>
 					BLDG ID
 				</th>
+				<th>
+					Actioncode
+				</th>
             </tr>
         </thead>
         <tbody>		
@@ -683,6 +687,9 @@
 					<td style="text-align:right;">
 					{{$rec->vb_id}}
 					</td>
+					<td>
+						noaction
+					</td>  
 	            </tr>
             
             @endforeach                       
@@ -1068,7 +1075,8 @@
 		});
 
 		 $('#landtable').DataTable({
-            "columns":[ null, null, null, null, null,null,{ "visible": false },{ "visible": false }],
+            // "columns":[ null, null, null, null, null,null,{ "visible": false },{ "visible": false }],
+			"columns":[ null, null, null, null, null,null,null,null],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			"oLanguage": {
@@ -1092,7 +1100,8 @@
 		
 
 		 $('#bldgtable').DataTable({
-            "columns":[ null, null, null, null, null,null, null,null,null,{ "visible": false },{ "visible": false }],
+            // "columns":[ null, null, null, null, null,null, null,null,null,{ "visible": false },{ "visible": false }],
+			"columns":[ null, null, null, null, null,null, null,null,null,null,null],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			"oLanguage": {

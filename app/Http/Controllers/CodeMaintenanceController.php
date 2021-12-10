@@ -56,7 +56,7 @@ class CodeMaintenanceController extends Controller
 
         App::setlocale(session()->get('locale'));
 
-        return view("codemaintenance.tenantreg")->with(array('tenant'=> $tenant,'state'=> $state,'citizen'=> $citizen,'race'=> $race,'activeind'=> $activeind, 'applntype' => $applntype, 'tenanttype' => $tenanttype,'search'=> $search));
+        return view("datamaintenance.tenantreg")->with(array('tenant'=> $tenant,'state'=> $state,'citizen'=> $citizen,'race'=> $race,'activeind'=> $activeind, 'applntype' => $applntype, 'tenanttype' => $tenanttype,'search'=> $search));
     }
 
      public function tenantTable(Request $request){
@@ -161,7 +161,7 @@ and rp_type_id = ratepayertype_id and approval_id = rp_approvalrpstatus_id");
 
         App::setlocale(session()->get('locale'));
         
-        return view("codemaintenance.ratepayer")->with(array('ratepayer'=> $ratepayer,'state'=> $state,'citizen'=> $citizen,'race'=> $race,'activeind'=> $activeind, 'applntype' => $applntype, 'ratepayertype' => $ratepayertype));
+        return view("datamaintenance.ratepayer")->with(array('ratepayer'=> $ratepayer,'state'=> $state,'citizen'=> $citizen,'race'=> $race,'activeind'=> $activeind, 'applntype' => $applntype, 'ratepayertype' => $ratepayertype));
     }
 
     public function ratepayerRegistrationTransaction(Request $request){
@@ -226,7 +226,7 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
 
         App::setlocale(session()->get('locale'));
         
-        return view("codemaintenance.transaction")->with(array('transaction'=> $transaction,'transtype'=> $transtype,'lotcode'=> $lotcode,'titletype'=> $titletype,'state'=> $state,'search'=> $search));
+        return view("datamaintenance.transaction")->with(array('transaction'=> $transaction,'transtype'=> $transtype,'lotcode'=> $lotcode,'titletype'=> $titletype,'state'=> $state,'search'=> $search));
     }
 
     public function evidentTransaction(Request $request){

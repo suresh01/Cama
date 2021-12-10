@@ -47,6 +47,7 @@ return [
 	'Row_Selected'=>'Baris dipilih',
 	'Edit_Detail'=>'Kemaskini',
 	'Reason_Name'=>'Sebab',
+	'Reason'=>'Sebab',
 	// newdeleteproperty.blade.php
 	'New_Property'=>'Harta Baru',
 	'Subzone'=>'Taman/Kawasan',
