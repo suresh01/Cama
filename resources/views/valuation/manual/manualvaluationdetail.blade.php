@@ -1240,7 +1240,7 @@
 	    
 	    let maplotareatable = new Map([["0","arname"],["1", "area"],  ["2", "rate"], ["3", "calculatedrate"], ["4", "grossvalue"], ["5", "lotareaid"], ["6", "lotid"], ["7", "actioncode"]]);
 
-	    let mapbldgareatable = new Map([["0","artype"],["1", "arlevel"],  ["2", "arcategory"], ["3", "arused"], ["4", "area"], ["5", "arearate"], ["6", "grossareavalue"],["7", "bldgarid"],["9", "bldgid"]]);
+	    let mapbldgareatable = new Map([["0","artype"],["1", "arlevel"],  ["2", "arcategory"], ["3", "arused"], ["4", "area"], ["5", "arearate"], ["6", "grossareavalue"],["7", "bldgarid"],["8", "bldgid"],["9", "actioncode"]]);
 
 	    let mapallowancetable = new Map([["0","sno"],["1", "desc"],  ["2", "calmethod"], ["3", "percentage"], ["4", "grossvalue"], ["5", "bldgallowanceid"], ["6", "bldgid"], ["7", "actioncode"]]);
 	    var noty_id = noty({

@@ -397,6 +397,7 @@ function updateCalculation(){
     var lotareatable = window.opener.$("#hiddenlandarea").DataTable();
     var landdetailtable = $("#landdetail").DataTable();
     
+    lotareatable.clear().draw();
     for (var l = 0;l < landdetailtable.rows().count() ;l++){
         var ldata = landdetailtable.row(l).data();
         

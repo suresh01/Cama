@@ -670,13 +670,13 @@ $(document).ready(function(){
     console.log(bldgallowancetable.rows().count());
     for (var i = 0;i<bldgallowancetable.rows().count();i++){
           var ldata = bldgallowancetable.row(i).data();
-          if (ldata[6] == {{$id}}){
+         // if (ldata[6] == {{$id}}){
             
             var rowid = i+ 1;
              $('#bldgallowance').DataTable().row.add([ ldata[0],  ldata[1], ldata[2], ldata[3] , ldata[4],ldata[5],ldata[6]  ,'<span><a onclick="" class="action-icons c-delete  deleteallowance" href="#" title="delete">Delete</a></span' ]).draw( false );      
              
               totalallowancegross = totalallowancegross + Number(removeCommas(ldata[4]));
-          }
+        //  }
                
     }
 //alert(totalgross);
@@ -761,6 +761,41 @@ function updateCalculation(){
 
     }
 
+
+    var allowancetable = window.opener.$("#hiddenbldgallowance").DataTable();
+   
+    for (var l = 0;l < $("#bldgallowance").DataTable() .rows().count() ;l++){
+        var ldata = $("#bldgallowance").DataTable() .row(l).data();
+       // alert(ldata[0]);
+       if (ldata[0] == 'New') {
+
+          allowancetable.row.add([ "New",  ldata[1], ldata[2], ldata[3] , ldata[4], ldata[5], ldata[6] ]).draw( false );
+        } else  {
+             for (var i = 0;i < allowancetable.rows().count() ;i++){
+                //var allowancedata = allowancetable.row(l).data();
+               // console.log(ldata[0]);
+              // alert(ldata[5]);
+                    var allowancerow = allowancetable.row(i);
+                    var allowancedata = allowancerow.data();
+                if (allowancedata[5] == ldata[5] ) {
+                    
+                          allowancedata[0] = ldata[0];
+                          allowancedata[1] = ldata[1];
+                          allowancedata[2] = ldata[2];
+                          allowancedata[3] = ldata[3];
+                          allowancedata[4] = ldata[4];
+                          allowancedata[5] = ldata[5];
+                          allowancedata[6] = ldata[6];
+                          allowancerow.data(allowancedata);
+                    
+                        //lotareatable.row.add([ ldata[1], ldata[2], ldata[6], ldata[7], ldata[5],ldata[8],ldata[9] ]).draw(false);   
+                               
+                } 
+           }
+
+          //allowancetable.row.add([ "New",  ldata[1], ldata[2], ldata[3] , ldata[4], ldata[5], ldata[6] ]).draw( false );
+        }
+      }
      
     window.opener.$('#vd_bldgtotal').val( formatMoneyHas(landtotal));
     window.opener.$('#deprate_{{$id}}').val($('#deprate').val());
