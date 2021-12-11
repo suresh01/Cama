@@ -1387,7 +1387,9 @@
 								text: 'Update successfully!',
 								modal : true,
 								type : 'success', 
-							});			
+							});	
+
+							window.location.assign("valuationdetail?prop_id={{$prop_id}}&pb={{$pb}}");		
 							
 						},
 						error:function(data){
