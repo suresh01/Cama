@@ -412,9 +412,29 @@ $(document).ready(function(){
     var temnetbldg = removeCommas(window.opener.$('#netbldg_{{$id}}').val());
     var temroundbldg = removeCommas(window.opener.$('#roundbldg_{{$id}}').val());
 
+
+      var parenttable = window.opener.$('#bldgtable').DataTable();
+      //var landtotal = 0;
+      for (var m = 0;m < parenttable.rows().count() ;m++){
+        var parenttableldata = parenttable.row(m).data();
+
+        var parenttablerow = parenttable.row(m);
+
+        var parenttabledata = parenttablerow.data();
+       // if (parenttableldata[8] == {{$id}}) {        ;
+        //  parenttabledata[5]=$('#depvalue').val();
+        //  parenttabledata[11]=$('#deprate').val();
+         // parenttablerow.data(parenttabledata);
+        //}
+      $('#deprate').val(parenttabledata[11]);
+    $('#depvalue').val( parenttabledata[5]);
+
+      }
+
+
     var bldgardata = [];
     @foreach ($bldgar as $rec)        
-      bldgardata.push( [ '{{$loop->iteration}}',  '{{$rec->artype}}','{{$rec->arlvel}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->aba_totsize}}','<input type="text" class="editrate" style="text-align:right;" id="rate" value="0" name="rate">','0', 'a','{{$rec->aba_id}}','{{$rec->aba_ab_id}}' ] );
+      bldgardata.push( [ '{{$loop->iteration}}',  '{{$rec->artype}}','{{$rec->arlvel}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->aba_totsize}}','<input type="text" class="editrate" style="text-align:right;" id="rate_{{$loop->iteration}}" value="0" name="rate">','0', '0','{{$rec->aba_id}}','{{$rec->aba_ab_id}}' ] );
     @endforeach
 
     $('#bldgarea').DataTable({
@@ -612,7 +632,7 @@ $(document).ready(function(){
 
 
         var rowid =  data[0];
-        var rate = $('#rate').val();
+        var rate = $('#rate_'+rowid).val();
         var area =  data[5];
 //alert($("#rate_"+rowid).val());
         //console.log(calucaterate);
@@ -621,7 +641,7 @@ $(document).ready(function(){
        // calucaterate = removeCommas(calucaterate);
           alert(rate);
         var gross = area * rate;
-        data[6] = '<input type="text" class="editrate" style="text-align:right;" id="rate" value="'+rate+'" name="rate">';
+        data[6] = '<input type="text" class="editrate" style="text-align:right;" id="rate_'+rowid+'" value="'+rate+'" name="rate">';
         data[7] = formatMoneyHas(gross);
         data[8] = rate;
         row.data(data);
@@ -724,17 +744,83 @@ function updateCalculation(){
     var bldgareatable = window.opener.$("#hiddenbldgarea").DataTable();
 
    // var lotareatable = window.opener.$("#hiddenlandarea").DataTable();
-    var bldgdetailtable = $("#bldgarea").DataTable();
-    
+    var bldgdetailtable = $("#bldgarea").DataTable();   
    
+    var maintablecount = window.opener.$("#hiddenbldgarea").DataTable().rows().count();
+    if (maintablecount == 0){
+        for (var l = 0;l < bldgdetailtable.rows().count() ;l++){
+          var ldata = bldgdetailtable.row(l).data();
+          var row = bldgdetailtable.row(l);
+          // var temptable = $("#bldgarea").DataTable();      
+
+          if (ldata[10] == {{$id}}) {
+            //var row = window.opener.$("#hiddenbldgarea").DataTable().row(l);
+            //var data = row.data();
+           // var temptable =  window.opener.$("#hiddenbldgarea").DataTable();
+
+           
+                  bldgareatable.row.add([ ldata[1], ldata[2],ldata[3], ldata[4], ldata[5], ldata[8],ldata[7],ldata[9],ldata[10],'new' ]).draw(false);  
+               //lotareatable.row.add([ ldata[1], ldata[2], ldata[6], ldata[7], ldata[5],ldata[8],ldata[9] ]).draw(false);   
+                        
+          } /* else {
+            bldgareatable.row.add([ ldata[1], ldata[2],ldata[3], ldata[4], ldata[5], ldata[8],ldata[7],ldata[9],ldata[10],'new' ]).draw(false);  
+          }   */ 
+
+           
+      }
+    } else {
+
+      //var bldgareatable = window.opener.$("#hiddenbldgarea").DataTable();
     
-    for (var l = 0;l < bldgdetailtable.rows().count() ;l++){
+      for (var l = 0;l < bldgdetailtable.rows().count() ;l++){
+          var ldata = bldgdetailtable.row(l).data();
+         
+          if (ldata[10] == {{$id}}) {
+             //  console.log(ldata[10]+"ddd" );
+               //   console.log("{{$id}} _dfd" );
+              var temptable = window.opener.$("#hiddenbldgarea").DataTable();
+              for (var k = 0;k<temptable.rows().count() ;k++){
+                  //var localdata = temptable.row(k).data();
+                  var row = window.opener.$("#hiddenbldgarea").DataTable().row(l);
+                  var data = row.data();
+                 // console.log(data[7] +"_ test");
+                 // console.log(ldata[9]  +"_ teest");
+                  if (data[7] == ldata[9]) {
+                    data[5] = ldata[8];
+                    data[6] = ldata[7];
+                    row.data(data);
+                  }
+                  //lotareatable.row.add([ ldata[1], ldata[2], ldata[6], ldata[7], ldata[5],ldata[8],ldata[9] ]).draw(false);   
+              }            
+          }
+      }       
+          
+      
+    }
+    /*for (var l = 0;l < bldgdetailtable.rows().count() ;l++){
         var ldata = bldgdetailtable.row(l).data();
         var row = bldgdetailtable.row(l);
-       // var temptable = $("#bldgarea").DataTable();            
+        // var temptable = $("#bldgarea").DataTable();      
 
-       bldgareatable.row.add([ ldata[1], ldata[2],ldata[3], ldata[4], ldata[5], ldata[8],ldata[7],ldata[9],ldata[10],'new' ]).draw(false);   
-    }
+        if (ldata[10] == {{$id}}) {
+          var row = window.opener.$("#hiddenbldgarea").DataTable().row(l);
+          var data = row.data();
+          var temptable =  window.opener.$("#hiddenbldgarea").DataTable();
+
+          for (var k = 0;k<temptable.rows().count() ;k++){
+              var localdata = temptable.row(k).data();
+              if (localdata[9] == ldata[7]) {
+                data[5] = localdata[8];
+                data[6] = localdata[7];
+                row.data(data);
+              } else {
+                bldgareatable.row.add([ ldata[1], ldata[2],ldata[3], ldata[4], ldata[5], ldata[8],ldata[7],ldata[9],ldata[10],'new' ]).draw(false);  
+              }  
+              //lotareatable.row.add([ ldata[1], ldata[2], ldata[6], ldata[7], ldata[5],ldata[8],ldata[9] ]).draw(false);   
+          }            
+        } 
+         
+    }*/
 
     
 
@@ -754,6 +840,7 @@ function updateCalculation(){
         parenttabledata[5]=$('#depvalue').val();
         parenttabledata[6]=$('#netbldg').val();
         parenttabledata[7]=$('#roundbldg').val();
+        parenttabledata[11]=$('#deprate').val();
         parenttablerow.data(parenttabledata);
       //}
     if (parenttabledata[6] != undefined)

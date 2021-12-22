@@ -726,6 +726,7 @@ function updateCalculation(){
         parenttabledata[5]=$('#depvalue').val();
         parenttabledata[6]=$('#netbldg').val();
         parenttabledata[7]=$('#roundbldg').val();
+        parenttabledata[9]=$('#deprate').val();
         parenttablerow.data(parenttabledata);
       }
 //console.log(parenttabledata[4]);

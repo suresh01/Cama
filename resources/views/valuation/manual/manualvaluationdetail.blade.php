@@ -218,6 +218,9 @@
 													</th>											
 													<th>
 														actioncode
+													</th>											
+													<th>
+														deprate
 													</th>
 												</tr>
 												</thead>
@@ -256,6 +259,7 @@
 														{{$rec->vb_id}} 
 													</td>
 													<td style="text-align:right;display: none;">noaction</td>
+													<td style="text-align:right;display: none;">{{$rec->vb_depreciationrate}}</td>
 													@php($totalbldg = $totalbldg + $rec->vb_roundnetnt)
 												</tr>												
 												@endforeach
@@ -275,7 +279,7 @@
 											</div>
 										</div>
 									</div>
-
+									
 
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
@@ -454,7 +458,7 @@
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
-														<input id="taxcalculaterate" style="width: 100%;" value="10" tabindex="2" name="taxcalculaterate"  type="text" onchange="taxCalculation()"  maxlength="50" class="right-text "/>
+														<input id="taxcalculaterate" style="width: 100%;" value="100" tabindex="2" name="taxcalculaterate"  type="text" onchange="taxCalculation()"  maxlength="50" class="right-text "/>
 													</div>
 													<span class=" label_intro"></span>
 												</div>
@@ -1095,13 +1099,13 @@
 	    $('#landtable_info').remove();
 	    $('#landtable_paginate').remove();
 	    $('#landtable_length').remove();
-	    $('#taxproposedrate').val(100);
+	    $('#taxproposedrate').val(0);
 	    $('#taxadjustment').val(0);
 		
 
 		 $('#bldgtable').DataTable({
             // "columns":[ null, null, null, null, null,null, null,null,null,{ "visible": false },{ "visible": false }],
-			"columns":[ null, null, null, null, null,null, null,null,null,null,null],
+			"columns":[ null, null, null, null, null,null, null,null,null,null,null,null],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			"oLanguage": {
@@ -1234,7 +1238,7 @@
     function updateValuation(){
 	    let maplottable = new Map([["0","sno"],["1", "lotno"], ["2", "lotarea"], ["3", "netvalue"],["4", "roundvalue"],["5", "action"], ["6", "lotid"], ["7", "actioncode"]]);
 
-	    let mapbldgtable = new Map([["0","sno"],["1", "bldgcategory"], ["2", "bldgtype"], ["3", "bldgvalue"],["4", "allowancevalue"], ["5", "depvalue"],["6", "netbldgvalue"], ["7", "roundbldgvalue"],["8", "action"],["9", "bldgid"],["10", "actioncode"]]);
+	    let mapbldgtable = new Map([["0","sno"],["1", "bldgcategory"], ["2", "bldgtype"], ["3", "bldgvalue"],["4", "allowancevalue"], ["5", "depvalue"],["6", "netbldgvalue"], ["7", "roundbldgvalue"],["8", "action"],["9", "bldgid"],["10", "actioncode"],["11", "deprate"]]);
 
 	    let mapadditionaltable = new Map([["0","sno"],["1", "desc"],["2", "area"],["3", "rate"],["4", "grossvalue"],["5", "roundvalue"],["6", "action"],  ["7", "actioncode"],  ["8", "addadditionalid"]]);
 	    

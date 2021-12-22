@@ -163,6 +163,9 @@
 													<th style="display: none;">
 														bldgid 
 													</th>
+													<th style="display: none;">
+														deprate 
+													</th>
 												</tr>
 												</thead>
 												<tbody>
@@ -197,6 +200,9 @@
 													</td>
 													<td style="text-align:right;display: none;">
 														{{$rec->vb_id}} 
+													</td>
+													<td style="text-align:right;display: none;">
+														{{$rec->vb_depreciationrate}} 
 													</td>
 													@php($totalbldg = $totalbldg + $rec->vb_roundnetnt)
 												</tr>												
@@ -1189,7 +1195,7 @@
     function updateValuation(){
 	    let maplottable = new Map([["0","sno"],["1", "lotno"], ["2", "lotarea"], ["3", "netvalue"],["4", "roundvalue"], ["5", "lotid"]]);
 
-	    let mapbldgtable = new Map([["0","sno"],["1", "bldgcategory"], ["2", "bldgtype"], ["3", "bldgvalue"],["4", "allowancevalue"], ["5", "depvalue"],["6", "netbldgvalue"], ["7", "roundbldgvalue"],["8", "bldgid"]]);
+	    let mapbldgtable = new Map([["0","sno"],["1", "bldgcategory"], ["2", "bldgtype"], ["3", "bldgvalue"],["4", "allowancevalue"], ["5", "depvalue"],["6", "netbldgvalue"], ["7", "roundbldgvalue"],["8", "bldgid"],["9", "deprate"]]);
 
 	    let mapadditionaltable = new Map([["0","sno"],["1", "desc"],["2", "area"],["3", "rate"],["4", "grossvalue"],["5", "roundvalue"],["6", "action"],  ["7", "actioncode"],  ["8", "addadditionalid"]]);
 

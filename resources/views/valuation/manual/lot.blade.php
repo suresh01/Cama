@@ -255,7 +255,9 @@
 			    window.opener.$('#bldgtable_info').remove();
 			    window.opener.$('#bldgtable_paginate').remove();
 			    window.opener.$('#bldgtable_length').remove();
-				t.row.add([ 'New','<a href="#" onclick="addBldg('+data[9]+','+data[0]+')">'+data[3]+'</a>', data[4], '0', '0','0','0','0', '<span><a onclick="" class="action-icons c-edit editaddrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span>',data[9],'new']).draw( false );	
+				t.row.add([ 'New','<a href="#" onclick="addBldg('+data[9]+','+data[0]+')">'+data[3]+'</a>', data[4], '0', '0','0','0','0', '<span><a onclick="" class="action-icons c-edit editaddrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span>',data[9],'new','0']).draw( false );	
+				
+				//$('#bldghiddendata').append('<input type="text" value="" id="deprate_'+data[9]+'"><input type="text" value="" id="depvalue_'+data[9]+'">');
 				alert('Bangunan ditambah');
 		   	
 		});
