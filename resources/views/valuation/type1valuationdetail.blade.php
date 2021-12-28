@@ -271,6 +271,9 @@
 														<span><a class="action-icons c-edit editaddrow"  href="#" title="{{__('common.Edit')}} ">{{__('common.Edit')}}</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="{{__('common.Delete')}} ">{{__('common.Delete')}}</a></span>
 													</td>
 													<td style="display: none;">noaction</td>
+													<td>
+														{{$rec->vad_id}}
+													</td>
 													@php($totaladditonal = $totaladditonal + $rec->vad_roundnetvalue)
 												</tr>
 												@endforeach	
@@ -300,6 +303,7 @@
 									<div  class="grid_12 form_container left_label">
 										<ul>	
 											<li class="li">
+															<input id="addadditionalid" name="addadditionalid" type="hidden"  value="" />								
 												<input type="hidden" id="index">
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
@@ -723,7 +727,8 @@
 </div>
 <script>
 	var w;
-	let tempmap = new Map([["0","sno"],["1", "add_description"],["2", "add_area"],["3", "add_rate"],["4", "add_grossvalue"],["5", "add_roundvalue"]]);
+	let tempmap = new Map([["0","sno"],["1", "add_description"],["2", "add_area"],["3", "add_rate"],["4", "add_grossvalue"],["5", "add_roundvalue"],["6", "action"],  ["7", "actioncode"],  ["8", "addadditionalid"]]);
+
 
 	function addLand(){
 		var w = window.open('about:blank','Popup_Window','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=1000,height=500,left = 312,top = 50');
@@ -933,7 +938,7 @@
 	$(document).ready(function(){
 
 	    $('#additionaltable').DataTable({
-            "columns":[ null, null, null, null, null, null, null, { "visible": false }],
+            "columns":[ null, null, null, null, null, null, null, { "visible": false }, { "visible": false }],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			"oLanguage": {
@@ -966,6 +971,7 @@
 
             $.each( tdata, function( key, val ) {
             	$('#'+key).val(val);
+            	console.log(key);
 			});
 			console.log($('#add_area').val());
 			$('#edit').show();
@@ -1107,7 +1113,9 @@
 				operation = "New";
 				operation_code = "new";
 			}
-	    data=[operation,$('#add_description').val(), $('#add_area').val(), $('#add_rate').val(), $('#add_grossvalue').val(), $('#add_roundvalue').val(),'<span><a onclick="" class="action-icons c-edit editaddrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span>',operation_code ];
+	    data=[operation,$('#add_description').val(), $('#add_area').val(), $('#add_rate').val(), $('#add_grossvalue').val(), $('#add_roundvalue').val(),'<span><a onclick="" class="action-icons c-edit editaddrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span>',operation_code , $('#addadditionalid').val()];
+
+		console.log( $('#addadditionalid').val()+"  ====== ");
 
 
 
@@ -1318,9 +1326,22 @@
 		else
 			additionaldata = JSON.stringify(additionaldata).replace(/]|[[]/g, '');
 
+
+		var notes = $('#taxnotes').val();
+
+		notes = notes.replace('\n', '\\n');
+		
+		notes = notes.replace('"', '\""');
+		notes = notes.replace("'", "\'");
+		notes = notes.replace('\r', '\\r');
+
+		$('#taxnotes').val(notes);
+
 		var taxdata = {};
 		$('#taxvaluationform').serializeArray().map(function(x){taxdata[x.name] = x.value;});
 		console.log(taxdata);
+
+
 		var prop_id = '{{$prop_id}}';
 		var d=new Date();
 					$.ajax({

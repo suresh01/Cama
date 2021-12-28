@@ -1366,6 +1366,17 @@
 					else
 						additionaldata = JSON.stringify(additionaldata).replace(/]|[[]/g, '');
 
+					var notes = $('#taxnotes').val();
+
+					notes = notes.replace('\n', '\\n');
+					
+					notes = notes.replace('"', '\""');
+					notes = notes.replace("'", "\'");
+					notes = notes.replace('\r', '\\r');
+
+					$('#taxnotes').val(notes);
+
+
 					var taxdata = {};
 					$('#taxvaluationform').serializeArray().map(function(x){taxdata[x.name] = x.value;});
 					console.log(taxdata);
