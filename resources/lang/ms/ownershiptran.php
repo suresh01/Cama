@@ -5,6 +5,7 @@
 return [
 	// owneraddresstransfer.blade.php
 	'Ownership_Transfer_Process'=>'Proses Pindahmilik',
+	'Ownership_Transfer_Process_Address'=>'Proses Tukar Alamat Pemilik',
 	'Home'=>'Laman Utama',
 	'Data_Maintenance'=>'Penyelenggaraan Data',
 	'Add_Property'=>'Tambah Harta',

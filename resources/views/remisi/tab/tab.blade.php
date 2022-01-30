@@ -58,7 +58,7 @@
 							</fieldset>
 							@endif
 							
-							<input type="submit" onclick="transfer()" class="finish" id="finish" value="Finish!"/>
+							<input type="submit" onclick="transfer()" class="finish" id="finish" value="Kemaskini!"/>
 						</form>
 					</div>
 				</div>
@@ -70,7 +70,17 @@
 <script src="js/propertyregister/tab-script.js"></script>
 </div>
 <script>
-
+	$('#propertyinspectionform').stepy({
+					backLabel: "{{__('common.Back')}}",
+					nextLabel: "{{__('common.Next')}}",
+					errorImage:true,
+					block: true,
+					description: true,
+					legend: false,
+					titleClick: true,
+					titleTarget: '#top_tabby',
+					validate: true
+				});
 	let invesitagemap = new Map([["0","sno"],["1", "typetxt"],["2", "officertxt"],["3", "insvdate"],["4", "action"],["5", "actioncode"],["6", "insid"],["7", "instype"], ["8", "insofficer"],  ["9", "review"],["10", "finreason1"], ["11", "finreason2"],["12", "finreason3"], ["13", "finreason4"],["14", "finreason5"],["15", "finreason6"],["16", "finreason7"],["17", "finreason8"]]);
 	function closeWindow(){
 	    

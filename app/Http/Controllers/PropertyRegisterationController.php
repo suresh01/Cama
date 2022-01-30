@@ -119,7 +119,12 @@ class PropertyRegisterationController extends Controller
             $status=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ACTIVEIND" order by tdi_sort ');
             $mbldg=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISMAINBLDG" order by tdi_sort ');
 
-        	$master = DB::select('select * from cm_masterlist where ma_id = ifnull("'.$prop_id.'",0)');
+        	// $master = DB::select('select * from cm_masterlist where ma_id = ifnull("'.$prop_id.'",0)');
+            $master = DB::select('select cm_masterlist.*, zone.tdi_key zoneid, subzone.tdi_value subzone 
+            from cm_masterlist 
+            left join (select tdi_key , tdi_value, tdi_parent_key  from tbdefitems where tdi_td_name = "SUBZONE")  subzone on ma_subzone_id = subzone.tdi_key 
+            left join (select tdi_key , tdi_value  from tbdefitems where tdi_td_name = "ZONE")  zone on subzone.tdi_parent_key = zone.tdi_key
+            where ma_id = ifnull("'.$prop_id.'",0)');
 
             $iseditable = 1;
             foreach ($master as $obj) {  
@@ -602,27 +607,24 @@ $master ='{"aa":"ss '.$type.'"}';
     }
 
     public function propertyTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         $pb = $request->input('pb');
         ini_set('memory_limit', '2056M');
-         Log::info($pb);
+        Log::info($pb);
         $maxRow = 30;
         //$property = '';           
         $property = DB::select('select ma_id, ma_pb_id,  ma_accno,  zone.tdi_value zone, subzone.tdi_value subzone, ma_addr_ln1, ma_addr_ln2, 
-        isbldg.tdi_value isbldg, owncount, ma_approvalstatus_id, propstatus.tdi_desc propstatus, applntype.tdi_value applntype
-        from cm_masterlist 
-        left join 
-        (select tdi_key , tdi_value, tdi_parent_key  from tbdefitems where tdi_td_name = "SUBZONE")  subzone
-        on ma_subzone_id = subzone.tdi_key 
-        left join (select tdi_key , tdi_value  from tbdefitems where tdi_td_name = "ZONE")  zone
-        on subzone.tdi_parent_key = zone.tdi_key
-        left join (select tdi_key , tdi_value  from tbdefitems where tdi_td_name = "ISHASBUILDING") isbldg
-        on ma_ishasbuilding_id = isbldg.tdi_key
-        left join (select TO_MA_ID,count(*) as owncount from cm_owner group by TO_MA_ID ) ownertb on TO_MA_ID = ma_id
-        left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propstatus
-        on propstatus.tdi_key = ma_approvalstatus_id
-        left join (select *  from tbdefitems where tdi_td_name = "APPLICATIONTYPE") applntype
-        on applntype.tdi_key = ma_applicationtype_id
+isbldg.tdi_value isbldg, owncount, ma_approvalstatus_id, propstatus.tdi_desc propstatus, applntype.tdi_value applntype, format(luastanah,2) luastanah , bilbldg bldgcount, ifnull(bilbldgarea,0) bldgareacount, format(ifnull(luasbldgarea,0),2) sumbldgarea
+from cm_masterlist 
+left join (select LO_MA_ID, sum(LO_SIZE) luastanah from cm_lot group by LO_MA_ID ) luastanah  on luastanah.LO_MA_ID = MA_ID
+left join (select BL_MA_ID, count(*) bilbldg from cm_bldg group by BL_MA_ID ) bldg  on bldg.BL_MA_ID = MA_ID
+left join (select BL_MA_ID, count(*) bilbldgarea, format(ifnull(sum(BA_TOTSIZE),0),2) luasbldgarea from cm_bldgarea inner join cm_bldg on BL_ID = BA_BL_ID  group by BL_MA_ID ) bldgarea on  bldgarea.BL_MA_ID = MA_ID
+left join (select tdi_key , tdi_value, tdi_parent_key  from tbdefitems where tdi_td_name = "SUBZONE")  subzone on ma_subzone_id = subzone.tdi_key 
+left join (select tdi_key , tdi_value  from tbdefitems where tdi_td_name = "ZONE")  zone on subzone.tdi_parent_key = zone.tdi_key
+left join (select tdi_key , tdi_value  from tbdefitems where tdi_td_name = "ISHASBUILDING") isbldg on ma_ishasbuilding_id = isbldg.tdi_key
+left join (select TO_MA_ID, count(*) as owncount from cm_owner group by TO_MA_ID ) ownertb on TO_MA_ID = ma_id 
+left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propstatus on propstatus.tdi_key = ma_approvalstatus_id
+left join (select *  from tbdefitems where tdi_td_name = "APPLICATIONTYPE") applntype on applntype.tdi_key = ma_applicationtype_id
         where ma_pb_id = '.$pb);
 
         $propertyDetails = Datatables::collection($property)->make(true);

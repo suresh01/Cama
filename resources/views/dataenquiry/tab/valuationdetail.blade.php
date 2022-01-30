@@ -357,7 +357,16 @@
 		</div>
 		<span class=" label_intro"></span>
 	</div>
-	
+	<div class="form_grid_4">
+		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Previous_Tax')}}<span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  class="form_input">
+			<input id="taxproposedprevioustax" style="width: 100%;" readonly="true" value="0" tabindex="2" name="taxproposedprevioustax"  type="text"   maxlength="50" class="right-text "/>
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+
 	<div class="form_grid_4">
 		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('tab.Proposed_Tax')}} \<span class="req">*</span></label>
 	</div>
@@ -406,6 +415,16 @@
 		<span class=" label_intro"></span>
 	</div>
 	
+	<div class="form_grid_4">
+		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('tab.Previous_Tax')}}<span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  class="form_input">
+			<input id="taxapprovedprevioustax" style="width: 100%;" readonly="true" value="0" tabindex="2" name="taxapprovedprevioustax"  type="text"  maxlength="50" class="right-text "/>
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+
 	<div class="form_grid_4">
 		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('tab.Approved_Tax')}}<span class="req">*</span></label>
 	</div>
@@ -529,8 +548,11 @@
 		formatMoney('taxproposedrate','{{$rec -> vt_proposedrate}}');
 		formatMoney('taxproposednt','{{$rec -> vt_proposednt}}');
 		formatMoney('taxcalculaterate','{{$rec -> vt_calculatedrate}}');
+		formatMoney('taxproposedprevioustax','{{$rec -> vt_previoustax}}');
+		formatMoney('taxapprovedprevioustax','{{$rec -> vt_previoustax}}');
 		formatMoney('taxproposedtax','{{$rec -> vt_proposedtax}}');
-		$('#taxnotes').val('{{$rec -> vt_note}}');
+		// $('#taxnotes').val('{{$rec -> vt_note}}');
+		$('#taxnotes').val('{!!$rec -> vt_note!!}');
 	@endforeach
 
 

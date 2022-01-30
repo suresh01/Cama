@@ -114,6 +114,7 @@ return [
 	'Proposed_NT'=>'NT Cadangan',
 	'Proposed_Rate'=>'Kadar Cadangan',
 	'Calculated_Rate'=>'Kadar Dikira',
+	'Previous_Tax'=>'Cukai Terdahulu',
 	'Proposed_Tax'=>'Cukai Cadangan',
 	'Approved_NT'=>'NT Lulus',
 	'Approved_Rate'=>'Kadar Lulus',

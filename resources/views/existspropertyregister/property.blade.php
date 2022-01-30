@@ -180,6 +180,8 @@
 							<th>
 								{{__('existspropertyregisyter.Owner_Count')}}
 							</th>
+							<th>{{__('existspropertyregisyter.Land_Info')}}</th>
+							<th>{{__('existspropertyregisyter.Bldg_Info')}}</th>
 							<th>
 								{{__('existspropertyregisyter.Status')}} 
 							</th>
@@ -376,6 +378,10 @@ var table = $('#proptble').DataTable();
 			        {"data": "ma_addr_ln1", "name": "address"},
 			        {"data": "ma_addr_ln1", "name": "address"},
 			        {"data": "owncount", "name": "ownername"},
+					{"data": "luastanah", "name": "luastanah"},
+					{"data":  function(data){
+						return data.bldgcount + '/' + data.bldgareacount + '/' + data.sumbldgarea;
+					}, "name": "bldgcount"},
 			        {"data":  "propstatus", "name": "status"},
 			        {"data": function(data){
 			        	if ('{{$basket_status}}' == '01' || '{{$basket_status}}' == '02' ){

@@ -63,10 +63,10 @@
                       <div class="grid_4 invoice_from">
                         <!--  -->
                         <strong><span>{{__('valuation.CCC_Date')}} : </span></strong>
-                        <span>{{$rec->vb_cccdate1}}</span><br><br>
+                        <span>{{$rec->vb_cccdate}}</span><br><br>
                         <!--  -->
                         <strong><span>{{__('valuation.Occupied_Date')}} : </span></strong>
-                        <span>{{$rec->vb_occupieddate1}}</span> <br>
+                        <span>{{$rec->vb_occupieddate}}</span> <br>
                       </div>
                       </div>
                      
@@ -128,7 +128,9 @@
                         <tr class=" gray_sai">
                           <th>{{__('valuation.SNo')}}</th>
                           <th>{{__('valuation.Description')}} ({{__('valuation.Allwoance_Cateory')}} ,  {{__('valuation.Allowance_Type')}})</th>
+                          <th>{{__('valuation.Allowance_Type')}} ID</th>
                           <th>{{__('valuation.Calculation_Method')}}</th>
+                          <th>{{__('valuation.Calculation_Method')}} ID</th>
                           <th>{{__('valuation.Percentage')}} / {{__('valuation.Value')}}</th>
                           <th>{{__('valuation.Gross_Allowance')}}</th>
                           <th>{{__('valuation.allowanceid')}}</th>
@@ -345,30 +347,32 @@ function allowanceCal(){
   }
 
   function allowancaCaluation(){
- var t = $('#bldgallowance').DataTable();
- var roundtotal = 0;
+var t = $('#bldgallowance').DataTable();
+    var roundtotal = 0;
     for (var i = 0;i<t.rows().count();i++){
-            var ldata = t.row(i).data();
-            if(ldata[0] !== 'Deleted'){
-              roundtotal = roundtotal +  Number(removeCommas(ldata[4]));
-            }
-        }
-      var totalbldggross1 = 0;
-         for (var i = 0;i<$('#bldgarea').DataTable().rows().count();i++){
-              var ldata = $('#bldgarea').DataTable().row(i).data();
-              totalbldggross1 = totalbldggross1 + Number(removeCommas(ldata[7]));
-               
-        }
-        $('#totalbldgarea').val(formatMoneyHas(roundtotal + totalbldggross1))
-        $('#allowancetotal').val(formatMoneyHas(roundtotal));
-       bldgcal();
+      var ldata = t.row(i).data();
+      if(ldata[0] !== 'Deleted'){
+        roundtotal = roundtotal +  Number(removeCommas(ldata[6]));
+      }
+    }
+    var totalbldggross1 = 0;
+    for (var i = 0;i<$('#bldgarea').DataTable().rows().count();i++){
+        var ldata = $('#bldgarea').DataTable().row(i).data();
+        totalbldggross1 = totalbldggross1 + Number(removeCommas(ldata[7]));
+            
+    }
+    $('#totalbldgarea').val(formatMoneyHas(roundtotal + totalbldggross1))
+    $('#allowancetotal').val(formatMoneyHas(roundtotal));
+    bldgcal();
   }
 
   function addAdditional(){
     var rate = $('#add_grossvalue').val();
     var allowancecateg = $("#allowancecateg :selected").text();
     var allowancetype = $("#allowancetype :selected").text();
+    var allowancetypeid = $("#allowancetype :selected").val();
     var calcmethod = $("#calcmethod :selected").text();
+    var calcmethodid = $("#calcmethod :selected").val();
     var add_roundvalue = $('#add_roundvalue').val();
 
     if (rate === '') {
@@ -381,9 +385,9 @@ function allowanceCal(){
         $('#additionaltable_info').remove();
         $('#additionaltable_paginate').remove();
         $('#additionaltable_length').remove();
-      t.row.add([ 'New',allowancecateg + ',' +  allowancetype, calcmethod, rate, add_roundvalue,0,'{{$id}}' ,'<span><a onclick="" class="action-icons c-delete  deleteallowance" href="#" title="delete">Delete</a></span' ]).draw( false );
+      t.row.add([ 'New',allowancecateg + ',' +  allowancetype, allowancetypeid, calcmethod, calcmethodid, rate, add_roundvalue, t.data().count() + 1,'{{$id}}' ,'<span><a onclick="" class="action-icons c-delete  deleteallowance" href="#" title="delete">Delete</a></span' ]).draw( false );
        
-allowancaCaluation();
+      allowancaCaluation();
         /*var roundtotal = 0;
       for (var i = 0;i<t.rows().count();i++){
             var ldata = t.row(i).data();
@@ -417,7 +421,7 @@ $(document).ready(function(){
     $('#bldgarea').DataTable({
       "columns":[ null, null, null, null, null, { className: "numericCol" }, null,  { className: "numericCol" }, { "visible": false }, { "visible": false }, { "visible": false}],
         "sPaginationType": "full_numbers",
-        "iDisplayLength": 5,
+        "iDisplayLength": 10,
         "oLanguage": {
           "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>", 
         },
@@ -438,15 +442,15 @@ $(document).ready(function(){
 
 
 
-     $('#bldgallowance').DataTable({
-      "columns":[ null, null, null, { className: "numericCol" }, { className: "numericCol" },  { "visible": false }, { "visible": false}, null],
-        "sPaginationType": "full_numbers",
-        "iDisplayLength": 5,
-        "oLanguage": {
-          "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>", 
-        },
-        "bAutoWidth": false,
-        "sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
+    $('#bldgallowance').DataTable({
+      "columns":[ null, null,{ "visible": false }, null, { "visible": false }, { className: "numericCol" }, { className: "numericCol" },  { "visible": false }, { "visible": false}, null],
+      "sPaginationType": "full_numbers",
+      "iDisplayLength": 5,
+      "oLanguage": {
+        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>", 
+      },
+      "bAutoWidth": false,
+      "sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
 
     });
 
@@ -464,9 +468,9 @@ $(document).ready(function(){
     $('#bldgallowance tbody').on( 'click', '.deleteallowance', function () {
        var table = $('#bldgallowance').DataTable();
       var row = table.row(table.row( $(this).parents('tr') ).index()),
-          data = row.data();
-          data[0]='Deleted';
-        data[7]='';
+        data = row.data();
+        data[0]='Deleted';
+        data[9]='';
         var noty_id = noty({
           layout : 'center',
           text: 'Are you want to delete?',
@@ -521,13 +525,13 @@ $(document).ready(function(){
     }
     $('#bldgtotal').val(formatMoneyHas(totalgross));
 
-var totalallowancegross1 = 0;
+    var totalallowancegross1 = 0;
         var totalbldggross1 = 0;
          for (var i = 0;i<bldgareatable.rows().count();i++){         
               var ldata = $('#bldgallowance').DataTable().row(i).data();   
               //console.log(ldata);    
               if (ldata != undefined) {   
-                totalallowancegross1 = totalallowancegross1 + Number(removeCommas(ldata[4]));   
+                totalallowancegross1 = totalallowancegross1 + Number(removeCommas(ldata[6]));   
               }           
         }
 
@@ -550,7 +554,7 @@ var totalallowancegross1 = 0;
 
         // $('#roundbldg').val(formatMoneyHas(Math.floor(res / 1000 ) * 1000));
 
-$('#bldgallowance_filter').remove();
+    $('#bldgallowance_filter').remove();
     $('#bldgallowance_info').remove();
     $('#bldgallowance_paginate').remove();
     $('#bldgallowance_length').remove();
@@ -560,26 +564,25 @@ $('#bldgallowance_filter').remove();
         var row = table.row(table.row( $(this).parents('tr') ).index());
         var data = row.data();
 
-        var r = confirm("Allowance will be cleared!");
+        var r = true; //confirm("Allowance will be cleared!");
         if (r == true) {
          // txt = "You pressed OK!";
-        var allowancetable = $('#bldgallowance').DataTable();
-        var allowancedata;
-        var bil = 0;
-         for (var i = 0;i<$('#bldgallowance').DataTable().rows().count();i++){
-            bil = i;
-            var allowrow = allowancetable.row(i),
-            allowancedata = allowrow.data();
-            allowancedata[0]='Deleted';
-            allowancedata[7]='';
+        
+        // var bil = 0;
+        //  for (var i = 0;i<$('#bldgallowance').DataTable().rows().count();i++){
+        //     bil = i;
+        //     var allowrow = allowancetable.row(i),
+        //     allowancedata = allowrow.data();
+        //     allowancedata[0]='Deleted';
+        //     allowancedata[7]='';
        
                
-        }
-        // edit by gebra at 05/09/2021 adding condition bil
-        if (bil !== 0){
-          allowrow.data(allowancedata);
-          allowancaCaluation();
-        }
+        // }
+        // // edit by gebra at 05/09/2021 adding condition bil
+        // if (bil !== 0){
+        //   allowrow.data(allowancedata);
+        //   allowancaCaluation();
+        // }
 
         var rowid =  data[0];
         var rate = $('#rate_'+rowid).val();
@@ -599,21 +602,50 @@ $('#bldgallowance_filter').remove();
         var totalallowancegross1 = 0;
         var totalbldggross1 = 0;
         //alert();
+
+        for (var i = 0;i<$('#bldgarea').DataTable().rows().count();i++){
+              var ldata = $('#bldgarea').DataTable().row(i).data();
+              totalbldggross1 = totalbldggross1 + Number(removeCommas(ldata[7]));     
+        }
+
+        var allowancetable = $('#bldgallowance').DataTable();
+        var allowancedata;
         for (var i = 0;i<$('#bldgallowance').DataTable().rows().count();i++){
 
-              var ldata = $('#bldgallowance').DataTable().row(i).data();
-if(ldata[0] !== 'Deleted'){
-              totalallowancegross1 = totalallowancegross1 + Number(removeCommas(ldata[4]));
+          var allowrow = allowancetable.row(i),
+          allowancedata = allowrow.data();
+          if (allowancedata[0] == 'Deleted'){
+
+          }else if (allowancedata[0] == 'New'){
+            if (allowancedata[4] == '1'){
+              // alert(totalbldggross1 *  Number(removeCommas(allowancedata[5]))/100);
+              allowancedata[6] = formatMoneyHas(totalbldggross1 *  Number(removeCommas(allowancedata[5]))/100);
+              allowrow.data(allowancedata);
+              // alert(totalbldggross1 *  Number(removeCommas(allowancedata[5]))/100);
+            }
+          }else{
+            if (allowancedata[4] == '1'){
+              allowancedata[0] = 'Updated';
+              allowancedata[6] = formatMoneyHas(totalbldggross1 *  Number(removeCommas(allowancedata[5]))/100);
+              allowrow.data(allowancedata);
+            }
+          }
+          // allowancedata[0]='Deleted';
+          // allowancedata[9]='';
+        }
+
+        for (var i = 0;i<$('#bldgallowance').DataTable().rows().count();i++){
+
+            var ldata = $('#bldgallowance').DataTable().row(i).data();
+            if(ldata[0] !== 'Deleted'){
+              totalallowancegross1 = totalallowancegross1 + Number(removeCommas(ldata[6]));
             }
              
                
         }
 
-          for (var i = 0;i<$('#bldgarea').DataTable().rows().count();i++){
-              var ldata = $('#bldgarea').DataTable().row(i).data();
-              totalbldggross1 = totalbldggross1 + Number(removeCommas(ldata[7]));
-               
-        }
+        allowancaCaluation();
+
          $('#bldgtotal').val(formatMoneyHas(totalbldggross1));
         var total = totalallowancegross1 + totalbldggross1;
 
@@ -625,7 +657,7 @@ if(ldata[0] !== 'Deleted'){
          var res = total - depvalue;
          $('#netbldg').val(formatMoneyHas(res ));
 
-         $('#roundbldg').val(formatMoneyHas(customround(res,1)));
+         $('#roundbldg').val(formatMoneyHas(customround(res,3)));
 
         } 
     });
@@ -641,13 +673,13 @@ if(ldata[0] !== 'Deleted'){
     console.log(bldgallowancetable.rows().count());
     for (var i = 0;i<bldgallowancetable.rows().count();i++){
           var ldata = bldgallowancetable.row(i).data();
-          if (ldata[6] == {{$id}}){
+         // if (ldata[6] == {{$id}}){
             
             var rowid = i+ 1;
-             $('#bldgallowance').DataTable().row.add([ ldata[0],  ldata[1], ldata[2], ldata[3] , ldata[4],ldata[5],ldata[6]  ,'<span><a onclick="" class="action-icons c-delete  deleteallowance" href="#" title="delete">Delete</a></span' ]).draw( false );      
+             $('#bldgallowance').DataTable().row.add([ ldata[0],  ldata[1], ldata[2], ldata[3] , ldata[4],ldata[5],ldata[6],ldata[7] ,ldata[8] ,'<span><a onclick="" class="action-icons c-delete  deleteallowance" href="#" title="delete">Delete</a></span' ]).draw( false );      
              
-              totalallowancegross = totalallowancegross + Number(removeCommas(ldata[4]));
-          }
+              totalallowancegross = totalallowancegross + Number(removeCommas(ldata[6]));
+        //  }
                
     }
 //alert(totalgross);
@@ -674,7 +706,7 @@ function bldgcal() {
     var res =  Number(totalbldgar) - tdepvalue;
     $('#netbldg').val(formatMoneyHas(res ));
 
-    $('#roundbldg').val(formatMoneyHas(customround(res,1)));
+    $('#roundbldg').val(formatMoneyHas(customround(res,3)));
     
 }
 
@@ -738,73 +770,34 @@ function updateCalculation(){
     var allowancetable = window.opener.$("#hiddenbldgallowance").DataTable();
    
     for (var l = 0;l < $("#bldgallowance").DataTable() .rows().count() ;l++){
-        var ldata = $("#bldgallowance").DataTable() .row(l).data();
-       // alert(ldata[0]);
-       if (ldata[0] == 'New') {
-
-          allowancetable.row.add([ "New",  ldata[1], ldata[2], ldata[3] , ldata[4], ldata[5], ldata[6] ]).draw( false );
-        } else  {
-             for (var i = 0;i < allowancetable.rows().count() ;i++){
-                //var allowancedata = allowancetable.row(l).data();
-               // console.log(ldata[0]);
-              // alert(ldata[5]);
-                    var allowancerow = allowancetable.row(i);
-                    var allowancedata = allowancerow.data();
-                if (allowancedata[5] == ldata[5] ) {
-                    
-                          allowancedata[0] = ldata[0];
-                          allowancedata[1] = ldata[1];
-                          allowancedata[2] = ldata[2];
-                          allowancedata[3] = ldata[3];
-                          allowancedata[4] = ldata[4];
-                          allowancedata[5] = ldata[5];
-                          allowancedata[6] = ldata[6];
-                          allowancerow.data(allowancedata);
-                    
-                        //lotareatable.row.add([ ldata[1], ldata[2], ldata[6], ldata[7], ldata[5],ldata[8],ldata[9] ]).draw(false);   
-                               
-                } 
-           }
-
-          //allowancetable.row.add([ "New",  ldata[1], ldata[2], ldata[3] , ldata[4], ldata[5], ldata[6] ]).draw( false );
-        }
-        /* else {
+        var ldata = $("#bldgallowance").DataTable().row(l).data();
+        var ldataexisted = '0';
+         for (var i = 0;i < allowancetable.rows().count() ;i++){
+            var allowancerow = allowancetable.row(i);
+            var allowancedata = allowancerow.data();
+           
+            if (allowancedata[7] == ldata[7] ) {
+              ldataexisted = '1';
+              break;
+            }
+          }
+          // alert("Popup:" + ldata[1] + "=" + ldata[2] + ", Main Window:" + allowancedata[2] + ", Jumpa=" + ldataexisted);
+          if (ldataexisted != '1' ) {
+            allowancetable.row.add([ "New",  ldata[1], ldata[2], ldata[3] , ldata[4], ldata[5], ldata[6], ldata[7] , ldata[8]  ]).draw( false );
+          }else{
+            allowancedata[0] = ldata[0];
+            allowancedata[1] = ldata[1];
+            allowancedata[2] = ldata[2];
+            allowancedata[3] = ldata[3];
+            allowancedata[4] = ldata[4];
+            allowancedata[5] = ldata[5];
+            allowancedata[6] = ldata[6];
+            allowancedata[7] = ldata[7];
+            allowancedata[8] = ldata[8];
+            allowancerow.data(allowancedata);
+          }
         
-        //var bldgareatable = window.opener.$("#hiddenbldgarea").DataTable();
-    
-          for (var l = 0;l < allowancetable.rows().count() ;l++){
-              //var allowancedata = allowancetable.row(l).data();
-             // console.log(ldata[0]);
-            // alert(ldata[5]);
-                  var allowancerow = allowancetable.row(l);
-                  var allowancedata = allowancerow.data();
-              if (allowancedata[5] == ldata[5] ) {
-                  
-                        allowancedata[0] = ldata[0];
-                        allowancedata[1] = ldata[1];
-                        allowancedata[2] = ldata[2];
-                        allowancedata[3] = ldata[3];
-                        allowancedata[4] = ldata[4];
-                        allowancedata[5] = ldata[5];
-                        allowancedata[6] = ldata[6];
-                        allowancerow.data(allowancedata);
-                  
-                      //lotareatable.row.add([ ldata[1], ldata[2], ldata[6], ldata[7], ldata[5],ldata[8],ldata[9] ]).draw(false);   
-                             
-              }
-         }
-    }*/
-            
-
-
-
-
-        /*if (ldata[0] == 'Deleted') {
-
-          allowancetable.row.add([ "Deleted",  ldata[1], ldata[2], ldata[3] , ldata[4], ldata[5], ldata[6] ]).draw( false );
-        }  */
-        
-    }
+      }
      
     window.opener.$('#vd_bldgtotal').val( formatMoneyHas(landtotal));
     window.opener.$('#deprate_{{$id}}').val($('#deprate').val());

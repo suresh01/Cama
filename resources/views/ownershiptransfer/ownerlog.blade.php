@@ -99,7 +99,7 @@
 						
 						<div class="widget_content">
 							<h3 id="title">Jana Laporan</h3>
-							<form style="" id="generateform" method="GET" action="generateOwnershipreport">
+							<form style="" id="generateform" method="post" action="generateOwnershipreport" target="_blank">
 					            @csrf
 					            <input type="hidden" name="type" id="type">
 					            <input type="hidden" name="accountnumber" id="accountnumber">
@@ -113,7 +113,7 @@
 												<div class="form_grid_12">
 													<label class="field_title" id="lposition" for="position">Nama Penilai<span class="req">*</span></label>
 													<div  class="form_input">
-														<select data-placeholder="Choose a Status..." onchange="getposition()"  style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle" tabindex="20">
+														<select data-placeholder="Choose a Status..." onchange="getposition()"  style="width:100%" class="cus-select"  id="userid" tabindex="7" name="userid" tabindex="20">
 																<option></option>
 															@foreach ($userlist as $rec)
 																	<option value='{{ $rec->usr_position }}'>{{ $rec->tbuser }}</option>
@@ -123,10 +123,12 @@
 													<span class=" label_intro"></span>
 												</div>
 												
+												<input id="userfullname" name="userfullname"  type="hidden"  maxlength="50" class="required"/>
+													
 												<div class="form_grid_12">
 													<label class="field_title" id="llevel" for="level">Jawatan Penilai<span class="req">*</span></label>
 													<div  class="form_input">
-														<input id="name" name="name"  type="text"  maxlength="50" class="required"/>
+														<input id="usertitle" name="usertitle"  type="text"  maxlength="50" class="required"/>
 													</div>
 													<span class=" label_intro"></span>
 												</div>
@@ -167,16 +169,18 @@
 		}
 
 		function getposition(){
-			var userid = $('#tittle').val();
+			var userid = $('#userid').val();
 			if(userid.length != 0){
-		      	$('#username').val($("#tittle option:selected").text());
+		      	$('#userfullname').val($("#userid option:selected").text());
+				// $('#username').val(($("#tittle option:selected").text());
+				  userfullname
 				$.ajax({
 					type:'GET',
 					url:'getuserdetail',
 					data:{id:userid},
 					success:function(data){	        	
 						console.log(data);
-						$('#name').val(data.userposition);
+						$('#usertitle').val(data.userposition);
 					}
 		    	});
 			}
@@ -312,7 +316,17 @@ $(document).ready(function (){
 			        {"data": "ttype", "name": "zone"},
 			        {"data": "logstatus", "name": "zone"},
 			        {"data": "otar_createdate", "name": "subzone"},
-			        {"data": "ota_transtocenterdate1", "name": "owner"}, 
+			        {"data": function(data){
+						"ota_transtocenterdate1"
+						var update = data.ota_transtocenterdate1;
+						var upby = data.ota_transtocenterby;
+			        		if(data.ota_transtocenterdate == null){
+			        			update = 'NA';
+								upby = 'NA';
+			        		}
+			        	return upby +" / "+update;
+					}
+					, "name": "owner"}, 
 			        {"data": function(data){
 			        	var update = data.otar_updatedate;
 			        		if(data.otar_updatedate == null){

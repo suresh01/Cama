@@ -86,7 +86,7 @@
 								<legend>{{__('datasearch.valinfo')}}</legend>
 								@include('dataenquiry.tab.valuationdetail')					
 							</fieldset>	
-								<input type="button" onclick="closePage()" class="finish" value="Close!"/>
+								<input type="button" onclick="closePage()" class="finish" value="Tutup!"/>
 						</form>
 					</div>
 				</div>
@@ -99,9 +99,10 @@
 </div>
 <script>
 
-
+		
 		function closePage(){
-			window.location.assign('datasearch');	
+			// window.location.assign('datasearch');	
+			window.close();
 		}
 		function addTenant() {
 			

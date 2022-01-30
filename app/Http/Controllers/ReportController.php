@@ -914,7 +914,7 @@ from  cm_appln_valterm
     }
 
     public function zonesummaryTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -982,7 +982,7 @@ from  cm_appln_valterm
     }
 
     public function subzonesummaryTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -1065,7 +1065,7 @@ from  cm_appln_valterm
     }
 
     public function racesummaryTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
         ini_set('max_execution_time', '200');
        // $baskedid = $request->input('id');
@@ -1302,7 +1302,7 @@ from  cm_appln_valterm
     }
 
     public function subzoneCollectionTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -1370,7 +1370,7 @@ from  cm_appln_valterm
     }
 
     public function bldgCollectionTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -1513,7 +1513,7 @@ from  cm_appln_valterm
     }
 
     public function exportExcelTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
         ini_set('max_execution_time', '200');
        // $baskedid = $request->input('id');
@@ -1764,7 +1764,7 @@ from  cm_appln_valterm ".$filterquery);
     }
 
     public function districtCollectionTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -2021,7 +2021,7 @@ from  cm_appln_valterm ".$filterquery);
       return view('report.pivotreport')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
  public function statisticalTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -2227,7 +2227,7 @@ bldgcategory,bldgtype ');
     }
 
     public function r4coverDataTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -2397,12 +2397,15 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12")  '.$filterquery);
         
         $filter = " vd_id in (". $account.")";
         
-       Log::info($type . ' ' . $prntdate . ' ' . $tarikhhijri . ' ' . $filter);
-       if($type == 'type1') {
-        $reportname = "ownernoticea";
+        Log::info($type . ' ' . $prntdate . ' ' . $tarikhhijri . ' ' . $filter);
+        if($type == 'type1') {
+            $reportname = "ownernoticea";
         } else if($type == 'type2')  {
-            // $reportname = "summaryofsubzonvspropcate";
             $reportname = "ownernoticeb";
+        } else if($type == 'type3')  {
+             $reportname = "ownernoticec";
+        } else if($type == 'type4')  {
+            $reportname = "ownernoticed";
         } else  {
             $reportname = "summaryofpropcate";
         }
@@ -2452,7 +2455,7 @@ where vd_approvalstatus_id in ("07","08","09","10","11","12")  '.$filterquery);
     }
 
     public function ownerNoticeDataTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -2624,11 +2627,13 @@ left join tbdefitems as lotcode on lotcode.tdi_key = al_lotcode_id and lotcode.t
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
-      $property = DB::select("select otar_id, otar_accno, grouptb.tdi_value, otar_ownertransgroup_id, date_format(otar_createdate,'%d/%m/%Y') otar_createdate, otar_createby, 'TRANSFER',
-date_format(ota_createdate,'%d/%m/%Y')  ota_createdate, ota_createby, DATEDIFF(otar_createdate, ota_createdate) + 1 days  
+      $property = DB::select("select otar_id, otar_accno, usergroup.tdi_value usergroup, ownershiptranstype.tdi_value ownershiptranstype, otar_ownertransgroup_id, ownershipstage.tdi_key ownershipstageid, ownershipstage.tdi_value ownershipstage, date_format(otar_createdate,'%d/%m/%Y') otar_createdate, otar_createby, 
+date_format(otar_updatedate,'%d/%m/%Y')  otar_updatedate, ota_createby, DATEDIFF(otar_updatedate, otar_createdate) + 1 days  
 from cm_ownertrans_applnreg 
 inner join cm_ownertrans_appln on ota_otar_id = otar_id
-inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = 'USERGROUP' ".$filterquery);
+inner join tbdefitems usergroup on  usergroup.tdi_key = otar_ownertransgroup_id  and usergroup.tdi_td_name = 'USERGROUP' 
+inner join tbdefitems ownershiptranstype on otar_ownertranstype_id = ownershiptranstype.tdi_key and ownershiptranstype.tdi_td_name = 'OWNERSHIPTRANSTYPE'
+inner join tbdefitems ownershipstage on otar_ownertransstatus_id = ownershipstage.tdi_key and ownershipstage.tdi_td_name = 'OWNERSHIPSTAGE' ".$filterquery);
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);
    
@@ -2641,7 +2646,7 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
     {        
              //$jasper = new JasperPHP;
         $account = $request->input('accounts');
-        //$prntdate = $request->input('prntdate');
+        $title = $request->input('titlereport');
         
         $filter = " otar_id in (". $account.")";
         
@@ -2652,7 +2657,7 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
             $jasper_path,
             $dowload_path,
             array("pdf"),               
-            array("basketid" => $filter),
+            array("basketid" => $filter,"title" => $title),
             array(
               'driver' => 'generic',
               'username' => env('DB_USERNAME',''),

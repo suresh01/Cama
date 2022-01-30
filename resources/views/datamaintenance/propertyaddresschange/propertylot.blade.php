@@ -39,31 +39,34 @@
 									{{__('CodeMaintenance.SNo')}}
 									</th>
 									<th>
-									No Harta
+									{{__('CodeMaintenance.Account_No')}} 
 									</th>
 									<th>
-									{{__('CodeMaintenance.Lot_Type_Number')}} 
+									{{__('CodeMaintenance.Lot_Type')}} 
 									</th>
 									<th>
-									{{__('CodeMaintenance.Lot_Title_Type_Number')}} 
+									{{__('CodeMaintenance.Lot_Number')}} 
 									</th>
 									<th>
 									{{__('CodeMaintenance.Alternatif_Lot_Number')}} 
 									</th>
 									<th>
-									{{__('CodeMaintenance.Strata_Number')}} 
+									{{__('CodeMaintenance.Lot_Title_Type')}} 
 									</th>
 									<th>
-									{{__('CodeMaintenance.Tenant_Type')}} 
+									{{__('CodeMaintenance.Lot_Title_Number')}} 
 									</th>	
 									<th>
-									{{__('CodeMaintenance.Tenure_Period')}} 
+									{{__('CodeMaintenance.Alternatif_Title_Number')}} 
 									</th>	
 									<th>
-									{{__('CodeMaintenance.Start_Date')}} 
+									{{__('CodeMaintenance.Strata_Number')}} 
 									</th>	
 									<th>
-									{{__('CodeMaintenance.End_Date')}} 
+									{{__('CodeMaintenance.Registered_By')}} 
+									</th>	
+									<th>
+									{{__('CodeMaintenance.Registered_Date')}} 
 									</th>
 									<th>
 									{{__('CodeMaintenance.Status')}} 
@@ -284,6 +287,14 @@
 	<span class="clear"></span>
 	
 	<script>
+		function paparmphtj(id, module, currstatus){
+			// alert("papardatatransfer?paramid="+id+"&module="+module);
+			var y = window.open('about:blank','Popup_Window','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=1600,height=800,left = 312,top = 50');
+			if ((y.closed) || (!y.document.URL) || (y.document.URL.indexOf("about") == 0)) {
+				// y.location.assign("ownertransfer?page=1");
+				y.location.assign("papardatatransfer?paramid="+id+"&module="+module);
+	    	}
+		}
 		function edit(id) {		
 		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0');
 		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
@@ -650,16 +661,17 @@ $(document).ready(function (){
 						return "<a onclick='edit("+data.log_id+")' href='#'>"+data.ma_accno+"</a>";
 			        	//return "<a onclick='edit("+data.LOT_ID+")' href='#'>"+data.ma_accno+"</a>";
 			        
-			        }, "name": "account number"},
-					{"data": "lotnumber", "name": "noacc"},
-			        {"data": "titlenumber", "name": "fileno"},
-			        {"data": "LO_ALTNO", "name": "zone"},
-			        {"data": "LO_STRATANO", "name": "subzone"},
-			        {"data": "tentype", "name": "owner"}, 
-			        {"data": "LO_TENUREPERIOD", "name": "ishasbldg"},
-			        {"data": "LO_STARTDATE", "name": "owntype"}, 
-			        {"data": "LO_EXPIREDDATE", "name": "TO_OWNNAME"}, 
-			        {"data": "tstatus", "name": "bldgcount"},
+			        }, "name": "ma_accno"},
+					{"data": "lotcode", "name": "lotcode"},
+			        {"data": "log_no", "name": "log_no"},
+			        {"data": "log_altno", "name": "log_altno"},
+			        {"data": "titlecode", "name": "titlecode"},
+			        {"data": "log_titleno", "name": "log_titleno"}, 
+			        {"data": "log_alttitleno", "name": "log_alttitleno"},
+			        {"data": "log_stratano", "name": "log_stratano"}, 
+			        {"data": "log_createdby", "name": "TO_Olog_createdbyWNNAME"}, 
+					{"data": "log_createdate", "name": "log_createdate"}, 
+			        {"data": "log_approvalstatus", "name": "log_approvalstatus"},
 			        {"data":  function(data){
 
 			        	var editaction ='' ;
@@ -677,7 +689,9 @@ $(document).ready(function (){
 								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.log_id+',4,2)"  title="Reject" href="#"></a></span>';		
 
 							} else if(data.log_approvalstatus_id == '5'){
-								action =  editaction+  '<!--<spane><a  class=" new-action-icons reverse" onclick="approve('+data.log_id+',5)" title="Revise" href="#"></a></span>--><span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('+data.log_id+',5)" title="Transfer" href="#"></a></span>';						
+								action =  editaction+  
+								// '<!--<spane><a  class=" new-action-icons reverse" onclick="approve('+data.log_id+',5)" title="Revise" href="#"></a></span>--><span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('+data.log_id+',5)" title="Transfer" href="#"></a></span>';						
+								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="paparmphtj('+data.log_id+',\'propertylotaddress\',5)" title="Transfer" href="#"></a></span>';						
 							} 
 							
 			        		return action;

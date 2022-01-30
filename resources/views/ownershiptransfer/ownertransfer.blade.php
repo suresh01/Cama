@@ -50,16 +50,16 @@
 							<thead style="text-align: left;">
 								<tr>
 									<th class="table_sno">{{__('ownershiptran.SNO')}}</th>
-							<th>{{__('ownershiptran.No_Account')}} </th>
-							<th>{{__('ownershiptran.Owner_Name')}} </th>
-							<th>{{__('ownershiptran.Owner_Id_Type')}} </th>
-							<th>{{__('ownershiptran.Owner_Id_No')}} </th>
-							<th>{{__('ownershiptran.Address')}} </th>		
-							<th>{{__('ownershiptran.Group')}} </th>		
-							<th>{{__('ownershiptran.Transfer_Type')}} </th>	
-							<th>{{__('ownershiptran.Register_By')}} / {{__('ownershiptran.Register_Date')}} </th>	
-							<th>{{__('ownershiptran.Register_Status')}} </th>	
-							<th>{{__('ownershiptran.Action')}} </th>			
+									<th>{{__('ownershiptran.No_Account')}} </th>
+									<th>{{__('ownershiptran.Owner_Name')}} </th>
+									<th>{{__('ownershiptran.Owner_Id_Type')}} </th>
+									<th>{{__('ownershiptran.Owner_Id_No')}} </th>
+									<th>{{__('ownershiptran.Address')}} </th>		
+									<th>{{__('ownershiptran.Group')}} </th>		
+									<th>{{__('ownershiptran.Transfer_Type')}} </th>	
+									<th>{{__('ownershiptran.Register_By')}} / {{__('ownershiptran.Register_Date')}} </th>	
+									<th>{{__('ownershiptran.Register_Status')}} </th>	
+									<th>{{__('ownershiptran.Action')}} </th>			
 								</tr>
 							</thead>
 							<tbody>		
@@ -97,7 +97,7 @@
 										</td>
 										<td>
 											<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: left;" onclick="submitForm('{{$rec->ma_accno}}')"  title="View Log" href="#"></a></span>&nbsp;&nbsp;
-
+											
 											
 											@if($rec->otar_ownertransstatus_id == '2')
 
@@ -106,7 +106,8 @@
 											@endif
 
 											@if($rec->otar_ownertransstatus_id == '5')
-												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',5)" title="Transfer" href="#"></a></span>
+												{{-- <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',5)" title="Transfer" href="#"></a></span> --}}
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="paparMPHTJ('{{$rec->otar_id}}','ownershiptrans',5)" title="Papar" href="#"></a></span>
 											@endif
 
 											@if($rec->otar_ownertransstatus_id == '3' || $rec->otar_ownertransstatus_id == '6')
@@ -188,7 +189,7 @@
 												<div class="form_grid_12">
 													<label class="field_title" id="lposition" for="position">Nama Pegawai<span class="req">*</span></label>
 													<div  class="form_input">
-														<select data-placeholder="Choose a Status..." onchange="getposition()" style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle" tabindex="20">
+														<select data-placeholder="Choose a Status..." onchange="getposition()" style="width:100%" class="cus-select"  id="userid" tabindex="7" name="userid" tabindex="20">
 																<option></option>
 															@foreach ($userlist as $rec)
 																	<option value='{{ $rec->usr_position }}'>{{ $rec->tbuser }}</option>
@@ -197,11 +198,11 @@
 													</div>
 													<span class=" label_intro"></span>
 												</div>
-												
+												<input id="userfullname" name="userfullname"  type="hidden"  maxlength="50" class="required"/>
 												<div class="form_grid_12">
 													<label class="field_title" id="llevel" for="level">Jawatan<span class="req">*</span></label>
 													<div  class="form_input">
-														<input id="name" name="name"  type="text"  maxlength="50" class="required"/>
+														<input id="usertitle" name="usertitle"  type="text"  maxlength="50" class="required"/>
 													</div>
 													<span class=" label_intro"></span>
 												</div>											
@@ -227,20 +228,30 @@
 	<span class="clear"></span>
 	
 	<script>
-
+		
+		function paparMPHTJ(id, module, currstatus){
+			
+			var y = window.open('about:blank','Popup_Window','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=1600,height=800,left = 312,top = 50');
+			if ((y.closed) || (!y.document.URL) || (y.document.URL.indexOf("about") == 0)) {
+				// y.location.assign("ownertransfer?page=1");
+				y.location.assign("papardatatransfer?paramid="+id+"&module="+module);
+	    	}
+		}
 		function getposition(){
-			var userid = $('#tittle').val();
+			var userid = $('#userid').val();
 			if(userid.length != 0){
-				$('#username').val($("#tittle option:selected").text());
+		      	$('#userfullname').val($("#userid option:selected").text());
+				// $('#username').val(($("#tittle option:selected").text());
+				  userfullname
 				$.ajax({
 					type:'GET',
 					url:'getuserdetail',
 					data:{id:userid},
 					success:function(data){	        	
 						console.log(data);
-						$('#name').val(data.userposition);
+						$('#usertitle').val(data.userposition);
 					}
-				});
+		    	});
 			}
 		}
 

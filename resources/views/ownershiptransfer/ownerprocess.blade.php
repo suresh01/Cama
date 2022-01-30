@@ -544,7 +544,7 @@
 							</fieldset>
 							
 							
-							<input type="submit" onclick="transfer()" class="finish" id="finish" value="Finish!"/>
+							<input type="submit" onclick="transfer()" class="finish" id="finish" value="Kemaskini!"/>
 						</form>
 					</div>
 				</div>

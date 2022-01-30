@@ -1006,11 +1006,16 @@ function updatetablestatus(tableid, indexid){
     $('#'+tableid+'_paginate').remove();
     $('#'+tableid+'_length').remove();     
 
-		var row = $('#'+indexid).val();
+	var row = $('#'+indexid).val();
 		//alert(row);
 	$( api.row( row-1 ).nodes() ).css('background-color','#67DA83');
 }
-
+$('#bldgtable').dataTable({
+    "iDisplayLength": 100,
+    "bPaginate": false, //hide pagination
+    "bFilter": false, //hide Search bar
+    "bInfo": false, // hide showing entries
+})
 function updateBldg(){
 	$( "select" ).removeAttr( "disabled" );
  

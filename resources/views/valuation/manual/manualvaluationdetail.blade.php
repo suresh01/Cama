@@ -32,7 +32,7 @@
 
 				<div class="widget_wrap">
 					<div class="widget_top">
-						<h6>{{__('valuation.Valuation')}}</h6>
+						<h6>{{__('valuation.Valuation')}} Secara Manual</h6>
 					</div>
 					<div class="widget_content">
 						<div class=" page_content">
@@ -109,10 +109,10 @@
 														<th style="width: 60px">
 															6: {{__('valuation.Action')}}
 														</th>												
-														<th>{{-- <th style="display: none;">  --}}
+														<th style="display: none;"> 
 															7: lotid
 														</th>											
-														<th>
+														<th style="display: none;">
 															8: actioncode
 														</th>
 													</tr>
@@ -213,13 +213,13 @@
 													<th style="width: 60px">
 														{{__('valuation.Action')}} 
 													</th>												
-													<th> {{-- <th style="display: none;"> --}}
+													<th style="display: none;">
 														bldgid
 													</th>											
-													<th>
+													<th style="display: none;">
 														actioncode
 													</th>											
-													<th>
+													<th style="display: none;">
 														deprate
 													</th>
 												</tr>
@@ -418,7 +418,7 @@
 													</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
-														<input id="taxvaluerdiscretion" class="right-text " tabindex="1" style="width: 100%;" name="taxvaluerdiscretion" value="" onchange="taxCalculation()" type="text" maxlength="100" >
+														<input id="taxvaluerdiscretion" class="right-text " tabindex="1" style="width: 100%;" name="taxvaluerdiscretion" value="0" onchange="taxCalculation()" type="text" maxlength="100" >
 													</div>
 													<span class=" label_intro"></span>
 												</div>
@@ -462,7 +462,17 @@
 													</div>
 													<span class=" label_intro"></span>
 												</div>
-											
+
+												<div class="form_grid_4">
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Previous_Tax')}}<span class="req">*</span></label>
+												</div>
+												<div class="form_grid_8">
+													<div  class="form_input">
+														<input id="taxproposedprevioustax" style="width: 100%;" value="0" tabindex="2" name="taxproposedprevioustax"  type="text" onchange="taxCalculation()"  maxlength="50" class="right-text "/>
+													</div>
+													<span class=" label_intro"></span>
+												</div>
+
 												<div class="form_grid_4">
 													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Proposed_Tax')}}<span class="req">*</span></label>
 												</div>
@@ -513,6 +523,16 @@
 													<span class=" label_intro"></span>
 												</div>
 											
+												<div class="form_grid_4">
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Previous_Tax')}}<span class="req">*</span></label>
+												</div>
+												<div class="form_grid_8">
+													<div  class="form_input">
+														<input id="taxapprovedprevioustax" style="width: 100%;" readonly="true" value="0" tabindex="2" name="taxapprovedprevioustax"  type="text"   maxlength="50" class="right-text "/>
+													</div>
+													<span class=" label_intro"></span>
+												</div>
+
 												<div class="form_grid_4">
 													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Approved_Tax')}}<span class="req">*</span></label>
 												</div>
@@ -704,25 +724,31 @@
         <thead>
             <tr class=" gray_sai">
 				<th>
-					S No
+					0. S No
 				</th>
 				<th>
-					Description (Allwoance Cateory ,  Allowance Type)
+					1. Description (Allwoance Cateory ,  Allowance Type)
 				</th>
 				<th>
-					Calculation Method
+					2. Allowance Type ID
 				</th>
 				<th>
-					Percentage / Value
+					3. Calculation Method
 				</th>
 				<th>
-					Gross Allowance
+					4. Calculation Method ID
 				</th>
 				<th>
-					BLDGALLOWANCE ID
+					5. Percentage / Value
 				</th>
 				<th>
-					BLDG ID
+					6. Gross Allowance
+				</th>
+				<th>
+					7. BLDGALLOWANCE ID
+				</th>
+				<th>
+					8. BLDG ID
 				</th>
             </tr>
         </thead>
@@ -796,6 +822,7 @@
     	var taxvaluerdiscretion = removeCommas($('#taxvaluerdiscretion').val());
     	var taxproposedrate = removeCommas($('#taxproposedrate').val());
     	var taxcalculaterate = removeCommas($('#taxcalculaterate').val());
+		var taxproposedprevioustax = removeCommas($('#taxproposedprevioustax').val());
     	var taxapprovednt = removeCommas($('#taxapprovednt').val());
     	var taxadjustment = removeCommas($('#taxadjustment').val());
     	var grossnt = Number(landtotal) + Number(bldgtotal) + Number(additionaltotal) + Number(taxvaluerdiscretion);
@@ -803,10 +830,11 @@
     	//alert(bldgtotal);
     	//console.log(grossnt);
     	var propsednt = customround(grossnt,3);// Math.floor(grossnt/1000)*1000;
-    	var propsedtax = propsednt * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 );
-    	var approvedtax = Number(taxapprovednt) * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment);
+    	var propsedtax = (propsednt * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 )) + Number(taxproposedprevioustax);
+    	var approvedtax = Number(taxapprovednt) * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment) + Number(taxproposedprevioustax);
 
     	$('#taxgrossnt').val(formatMoneyHas(grossnt));
+		$('#taxapprovedprevioustax').val(formatMoneyHas(taxproposedprevioustax));
     	$('#taxproposednt').val(formatMoneyHas(propsednt));
     	$('#taxapprovednt').val(formatMoneyHas(propsednt));
     	$('#taxproposedtax').val(formatMoneyHas(propsedtax));
@@ -847,10 +875,11 @@
     	
     	var taxapprovednt = removeCommas($('#taxapprovednt').val());
     	var taxapprovedrate = removeCommas($('#taxapprovedrate').val());
+		var taxproposedprevioustax = removeCommas($('#taxproposedprevioustax').val());
     	var taxadjustment = removeCommas($('#taxadjustment').val());
     	var taxcalculaterate = removeCommas($('#taxcalculaterate').val());
     	
-    	var approvedtax = Number(taxapprovednt) * (Number(taxapprovedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment);
+    	var approvedtax = Number(taxapprovednt) * (Number(taxapprovedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment) + Number(taxproposedprevioustax);
 
     	$('#taxapprovedtax').val(formatMoneyHas(approvedtax));
     }
@@ -879,13 +908,15 @@
 			$('#taxproposedrate').val('{{$rec -> vt_proposedrate}}');
 			formatMoney('taxproposednt','{{$rec -> vt_proposednt}}');
 			formatMoney('taxcalculaterate','{{$rec -> vt_calculatedrate}}');
+			formatMoney('taxproposedprevioustax','{{$rec -> vt_previoustax}}');
+			formatMoney('taxapprovedprevioustax','{{$rec -> vt_previoustax}}');
 			formatMoney('taxproposedtax','{{$rec -> vt_proposedtax}}');
 			formatMoney('taxdrivevalue','{{$rec -> vt_derivedvalue}}');
 			formatMoney('taxdriverate','{{$rec -> vt_derivedrate}}');
 
 			
 
-			$('#taxnotes').val('{{$rec -> vt_note}}');
+			$('#taxnotes').val('{!!$rec -> vt_note!!}');
 		@endforeach
 
 	function formatMoney(field, n, c, d, t) {
@@ -1079,8 +1110,8 @@
 		});
 
 		 $('#landtable').DataTable({
-            // "columns":[ null, null, null, null, null,null,{ "visible": false },{ "visible": false }],
-			"columns":[ null, null, null, null, null,null,null,null],
+            "columns":[ null, null, null, null, null,null,{ "visible": false },{ "visible": false }],
+			// "columns":[ null, null, null, null, null,null,null,null],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			"oLanguage": {
@@ -1104,8 +1135,8 @@
 		
 
 		 $('#bldgtable').DataTable({
-            // "columns":[ null, null, null, null, null,null, null,null,null,{ "visible": false },{ "visible": false }],
-			"columns":[ null, null, null, null, null,null, null,null,null,null,null,null],
+            "columns":[ null, null, null, null, null,null, null,null,null,{ "visible": false },{ "visible": false }],
+			// "columns":[ null, null, null, null, null,null, null,null,null,null,null,null],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			"oLanguage": {
@@ -1246,7 +1277,7 @@
 
 	    let mapbldgareatable = new Map([["0","artype"],["1", "arlevel"],  ["2", "arcategory"], ["3", "arused"], ["4", "area"], ["5", "arearate"], ["6", "grossareavalue"],["7", "bldgarid"],["8", "bldgid"],["9", "actioncode"]]);
 
-	    let mapallowancetable = new Map([["0","sno"],["1", "desc"],  ["2", "calmethod"], ["3", "percentage"], ["4", "grossvalue"], ["5", "bldgallowanceid"], ["6", "bldgid"], ["7", "actioncode"]]);
+	    let mapallowancetable = new Map([["0","sno"],["1", "desc"], ["2", "allowancetypeid"],  ["3", "calmethod"], ["4", "calmethodid"], ["5", "percentage"], ["6", "grossvalue"], ["7", "bldgallowanceid"], ["8", "bldgid"], ["9", "actioncode"]]);
 	    var noty_id = noty({
 			layout : 'center',
 			text: 'Do want submit valuation?',
@@ -1366,15 +1397,15 @@
 					else
 						additionaldata = JSON.stringify(additionaldata).replace(/]|[[]/g, '');
 
-					var notes = $('#taxnotes').val();
+					// var notes = $('#taxnotes').val();
 
-					notes = notes.replace('\n', '\\n');
+					// notes = notes.replace('\n', '\\n');
 					
-					notes = notes.replace('"', '\""');
-					notes = notes.replace("'", "\'");
-					notes = notes.replace('\r', '\\r');
+					// notes = notes.replace('"', '\""');
+					// notes = notes.replace("'", "\'");
+					// notes = notes.replace('\r', '\\r');
 
-					$('#taxnotes').val(notes);
+					// $('#taxnotes').val(notes);
 
 
 					var taxdata = {};

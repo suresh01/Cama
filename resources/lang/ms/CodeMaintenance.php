@@ -84,11 +84,16 @@ return [
 	'Add_Property'=>'Tambah Harta',
 	'Log_Information'=>'Maklumat log',
 	// propertylot.blade.php
+	
 	'Property_Lot_Information'=>'Maklumat Alamat Harta',
 	'Property_Lot_Transfer'=>'Tukar No Lot',
-	'Lot_Type_Number'=>'Jenis / No Lot',
-	'Lot_Title_Type_Number'=>'Jenis / No Hakmilik',
+	
+	'Lot_Type'=>'Jenis Lot',
+	'Lot_Number'=>'Jenis Lot',
 	'Alternatif_Lot_Number'=>'No Lot Lama',
+	'Lot_Title_Type'=>'Jenis Hakmilik',
+	'Lot_Title_Number'=>'No Hakmilik',
+	'Alternatif_Title_Number'=>'No Hakmilik Lama',
 	'Strata_Number'=>'No Strata',
 	'Tenure_Period'=>'Tempoh Pajakan',
 	'Start_Date'=>'Tarikh Mula',
@@ -108,6 +113,8 @@ return [
 	'Tenure_Type'=>'Jenis Pajakan',
 	'Tenure_Start_Date'=>'Tarikh Mula',
 	'Tenure_End_Date'=>'Tarikh Tamat',
-	'Submit'=>'Submit',
-	'Close'=>'Close'
+	'Registered_By'=>'Didafar Oleh',
+	'Registered_Date'=>'Didafar Pada',
+	'Submit'=>'Simpan',
+	'Close'=>'Tutup'
 ];

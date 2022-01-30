@@ -450,16 +450,21 @@ DB::statement("insert into tempQuery values(select * from )");
     }
 
 
-    public function ownerDetail(Request $request) {
+    public function propertyAddressDetail(Request $request) {
       $prop_id = $request->input('prop_id');  
         $master = DB::select('select  mal_id,  mal_accno,mal_fileno,  mal_subzone_id, subzone.tdi_parent_key zone_id, subzone.tdi_parent_name zone, subzone.tdi_value subzone, district.tdi_value district,
         mal_district_id, mal_addr_ln1,mal_addr_ln2,mal_addr_ln3,mal_addr_ln4, mal_postcode, mal_city, mal_state_id,
-        ma_fileno, ma_addr_ln1, ma_addr_ln2, ma_addr_ln3, ma_addr_ln4, ma_postcode, ma_city, ma_state_id
+        ma_fileno, ma_addr_ln1, ma_addr_ln2, ma_addr_ln3, ma_addr_ln4, ma_postcode, ma_city, ma_state_id, mal_approvalstatus_id 
         from  cm_masterlist_log 
         inner join cm_masterlist on ma_accno = mal_accno
         left join (select tdi_key, tdi_value,tdi_parent_key, tdi_parent_name from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = mal_subzone_id
         left join (select tdi_key, tdi_value,tdi_parent_key, tdi_parent_name from tbdefitems where tdi_td_name = "DISTRICT") district on district.tdi_key = mal_district_id
         where mal_id = ifnull("'.$prop_id.'",0)');
+
+        foreach ($master as $rec) { 
+ 
+                $formstatus = $rec->mal_approvalstatus_id;
+        }
 
           $district= DB::table('tbdefitems')->where('tdi_td_name', 'DISTRICT')->get(); 
           $state=DB::table('tbdefitems')->where('tdi_td_name', 'STATE')->get();
@@ -468,7 +473,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
         App::setlocale(session()->get('locale'));
         
-         return view("datamaintenance.propertyaddresschange.ownerdetail")->with(array('district'=>$district, 'state'=>$state, 'zone'=>$zone, 'subzone'=>$subzone, 'master'=>$master));
+         return view("datamaintenance.propertyaddresschange.propertyaddressdetail")->with(array('district'=>$district, 'state'=>$state, 'zone'=>$zone, 'subzone'=>$subzone, 'master'=>$master))->with('formstatus',$formstatus);
     
     }
 
@@ -581,6 +586,11 @@ DB::statement("insert into tempQuery values(select * from )");
         inner join cm_masterlist on ma_id = lo_ma_id
         left join cm_lot_log on log_lot_id = lot_id
         where log_id = ifnull("'.$prop_id.'",0)');
+        
+        foreach ($master as $rec) { 
+ 
+                    $formstatus = $rec->log_approvalstatus_id;
+                }
          Log::info($prop_id);
           $lotcode=DB::table('tbdefitems')->where('tdi_td_name', 'LOTCODE')->get();
           $titiletype=DB::table('tbdefitems')->where('tdi_td_name', 'TITLETYPE')->get();
@@ -588,7 +598,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
         App::setlocale(session()->get('locale'));
         
-         return view("datamaintenance.propertyaddresschange.popup.propertylotdetail")->with(array('lotcode'=>$lotcode, 'master'=>$master, 'titiletype'=>$titiletype, 'tnttype'=>$tnttype, 'prop_id'=>$prop_id));
+         return view("datamaintenance.propertyaddresschange.popup.propertylotdetail")->with(array('lotcode'=>$lotcode, 'master'=>$master, 'titiletype'=>$titiletype, 'tnttype'=>$tnttype, 'prop_id'=>$prop_id))->with('formstatus',$formstatus);
     
     }
 
@@ -732,22 +742,40 @@ DB::statement("insert into tempQuery values(select * from )");
                         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
                       then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
                       from tbsearchdetail mtb where sd_se_id = "19" order by sd_sort');
-              $ownertransfer=DB::select('select DATE_FORMAT(otar_createdate, "%d/%m/%Y")   otar_createdate1, cm_ownertrans_applnreg.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, 
-                  state.tdi_value state, grouptb.tdi_value colgroup, statustb.tdi_value colstatus,
-                  transtype.tdi_value transtype, otar_ownertranstype_id
+            //   $ownertransfer=DB::select('select otar_id, DATE_FORMAT(otar_createdate, "%d/%m/%Y")   otar_createdate1, cm_ownertrans_appln.*, cm_ownertrans_applnreg.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, 
+            //       state.tdi_value state, grouptb.tdi_value colgroup, statustb.tdi_value colstatus,
+            //       transtype.tdi_value transtype, otar_ownertranstype_id
+            //       from cm_masterlist 
+            //       inner join cm_owner on to_ma_id = ma_id
+            //       inner join cm_ownertrans_applnreg on otar_accno = ma_accno
+            //       inner join cm_ownertrans_appln on ota_otar_id = otar_id
+            //       left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "OWNTYPE") owntype on owntype.tdi_key = to_owntype_id
+            //       left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = TO_STATE_ID
+            //       left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
+            //       on subzone.tdi_key = ma_subzone_id
+            //       inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
+            //       inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE" 
+            //       inner join tbdefitems transtype on otar_ownertranstype_id = transtype.tdi_key and transtype.tdi_td_name = "OWNERSHIPTRANSTYPE"
+            //       where otar_ownertransstatus_id in (1,2,4,5,6) and otar_ownertranstype_id = 3 
+            //       ');
+
+            $ownertransfer=DB::select('select otar_id, ota_id, otar_accno, ota_ownname, owntype.tdi_value owntype, ota_ownno, ota_race_id, race.tdi_value ownrace, ota_addr_ln1, ota_addr_ln2, ota_addr_ln3, ota_addr_ln4, ota_postcode, ota_city, state.tdi_value state, otar_createby, DATE_FORMAT(otar_createdate, "%d/%m/%Y")   otar_createdate, 
+                  grouptb.tdi_value colgroup, statustb.tdi_value colstatus,
+                  transtype.tdi_value transtype, otar_ownertranstype_id, otar_ownertransgroup_id, otar_ownertransstatus_id
                   from cm_masterlist 
                   inner join cm_owner on to_ma_id = ma_id
                   inner join cm_ownertrans_applnreg on otar_accno = ma_accno
-                  left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "OWNTYPE") owntype on owntype.tdi_key = to_owntype_id
-                  left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = TO_STATE_ID
+                  left join cm_ownertrans_appln on ota_otar_id = otar_id
+                  left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "OWNTYPE") owntype on owntype.tdi_key = ota_owntype_id
+                  left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = ota_state_id
+                  left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "RACE") race on race.tdi_key = ota_race_id
                   left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
                   on subzone.tdi_key = ma_subzone_id
                   inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
                   inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE" 
                   inner join tbdefitems transtype on otar_ownertranstype_id = transtype.tdi_key and transtype.tdi_td_name = "OWNERSHIPTRANSTYPE"
-                  where otar_ownertransstatus_id in (1,2,4,5,6) and otar_ownertranstype_id = 3 
+                  where otar_ownertransstatus_id in (1,2,4,5,6) and otar_ownertranstype_id = 3    
                   ');
-
                 App::setlocale(session()->get('locale'));
         
                 return view("ownershiptransfer.owneraddresstransfer")->with(array('search' => $search, 'page' => $page, 'ownertransfer' => $ownertransfer,'owner' => $owner,'param' => $param));
@@ -769,7 +797,7 @@ DB::statement("insert into tempQuery values(select * from )");
                   inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
                   inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE"
                   inner join tbdefitems transtype on otar_ownertranstype_id = transtype.tdi_key and transtype.tdi_td_name = "OWNERSHIPTRANSTYPE"
-                  where otar_ownertransstatus_id in (1,2,3,4,5,6) and otar_ownertranstype_id in (1,2)
+                  where otar_ownertransstatus_id in (1,2,4,5,6) and otar_ownertranstype_id in (1,2)
                   '.$condition.' order by otar_id desc');
 
         App::setlocale(session()->get('locale'));
@@ -827,7 +855,7 @@ DB::statement("insert into tempQuery values(select * from )");
         $owntype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "OWNTYPE"');
         $race=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "RACE"');
         $citizen=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "CITIZEN"');
-          $state=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE"'); 
+        $state=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE"'); 
           if ( $page == 2){
              $owndetail=DB::select('select date_format(otar_createdate,"%d/%m/%Y") otar_createdate, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, state.tdi_value state
         from cm_masterlist 
@@ -852,7 +880,7 @@ DB::statement("insert into tempQuery values(select * from )");
 
       $newowndetail=DB::select('select date_format(otar_createdate,"%d/%m/%Y") otar_createdate, cm_masterlist.*,cm_ownertrans_appln.*, 
         owntype.tdi_value owntype, state.tdi_value state, date_format(ota_applydate,"%d/%m/%Y") applydate, date_format(ota_recievedate,"%d/%m/%Y") recievedate,
-        date_format(ota_transactiondate,"%d/%m/%Y") transactiondate
+        date_format(ota_transactiondate,"%d/%m/%Y") transactiondate, otar_ownertransstatus_id
         from cm_masterlist 
         left join cm_ownertrans_applnreg on otar_accno = ma_accno
         left join cm_ownertrans_appln on ota_otar_id = otar_id
@@ -861,12 +889,16 @@ DB::statement("insert into tempQuery values(select * from )");
         left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
         on subzone.tdi_key = ma_subzone_id
         where otar_id = '.$account.'   limit 1');
-
+         foreach ($newowndetail as $rec) { 
+ 
+                    $formstatus = $rec->otar_ownertransstatus_id;
+                }
+        
       $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
 
         App::setlocale(session()->get('locale'));
         
-        return view("ownershiptransfer.ownertransferprocess")->with(array('state'=>$state,'owntype'=>$owntype, 'race'=>$race,'userlist' => $userlist, 'citizen'=>$citizen, 'owndetail'=>$owndetail, 'account'=>$account, 'page'=>$page, 'newowndetail'=>$newowndetail));
+        return view("ownershiptransfer.ownertransferprocess")->with(array('state'=>$state,'owntype'=>$owntype, 'race'=>$race,'userlist' => $userlist, 'citizen'=>$citizen, 'owndetail'=>$owndetail, 'account'=>$account, 'page'=>$page, 'newowndetail'=>$newowndetail))->with('formstatus',$formstatus);
     
     }
 
@@ -937,7 +969,7 @@ DB::statement("insert into tempQuery values(select * from )");
           return response()->json(array('msg'=> 'true'), 200);
     }
      public function transferLogTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -1221,7 +1253,7 @@ inner join (select tdi_key, tdi_parent_name, tdi_value  from tbdefitems where td
 }
 
 public function owneradddresTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -1287,8 +1319,9 @@ public function owneradddresTables(Request $request){
     public function generateOwnershipreport(Request $request) {
       $type = $request->input('type');
       $accountnumber = $request->input('accountnumber');
-      $tittle = $request->input('tittle');
-      $name = $request->input('name');
+      $userid = $request->input('userid');
+      $usertitle = $request->input('usertitle');
+      $userfullname = $request->input('userfullname');
       if($type == 'Successs'){
         $jasper_path = base_path('/reports/ownertransferSuccess.jasper');
         $dowload_path = base_path('/reports/temp/ownertransferSuccess');
@@ -1309,7 +1342,7 @@ Log::info($filter);
                 $jasper_path,
                   $dowload_path,
                   array("pdf"),
-                  array("propid" => $filter,'user'=>$name),
+                  array("propid" => $filter,'user'=>$userfullname),
                   array(
                         'driver' => 'generic',
                         'username' => env('DB_USERNAME',''),
@@ -1603,7 +1636,7 @@ public function generateRemisireport(Request $request) {
 
 
     public function dataSearchTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
         ini_set('max_execution_time', '200');
        // $baskedid = $request->input('id');max_execution_time = 30     ; 
@@ -1946,8 +1979,8 @@ from cm_appln_val_bldgallowances
     left join (select tdi_key, tdi_value,tdi_parent_name from tbdefitems where tdi_td_name = "ALLOWANCETYPE") allowancetype on allowancetype.tdi_key = vbal_allowancetype_id 
      , cm_appln_val_bldg where vbal_vb_id = vb_id and vb_vd_id = ifnull("'.$prop_id.'",0)');           
 
-             $tax = DB::select('select `vt_id`, `vt_vd_id`,  `vt_grossvalue`, `vt_valuedescretion`, `vt_proposednt`, `vt_proposedrate`, `vt_calculatedrate`,  
-`vt_proposedtax`, `vt_approvednt`,  `vt_approvedrate`, `vt_adjustment`,  `vt_approvedtax`,  TRIM(REPLACE(REPLACE(REPLACE(`vt_note`, "\\n", " "), "\\r", " "), "\\t", " ")) vt_note,
+             $tax = DB::select('select `vt_id`, `vt_vd_id`,  `vt_grossvalue`, `vt_valuedescretion`, `vt_proposednt`, `vt_proposedrate`, `vt_calculatedrate`, vt_previoustax, 
+`vt_proposedtax`, `vt_approvednt`,  `vt_approvedrate`, `vt_adjustment`,  `vt_approvedtax`,  vt_note,
 `vt_createby`,  `vt_createdate`,  `vt_updateby`,  `vt_updatedate`
 FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
 
@@ -2561,7 +2594,7 @@ group by vd_ma_id, vd_accno) active_term on active_term.termdate = vt_termDate a
     }
 
      public function searchPropertyAddressData(Request $request){
-        Log::info('Testvv');
+        Log::info('searchPropertyAddressData');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -2614,7 +2647,7 @@ group by vd_ma_id, vd_accno) active_term on active_term.termdate = vt_termDate a
     }
 
     public function propertyLotData(Request $request){
-        Log::info('Testvv');
+        Log::info('propertyLotData');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -2654,20 +2687,32 @@ group by vd_ma_id, vd_accno) active_term on active_term.termdate = vt_termDate a
             Log::info($filterquery);
 
         }
-      $property = DB::select('select cm_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
-      , unitsize.tdi_value unitsize, concat(lotcode.tdi_value, " ",lo_no) lotnumber, concat(titletype.tdi_value, " ", LO_TITLENO) titlenumber, 
-      landuse.tdi_value landuse, tentype.tdi_value tentype, tstatus, ma_accno, log_approvalstatus_id, log_id
-      from cm_lot
-      inner join cm_masterlist on ma_id = lo_ma_id
-      inner join cm_lot_log on lot_id = log_lot_id
-      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = LO_LOTCODE_ID
-      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = LO_ROADTYPE_ID
-      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = LO_TITLETYPE_ID
-      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") unitsize on unitsize.tdi_key = LO_SIZEUNIT_ID
-      left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  LO_LANDUSE_ID = landuse.tdi_key
-      left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  LO_TENURETYPE_ID = tentype.tdi_key 
-      left join (select tdi_key ,tdi_parent_name , tdi_value tstatus from tbdefitems where tdi_td_name = "OWNERSHIPSTAGE") tstatus 
-      on tstatus.tdi_key = log_approvalstatus_id  where log_approvalstatus_id <> "7" 
+    //   $property = DB::select('select cm_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
+    //   , unitsize.tdi_value unitsize, concat(lotcode.tdi_value, " ",lo_no) lotnumber, concat(titletype.tdi_value, " ", LO_TITLENO) titlenumber, 
+    //   landuse.tdi_value landuse, tentype.tdi_value tentype, tstatus, ma_accno, log_approvalstatus_id, log_id
+    //   from cm_lot
+    //   inner join cm_masterlist on ma_id = lo_ma_id
+    //   inner join cm_lot_log on lot_id = log_lot_id
+    //   left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = LO_LOTCODE_ID
+    //   left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = LO_ROADTYPE_ID
+    //   left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = LO_TITLETYPE_ID
+    //   left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") unitsize on unitsize.tdi_key = LO_SIZEUNIT_ID
+    //   left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  LO_LANDUSE_ID = landuse.tdi_key
+    //   left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  LO_TENURETYPE_ID = tentype.tdi_key 
+    //   left join (select tdi_key ,tdi_parent_name , tdi_value tstatus from tbdefitems where tdi_td_name = "OWNERSHIPSTAGE") tstatus 
+    //   on tstatus.tdi_key = log_approvalstatus_id  where log_approvalstatus_id <> "7" 
+    //    '.$filterquery  );
+
+       $property = DB::select('select log_id, ma_accno, lotcode.tdi_value lotcode, log_no, log_altno, titletype.tdi_value titlecode, log_titleno, log_alttitleno, log_stratano,
+log_approvalstatus.tdi_value log_approvalstatus, log_approvalstatus_id ,log_createdby, DATE_FORMAT(log_createdate, "%d/%m/%Y") log_createdate
+  from cm_lot
+  inner join cm_masterlist on ma_id = lo_ma_id
+  inner join cm_lot_log on lot_id = log_lot_id
+  left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = LOG_LOTCODE_ID
+  left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = LOG_TITLETYPE_ID
+  left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  LOG_TENURETYPE_ID = tentype.tdi_key 
+  left join (select tdi_key ,tdi_parent_name, tdi_value from tbdefitems where tdi_td_name = "OWNERSHIPSTAGE") log_approvalstatus on log_approvalstatus.tdi_key = log_approvalstatus_id  
+  where log_approvalstatus_id <> "7"
        '.$filterquery  );
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);

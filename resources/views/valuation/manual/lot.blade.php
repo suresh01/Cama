@@ -127,7 +127,8 @@
 										{{$rec->landuse}}
 									</td>
 									<td>
-										<span><a onclick="addLot()" class="action-icons c-edit editaddrow" href="#" title="Add">Tambah</a></span>
+										<span><a onclick="addLot()" class="action-icons c-approve editaddrow" href="#" title="Tambah">Tambah</a></span>
+										{{-- <span><a onclick="addLot()" class="editaddrow" href="#" title="Add">Tambah</a></span>  --}}
 									</td>
 									<td style="display: none;">
 										{{$rec->al_id}}
@@ -188,7 +189,8 @@
 										{{$rec->ab_ismainbldg_id}}
 									</td>
 									<td>
-										<span><a onclick="addBldg()" class="action-icons c-edit editbldgrow" href="#" title="Add">Tambah</a></span>
+										<span><a onclick="addBldg()" class="action-icons c-approve editbldgrow" href="#" title="Tambah">Tambah</a></span>
+										{{-- <span><a onclick="addBldg()" class="editbldgrow" href="#" title="Add">Tambah</a></span> --}}
 									</td>
 									<td style="display: none;">
 										{{$rec->ab_id}}

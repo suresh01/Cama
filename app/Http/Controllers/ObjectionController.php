@@ -80,12 +80,14 @@ class ObjectionController extends Controller
         $term = DB::select("select vt_id termid, vt_name term from cm_appln_valterm");
 
         $agenda = DB::select("
-select ob_id, vt_id,vt_name,ob_desc,ob_listyear,DATE_FORMAT(ob_meetingdate, '%d/%m/%Y') ob_meetingdate, DATE_FORMAT(ob_notis8date, '%d/%m/%Y') ob_notis8date,
-ob_notis8hijridate,DATE_FORMAT(ob_notis9date, '%d/%m/%Y') ob_notis9date,
-ob_notis9hijridate, DATE_FORMAT(ob_notis10date, '%d/%m/%Y') ob_notis10date,ob_notis10hijridate, DATE_FORMAT(ob_notis8printdate, '%d/%m/%Y') ob_notis8printdate,
-DATE_FORMAT(ob_enforcedate, '%d/%m/%Y') ob_enforcedate  ,DATE_FORMAT(vt_termdate, '%d/%m/%Y') vt_termdate ,DATE_FORMAT(ob_vallistrevdate, '%d/%m/%Y') ob_vallistrevdate ,DATE_FORMAT(ob_noticeobjdate, '%d/%m/%Y') ob_noticeobjdate 
-from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
-           ");    
+            select ob_id, vt_id,vt_name,ob_desc,ob_listyear,DATE_FORMAT(ob_meetingdate, '%d/%m/%Y') ob_meetingdate, DATE_FORMAT(ob_notis8date, '%d/%m/%Y') ob_notis8date,
+            ob_notis8hijridate,DATE_FORMAT(ob_notis9date, '%d/%m/%Y') ob_notis9date,
+            ob_notis9hijridate, DATE_FORMAT(ob_notis10date, '%d/%m/%Y') ob_notis10date,ob_notis10hijridate, DATE_FORMAT(ob_notis8printdate, '%d/%m/%Y') ob_notis8printdate,
+            DATE_FORMAT(ob_enforcedate, '%d/%m/%Y') ob_enforcedate  ,DATE_FORMAT(vt_termdate, '%d/%m/%Y') vt_termdate ,DATE_FORMAT(ob_vallistrevdate, '%d/%m/%Y') ob_vallistrevdate ,DATE_FORMAT(ob_noticeobjdate, '%d/%m/%Y') ob_noticeobjdate 
+            from cm_objection 
+            inner join cm_appln_valterm on vt_id = ob_vt_id
+            where vt_approvalstatus_id IN ('01','02','03','04')
+            ");    
         App::setlocale(session()->get('locale'));   
 
         return view("objection.meeting")->with(array('term'=> $term,'agenda'=> $agenda));
@@ -670,7 +672,7 @@ on ma_subzone_id = subzone.tdi_key
         $id = $request->input('id');
         $objectiondetail = ObjectionController::objectionInfo($id);
         $objectionlist = DB::select(" select vd_id,de_id, de_ob_id, de_accno, ol_time, ol_reason, format(ol_valuerrecommend, 2) ol_valuerrecommend,  va_name,
-    vt_approvedrate,vt_adjustment,  vd_accno, vd_id, format(vt_proposednt,2) vt_proposednt, format(vt_proposedrate, 2) vt_proposedrate, format(vt_proposedtax, 2) vt_proposedtax, format(vt_approvedtax, 2) vt_approvedtax, format(vt_approvednt, 2) vt_approvednt, subzone.tdi_value subzone, subzone.tdi_parent_name zone, ap_bldgstatus_id, proptype.tdi_value proptype, 
+    vt_approvedrate,vt_adjustment,  vd_accno, vd_id, format(vt_proposednt,2) vt_proposednt, format(vt_proposedrate, 2) vt_proposedrate, format(vt_previoustax, 2) vt_previoustax, format(vt_proposedtax, 2) vt_proposedtax, format(vt_approvedtax, 2) vt_approvedtax, format(vt_approvednt, 2) vt_approvednt, subzone.tdi_value subzone, subzone.tdi_parent_name zone, ap_bldgstatus_id, proptype.tdi_value proptype, 
     proptype.tdi_parent_name propcategorty, vt_valuedescretion, vt_grossvalue, vt_calculatedrate, vt_note,
     format(vl_roundnetlandvalue,2) landvalue, format(vb_roundnetnt,2) bldgvalue, (vt_approvednt - vt_proposednt) diff,
   (((vt_approvednt - vt_proposednt)/vt_proposednt)*100) percentage
@@ -857,7 +859,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
     }
 
     public function decisionTable(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -944,7 +946,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
     }
 
     public function decisionGrabTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -1073,7 +1075,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
     }
 
     public function noticeTables(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -1134,13 +1136,13 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
      public function decisionTrn(Request $request){
         $jsondata = $request->input('jsondata');
         $name=Auth::user()->name;
-        //$sql = 'call proc_grabdata("'.$accounts.'",1)';
+        // $jsondata = str_replace('\r\n', '<br>',$jsondata);
+        $jsondata = addCslashes($jsondata, '\\');
+        // dd($jsondata);
+        // htmlspecialchars
         $objectionid = $request->input('id');
        
         $type = $request->input('type');
-       
-        //$sql = 'call proc_grabdata("'.$accounts.'",1)';
-
        
         Log::info("call proc_objection_decision_trn('".$jsondata."','".$name."',@p_newprop,'".$type."',".$objectionid.")");
         $search=DB::select("call proc_objection_decision_trn('".$jsondata."','".$name."',@p_newprop,'".$type."',".$objectionid.")"); 

@@ -377,7 +377,7 @@
 													</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
-														<input id="taxvaluerdiscretion" class="right-text " tabindex="1" style="width: 100%;" name="taxvaluerdiscretion" value="" onchange="taxCalculation()" type="text" maxlength="100" >
+														<input id="taxvaluerdiscretion" class="right-text " tabindex="1" style="width: 100%;" name="taxvaluerdiscretion" value="0" onchange="taxCalculation()" type="text" maxlength="100" >
 													</div>
 													<span class=" label_intro"></span>
 												</div>
@@ -421,7 +421,17 @@
 													</div>
 													<span class=" label_intro"></span>
 												</div>
-											
+
+												<div class="form_grid_4">
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Previous_Tax')}}<span class="req">*</span></label>
+												</div>
+												<div class="form_grid_8">
+													<div  class="form_input">
+														<input id="taxproposedprevioustax" style="width: 100%;" value="0" tabindex="2" name="taxproposedprevioustax"  type="text" onchange="taxCalculation()"  maxlength="50" class="right-text "/>
+													</div>
+													<span class=" label_intro"></span>
+												</div>
+
 												<div class="form_grid_4">
 													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Proposed_Tax')}} <span class="req">*</span></label>
 												</div>
@@ -471,7 +481,17 @@
 													</div>
 													<span class=" label_intro"></span>
 												</div>
-											
+
+												<div class="form_grid_4">
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Previous_Tax')}}<span class="req">*</span></label>
+												</div>
+												<div class="form_grid_8">
+													<div  class="form_input">
+														<input id="taxapprovedprevioustax" style="width: 100%;" readonly="true" value="0" tabindex="2" name="taxapprovedprevioustax"  type="text"   maxlength="50" class="right-text "/>
+													</div>
+													<span class=" label_intro"></span>
+												</div>
+
 												<div class="form_grid_4">
 													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Approved_Tax')}} <span class="req">*</span></label>
 												</div>
@@ -526,7 +546,7 @@
 		<span class="clear"></span>
 	</div>
 </div>
-<div style="display: none;">
+<div > {{-- <div style="display: none;"> --}}
 	<table id="hiddenlandarea" class="display ">
 		<thead style="text-align: left;">
 				<tr>
@@ -659,11 +679,11 @@
     </table>
 	    @foreach($bldg as $rec)
 			
-			<input type="text" value="{{number_format($rec->vb_depreciationrate,2)}}" style="text-align:right;"  id="deprate_{{$rec->vb_id}}">
+		<input type="text" value="{{number_format($rec->vb_depreciationrate,2)}}" style="text-align:right;"  id="deprate_{{$rec->vb_id}}">
 		<input type="text" value="{{number_format($rec->vb_depreciationvalue,2)}}" style="text-align:right;" id="depvalue_{{$rec->vb_id}}">
 
-		 <input type="text" value="{{number_format($rec->vb_netnt,2)}}"   style="text-align:right;" id="netbldg_{{$rec->vb_id}}">
-		 <input type="text" value="{{number_format($rec->vb_roundnetnt,2)}}"  style="text-align:right;" id="roundbldg_{{$rec->vb_id}}">
+		<input type="text" value="{{number_format($rec->vb_netnt,2)}}"   style="text-align:right;" id="netbldg_{{$rec->vb_id}}">
+		<input type="text" value="{{number_format($rec->vb_roundnetnt,2)}}"  style="text-align:right;" id="roundbldg_{{$rec->vb_id}}">
 
 		@endforeach  
 
@@ -677,7 +697,13 @@
 				Description (Allwoance Cateory ,  Allowance Type)
 				</th>
 				<th>
+				Allowance Type ID
+				</th>
+				<th>
 				Calculation Method
+				</th>
+				<th>
+				Calculation Method ID
 				</th>
 				<th>
 				Percentage / Value
@@ -696,27 +722,33 @@
         <tbody>
          	@foreach ($allowance as $rec)
 	        <tr>
-		          <td>
-		            {{$loop->iteration}}
-		          </td>
-		          <td>
-		            {{$rec->allowancecategory}} , {{$rec->allowancetype}}
-		          </td>
-		          <td>
-		            {{$rec->allowancemethod}}
-		          </td>
-		          <td style="text-align:right;">
+				<td>
+					{{$loop->iteration}}
+				</td>
+				<td>
+					{{$rec->allowancecategory}} , {{$rec->allowancetype}}
+				</td>
+				<td>
+		            {{$rec->vbal_allowancetype_id}}
+				</td>
+				<td>
+					{{$rec->allowancemethod}}
+				</td>
+				<td>
+					{{$rec->vbal_calcmethod_id}}
+				</td>
+				<td style="text-align:right;">
 		            {{$rec->vbal_drivevalue}}
-		          </td>
-		          <td style="text-align:right;">
+				</td>
+				<td style="text-align:right;">
 		            {{$rec->vbal_roundgrossallowancevalue}}
-		          </td>
-		          <td style="text-align:right;">
+				</td>
+				<td style="text-align:right;">
 		            {{$rec->vbal_id}}
-		          </td>
-		          <td style="text-align:right;">
+				</td>
+				<td style="text-align:right;">
 		            {{$rec->vb_id}}
-		          </td>
+				</td>
 	        </tr>
          	
         	@endforeach
@@ -785,23 +817,27 @@
     	var taxvaluerdiscretion = removeCommas($('#taxvaluerdiscretion').val());
     	var taxproposedrate = removeCommas($('#taxproposedrate').val());
     	var taxcalculaterate = removeCommas($('#taxcalculaterate').val());
+		var taxproposedprevioustax = removeCommas($('#taxproposedprevioustax').val());
     	var taxapprovednt = removeCommas($('#taxapprovednt').val());
     	var taxadjustment = removeCommas($('#taxadjustment').val());
     	var grossnt = Number(landtotal) + Number(bldgtotal) + Number(additionaltotal) + Number(taxvaluerdiscretion);
     	//var grossnt = Number(landtotal) + Number(additionaltotal) + Number(taxvaluerdiscretion);
-    	//alert(bldgtotal);
+    	// alert(grossnt);
     	//console.log(grossnt);
     	var propsednt = customroundnt(grossnt,3);// Math.floor(grossnt/1000)*1000;
-    	var propsedtax = propsednt * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 );
-    	var approvedtax = Number(taxapprovednt) * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment);
-
+    	var propsedtax = (propsednt * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 )) + Number(taxproposedprevioustax);
+    	var approvedtax = Number(taxapprovednt) * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment) + Number(taxproposedprevioustax);
+		//alert(grossnt);
     	$('#taxgrossnt').val(formatMoneyHas(grossnt));
+		$('#taxapprovedprevioustax').val(formatMoneyHas(taxproposedprevioustax));
     	$('#taxproposednt').val(formatMoneyHas(propsednt));
     	$('#taxapprovednt').val(formatMoneyHas(propsednt));
     	$('#taxproposedtax').val(formatMoneyHas(propsedtax));
+		
     	$('#taxapprovedtax').val(formatMoneyHas(approvedtax));
+		
     	$('#taxapprovedrate').val(taxproposedrate);
-    	taxApprovedCalculation();
+    	// taxApprovedCalculation();
     }
 
 
@@ -836,10 +872,11 @@
     	
     	var taxapprovednt = removeCommas($('#taxapprovednt').val());
     	var taxapprovedrate = removeCommas($('#taxapprovedrate').val());
+		var taxproposedprevioustax = removeCommas($('#taxproposedprevioustax').val());
     	var taxadjustment = removeCommas($('#taxadjustment').val());
     	var taxcalculaterate = removeCommas($('#taxcalculaterate').val());
     	
-    	var approvedtax = Number(taxapprovednt) * (Number(taxapprovedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment);
+    	var approvedtax = Number(taxapprovednt) * (Number(taxapprovedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment) + Number(taxproposedprevioustax);
 
     	$('#taxapprovedtax').val(formatMoneyHas(approvedtax));
     }
@@ -857,6 +894,7 @@
 	}
 
 	@foreach ($tax as $rec)
+		// alert('{{$rec -> vt_approvednt}}');
 		formatMoney('taxvaluerdiscretion','{{$rec -> vt_valuedescretion}}');
 		formatMoney('taxapprovednt','{{$rec -> vt_approvednt}}');
 		formatMoney('taxapprovedrate','{{$rec -> vt_approvedrate}}');
@@ -866,11 +904,13 @@
 		formatMoney('taxproposedrate','{{$rec -> vt_proposedrate}}');
 		formatMoney('taxproposednt','{{$rec -> vt_proposednt}}');
 		formatMoney('taxcalculaterate','{{$rec -> vt_calculatedrate}}');
+		formatMoney('taxproposedprevioustax','{{$rec -> vt_previoustax}}');
+		formatMoney('taxapprovedprevioustax','{{$rec -> vt_previoustax}}');
 		formatMoney('taxproposedtax','{{$rec -> vt_proposedtax}}');
 		formatMoney('taxdrivevalue','{{$rec -> vt_derivedvalue}}');
 		formatMoney('taxdriverate','{{$rec -> vt_derivedrate}}');
 
-		$('#taxnotes').val('{{$rec -> vt_note}}')
+		$('#taxnotes').val('{!!$rec -> vt_note!!}');
 
 	@endforeach
 
@@ -1212,7 +1252,7 @@
 
 	    let mapbldgareatable = new Map([["0","artype"],["1", "arlevel"],  ["2", "arcategory"], ["3", "arused"], ["4", "area"], ["5", "arearate"], ["6", "grossareavalue"],["7", "bldgarid"],["9", "bldgid"]]);
 
-	    let mapallowancetable = new Map([["0","sno"],["1", "desc"],  ["2", "calmethod"], ["3", "percentage"], ["4", "grossvalue"], ["5", "bldgallowanceid"], ["6", "bldgid"], ["7", "actioncode"]]);
+	    let mapallowancetable = new Map([["0","sno"],["1", "desc"], ["2", "allowancetypeid"], ["3", "calmethod"], ["4", "calmethodid"], ["5", "percentage"], ["6", "grossvalue"], ["7", "bldgallowanceid"], ["8", "bldgid"], ["9", "actioncode"]]);
 	    var noty_id = noty({
 					layout : 'center',
 					text: 'Do want submit valuation?',
@@ -1327,15 +1367,15 @@
 			additionaldata = JSON.stringify(additionaldata).replace(/]|[[]/g, '');
 
 
-		var notes = $('#taxnotes').val();
+		// var notes = $('#taxnotes').val();
 
-		notes = notes.replace('\n', '\\n');
+		// notes = notes.replace('\n', '\\n');
 		
-		notes = notes.replace('"', '\""');
-		notes = notes.replace("'", "\'");
-		notes = notes.replace('\r', '\\r');
+		// notes = notes.replace('"', '\""');
+		// notes = notes.replace("'", "\'");
+		// notes = notes.replace('\r', '\\r');
 
-		$('#taxnotes').val(notes);
+		// $('#taxnotes').val(notes);
 
 		var taxdata = {};
 		$('#taxvaluationform').serializeArray().map(function(x){taxdata[x.name] = x.value;});

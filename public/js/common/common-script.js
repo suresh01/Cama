@@ -449,7 +449,7 @@ function customroundnt(num, inputcategory){
 	if (num >= 10000){
         diffParam = 5000;
     } else if (num < 10000 && num >= 1000) {
-        diffParam = 5000;
+        diffParam = 1000;
     } else if (num < 1000 && num >= 10) {
         diffParam = 100;
     } else if (num < 10) {

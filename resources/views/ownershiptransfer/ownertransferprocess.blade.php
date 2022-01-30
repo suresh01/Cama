@@ -218,6 +218,17 @@
 						 			$( "#reqdate" ).datepicker({dateFormat: 'dd/mm/yy'});
 						 			$("#addacceptdt").val('{{$owner->otar_createdate}}');
 						 			$("#addref").val('{{$owner->ma_fileno}}');
+									$('#propertyinspectionform').stepy({
+									backLabel: "{{__('common.Back')}}",
+									nextLabel: "{{__('common.Next')}}",
+									errorImage:true,
+									block: true,
+									description: true,
+									legend: false,
+									titleClick: true,
+									titleTarget: '#top_tabby',
+									validate: true
+									});
 								});
 							</script>
 							@endforeach
@@ -232,6 +243,7 @@
 											<input type="hidden" name="owneraccnum" id="owneraccnum">
 											<input type="hidden" value="0" name="ownerid" id="ownerid">
 											<input type="hidden" value="0" name="tableindex" id="tableindex">
+											
 										
 										<fieldset>
 												<legend>Pemilik Baru</legend>
@@ -713,7 +725,7 @@
 						 			$( "#reqdate" ).datepicker({dateFormat: 'dd/mm/yy'});
 						 			$("#addacceptdt").val('{{$owner->otar_createdate}}');
 						 			$("#addref").val('{{$owner->ma_fileno}}');
-
+									
 
 						 			if('{{$owner->ota_rejectreason1}}' == 1){				
 										var to_replace = $("#uniform-reason1").find('span');
@@ -778,7 +790,11 @@
 								});
 							</script>
 							@endforeach
-							<input type="submit" onclick="transfer()" class="finish" id="finish" value="Kemaskini"/>
+							@if($formstatus == '6' || $formstatus == '1' || $formstatus == '2')
+								<input type="submit" onclick="transfer()" class="finish" id="finish" value="Kemaskini"/>
+							@else
+								<input type="submit" onclick="closeWindow()" class="finish" id="finish" value="Tutup"/>
+							@endif
 						</form>
 					</div>
 				</div>
@@ -849,11 +865,14 @@
 					</div>
 				</div>
 <script type="text/javascript">
+
+
 	function closeWindow(){
 	    try {
 	        window.opener.HandlePopupResult(sender.getAttribute("result"));
 	    }
 	    catch (err) {}
+		
 	    window.close();
 	    return false;
   	}

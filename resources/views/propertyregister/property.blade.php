@@ -170,6 +170,8 @@
 									<th>{{__('propertyregister.Address1')}}</th>
 									<th>{{__('propertyregister.Address2')}}</th>
 									<th>{{__('propertyregister.Owner_Count')}}</th>
+									<th>{{__('propertyregister.Land_Info')}}</th>
+									<th>{{__('propertyregister.Bldg_Info')}}</th>
 									<th>{{__('propertyregister.Status')}}</th>
 									<th>{{__('propertyregister.Action')}}</th>		
 								</tr>
@@ -346,9 +348,13 @@ var table = $('#proptble').DataTable();
 			        {"data": "zone", "name": "zone"},
 			        {"data": "subzone", "name": "subzone"},
 			        {"data": "isbldg", "name": "ishasbldg"},
-			        {"data": "ma_addr_ln1", "name": "address"},
-			        {"data": "ma_addr_ln2", "name": "address"},
-			        {"data": "owncount", "name": "ownername"},
+			        {"data": "ma_addr_ln1", "name": "ma_addr_ln1"},
+			        {"data": "ma_addr_ln2", "name": "ma_addr_ln2"},
+			        {"data": "owncount", "name": "owncount"},
+					{"data": "luastanah", "name": "luastanah"},
+					{"data":  function(data){
+						return data.bldgcount + '/' + data.bldgareacount + '/' + data.sumbldgarea;
+					}, "name": "bldgcount"},
 			        {"data":  "propstatus", "name": "status"},
 			        {"data": function(data){
 			        	if ('{{$basket_status}}' == '01' || '{{$basket_status}}' == '02' ){

@@ -232,7 +232,7 @@ $(document).ready(function(){
                   
         }
         formatMoney('netlandvalue',grossland);
-        formatMoney('roundnetlandvalue',customround(grossland,1));
+        formatMoney('roundnetlandvalue',customround(grossland,3));
     });
 
     //Manual Calculated Rate Calculation
@@ -252,7 +252,7 @@ $(document).ready(function(){
         calucaterate = removeCommas(calucaterate);
         
         
-        var gross = area * rate * (calucaterate / 100);
+        var gross = area * rate * (1 - (calucaterate / 100));
         //console.log(gross);
         data[3] = '<input type="text" class="editrate" style="text-align:right;" id="rate_'+rowid+'" value="'+rate+'" name="rate">';
         data[4] = '<input type="text" class="editcalrate"  style="text-align:right;" id="calucatedrate_'+rowid+'" value="'+calucaterate+'" name="rate">';
@@ -272,7 +272,7 @@ $(document).ready(function(){
         console.log(grossland);
         
         formatMoney('netlandvalue',grossland);
-        formatMoney('roundnetlandvalue',customround(grossland,1));
+        formatMoney('roundnetlandvalue',customround(grossland,3));
         //$('#netlandvalue').val(formatMoneyHas(grossland));
         // $('#roundnetlandvalue').val(formatMoneyHas(grossland));
         // table.row($(this).parents('tr') ).remove().draw();

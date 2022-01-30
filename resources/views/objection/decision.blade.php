@@ -90,7 +90,7 @@
 					</div>
 					<div class="comments_s">
 						<div class="block_label">
-							Objection_Count<span>@foreach ($objectioncnt as $rec)
+							{{__('objection.Objection_Count')}}<span>@foreach ($objectioncnt as $rec)
 										{{$rec->objection_count}}
 									@endforeach	</span>
 						</div>
@@ -104,15 +104,15 @@
 									<th class="table_sno"> {{__('objection.SNO')}}</th>
 									<th> {{__('objection.Account_number')}} </th>
 									<th> {{__('objection.Basket_Name')}} </th>
-									<th> Nilai Tanah </th>
-									<th> Nilai Bangunan </th>
+									<th> {{__('objection.Proposed_LandValue')}} </th>
+									<th> {{__('objection.Proposed_BuildingValue')}} </th>
 									<th> {{__('objection.Proposed_NT')}} </th>
 									<th> {{__('objection.Proposed_Rate')}} </th>
 									<th> {{__('objection.Proposed_Tax')}} </th>
 									<th> {{__('objection.Valuer_Recommend')}}  </th>
 									<th> {{__('objection.Approved_NT')}}  </th>
 									<th> {{__('objection.Approved_Tax')}} </th>
-									<th> Selisih </th>
+									<th> {{__('objection.Difference')}} </th>
 									<th> (%) </th>
 									<th> {{__('objection.Action')}} </th>
 								</tr>
@@ -128,32 +128,35 @@
 				
 
 				@foreach ($objectionlist as $rec)
-								<div style="display: none;">
-									<input type="text" id="time_{{$rec->de_id}}" value="{{$rec->ol_time}}">
-									<input type="text" id="reason_{{$rec->de_id}}" value="{{$rec->ol_reason}}">
-									<input type="text" id="recommend_{{$rec->de_id}}" value="{{$rec->ol_valuerrecommend}}">
-									<input type="text" id="nt_{{$rec->de_id}}" value="{{$rec->vt_approvednt}}">
-									<input type="text" id="rate_{{$rec->de_id}}" value="{{$rec->vt_approvedrate}}">
-									<input type="text" id="adjust_{{$rec->de_id}}" value="{{$rec->vt_adjustment}}">
-									<input type="text" id="tax_{{$rec->de_id}}" value="{{$rec->vt_approvedtax}}">
-									<input type="text" id="accno_{{$rec->de_id}}" value="{{$rec->vd_accno}}">
-									<input type="text" id="vd_id_{{$rec->de_id}}" value="{{$rec->vd_id}}">
-									<input type="text" id="zone_{{$rec->de_id}}" value="{{$rec->zone}}">
-									<input type="text" id="subzone_{{$rec->de_id}}" value="{{$rec->subzone}}">
-									<input type="text" id="proptype_{{$rec->de_id}}" value="{{$rec->proptype}}">
-									<input type="text" id="propcate_{{$rec->de_id}}" value="{{$rec->propcategorty}}">
-									<input type="text" id="vt_valuedescretion_{{$rec->de_id}}" value="{{$rec->vt_valuedescretion}}">
-									<input type="text" id="vt_grossvalue_{{$rec->de_id}}" value="{{$rec->vt_grossvalue}}">
-									<input type="text" id="vt_calculatedrate_{{$rec->de_id}}" value="{{$rec->vt_calculatedrate}}">
-									<input type="text" id="vt_proposednt_{{$rec->de_id}}" value="{{$rec->vt_proposednt}}">
-									<input type="text" id="vt_proposedrate_{{$rec->de_id}}" value="{{$rec->vt_proposedrate}}">
-									<input type="text" id="vt_proposedtax_{{$rec->de_id}}" value="{{$rec->vt_proposedtax}}">
-									<input type="text" id="note_{{$rec->de_id}}" value="{{$rec->vt_note}}">
-									<input type="text" id="landvalue_{{$rec->de_id}}" value="{{$rec->landvalue}}">
-									<input type="text" id="bldgvalue_{{$rec->de_id}}" value="{{$rec->bldgvalue}}">
-									<input type="text" id="valid_{{$rec->de_id}}" value="{{$rec->vd_id}}">
-								</div>
-								@endforeach	
+					<div>{{-- <div style="display: none;"> --}}
+						<input type="text" id="time_{{$rec->de_id}}" value="{{$rec->ol_time}}">
+						<input type="text" id="reason_{{$rec->de_id}}" value="{{$rec->ol_reason}}">
+						<input type="text" id="recommend_{{$rec->de_id}}" value="{{$rec->ol_valuerrecommend}}">
+						<input type="text" id="nt_{{$rec->de_id}}" value="{{$rec->vt_approvednt}}">
+						<input type="text" id="rate_{{$rec->de_id}}" value="{{$rec->vt_approvedrate}}">
+						<input type="text" id="adjust_{{$rec->de_id}}" value="{{$rec->vt_adjustment}}">
+						<input type="text" id="tax_{{$rec->de_id}}" value="{{$rec->vt_approvedtax}}">
+						<input type="text" id="accno_{{$rec->de_id}}" value="{{$rec->vd_accno}}">
+						<input type="text" id="vd_id_{{$rec->de_id}}" value="{{$rec->vd_id}}">
+						<input type="text" id="zone_{{$rec->de_id}}" value="{{$rec->zone}}">
+						<input type="text" id="subzone_{{$rec->de_id}}" value="{{$rec->subzone}}">
+						<input type="text" id="proptype_{{$rec->de_id}}" value="{{$rec->proptype}}">
+						<input type="text" id="propcate_{{$rec->de_id}}" value="{{$rec->propcategorty}}">
+						<input type="text" id="vt_valuedescretion_{{$rec->de_id}}" value="{{$rec->vt_valuedescretion}}">
+						<input type="text" id="vt_grossvalue_{{$rec->de_id}}" value="{{$rec->vt_grossvalue}}">
+						<input type="text" id="vt_calculatedrate_{{$rec->de_id}}" value="{{$rec->vt_calculatedrate}}">
+						<input type="text" id="vt_previoustax_{{$rec->de_id}}" value="{{$rec->vt_previoustax}}">
+						<input type="text" id="vt_proposednt_{{$rec->de_id}}" value="{{$rec->vt_proposednt}}">
+						<input type="text" id="vt_proposedrate_{{$rec->de_id}}" value="{{$rec->vt_proposedrate}}">
+						<input type="text" id="vt_proposedtax_{{$rec->de_id}}" value="{{$rec->vt_proposedtax}}">
+						<input type="text" id="note_{{$rec->de_id}}" value="{!!$rec -> vt_note!!}">
+						{{-- <input type="text" id="note_{{$rec->de_id}}" value="{{$rec->vt_note}}"> --}}
+						{{-- <textarea id="note_{{$rec->de_id}}">{!!$rec -> vt_note!!}</textarea> --}}
+						<input type="text" id="landvalue_{{$rec->de_id}}" value="{{$rec->landvalue}}">
+						<input type="text" id="bldgvalue_{{$rec->de_id}}" value="{{$rec->bldgvalue}}">
+						<input type="text" id="valid_{{$rec->de_id}}" value="{{$rec->vd_id}}">
+					</div>
+				@endforeach	
 			</div>
 
 			<div id="addgroup" style="display:none" class="grid_12 full_block">
@@ -309,6 +312,16 @@
 												</div>
 											
 												<div class="form_grid_4">
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Previous_Tax')}}<span class="req">*</span></label>
+												</div>
+												<div class="form_grid_8">
+													<div  class="form_input">
+														<input id="taxapprovedprevioustax" style="width: 100%;" readonly="true" value="0" tabindex="2" name="taxapprovedprevioustax"  type="text"   maxlength="50" class="right-text "/>
+													</div>
+													<span class=" label_intro"></span>
+												</div>
+
+												<div class="form_grid_4">
 													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('objection.Approved_Tax')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
@@ -369,6 +382,16 @@
 												</div>
 											
 												<div class="form_grid_4">
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Previous_Tax')}}<span class="req">*</span></label>
+												</div>
+												<div class="form_grid_8">
+													<div  class="form_input">
+														<input id="taxproposedprevioustax" style="width: 100%;" readonly="true" value="0" tabindex="2" name="taxproposedprevioustax"  type="text" onchange="taxCalculation()"  maxlength="50" class="right-text "/>
+													</div>
+													<span class=" label_intro"></span>
+												</div>
+
+												<div class="form_grid_4">
 													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('objection.Proposed_Tax')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
@@ -388,13 +411,14 @@
 										<ul>
 											<li>													
 												<fieldset>
-										<legend>{{__('objection.Valuation_Description')}}</legend>		
+												<legend>{{__('objection.Valuation_Description')}}</legend>		
 												<div class="form_grid_2">
 													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('objection.Notes')}}<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_9">
 													<div style="margin-left: 0px"  class="form_input"> 
 													<textarea rows="4" id="taxnotes" name="taxnotes" cols="50"></textarea>
+													{{-- <div id="taxnotes"></div> --}}
 													<span class=" label_intro"></span>
 												</div>
 												</div>
@@ -431,6 +455,7 @@
 	    	var taxvaluerdiscretion = removeCommas($('#taxvaluerdiscretion').val());
 	    	var taxproposedrate = removeCommas($('#taxproposedrate').val());
 	    	var taxcalculaterate = removeCommas($('#taxcalculaterate').val());
+			var taxproposedprevioustax = removeCommas($('#taxproposedprevioustax').val());
 	    	var taxapprovednt = removeCommas($('#taxapprovednt').val());
 	    	var taxadjustment = removeCommas($('#taxadjustment').val());
 	    	var grossnt = Number(landtotal) + Number(bldgtotal) + Number(taxvaluerdiscretion);
@@ -438,10 +463,11 @@
 	    	//alert(bldgtotal);
 	    	//console.log(grossnt);
 	    	var propsednt = customround(grossnt,3);// Math.floor(grossnt/1000)*1000;
-	    	var propsedtax = propsednt * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 );
-	    	var approvedtax = Number(taxapprovednt) * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment);
+	    	var propsedtax = (propsednt * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 )) + Number(taxproposedprevioustax);
+	    	var approvedtax = Number(taxapprovednt) * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment) + Number(taxproposedprevioustax);
 
 	    	$('#taxgrossnt').val(formatMoneyHas(grossnt));
+			$('#taxapprovedprevioustax').val(formatMoneyHas(taxproposedprevioustax));
 	    	$('#taxproposednt').val(formatMoneyHas(propsednt));
 	    	$('#taxapprovednt').val(formatMoneyHas(propsednt));
 	    	$('#taxproposedtax').val(formatMoneyHas(propsedtax));
@@ -456,10 +482,11 @@
 	    	
 	    	var taxapprovednt = removeCommas($('#taxapprovednt').val());
 	    	var taxapprovedrate = removeCommas($('#taxapprovedrate').val());
+			var taxproposedprevioustax = removeCommas($('#taxproposedprevioustax').val());
 	    	var taxadjustment = removeCommas($('#taxadjustment').val());
 	    	var taxcalculaterate = removeCommas($('#taxcalculaterate').val());
 	    	
-	    	var approvedtax = Number(taxapprovednt) * (Number(taxapprovedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment);
+	    	var approvedtax = Number(taxapprovednt) * (Number(taxapprovedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment) + Number(taxproposedprevioustax);
 
 	    	$('#taxapprovedtax').val(formatMoneyHas(approvedtax));
    		}
@@ -556,8 +583,14 @@
 		 	$("label.error").remove();	
 		}
 
+
 		function updateMeeting(id){
 
+			// @foreach ($objectionlist as $rec)
+	
+			// 	alert('{!!$rec->vt_note!!}');
+
+			// @endforeach
 
 			$("#operation").val(2);
 			$("#grouptable").hide();
@@ -570,16 +603,35 @@
 			$("#accno").val($("#accno_"+id).val());
 			$("#vd_id").val($("#vd_id_"+id).val());
 
-
+			//alert($("#note_"+id).val());
 			$("#zone").val($("#zone_"+id).val());
 			$("#subzone").val($("#subzone_"+id).val());
 			$("#proptype").val($("#proptype_"+id).val());
 			$("#propcate").val($("#propcate_"+id).val());
-			$("#taxnotes").val($("#note_"+id).val());
+			// console.log($("#note_"+id).val());
+			var idbaris;
+			@foreach ($objectionlist as $rec)
+				idbaris = '{{$rec->de_id}}';
+				if(id == idbaris){
+					$("#taxnotes").val('{!!$rec->vt_note!!}');
+				}
+				// alert('{!!$rec->vt_note!!}');
+
+			@endforeach
+
+			
+			// tinymce.init({
+            //     selector: '#taxnotes',
+			// 	force_br_newlines : true,
+			// 	force_p_newlines : false,
+			// 	forced_root_block : '',
+            //     menubar: false,
+            //     toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+            //     height: 350
+            // });
 
 			$("#landvalue").val($("#landvalue_"+id).val());
 			$("#bldgvalue").val($("#bldgvalue_"+id).val());
-
 			
 			$("#taxapprovednt").val($("#nt_"+id).val());
 			$("#taxproposednt").val($("#vt_proposednt_"+id).val());
@@ -590,6 +642,8 @@
 			formatMoney("taxvaluerdiscretion",$("#vt_valuedescretion_"+id).val());
 			formatMoney("taxgrossnt",$("#vt_grossvalue_"+id).val());
 			formatMoney("taxcalculaterate",$("#vt_calculatedrate_"+id).val());
+			formatMoney("taxproposedprevioustax",$("#vt_previoustax_"+id).val());
+			formatMoney("taxapprovedprevioustax",$("#vt_previoustax_"+id).val());
 			// alert($("#taxproposedtax").val());
 			//formatMoney("taxproposednt",$("#vt_proposednt_"+id).val());
 			formatMoney("taxproposedrate",$("#vt_proposedrate_"+id).val());
@@ -605,6 +659,7 @@
 			$("#addsubmit").html("Kemaskini");
 		 	$("label.error").remove();	
 		}
+		
 
 		function taxApprovedCalculation(){
     	
@@ -744,39 +799,64 @@
 
 		function validateGroup(){
 			
-											
-			$('#addgroupfrom').validate({
-		        rules: {
-		            'termid': 'required',
-		            'name': 'required'
-		        },
-		        messages: {
-					"term": "Please select term name",
-					"name": "Please enter basket name"
-		        },
-		        submitHandler: function(form) {
-					var d=new Date();		        	
-					var operation = $('#operation').val();
-					var page = "ratepayer";
-					var groupdata = {};
-		        	$('#addgroupfrom').serializeArray().map(function(x){groupdata[x.name] = x.value;});
+			var d=new Date();		        	
+			var operation = $('#operation').val();
+			var page = "ratepayer";
+			var groupdata = {};
+			// $("#addgroupfrom").append("<textarea name='taxnotes' style='display:none'>" + tinymce.activeEditor.getContent() + "</textarea>");
 
-		            var groupjson = JSON.stringify(groupdata);
-		            //console.log(groupjson);
-		            $.ajax({
-			  				type: 'GET', 
-						    url:'decisiontrn',
-						    headers: {
-							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-							},
-					        data:{jsondata:groupjson,type:'update',id:'{{$id}}'},
-					        success:function(data){
-					        	window.location.assign('decision?term={{$term}}&id={{$id}}')											
-				        	}
-				    	});
+			$('#addgroupfrom').serializeArray().map(function(x){groupdata[x.name] = x.value;});
+
+			var groupjson = JSON.stringify(groupdata);
+
+			console.log(groupjson);
+			$.ajax({
+					type: 'GET', 
+					url:'decisiontrn',
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					},
+					data:{jsondata:groupjson,type:'update',id:'{{$id}}'},
+					success:function(data){
+						window.location.assign('decision?term={{$term}}&id={{$id}}')											
+					}
+				});
+
+			// $('#addgroupfrom').validate({
+				
+		    //     rules: {
+		    //         'termid': 'required',
+		    //         'name': 'required'
+		    //     },
+		    //     messages: {
+			// 		"term": "Please select term name",
+			// 		"name": "Please enter basket name"
+		    //     },
+		    //     submitHandler: function(form) {
+					
+			// 		var d=new Date();		        	
+			// 		var operation = $('#operation').val();
+			// 		var page = "ratepayer";
+			// 		var groupdata = {};
+					
+		    //     	$('#addgroupfrom').serializeArray().map(function(x){groupdata[x.name] = x.value;});
+
+		    //         var groupjson = JSON.stringify(groupdata);
+		    //         //console.log(groupjson);
+		    //         $.ajax({
+			//   				type: 'GET', 
+			// 			    url:'decisiontrn',
+			// 			    headers: {
+			// 				    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			// 				},
+			// 		        data:{jsondata:groupjson,type:'update',id:'{{$id}}'},
+			// 		        success:function(data){
+			// 		        	window.location.assign('decision?term={{$term}}&id={{$id}}')											
+			// 	        	}
+			// 	    	});
 		                  	
-		        }
-		    });
+		    //     }
+		    // });
 
 		    		
 		}

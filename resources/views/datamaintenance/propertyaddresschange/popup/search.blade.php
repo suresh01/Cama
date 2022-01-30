@@ -88,7 +88,7 @@ $(document).ready(function (){
               {"data": "ma_addr_ln1", "name": "ishasbldg"}, 
               {"data": "isbldg", "name": "ishasbldg"},
               {"data": function(data){
-                return '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" disabled="true" title="Select Asset Area" class="select-assetdba "  onclick="addApplication('+data.ma_id+')"  href="#"></a></span>'; 
+                return '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" disabled="true" title="Pilih" class="select-assetdba "  onclick="addApplication('+data.ma_id+')"  href="#"></a></span>'; 
                }, "name": "address"}            
           ],
 		    'columnDefs': [{

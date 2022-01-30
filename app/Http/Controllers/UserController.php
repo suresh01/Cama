@@ -34,8 +34,8 @@ class UserController extends Controller
 
     public function languageSetup(Request $request){
         $lang = $request->input('lang'); // passed from the form
-        Log::info('Test');
-Log::info($lang);
+        //Log::info('Test');
+        Log::info($lang);
        // App::setlocale('en');
         session()->put('locale', $lang); 
 
@@ -43,7 +43,7 @@ Log::info($lang);
        /* Session::put('locale', $locale);
 
         app()->setLocale(Session::get('locale'));*/
- //Log::info("End");
+        //Log::info("End");
 
 
         return redirect('dashboard');
@@ -1231,7 +1231,7 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
         $type = $request->input('type');
         $name=Auth::user()->name;
         //$param = $request->input('param');
-        Log::info($module);
+        // Log::info($param_value);
         //$register=DB::select("call proc_approvepropreg(".$param_value.",   '".$name."', '".$module."')"); 
         $propertycnt = 0;
         //$trn_date = new DateTime();
@@ -1240,7 +1240,7 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
             $ownerdetail = DB::select('select * from cm_masterlist_log 
             inner join (select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = "STATE") state on state_id = mal_state_id
              where mal_id ='.$param_value.' ');
-            Log::info($ownerdetail );
+            // Log::info($ownerdetail );
             foreach ($ownerdetail as $rec) {            
                 //$lastcode = $rec->tdi_key;
                 $result = DB::connection('oracle')->update("
@@ -1294,6 +1294,7 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
                 NEGERI_POS = '".$rec->state."', 
                 KP = '".$rec->ota_ownno."', 
                 NO_TEL = '".$rec->ota_phoneno."', 
+                EMEL = '".$rec->ota_emailid."', 
                 TKH_UPDATE = SYSDATE , 
                 USER_UPDATE = 'CAMA' 
                 WHERE ID = '".$rec->otar_accno."'");
@@ -1315,7 +1316,66 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
         return response()->json(array('checkdigit'=> 'succsess','propertycnt'=>$propertycnt), 200);
     }
 
+    public function paparDataTransfer(Request $request){
+        $paramid = $request->input('paramid');
+        $module = $request->input('module');
+        // $currstatus = $request->input('currstatus');
 
+        if($module == 'propertyaddress'){
+            $masterlist = DB::select('select mal_id, mal_accno, mal_addr_ln1, mal_addr_ln2, mal_addr_ln3, mal_addr_ln4, mal_postcode, mal_city, state.tdi_value state, mal_approvalstatus_id
+            from cm_masterlist_log
+            inner join (select tdi_key state_id, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state_id = mal_state_id
+            where mal_id ='.$paramid.' ');
+            
+            foreach ($masterlist as $rec) { 
+                    $noakaun = $rec->mal_accno;
+                    $currstatus = $rec->mal_approvalstatus_id;
+                }
+            $mphtj = DB::connection('oracle')->select("
+                    SELECT ID noaccmphtj, NO_RUMAH, JALAN, TEMPAT, KAWASAN, BANDAR, NEGERI FROM PEMILIK_SB 
+                    WHERE ID = '".$noakaun."'");
+
+            
+            Log::info($mphtj);
+            return view('datamaintenance.propertyaddresschange.propertyaddresspreview')->with(array('masterlist'=>$masterlist,'mphtj'=>$mphtj))->with('module',$module)->with('currstatus',$currstatus)->with('paramid',$paramid);
+        }else if($module == 'propertylotaddress'){
+
+            $lot = DB::select('select log_id, ma_accno, lotcode.tdi_value lotcode, log_no, log_altno, log_approvalstatus_id
+                    from cm_lot_log
+                    inner join cm_lot on LOT_ID = log_lot_id
+                    inner join cm_masterlist on ma_id = LO_MA_ID 
+                    left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = log_lotcode_id
+            where log_id ='.$paramid.' ');
+
+            foreach ($lot as $rec) { 
+                    $noakaun = $rec->ma_accno;
+                    $currstatus = $rec->log_approvalstatus_id;
+                }
+            $mphtj = DB::connection('oracle')->select("
+                    SELECT ID noaccmphtj, KOD_LOT, LOTID, LOT_LAMA FROM PEMILIK_SB 
+                    WHERE ID = '".$noakaun."'");
+            Log::info($lot);
+            Log::info($mphtj);        
+            return view('datamaintenance.propertyaddresschange.propertylotpreview')->with(array('lot'=>$lot,'mphtj'=>$mphtj))->with('module',$module)->with('currstatus',$currstatus)->with('paramid',$paramid);
+        }else{
+            $ownerdetail = DB::select('select otar_accno, ota_ownname, ota_ownno, ota_addr_ln1, ota_addr_ln2, ota_addr_ln3, ota_addr_ln4, ota_city, ota_postcode, state.tdi_value state, ota_phoneno, ota_emailid, otar_ownertransstatus_id 
+            from cm_ownertrans_appln 
+            inner join cm_ownertrans_applnreg on otar_id = ota_otar_id
+            inner join (select tdi_key state_id, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state_id = ota_state_id
+            where ota_otar_id ='.$paramid.' ');
+                foreach ($ownerdetail as $rec) { 
+                    $noakaun = $rec->otar_accno;
+                    $currstatus = $rec->otar_ownertransstatus_id;
+                }
+            $mphtj = DB::connection('oracle')->select("
+                    SELECT ID noaccmphtj, NAMA, KP, NO_RUM_POS, JALAN_POS, TEMPAT_POS, KAWASAN_POS, BANDAR_POS, NEGERI_POS, NO_TEL, EMEL FROM PEMILIK_SB 
+                    WHERE ID = '".$noakaun."'");
+            // Log::info($module); 
+            // Log::info($currstatus); 
+            // return view('ownershiptransfer.papardatatransfer')->with('ownerdetail',$ownerdetail)->with('mphtj',$mphtj);
+            return view('ownershiptransfer.ownertransferpreview')->with(array('ownerdetail'=>$ownerdetail,'mphtj'=>$mphtj))->with('module',$module)->with('currstatus',$currstatus)->with('paramid',$paramid);
+        }
+    }
     
     
 } 

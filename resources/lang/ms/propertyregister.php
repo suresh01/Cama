@@ -40,6 +40,9 @@ return [
 	'Address3'=>'Tempat',		
 	'Address4'=>'Kawasan',		
 	'Owner_Count'=>'BIlangan Pemilik',
+	'Land_Info'=>'Maklumat Tanah',
+	'Bldg_Info'=>'Maklumat Bangunan',
+	
 	'addowner'=>'Add Pemilik',
 	// tab.blade.php
 	'Master_Information'=>'Induk',

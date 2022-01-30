@@ -173,6 +173,7 @@ return [
 	'Approved_Rate'=>'Kadar Lulus',
 	'Adjustment'=>'Pelarasan',
 	'Approved_Tax'=>'Cukai Lulus',
+	'Previous_Tax'=>'Cukai Terdahulu',
 	'NOTES'=>'Nota',
 	// datasearchdetail.blade.php
 	'Property_Detail'=>'Maklumat Harta'

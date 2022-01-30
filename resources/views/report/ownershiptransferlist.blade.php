@@ -22,7 +22,7 @@
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="deleteProperty()" >Jana Laporan</a>	
+					<a href="#" onclick="janalaporan()" >Jana Laporan</a>	
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'ownertransferlistdata', 'searchid' => '40'])			
 					
 				</div>
@@ -44,16 +44,22 @@
 										Kumpulan
 									</th>
 									<th>
-										Didaftar Pada
+										Jenis Pindah milik
+									</th>
+									<th>
+										Status
 									</th>
 									<th>
 										Didaftar Oleh
 									</th>
 									<th>
-										Diproses Pada
+										Didaftar Pada
 									</th>
 									<th>
 										Diproses Oleh
+									</th>
+									<th>
+										Diproses Pada
 									</th>
 									<th>
 										Hari
@@ -71,6 +77,7 @@
 		<form style="display: hidden;" id="generateform" method="post" action="generateownertransferlist" target="_blank">
             @csrf
             <input type="hidden" name="accounts" id="accounts">
+			<input type="hidden" name="titlereport" id="titlereport">
 		</form>
 		
 		
@@ -88,7 +95,9 @@
 		}
 
 
-		function deleteProperty(){
+		function janalaporan(){
+			var title = prompt("Report Title", "LAPORAN STATISTIK PENDAFTARAN PINDAH MILIK");
+
 			var table = $('#proptble').DataTable();
 			//var termdate = '';
 //console.log(table.rows('.selected').data());termdate
@@ -109,7 +118,7 @@
 					{type: 'button pink', text: 'Jana Laporan', click: function($noty) {
 						$noty.close();
 						$('#accounts').val(account.toString());
-					
+						$('#titlereport').val(title.toString());
 						$('#generateform').submit();
 					/*	$.ajax({
 					        type:'GET',
@@ -192,11 +201,13 @@ $(document).ready(function (){
 			        {"data": "vd_id", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": null, "name": "sno"},
 			        {"data": "otar_accno", "name": "account number"},
-			        {"data": "tdi_value", "name": "fileno"},
-			        {"data": "otar_createdate", "name": "zone"},
-			        {"data": "otar_createby", "name": "subzone"},
-			        {"data": "ota_createdate", "name": "subzone"},
+			        {"data": "usergroup", "name": "usergroup"},
+					{"data": "ownershiptranstype", "name": "ownershiptranstype"},
+					{"data": "ownershipstage", "name": "ownershipstage"},
+			        {"data": "otar_createby", "name": "zone"},
+			        {"data": "otar_createdate", "name": "subzone"},
 			        {"data": "ota_createby", "name": "subzone"},
+			        {"data": "otar_updatedate", "name": "otar_updatedate"},
 			        {"data": "days", "name": "subzone"}
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {

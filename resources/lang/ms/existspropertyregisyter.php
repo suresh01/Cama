@@ -42,6 +42,8 @@ return [
 	'Address3'=>'Tempat',
 	'Address4'=>'Kawasan',
 	'Owner_Count'=>'Bilangan Pemilik',
+	'Land_Info'=>'Maklumat Tanah',
+	'Bldg_Info'=>'Maklumat Bangunan',
 	'Master_Information'=>'Induk',
 	'Lot_Inforamtion'=>'Lot',
 	'Owner_Information'=>'Pemilik',

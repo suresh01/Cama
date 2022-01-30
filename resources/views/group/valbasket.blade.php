@@ -394,7 +394,7 @@ function check_usaccess(module,id){
 				$("#grouptable").hide();
 				$("#addgroup").show();
 
-				$("#addsubmit").html("Save");
+				$("#addsubmit").html("Simpan");
 			 	$("label.error").remove();	
 		 	}
 				

@@ -19,6 +19,17 @@
 				$('#propertyinspectionform-next-5').hide();	
 				$('#propertyinspectionform-back-6').hide();
 				$('#propertyinspectionform-next-6').hide();	
+				$('#propertyinspectionform').stepy({
+					backLabel: "{{__('common.Back')}}",
+					nextLabel: "{{__('common.Next')}}",
+					errorImage:true,
+					block: true,
+					description: true,
+					legend: false,
+					titleClick: true,
+					titleTarget: '#top_tabby',
+					validate: true
+				});
 			});
 		</script>
 <div  class="grid_6 ">

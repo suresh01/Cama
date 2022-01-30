@@ -256,15 +256,16 @@
 									</div>
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">{{__('inspection.Express_Condition')}} </label>
-										<div  class="form_iput">
-										<input id="expcon"  name="expcon" tabindex="17" class="" type="text"  maxlength="50" />
+										<div  class="form_input">
+											<input id="expcon"  name="expcon" tabindex="17" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 									</div>
+									
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">{{__('inspection.Restriction_Of_Interest')}} </label>
 										<div  class="form_input">
-										<input id="interest"  name="interest" tabindex="18" class="" type="text"  maxlength="50" />
+											<input id="interest"  name="interest" tabindex="18" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 									</div>

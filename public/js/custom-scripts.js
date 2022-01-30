@@ -26,8 +26,8 @@
 
 	/*==JQUERY STEPY==*/
 	$('#stepy_form').stepy({
-		backLabel: 'Back',
-		nextLabel: 'Next',
+		backLabel: 'Sebelumnya',
+		nextLabel: 'Seterusnya',
 		errorImage:true,
 		block: true,
 		description: true,
@@ -42,8 +42,8 @@
 	
 
 	$('#propertyregsitration_from').stepy({
-		backLabel: 'Back',
-		nextLabel: 'Next',
+		backLabel: 'Sebelumnya',
+		nextLabel: 'Seterusnya',
 		errorImage:true,
 		block: true,
 		description: true,
@@ -54,8 +54,8 @@
 	});
 
 	$('#existspropertyregsitration_from').stepy({
-		backLabel: 'Back',
-		nextLabel: 'Next',
+		backLabel: 'Sebelumnya',
+		nextLabel: 'Seterusnya',
 		errorImage:true,
 		block: true,
 		description: true,
@@ -150,8 +150,8 @@ var masterdata = {};
 	});
 				
 		$('#left_stepy').stepy({
-		backLabel: 'Back',
-		nextLabel: 'Next',
+		backLabel: 'Sebelumnya',
+		nextLabel: 'Seterusnya',
 		errorImage:     true,
 		block: true,
 		description: true,
@@ -174,8 +174,8 @@ var masterdata = {};
 				});	
 				
 	$('#stepy_no_validation').stepy({
-		backLabel: 'Back',
-		nextLabel: 'Next',
+		backLabel: 'Sebelumnya',
+		nextLabel: 'Seterusnya',
 		errorImage:     true,
 		block: true,
 		description: true,

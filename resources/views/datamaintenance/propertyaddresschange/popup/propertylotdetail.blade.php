@@ -128,7 +128,7 @@
 										<span class=" label_intro"></span>
 									</div>
 								</fieldset>
-
+{{-- 
 								<fieldset>
 									<legend>{{__('CodeMaintenance.Lease_Information')}} </legend>					
 									
@@ -169,7 +169,7 @@
 										</div>
 										<span class=" label_intro"></span>
 									</div>
-								</fieldset>
+								</fieldset> --}}
 								</li>
 							</ul>
 						</div>
@@ -257,7 +257,7 @@
 										</div>
 									</fieldset>
 
-									<fieldset>
+									{{-- <fieldset>
 										<legend>{{__('CodeMaintenance.Lease_Information')}} </legend>					
 										
 										
@@ -297,14 +297,15 @@
 											</div>
 											<span class=" label_intro"></span>
 										</div>
-									</fieldset>
+									</fieldset> --}}
 									</li>
 								</ul>
 							</div>
 							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 								<div class="form_input">
-									<button id="addsubmit" name="adduser" onclick="validateDetail()" class="btn_small btn_blue"><span>{{__('common.Submit')}} </span></button>
-									
+									@if($formstatus == '5' || $formstatus == '1' || $formstatus == '2')
+										<button id="addsubmit" name="adduser" onclick="validateDetail()" class="btn_small btn_blue"><span>{{__('common.Submit')}} </span></button>
+									@endif
 									<button id="close" onclick="closeTenant()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}} 	</span></button>
 									<span class=" label_intro"></span>
 								</div>

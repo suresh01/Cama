@@ -76,7 +76,7 @@
 								<legend>Attachment</legend>
 								@include('inspection.tab.attachmentnew')
 							</fieldset>			
-								<input type="submit" onclick="loader()" class="finish" id="finish" value="Finish!"/>
+								<input type="submit" onclick="loader()" class="finish" id="finish" value="Kemaskini!"/>
 						</form>
 					</div>
 				</div>

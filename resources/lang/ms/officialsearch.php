@@ -21,7 +21,7 @@ return [
     'City'=>'Bandar',
     'Postcode'=>'Poskod',
     'State'=>'Negeri',
-    'Applicant_Ref'=>'Jurukan Pemohon',
+    'Applicant_Ref'=>'Rujukan Pemohon',
     'Our_Ref'=>'Rujukan Majlis',
     'Date'=>'Tarikh',
     'Hijri_Date'=>'Tarikh Hijrah',
@@ -38,5 +38,5 @@ return [
     'Register_Date'=>'Didaftar Pada',
     'Status'=>'Status',
     'Action'=>'Aksi',
-    'addapplication'=>'Add Application'
+    'addapplication'=>'Tambah Permohonan'
 ];

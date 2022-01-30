@@ -247,8 +247,8 @@ $(document).ready(function(){
     //parenrowid = prmstr[2];
 
     $('#landdetail').DataTable({
-      // "columns":[ null, null, null, null, null,  { className: "numericCol" },null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}],
-      "columns":[ null, null, null, null, null,  { className: "numericCol" },null, null, null, null, null],
+      "columns":[ null, null, null, null, null,  { className: "numericCol" },null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}],
+      // "columns":[ null, null, null, null, null,  { className: "numericCol" },null, null, null, null, null],
         "sPaginationType": "full_numbers",
         "iDisplayLength": 5,
         "lengthMenu": [5, 10, 15],
@@ -326,7 +326,7 @@ $(document).ready(function(){
                   
         }
         formatMoney('netlandvalue',grossland);
-        formatMoney('roundnetlandvalue',customround(grossland,1));
+        formatMoney('roundnetlandvalue',customround(grossland,3));
     });
     
 

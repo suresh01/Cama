@@ -104,16 +104,16 @@ $(function(){
     // To initially run the function:
     $(window).resize();
 
-        $.ajax({
-        type: "OPTIONS",
-        url: 'http://172.16.16.37:81/blue/connectors/php/connector.php?cmd=open&target=8ea8853cb93f2f9781e0bf6e857015ea&init=true&tree=true&_=1535393064497',
-        async:true,
-        dataType : 'json',   //you may use jsonp for cross origin request
-        crossDomain:true,
-        success: function(data, status, xhr) {
-            console.log("data : "+data);
-        }
-    });
+    //     $.ajax({
+    //     type: "OPTIONS",
+    //     url: 'http://172.16.16.37:81/blue/connectors/php/connector.php?cmd=open&target=8ea8853cb93f2f9781e0bf6e857015ea&init=true&tree=true&_=1535393064497',
+    //     async:true,
+    //     dataType : 'json',   //you may use jsonp for cross origin request
+    //     crossDomain:true,
+    //     success: function(data, status, xhr) {
+    //         console.log("data : "+data);
+    //     }
+    // });
 });
 </script>
 </head>

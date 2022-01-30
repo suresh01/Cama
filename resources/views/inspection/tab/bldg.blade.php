@@ -485,7 +485,7 @@
 		@foreach ($bldgardetail as $rec)				
 					blsgardata.push( [ '{{$loop->iteration}}', $('#accnumber').val(), '{{$rec->ab_bldg_no}}', '{{$rec->artype}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->arlvel}}','{{$rec->aba_unitcount}}','{{$rec->aba_totsize}}','{{$rec->ceilingtype}}','{{$rec->floortype}}','{{$rec->walltype}}','{{$rec->aba_areadesc}}', '{{$rec->aba_ref}}', '{{$rec->aba_areatype_id}}','{{$rec->aba_areacategory_id}}','{{$rec->aba_arealevel_id}}', '{{$rec->aba_areazone_id}}', '{{$rec->aba_areause_id}}', '{{$rec->aba_areadesc}}',  '{{$rec->aba_dimention}}', '{{$rec->aba_unitcount}}', '{{$rec->aba_size}}','{{$rec->aba_sizeunit_id}}', '{{$rec->aba_totsize}}', '{{$rec->aba_floortype_id}}','{{$rec->aba_walltype_id}}','{{$rec->aba_ceilingtype_id}}','<span><a onclick="" class="action-icons c-edit edtbldgarrow" href="#" title="Edit">Edit</a></span>@if($iseditable == 1)<span><a onclick="" class="action-icons    deletebldgarrow" href="#" title="delete">Delete</a></span>@endif', 'noaction','{{$rec->aba_id}}' ] );
 	    @endforeach
-			var groupColumn = 4;
+			var groupColumn = 3;
 		 $('#bldgartable1').DataTable({
         	data:           blsgardata,
             "columns":[ null, { "visible": false }, { "visible": false }, null, null, null, null, null, null,null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, null,{ "visible": false },{ "visible": false }],
@@ -1071,21 +1071,21 @@ function editbldgarRow() {
 		//alert(bldgno);
 
 		
-	$.fn.dataTable.ext.search.push(
-	     function(settings, data, dataIndex) {
-	     	//alert(settings.nTable.id);
-			if (settings.nTable.id === 'bldgartable1') {
-			    if (data[2] === bldgno){
+		$.fn.dataTable.ext.search.push(
+			function(settings, data, dataIndex) {
+				//alert(settings.nTable.id);
+				if (settings.nTable.id === 'bldgartable1') {
+					if (data[2] === bldgno){
 
-		      		return true;
-		      	}
-	        }
-	        if (settings.nTable.id !== 'bldgartable1') {
-			   	return true;
-	        }
+						return true;
+					}
+				}
+				if (settings.nTable.id !== 'bldgartable1') {
+					return true;
+				}
 
-		}       
-	);
+			}       
+		);
 	    tablear.draw();
     	
 		 $('#submitedittblbldgar').show();

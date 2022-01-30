@@ -77,9 +77,9 @@
 								@include('inspection.tab.attachmentnew')
 							</fieldset>			
 							@if($iseditable == 1)
-								<input type="submit" onclick="loader()" class="finish" id="finish" value="Finish!"/>	
+								<input type="submit" onclick="loader()" class="finish" id="finish" value="Kemaskini!"/>	
 							@else
-								<input type="button" onclick="closePage()"  class="finish" value="Close!"/>
+								<input type="button" onclick="closePage()"  class="finish" value="Tutup!"/>
 								
 							@endif
 						</form>

@@ -40,7 +40,7 @@ class ValutionController extends Controller
         $pb = $request->input('pb');
         $name=Auth::user()->name;
 
-         $term=DB::select("select vt_valbase_id, concat(vt_name,'', DATE_FORMAT(vt_createdate, '%d%m%Y')) termfoldername, vd_accno accountnumber, va_vt_id,
+        $term=DB::select("select vt_valbase_id, concat(vt_name,'', DATE_FORMAT(vt_createdate, '%d%m%Y')) termfoldername, vd_accno accountnumber, va_vt_id,
                 vt_name , applntype.tdi_value applntype, termstage.tdi_desc termstage, va_name, approval.tdi_desc approval, vd_approvalstatus_id
                 FROM cm_appln_valterm inner join cm_appln_val on va_vt_id = vt_id inner join cm_appln_valdetl on vd_va_id = va_id  
                 left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approvalstatus_id 
@@ -49,56 +49,56 @@ class ValutionController extends Controller
                 left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
                 on termstage.tdi_key = vt_approvalstatus_id 
                  where vd_id = ".$prop_id);
-            $iseditable = 1;
+        $iseditable = 1;
 
           /* $termtype=DB::select( "select 1 from cm_appln_valterm 
         inner join cm_appln_val on va_vt_id = vt_id
         inner join cm_appln_valdetl on  vd_va_id = va_id where vt_valbase_id = 2 and vd_id = ".$prop_id." limit 1"); 
 */
-            foreach ($term as $rec) {
-                $termname = $rec->termfoldername;
-                $accountnumber = $rec->accountnumber;
-                $viewparambasket = $rec->va_name;
-                $viewparambasketstatus = $rec->approval;
-                $propertystatus = $rec->vd_approvalstatus_id;
-                $termid = $rec->va_vt_id;
-                $termtype = $rec->vt_valbase_id;
-                $applntype = $rec->applntype;
-                $viewparamterm = "( ".$rec->applntype." ) ".$rec->vt_name." - ".$rec->termstage ;
-                $manualpropstatus = $rec->vd_approvalstatus_id;
-                if($rec->vd_approvalstatus_id == "07" || $rec->vd_approvalstatus_id == "08"|| $rec->vd_approvalstatus_id == "09"){
-                    $iseditable = 1;
-                } else {
-                    $iseditable = 0;
-                }
+        foreach ($term as $rec) {
+            $termname = $rec->termfoldername;
+            $accountnumber = $rec->accountnumber;
+            $viewparambasket = $rec->va_name;
+            $viewparambasketstatus = $rec->approval;
+            $propertystatus = $rec->vd_approvalstatus_id;
+            $termid = $rec->va_vt_id;
+            $termtype = $rec->vt_valbase_id;
+            $applntype = $rec->applntype;
+            $viewparamterm = "( ".$rec->applntype." ) ".$rec->vt_name." - ".$rec->termstage ;
+            $manualpropstatus = $rec->vd_approvalstatus_id;
+            if($rec->vd_approvalstatus_id == "07" || $rec->vd_approvalstatus_id == "08"|| $rec->vd_approvalstatus_id == "09"){
+                $iseditable = 1;
+            } else {
+                $iseditable = 0;
             }
+        }
 
-            if ($manualpropstatus == "07") {
-               // $register=DB::select("call proc_manaual_valuation_process(".$prop_id.", 10001, 10010,   '".$name."',  0, 0, @p_result)"); 
-                 $iseditable = 0;
-            }
+        if ($manualpropstatus == "07") {
+            // $register=DB::select("call proc_manaual_valuation_process(".$prop_id.", 10001, 10010,   '".$name."',  0, 0, @p_result)"); 
+                $iseditable = 0;
+        }
 
-            Log::info($applntype);
+        Log::info($applntype);
 
-            $master = DB::select('select subzone.tdi_value subzone, subzone.tdi_parent_name zone, ap_bldgstatus_id, proptype.tdi_value proptype, 
-                proptype.tdi_parent_name propcategorty,  bldgstatus.tdi_value bldgstatus, bldgstorey.tdi_value  bldgstorey
-                from cm_appln_valdetl, cm_appln_parameter 
-left join (select tdi_key, tdi_value, tdi_parent_name from tbdefitems where tdi_td_name = "BULDINGTYPE") proptype
-on proptype.tdi_key = ap_propertytype_id
-left join (select tdi_key, tdi_value, tdi_parent_name from tbdefitems where tdi_td_name = "ISHASBUILDING") bldgstatus
-on bldgstatus.tdi_key = ap_bldgstatus_id
-left join (select tdi_key, tdi_value, tdi_parent_name from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgstorey
-on bldgstorey.tdi_key = ap_propertylevel_id,
+        $master = DB::select('select subzone.tdi_value subzone, subzone.tdi_parent_name zone, ap_bldgstatus_id, proptype.tdi_value proptype, 
+            proptype.tdi_parent_name propcategorty,  bldgstatus.tdi_value bldgstatus, bldgstorey.tdi_value  bldgstorey
+            from cm_appln_valdetl, cm_appln_parameter 
+            left join (select tdi_key, tdi_value, tdi_parent_name from tbdefitems where tdi_td_name = "BULDINGTYPE") proptype
+            on proptype.tdi_key = ap_propertytype_id
+            left join (select tdi_key, tdi_value, tdi_parent_name from tbdefitems where tdi_td_name = "ISHASBUILDING") bldgstatus
+            on bldgstatus.tdi_key = ap_bldgstatus_id
+            left join (select tdi_key, tdi_value, tdi_parent_name from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgstorey
+            on bldgstorey.tdi_key = ap_propertylevel_id,
                 cm_masterlist 
                 left join (select tdi_key, tdi_value,tdi_parent_name from tbdefitems where tdi_td_name = "SUBZONE") subzone
                 on subzone.`tdi_key` = ma_subzone_id
                 where ap_vd_id  = vd_id and ma_id = vd_ma_id and vd_id = '.$prop_id);
-            $bldgtype = '';
-            foreach ($master as $rec) {
-                $bldgtype = $rec->ap_bldgstatus_id;
-            }
+        $bldgtype = '';
+        foreach ($master as $rec) {
+            $bldgtype = $rec->ap_bldgstatus_id;
+        }
 
-            $lot = DB::select('select DATE_FORMAT(vl_startdate, "%d/%m/%Y") vl_startdate1, DATE_FORMAT(vl_expireddate, "%d/%m/%Y") vl_expireddate1,cm_appln_val_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
+        $lot = DB::select('select DATE_FORMAT(vl_startdate, "%d/%m/%Y") vl_startdate1, DATE_FORMAT(vl_expireddate, "%d/%m/%Y") vl_expireddate1,cm_appln_val_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
         , unitsize.tdi_value unitsize, concat(lotcode.tdi_value,vl_no) lotnumber, concat(titletype.tdi_value,vl_titleno) titlenumber, landuse.tdi_value landuse, tentype.tdi_value tentype
          from cm_appln_val_lot left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = vl_lotcode_id
         left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = vl_roadtype_id
@@ -107,8 +107,8 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
         left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  vl_landuse_id = landuse.tdi_key
         left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  vl_tenuretype_id = tentype.tdi_key 
          where vl_vd_id = ifnull("'.$prop_id.'",0)');
-        Log::info($lot );
-            $bldg = DB::select(' select DATE_FORMAT(vb_cccdate, "%d/%m/%Y") vb_cccdate1, DATE_FORMAT(vb_occupieddate, "%d/%m/%Y") vb_occupieddate1,
+        // Log::info($lot );
+        $bldg = DB::select(' select DATE_FORMAT(vb_cccdate, "%d/%m/%Y") vb_cccdate1, DATE_FORMAT(vb_occupieddate, "%d/%m/%Y") vb_occupieddate1,
                  cm_appln_val_bldg.*, bldgtype.tdi_value bldgtype, tdi_parent_name
                  bldgcategory, tdi_parent_key bldgcategory_id, bldgstorey.tdi_value bldgstorey, 
                 bldgstr.tdi_value bldgstr,bldgcondn.tdi_value bldgcondn,bldgposition.tdi_value bldgposition,walltype.tdi_value walltype
@@ -131,7 +131,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
                 on floortype.tdi_key = vb_floortype_id
                 where vb_vd_id = ifnull("'.$prop_id.'",0)');
             
-              $bldgar = DB::select('select cm_appln_val_bldgarea.*,
+        $bldgar = DB::select('select cm_appln_val_bldgarea.*,
             vb_id,
             arlvel.tdi_value arlvel, 
             arlvel.tdi_sort arlvelsort, 
@@ -149,23 +149,23 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
             where vba_vb_id = vb_id and vb_vd_id = ifnull("'.$prop_id.'",0)
             order by  artype.tdi_sort, arlvel.tdi_sort ');
 
-               $allowance = DB::select('select *, vb_id, allowancetype.tdi_value allowancetype,allowancetype.tdi_parent_name allowancecategory, allowancemethod.tdi_value allowancemethod 
+        $allowance = DB::select('select *, vb_id, allowancetype.tdi_value allowancetype,allowancetype.tdi_parent_name allowancecategory, allowancemethod.tdi_value allowancemethod 
             from cm_appln_val_bldgallowances
             left join (select tdi_key, tdi_value, tdi_parent_name from tbdefitems where tdi_td_name = "ALLOWANCECALMETHOD") allowancemethod on  allowancemethod.tdi_key = vbal_calcmethod_id 
             left join (select tdi_key, tdi_value,tdi_parent_name from tbdefitems where tdi_td_name = "ALLOWANCETYPE") allowancetype on allowancetype.tdi_key = vbal_allowancetype_id 
              , cm_appln_val_bldg where vbal_vb_id = vb_id and vb_vd_id = ifnull("'.$prop_id.'",0)');           
             
-             $tax = DB::select('select `vt_id`, `vt_vd_id`, vt_derivedrate, vt_derivedvalue, `vt_grossvalue`, `vt_valuedescretion`, `vt_proposednt`, `vt_proposedrate`, `vt_calculatedrate`,  
-`vt_proposedtax`, `vt_approvednt`,  `vt_approvedrate`, `vt_adjustment`,  `vt_approvedtax`,  TRIM(REPLACE(REPLACE(REPLACE(`vt_note`, "\\n", " "), "\\r", " "), "\\t", " ")) vt_note,
-`vt_createby`,  `vt_createdate`,  `vt_updateby`,  `vt_updatedate`
-FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
+        $tax = DB::select('select `vt_id`, `vt_vd_id`, vt_derivedrate, vt_derivedvalue, `vt_grossvalue`, `vt_valuedescretion`, `vt_proposednt`, `vt_proposedrate`, `vt_calculatedrate`,  vt_previoustax,
+            `vt_proposedtax`, `vt_approvednt`,  `vt_approvedrate`, `vt_adjustment`,  `vt_approvedtax`,  TRIM(REPLACE(REPLACE(REPLACE(`vt_note`, "\\n", " "), "\\r", " "), "\\t", " ")) vt_note,
+            `vt_createby`,  `vt_createdate`,  `vt_updateby`,  `vt_updatedate`
+            FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
 
-              $lotarea = DB::select('select * from cm_appln_val_lotarea, cm_appln_val_lot where vla_vt_id = vl_id and vl_vd_id = ifnull("'.$prop_id.'",0) order by vla_id asc ');
+        $lotarea = DB::select('select * from cm_appln_val_lotarea, cm_appln_val_lot where vla_vt_id = vl_id and vl_vd_id = ifnull("'.$prop_id.'",0) order by vla_id asc ');
 
-            
-       $lotdetail = DB::select('select * from cm_appln_val_lotarea where vla_vt_id =  ifnull("'.$prop_id.'",0)');
+        
+        $lotdetail = DB::select('select * from cm_appln_val_lotarea where vla_vt_id =  ifnull("'.$prop_id.'",0)');
 
-       $additional = DB::select('select * from cm_appln_val_additional where vad_vd_id =  ifnull("'.$prop_id.'",0)');
+        $additional = DB::select('select * from cm_appln_val_additional where vad_vd_id =  ifnull("'.$prop_id.'",0)');
 
 
         App::setlocale(session()->get('locale'));
@@ -303,13 +303,13 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
             where vba_vb_id = vb_id and vb_vd_id = ifnull("'.$prop_id.'",0)
             order by  artype.tdi_sort, arlvel.tdi_sort ');
 
-               $allowance = DB::select('select *, vb_id, allowancetype.tdi_value allowancetype,allowancetype.tdi_parent_name allowancecategory, allowancemethod.tdi_value allowancemethod 
+            $allowance = DB::select('select *, vb_id, allowancetype.tdi_value allowancetype,allowancetype.tdi_parent_name allowancecategory, allowancemethod.tdi_value allowancemethod 
             from cm_appln_val_bldgallowances
             left join (select tdi_key, tdi_value, tdi_parent_name from tbdefitems where tdi_td_name = "ALLOWANCECALMETHOD") allowancemethod on  allowancemethod.tdi_key = vbal_calcmethod_id 
             left join (select tdi_key, tdi_value,tdi_parent_name from tbdefitems where tdi_td_name = "ALLOWANCETYPE") allowancetype on allowancetype.tdi_key = vbal_allowancetype_id 
              , cm_appln_val_bldg where vbal_vb_id = vb_id and vb_vd_id = ifnull("'.$prop_id.'",0)');           
             
-             $tax = DB::select('select `vt_id`, `vt_vd_id`, vt_derivedrate, vt_derivedvalue, `vt_grossvalue`, `vt_valuedescretion`, `vt_proposednt`, `vt_proposedrate`, `vt_calculatedrate`,  
+             $tax = DB::select('select `vt_id`, `vt_vd_id`, vt_derivedrate, vt_derivedvalue, `vt_grossvalue`, `vt_valuedescretion`, `vt_proposednt`, `vt_proposedrate`, `vt_calculatedrate`,  vt_previoustax
 `vt_proposedtax`, `vt_approvednt`,  `vt_approvedrate`, `vt_adjustment`,  `vt_approvedtax`,  TRIM(REPLACE(REPLACE(REPLACE(`vt_note`, "\\n", " "), "\\r", " "), "\\t", " ")) vt_note,
 `vt_createby`,  `vt_createdate`,  `vt_updateby`,  `vt_updatedate`
 FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
@@ -614,6 +614,9 @@ left join (SELECT * FROM tbdefitems where tdi_td_name = "APPLICATIONTYPE") appln
         $bldgarea_param = $request->input('bldgareadata');
         $bldgallowance_param = $request->input('bldgallowancedata');
         $taxdata = $request->input('taxdata');
+
+        $taxdata = addCslashes($taxdata, '\\');
+
         $name=Auth::user()->name;
 
         DB::connection()->getPdo()->quote("'");
@@ -775,11 +778,12 @@ left join (SELECT * FROM tbdefitems where tdi_td_name = "APPLICATIONTYPE") appln
         $bldgarea_param = $request->input('bldgareadata');
         $bldgallowance_param = $request->input('bldgallowancedata');
         $taxdata = $request->input('taxdata');
+        $taxdata = addCslashes($taxdata, '\\');
         $name=Auth::user()->name;
-        Log::info('lot:'.$lot_param);
-        Log::info('lotdetail:'.$lotarea_param);
-        Log::info('bangunan:'.$bldg_param);
-        Log::info('bangunandetail'.$bldgarea_param);
+        // Log::info('lot:'.$lot_param);
+        // Log::info('lotdetail:'.$lotarea_param);
+        // Log::info('bangunan:'.$bldg_param);
+        // Log::info('bangunandetail'.$bldgarea_param);
         Log::info("call proc_manaualvaluation_v2( '".$lot_param."', '".$bldg_param."', '".$lotarea_param."','".$additional_param."', '".$bldgarea_param."', '".$bldgallowance_param."',  '".$taxdata."', '".$name."',".$prop_id.")");
          $response = DB::select("call proc_manaualvaluation_v2( '".$lot_param."', '".$bldg_param."', '".$lotarea_param."', '".$additional_param."', '".$bldgarea_param."', '".$bldgallowance_param."', '".$taxdata."', '".$name."',".$prop_id.")"); 
         

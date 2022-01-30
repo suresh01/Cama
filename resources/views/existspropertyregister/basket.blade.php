@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>{{__('existspropertyregisyter.Basket')}}</title>
+<title>{{__('existspropertyregisyter.Existing_Masterlist_Maintenance')}}</title>
 @include('includes.header', ['page' => 'datamaintenance'])
 	<!--<div class="page_title">
 		<span class="title_icon"><span class="blocks_images"></span></span>

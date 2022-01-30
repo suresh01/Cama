@@ -146,6 +146,14 @@
 	
 	<script>
 		
+		function paparmphtj(id, module, currstatus){
+			// alert();
+			var y = window.open('about:blank','Popup_Window','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=1600,height=800,left = 312,top = 50');
+			if ((y.closed) || (!y.document.URL) || (y.document.URL.indexOf("about") == 0)) {
+				// y.location.assign("ownertransfer?page=1");
+				y.location.assign("papardatatransfer?paramid="+id+"&module="+module);
+	    	}
+		}
 		function changeField(val){
 			if(val == 'table'){
 				$('#maxrow').removeAttr('style');
@@ -256,7 +264,7 @@
 	   	if(currstatus == 5){
 			var noty_id = noty({
 				layout : 'center',
-				text: 'Are you sure want to Transfer Data?',
+				text: 'Anda Pasti Ingin Kemaskini Data Ke MPHTJNET?',
 				modal : true,
 				buttons: [
 					{type: 'button pink', text: 'Submit', click: function($noty) {
@@ -354,14 +362,14 @@ $(document).ready(function (){
 			        {"data": "mal_fileno", "name": "fileno"},
 			        {"data": "zone", "name": "zone"},
 			        {"data": "subzone", "name": "subzone"},
-			        {"data": "mal_addr_ln1", "name": "owner"}, 
-			        {"data": "mal_addr_ln2", "name": "ishasbldg"},
-			        {"data": "mal_addr_ln3", "name": "owntype"}, 
-			        {"data": "mal_city", "name": "TO_OWNNAME"}, 
-			        {"data": "mal_postcode", "name": "bldgcount"}, 
-			        {"data": "tstatus", "name": "bldgcount"}, 
+			        {"data": "mal_addr_ln1", "name": "mal_addr_ln1"}, 
+			        {"data": "mal_addr_ln2", "name": "mal_addr_ln2"},
+			        {"data": "mal_addr_ln3", "name": "owntymal_addr_ln3pe"}, 
+			        {"data": "mal_city", "name": "mal_city"}, 
+			        {"data": "mal_postcode", "name": "mal_postcode"}, 
+			        {"data": "tstatus", "name": "tstatus"}, 
 			        {"data":  function(data){
-
+						
 			        	var editaction ='<a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: right;" title="View Log" 			        	onclick="submitLogForm('+data.mal_id+')"></a></span>&nbsp;&nbsp;&nbsp;&nbsp;' ;
 
 			        	var deleteaction ="&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; float: right;'  onclick='deleteProperty("+data.mal_id+")' href='#' title='Delete'></a></span>";
@@ -377,10 +385,13 @@ $(document).ready(function (){
 								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.mal_id+',4,2)"  title="Reject" href="#"></a></span>';		
 
 							} else if(data.mal_approvalstatus_id == '5'){
-								action =  editaction+  '<!--<spane><a  class=" new-action-icons reverse" onclick="approve('+data.mal_id+',5)" title="Revise" href="#"></a></span>-->								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('+data.mal_id+',5)" title="Transfer" href="#"></a></span>';						
+								action =  editaction+  ' ' + 
+								// '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('+data.mal_id+',5)" title="Transfer" href="#"></a></span>';	
+								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="paparmphtj('+data.mal_id+',\'propertyaddress\',5)" title="Transfer" href="#"></a></span>';						
+									
 							} 
-							
-			        		return action;
+								
+							return action;
 
 			        }, "name": "bldgcount"}
 		   		],
@@ -490,7 +501,7 @@ $(document).ready(function (){
 		function edit(acc) {		
 		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
 		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
-		        w.location = "ownerdetail?prop_id="+acc;
+		        w.location = "propertyaddressdetail?prop_id="+acc;
 		    }	    
 		    if (w.outerWidth < screen.availWidth || w.outerHeight < screen.availHeight)
 			{

@@ -168,7 +168,7 @@
 <script src="js/custom-scripts.js"></script>
 <script src="js/common/common-script.js"></script>
 <script src="js/common/validation/validation.js"></script>
-
+{{-- <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script> --}}
 <script>
 	$(document).ready(function(){
 $('.mainNav li:has(ul)').addClass('has-child');

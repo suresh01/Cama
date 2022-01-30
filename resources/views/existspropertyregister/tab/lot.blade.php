@@ -337,11 +337,13 @@
 
 							var start = new Date($( "#tenstart" ).val());
 							var end = new Date($( "#tenend" ).val());
-							var days = (end - start) / 1000 / 60 / 60 / 24;
+							let yearstar = start.getFullYear();
+							let yearend = end.getFullYear();
+							var days = (yearend - yearstar);
 							console.log(days);
 							// actually its 30 ; but due to daylight savings will show 31.0xxx
 							// which you need to offset as below
-							days = days - (end.getTimezoneOffset() - start.getTimezoneOffset()) / (60 * 24);
+							// days = days - (end.getTimezoneOffset() - start.getTimezoneOffset()) / (60 * 24);
 							//console.log(days);
 							$('#tenduration').val(days);
 						}

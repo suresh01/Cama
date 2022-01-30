@@ -60,7 +60,7 @@ class CodeMaintenanceController extends Controller
     }
 
      public function tenantTable(Request $request){
-        Log::info('Test');
+        // Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -342,7 +342,7 @@ left join (SELECT tdi_key, tdi_value FROM cama.tbdefitems where tdi_td_name = 'A
 
 
     public function tonebldgTable(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -478,7 +478,7 @@ where tollist_id = tland_tone_id');
 
 
      public function tonelandTable(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -682,7 +682,7 @@ where tollist_id = tstand_tone_id');
 
 
      public function tonelandsdTable(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;
@@ -805,7 +805,7 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
 
 
      public function tonetaxTable(Request $request){
-        Log::info('Test');
+        //Log::info('Test');
         ini_set('memory_limit', '2056M');
        // $baskedid = $request->input('id');
         $maxRow = 30;

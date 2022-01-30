@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>{{__('ownershiptran.Ownership_Transfer_Process')}}</title>
+<title>{{__('ownershiptran.Ownership_Transfer_Process_Address')}}</title>
 
 @include('includes.header', ['page' => 'datamaintenance'])
 					
@@ -16,7 +16,7 @@
 					<ul>
 						<li><a href="#">{{__('ownershiptran.Home')}}</a></li>
 						<li><a href="#">{{__('ownershiptran.Data_Maintenance')}}</a></li>
-						<li>{{__('ownershiptran.Ownership_Transfer_Process')}}</li>
+						<li>{{__('ownershiptran.Ownership_Transfer_Process_Address')}}</li>
 					</ul>
 				</div>
 				</div>
@@ -65,16 +65,16 @@
 											<a class='shobldg' onclick="edit('{{$rec->otar_id}}')" href='#' >{{$rec->otar_accno}}</a>
 										</td>
 										<td>
-											{{$rec->TO_OWNNAME}}
+											{{$rec->ota_ownname}}
 										</td>
 										<td>
 											{{$rec->owntype}}
 										</td>
 										<td>
-											{{$rec->TO_OWNNO}}
+											{{$rec->ota_ownno}}
 										</td>
 										<td>
-											{{$rec->TO_ADDR_LN1}}
+											{{$rec->ota_addr_ln1}}
 										</td>
 										<td>
 											{{$rec->colgroup}}
@@ -83,13 +83,13 @@
 											{{$rec->transtype}}
 										</td>
 										<td>
-											{{$rec->otar_createby}} / {{$rec->otar_createdate1}}
+											{{$rec->otar_createby}} / {{$rec->otar_createdate}}
 										</td>
 										<td>
 											{{$rec->colstatus}}
 										</td>
 										<td>
-											<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: left;" onclick="submitForm('{{$rec->ma_accno}}')"  title="View Log" href="#"></a></span>&nbsp;&nbsp;
+											{{-- <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: left;" onclick="submitForm('{{$rec->ma_accno}}')"  title="View Log" href="#"></a></span>&nbsp;&nbsp; --}}
 
 											
 											@if($rec->otar_ownertransstatus_id == '2')
@@ -98,7 +98,8 @@
 											@endif
 
 											@if($rec->otar_ownertransstatus_id == '5')
-												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',5)" title="Transfer" href="#"></a></span>
+												{{-- <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',5)" title="Transfer" href="#"></a></span> --}}
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="paparMPHTJ('{{$rec->otar_id}}','ownershiptrans',5)" title="Papar" href="#"></a></span>
 											@endif
 										</td>
 									</tr>
@@ -154,6 +155,14 @@
 	<span class="clear"></span>
 	
 	<script>
+		function paparMPHTJ(id, module, currstatus){
+			
+			var y = window.open('about:blank','Popup_Window','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=1600,height=800,left = 312,top = 50');
+			if ((y.closed) || (!y.document.URL) || (y.document.URL.indexOf("about") == 0)) {
+				// y.location.assign("ownertransfer?page=1");
+				y.location.assign("papardatatransfer?paramid="+id+"&module="+module);
+	    	}
+		}
 		function getdata(){
 			var zone = $('#filterzone').val();
 			//alert();
@@ -460,7 +469,7 @@ $(document).ready(function (){
 		        "columns": [
 			        {"data": "ota_id", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": "ota_id", "name": "sno"},
-			        {"data": "ttype", "name": "account number"},
+			        {"data": "transtype", "name": "account number"},
 			        {"data": "ownstatus", "name": "account number"},
 			        {"data": "otar_createdate", "name": "fileno"},
 			        {"data": "otar_updatedate", "name": "zone"},

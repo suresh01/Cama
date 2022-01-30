@@ -21,6 +21,7 @@
 			$(document).ready(function(){
 				$("#bldgtype").val('{{$master->ma_ishasbuilding_id}}');
 				$("#district").val('{{$master->ma_district_id}}');
+				$("#zone").val('{{$master->zoneid}}');
 				$("#subzone").val('{{$master->ma_subzone_id}}');
 				$("#state").val('{{$master->ma_state_id}}');
 			});
@@ -32,7 +33,7 @@
 				<input type="hidden" value="0" name="role_id" id="roleid">
 				<input type="hidden" value="0" name="role_id" id="roleid">
 				<fieldset>
-					<legend>{{__('propertyregister.Account_Information')}} </legend>
+					<legend>{{__('propertyregister.Account_Information')}} 1</legend>
 					<div class="form_grid_12">
 						<label class="field_title" id="accnumberlbl" for="username">{{__('propertyregister.Account_Number')}} <span class="req">*</span></label>
 						<div  class="form_input">

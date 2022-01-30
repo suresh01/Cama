@@ -229,6 +229,8 @@ Route::get('testgeneratetextfile', 'PropertyRegisterationController@testGenerate
 
 Route::get('datatransfer', 'UserController@dataTransfer');
 
+Route::get('papardatatransfer', 'UserController@paparDataTransfer');
+
 Route::get('evidentmgmt', 'CodeMaintenanceController@evidentManagement');
 
 Route::get('evidentmgmttrn', 'CodeMaintenanceController@evidentTransaction');
@@ -426,7 +428,7 @@ Route::get('propertylot','HomeController@propertyLot');
     
 Route::get('propertyaddressdata', 'HomeController@propertyTables');
 
-Route::get('ownerdetail', 'HomeController@ownerDetail');
+Route::get('propertyaddressdetail', 'HomeController@propertyAddressDetail');
 
 Route::post('propertylotdetail', 'HomeController@propertyLotDetail');
 

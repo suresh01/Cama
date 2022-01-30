@@ -161,8 +161,8 @@
 								<legend>Property Register</legend>
 								<div id="mastertable"></div>								
 							</fieldset>
-							<a href="#" id="finish" class="finish">Finish!</a>
-							<!--<input type="button" id="finish" class="finish" value="Finish!"/>-->
+							<a href="#" id="finish" class="finish">Kemaskini!</a>
+							<!--<input type="button" id="finish" class="finish" value="Kemaskini!"/>-->
 						</div>
 					</div>
 				</div>

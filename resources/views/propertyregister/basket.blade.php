@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>{{__('propertyregister.Basket')}}</title>
+<title>{{__('propertyregister.Property_Registration')}}</title>
 @include('includes.header', ['page' => 'datamaintenance'])
 	<!--<div class="page_title">
 		<span class="title_icon"><span class="blocks_images"></span></span>
@@ -75,7 +75,7 @@
 					<ul >
 						<li><a href="#">{{__('propertyregister.Home')}}</a></li>
 						<li><a href="#">{{__('propertyregister.Data_Maintenance')}}</a></li>
-						<li>Property_Registration</li>
+						<li>{{__('propertyregister.Property_Registration')}}</li>
 					</ul>
 				</div>
 

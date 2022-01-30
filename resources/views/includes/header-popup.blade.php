@@ -72,6 +72,7 @@
 <script src="js/common/common-script.js"></script>
 <script src="js/common/validation/validation.js"></script>
 <script src="js/propertyregister/tab-script.js"></script>
+
 </head>
 <body id="theme-default" class="full_block">
 <script type = "text/javascript">  

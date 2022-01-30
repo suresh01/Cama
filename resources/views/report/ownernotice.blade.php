@@ -22,8 +22,10 @@
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="reportA()" >Notis Jenis A</a>	
-					<a href="#" onclick="reportB()" >Notis Jenis B</a>	
+					<a href="#" onclick="reporta('a')" >Penyata Pemilik</a>	
+					<a href="#" onclick="reporta('b')" >Notis Pindahmilik RM30</a>
+					<a href="#" onclick="reporta('c')" >Notis Pindahmilik Percuma</a>	
+					<a href="#" onclick="reporta('d')" >Notis Pindahmilik RM50</a>		
 					@include('report.search.search',['tableid'=>'proptble', 'action' => 'ownernoticedata', 'searchid' => '14'])			
 					
 				</div>
@@ -427,7 +429,7 @@ function getposition(){
 		});
 	}
 }
-function reportA(){
+function reporta(reporttype){
 	var table = $('#proptble').DataTable();
 		$('#prntdateahtm').html('<input id="prntdatea" name="prntdate" autocomplete="off" type="text"  maxlength="50" class="required datepicker"/>');
 					 	$( "#prntdatea" ).datepicker({dateFormat: 'dd/mm/yy'});
@@ -439,10 +441,19 @@ function reportA(){
 		var type = "delete";
 		
 		if(account.length > 0) {
-			$('#type').val('type1');
+			if(reporttype == 'a'){
+				$('#type').val('type1');
+			}else if(reporttype == 'b'){
+				$('#type').val('type2');
+			}else if(reporttype == 'c'){
+				$('#type').val('type3');
+			}else if(reporttype == 'd'){
+				$('#type').val('type4');
+			}
+			
 			$('#accountsa').val(account.toString());
 			$('#addDetailA').modal();
-			console.log(account.toString());
+			// console.log(account.toString());
 		} else {
 			alert('Please atleast one property to generate report');
 		}
